@@ -38,6 +38,7 @@
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro
     function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador){
+        $bd= conectaBD();
         $sql=" INSERT INTO Projeto_Pesquisa ( Objetivo, Descricao, Orcamento, Atividade, ID_Fin) 
         VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
         if ($bd->query($sql) === TRUE) {
@@ -49,6 +50,16 @@
         $bd->close();
         return FALSE;
     }
+    
+     //insere projeto extensao
+    //retorna true se inseriu e false se deu erro
+    function insereExtensao(){
+        
+    }
+    
+    //Liste o nome de todos os professores que tiveram, entre suas atribuições, cargos relacionados a funções 
+    //gratificadas e/ou cargos comissionados. Nessa listagem, informe o nome do professor, as datas referentes ao 
+    //período de ocupação desse cargos e os setores administrativos relacionados aos cargos.
 
 	
 ?>

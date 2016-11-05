@@ -17,7 +17,10 @@
 		<main>
 			<div class="container">
 				<h2 class="title">Gerenciamento de Bens</h2>
-				<p>Clique nos links abaixo para acessar as telas do sistema:</p>
+				<p>
+					Nessa tela, são exibidas as informações sobre cada bem que a universidade
+					possui, como prédios, carros e equipamentos.
+				</p>
 			</div>
 		</main>
 		<footer class="text-center">

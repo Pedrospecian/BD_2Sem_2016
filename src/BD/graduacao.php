@@ -1,5 +1,6 @@
 <?php 
 	include "header.html"; 
+	include "queries.php";
 ?>
 <main>
 	<div class="container">
@@ -9,6 +10,28 @@
 			graduação, como notas e frequência obtidas em disciplinas e bolsas que o
 			aluno recebe durante o período em que está na universidade.
 		</p>
+		<br>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>id</th>
+		        	<th>nome</th>
+		        	<th>cpf</th>
+		     	</tr>
+    		</thead>
+		    <tbody>
+		    	<?php
+		    		$alunos = consultaTodosAlunos();
+		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<tr>";
+		    			echo "<td>".$dados[ID_Usu]."</td>";
+		    			echo "<td>".$dados[nome]."</td>";
+		    			echo "<td>".$dados[cpf]."</td>";
+		    			echo "</tr>";
+		    		}
+		    	?>
+		    </tbody>
+		  </table>
 	</div>
 </main>
 <?php 

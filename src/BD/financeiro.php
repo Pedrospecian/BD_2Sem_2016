@@ -1,13 +1,6 @@
-<html>
-	<head>
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap-theme.css">
-		<link rel="stylesheet" type="text/css" href="assets/style.css">
-		<script src="assets/vendor/jquery-3.1.1.min.js"></script>
-		<script src="assets/main.js"></script>
-		<title>ACH2004 - Banco de Dados - Sistema Financeiro</title>
-	</head>
+<?php 
+	include "header.html"; 
+?>
 	<body>
 		<header>
 			<div class="container">

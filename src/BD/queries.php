@@ -31,8 +31,38 @@
     }
     
 //listar todos os alunos da graduação
+    function consultaCursosGraduacao(){
+        $bd= conectaBD();
+        $sql="SELECT *
+            FROM Cursos
+            INNER JOIN Graduacao 
+            ON Cursos.ID_Cur = Graduacao.ID_Cur";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
 
 //listar todos os alunos da pós
+    function consultaCursosPos(){
+        $bd= conectaBD();
+        $sql="SELECT *
+            FROM Cursos
+            INNER JOIN Pos_Graduacao 
+            ON Cursos.ID_Cur = Pos_Graduacao.ID_Cur";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
+//lista financeiadores (id e tipo)
+    function consultaFinanciadores(){
+        $bd= conectaBD();
+        $sql="SELECT *
+                FROM Financiador";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
 
 
     //insere projeto pesquisa

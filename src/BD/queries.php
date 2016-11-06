@@ -137,6 +137,18 @@
         $bd->close();
         return $resultado;
     }
+    
+    function consultaHistoricoAluno($idAluno){
+        $sql="SELECT Aluno.ID_Aluno, Disciplinas.ID_Dis, Notas, Frequencia, Disciplinas.Codigo, Disciplinas.nome
+                FROM Aluno
+                INNER JOIN Historico ON Historico.ID_Alu = Aluno.ID_Aluno
+                AND ID_Aluno = '1'
+                INNER JOIN Disciplinas ON Disciplinas.ID_dis = Historico.ID_Dis";
+        $bd= conectaBD();
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro

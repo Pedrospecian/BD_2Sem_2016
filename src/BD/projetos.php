@@ -1,5 +1,6 @@
 <?php 
 	include "header.html"; 
+	include "queries.php";
 ?>
 <main>
 	<div class="container">
@@ -12,7 +13,6 @@
 		</p>
 		<h1>
 			Cadastrar projeto de pesquisa
-			inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador)
 		</h1>
 		<form action="inserePesquisa.php" method="get">
 			Objetivo: 
@@ -24,9 +24,24 @@
 			Atividade:
 			<input type="text" name="atividade"/><br>
 			ID Financiador:
-			<input type="number" name="idFinanciador"/><br>
+			<select name="idFinanciador">
+				<?php
+					$financiadores = consultaFinanciadores();
+					while ($dados = mysqli_fetch_array($financiadores)) {
+						//<option value="volvo">Volvo</option>
+						echo "<option value=".$dados['ID_Fin'].">".$dados['Tipo']."</option>";
+			        }
+				?>
+			</select><br>
 			<input type="submit" value="Criar projeto de pesquisa">
 		
+		</form>
+		
+		<h1>
+			Cadastrar projeto de extensão.
+		</h1>
+		<form>
+			<input type="submit" name="Criar projeto de extensão"/>
 		</form>
 	</div>
 </main>

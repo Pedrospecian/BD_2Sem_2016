@@ -107,6 +107,36 @@
         $bd->close();
         return $resultado;
     }
+    
+    //funcao que retorna todos os bens de uma determinada unidade
+    //recebe como parametor o nome da unidade
+    function consultaBensUnidade($nomeUnidade){
+        $bd= conectaBD();
+        $sql="SELECT Bens.ID_Ben, Identificador, Localizacao, Valor, Data_de_Aquisicao, Bens.tipo tipoBem, Unidade.ID_Unidade,
+                nome AS nomeUnidade, Unidade.tipo AS tipoUnidade
+                FROM Bens
+                INNER JOIN Possui ON Bens.ID_Ben = Possui.ID_Ben
+                INNER JOIN Unidade ON Possui.ID_Unidade = Unidade.ID_Unidade
+                AND nome = '".$nomeUnidade."'";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+        
+    }
+    
+    //funcao para retornar valor total de todos os bens de uma determinada unidade
+    //recebe como parametro o nome da unidade
+    function somaValorBensUnidade($nomeUnidade){
+        $bd= conectaBD();
+        $sql="SELECT SUM(Valor) AS total
+                FROM Bens
+                INNER JOIN Possui ON Bens.ID_Ben = Possui.ID_Ben
+                INNER JOIN Unidade ON Possui.ID_Unidade = Unidade.ID_Unidade
+                AND nome = '".$nomeUnidade."'";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro

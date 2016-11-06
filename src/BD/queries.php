@@ -87,6 +87,26 @@
         $bd->close();
         return $resultado;
     }
+    
+    //lista todas as informacoes dos bens
+    function consultaBens(){
+        $bd= conectaBD();
+        $sql="SELECT * 
+                FROM  Bens ";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
+    //funcao para retornar valor total de todos os bens
+    function somaValorBens(){
+        $bd= conectaBD();
+        $sql="SELECT SUM( Valor ) AS total
+                FROM Bens";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro

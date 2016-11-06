@@ -9,7 +9,7 @@
 	    $sql="SELECT *
                 FROM Usuario
                 INNER JOIN Aluno 
-                ON Aluno.ID_Usu = Usuario.ID_Usu";
+                ON Aluno.ID_Usuario = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         //var_dump($resultado);
         //while ($dados = mysqli_fetch_array($resultado)) {
@@ -54,7 +54,7 @@
         return $resultado;
     }
 
-//lista financeiadores (id e tipo)
+//lista financeiadores (id e tipo e nome)
     function consultaFinanciadores(){
         $bd= conectaBD();
         $sql="SELECT *
@@ -83,8 +83,18 @@
     
      //insere projeto extensao
     //retorna true se inseriu e false se deu erro
-    function insereExtensao(){
-        
+    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador){
+            $bd= conectaBD();
+        $sql= "INSERT INTO Projeto_Extensao (objetivo, descricao, orcamento, atividades, ID_Financiador) 
+             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.");";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
     }
     
     //Liste o nome de todos os professores que tiveram, entre suas atribuições, cargos relacionados a funções 

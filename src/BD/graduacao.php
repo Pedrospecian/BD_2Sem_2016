@@ -24,7 +24,7 @@
 		    		$alunos = consultaTodosAlunos();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados[ID_Usu]."</td>";
+		    			echo "<td>".$dados[ID_Usuario]."</td>";
 		    			echo "<td>".$dados[nome]."</td>";
 		    			echo "<td>".$dados[cpf]."</td>";
 		    			echo "</tr>";

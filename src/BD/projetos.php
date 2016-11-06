@@ -29,7 +29,7 @@
 					$financiadores = consultaFinanciadores();
 					while ($dados = mysqli_fetch_array($financiadores)) {
 						//<option value="volvo">Volvo</option>
-						echo "<option value=".$dados['ID_Fin'].">".$dados['Tipo']."</option>";
+						echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
 			        }
 				?>
 			</select><br>
@@ -40,7 +40,25 @@
 		<h1>
 			Cadastrar projeto de extensão.
 		</h1>
-		<form>
+		<form action="insereExtensao.php">
+			Objetivo: 
+			<input type="text" name="objetivo"/><br>
+			Descricao:
+			<input type="text" name="descricao"/><br>
+			Orçamento:
+			<input type="text" name="orcamento"/><br>
+			Atividade:
+			<input type="text" name="atividade"/><br>
+			ID Financiador:
+			<select name="idFinanciador">
+				<?php
+					$financiadores = consultaFinanciadores();
+					while ($dados = mysqli_fetch_array($financiadores)) {
+						//<option value="volvo">Volvo</option>
+						echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
+			        }
+				?>
+			</select><br>
 			<input type="submit" name="Criar projeto de extensão"/>
 		</form>
 	</div>

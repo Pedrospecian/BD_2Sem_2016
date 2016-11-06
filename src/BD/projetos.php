@@ -36,7 +36,7 @@
 			<input type="submit" value="Criar projeto de pesquisa">
 		
 		</form>
-		
+		<br>
 		<h1>
 			Cadastrar projeto de extensão.
 		</h1>
@@ -61,6 +61,63 @@
 			</select><br>
 			<input type="submit" name="Criar projeto de extensão"/>
 		</form>
+		
+		<br>
+		<h1>Projetos de pesquisa</h1>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>Objetivo</th>
+		        	<th>Orcamento</th>
+		        	<th>Atividade</th>
+		        	<th>Fiananciador</th>
+		     	</tr>
+    		</thead>
+		    <tbody>
+		    	<?php
+		    		$alunos = consultaProjetoPesquisa();
+		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<tr>";
+		    			echo "<td>".$dados[objetivo]."</td>";
+		    			echo "<td>".$dados[orcamento]."</td>";
+		    			echo "<td>".$dados[atividade]."</td>";
+		    			echo "<td>".$dados[nome]."</td>";
+		    			echo "</tr>";
+		    		}
+		    	?>
+			</tbody>
+		</table>
+		
+		<br>
+		
+		<h1>Projetos de extensao</h1>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>Objetivo</th>
+		        	<th>Orcamento</th>
+		        	<th>Atividade</th>
+		        	<th>Fiananciador</th>
+		     	</tr>
+    		</thead>
+		    <tbody>
+		    	<?php
+		    		$alunos = consultaProjetoExtensao();
+		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<tr>";
+		    			echo "<td>".$dados[objetivo]."</td>";
+		    			echo "<td>".$dados[orcamento]."</td>";
+		    			echo "<td>".$dados[atividades]."</td>";
+		    			echo "<td>".$dados[nome]."</td>";
+		    			echo "</tr>";
+		    		}
+		    	?>
+			</tbody>
+		</table>
+		
+		
+		
+		
 	</div>
 </main>
 <?php 

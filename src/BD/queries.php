@@ -63,7 +63,30 @@
         $bd->close();
         return $resultado;
     }
-
+    
+    //lista projetos de extensao
+    function consultaProjetoExtensao(){
+        $bd= conectaBD();
+        $sql="SELECT ID_Projeto_extensao, objetivo, orcamento, atividades, nome
+            FROM Projeto_Extensao
+            INNER JOIN Financiador 
+            ON Projeto_Extensao.ID_Financiador = Financiador.ID_Financiador";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
+    //lista projetos d pesquisa
+    function consultaProjetoPesquisa(){
+        $bd= conectaBD();
+        $sql="SELECT ID_Projeto_Pesquisa, objetivo, orcamento, atividade, nome
+            FROM Projeto_Pesquisa
+            INNER JOIN Financiador 
+            ON Projeto_Pesquisa.ID_Fin = Financiador.ID_Financiador";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro

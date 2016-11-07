@@ -14,9 +14,10 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th></th>
 		        	<th>nome</th>
 		        	<th>cpf</th>
-		        	<th></th>
+		        	<th>detalhes</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -25,9 +26,9 @@
 			    		$alunos = consultaTodosAlunos();
 			    		while ($dados = mysqli_fetch_array($alunos)) {
 			    			echo "<tr>";
+			    			echo "<td>".$dados[ID_Usuario]."</td>";
 			    			echo "<td>".$dados[nome]."</td>";
 			    			echo "<td>".$dados[cpf]."</td>";
-			    			echo "<input type='hidden' name='idAluno' value=".$dados[ID_Usuario]." />";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Detalhes</button></td>";
 			    			echo "</tr>";
 			    		}

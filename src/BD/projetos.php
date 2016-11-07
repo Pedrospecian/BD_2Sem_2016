@@ -11,64 +11,113 @@
 			<br>
 			É possível, também, cadastrar relatórios sobre a finalização dos projetos.
 		</p>
-		<h1>
+		<h3>
 			Cadastrar projeto de pesquisa
-		</h1>
-		<form action="inserePesquisa.php" method="get">
-			Objetivo: 
-			<input type="text" name="objetivo"/><br>
-			Descricao:
-			<input type="text" name="descricao"/><br>
-			Orçamento:
-			<input type="text" name="orcamento"/><br>
-			Atividade:
-			<input type="text" name="atividade"/><br>
-			ID Financiador:
-			<select name="idFinanciador">
-				<?php
-					$financiadores = consultaFinanciadores();
-					while ($dados = mysqli_fetch_array($financiadores)) {
-						//<option value="volvo">Volvo</option>
-						echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
-			        }
-				?>
-			</select><br>
-			<input type="submit" value="Criar projeto de pesquisa">
+		</h3>
+		<form action="inserePesquisa.php" method="get" class="form-horizontal">			
+			<div class="row">
+				<div class="form-group">
+					<label for="objetivo" class="control-label col-sm-2 text-right">Objetivo</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="objetivo"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="descricao" class="control-label col-sm-2 text-right">Descrição</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="descricao"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="orcamento" class="control-label col-sm-2 text-right">Orçamento</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="orcamento"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="atividade" class="control-label col-sm-2 text-right">Atividade</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="atividade"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="atividade" class="control-label col-sm-2 text-right">ID Financiador</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="idFinanciador">
+							<?php
+								$financiadores = consultaFinanciadores();
+								while ($dados = mysqli_fetch_array($financiadores)) {
+									//<option value="volvo">Volvo</option>
+									echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<button type="submit" class="btn btn-default col-sm-3">Criar projeto de pesquisa</button>
+				</div>
+			</div>
 		
 		</form>
-		<br>
-		<h1>
-			Cadastrar projeto de extensão.
-		</h1>
-		<form action="insereExtensao.php">
-			Objetivo: 
-			<input type="text" name="objetivo"/><br>
-			Descricao:
-			<input type="text" name="descricao"/><br>
-			Orçamento:
-			<input type="text" name="orcamento"/><br>
-			Atividade:
-			<input type="text" name="atividade"/><br>
-			ID Financiador:
-			<select name="idFinanciador">
-				<?php
-					$financiadores = consultaFinanciadores();
-					while ($dados = mysqli_fetch_array($financiadores)) {
-						//<option value="volvo">Volvo</option>
-						echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
-			        }
-				?>
-			</select><br>
-			<input type="submit" name="Criar projeto de extensão"/>
+		<h3>
+			Cadastrar projeto de extensão
+		</h3>
+		<form action="insereExtensao.php" class="form-horizontal">
+			<div class="row">
+				<div class="form-group">
+					<label for="objetivo" class="control-label col-sm-2 text-right">Objetivo</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="objetivo"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="descricao" class="control-label col-sm-2 text-right">Descrição</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="descricao"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="orcamento" class="control-label col-sm-2 text-right">Orçamento</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="orcamento"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="atividade" class="control-label col-sm-2 text-right">Atividade</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="atividade"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="atividade" class="control-label col-sm-2 text-right">ID Financiador</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="idFinanciador">
+							<?php
+								$financiadores = consultaFinanciadores();
+								while ($dados = mysqli_fetch_array($financiadores)) {
+									//<option value="volvo">Volvo</option>
+									echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<button type="submit" class="btn btn-default col-sm-3">Criar projeto de pesquisa</button>
+				</div>
+			</div>
 		</form>
-		
-		<br>
-		<h1>Projetos de pesquisa</h1>
+		<h3>Projetos de pesquisa</h3>
 		<table class="table">
 			<thead>
 				<tr>
 		        	<th>Objetivo</th>
-		        	<th>Orcamento</th>
+		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
 		     	</tr>

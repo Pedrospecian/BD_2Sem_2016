@@ -127,10 +127,10 @@
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados[objetivo]."</td>";
-		    			echo "<td>".$dados[orcamento]."</td>";
-		    			echo "<td>".$dados[atividade]."</td>";
-		    			echo "<td>".$dados[nome]."</td>";
+		    			echo "<td>".$dados['objetivo']."</td>";
+		    			echo "<td>".$dados['orcamento']."</td>";
+		    			echo "<td>".$dados['atividade']."</td>";
+		    			echo "<td>".$dados['nome']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>
@@ -139,7 +139,7 @@
 		
 		<br>
 		
-		<h1>Projetos de extensao</h1>
+		<h3>Projetos de extensão</h3>
 		<table class="table">
 			<thead>
 				<tr>
@@ -154,10 +154,10 @@
 		    		$alunos = consultaProjetoExtensao();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados[objetivo]."</td>";
-		    			echo "<td>".$dados[orcamento]."</td>";
-		    			echo "<td>".$dados[atividades]."</td>";
-		    			echo "<td>".$dados[nome]."</td>";
+		    			echo "<td>".$dados['objetivo']."</td>";
+		    			echo "<td>".$dados['orcamento']."</td>";
+		    			echo "<td>".$dados['atividades']."</td>";
+		    			echo "<td>".$dados['nome']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

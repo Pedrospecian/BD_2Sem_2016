@@ -12,26 +12,26 @@
 		<thead>
 		    <tr>
     		    <th>Código disciplina</th>
-    		    <th>Nome disicplina</th>
+    		    <th>Nome disciplina</th>
     		    <th>Nota do aluno</th>
     		    <tH>Frequencia do aluno</tH>
 		   	</tr>
     	</thead>
-		    <tbody>
-		        
-		    	<?php
-		    		$alunos = consultaHistoricoAluno($_GET[idAluno]);
-		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			echo "<tr>";
-		    			echo "<td>".$dados[Codigo]."</td>";
-		    			echo "<td>".$dados[nome]."</td>";
-		    			echo "<td>".$dados[Notas]."</td>";
-		    			echo "<td>".$dados[Frequencia]."</td>";
-		    			echo "</tr>";
-		    		}
-		    	?>
-		    	
-			</tbody>
+	    <tbody>
+	        
+	    	<?php
+	    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+	    		while ($dados = mysqli_fetch_array($alunos)) {
+	    			echo "<tr>";
+	    			echo "<td>".$dados['Codigo']."</td>";
+	    			echo "<td>".$dados['nome']."</td>";
+	    			echo "<td>".$dados['Notas']."</td>";
+	    			echo "<td>".$dados['Frequencia']."</td>";
+	    			echo "</tr>";
+	    		}
+	    	?>
+	    	
+		</tbody>
 		</table>
 </main>
 <?php 

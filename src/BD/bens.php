@@ -15,7 +15,7 @@
 		</p>
 		
 		<br>
-		<h1>Pesquisar bens de uma determinada unidade:</h1>
+		<h3>Pesquisar bens de uma determinada unidade:</h3>
 		<form action="bensUnidade.php" method="GET" class="form-horizontal">
 			<div class="form-group">
 				<label class="control-label col-sm-2">Nome da unidade</label> 
@@ -23,7 +23,6 @@
 				<button class="btn btn-default" type="submit" name="Pesquisar">Pesquisar</button>
 			</div>
 		</form>
-		<br>
 		<table class="table">
 			<thead>
 				<tr>

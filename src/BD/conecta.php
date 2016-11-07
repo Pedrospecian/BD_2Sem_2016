@@ -4,8 +4,8 @@
     // then click the URL that is emitted to the Output tab of the console.
     
 function conectaBD(){
-    $servername = getenv('IP');
-    $username = getenv('C9_USER');
+    $servername = 'localhost';
+    $username = 'root';
     $password = "";
     $database = "universidade";
     $dbport = 3306;

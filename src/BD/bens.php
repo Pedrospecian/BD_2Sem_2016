@@ -16,10 +16,12 @@
 		
 		<br>
 		<h1>Pesquisar bens de uma determinada unidade:</h1>
-		<form action="bensUnidade.php" method="GET">
-			Nome da unidade: 
-			<input type="text" name="nomeUnidade"/>
-			<input type="submit" name="Pesquisar" value="Pesquisar"/>
+		<form action="bensUnidade.php" method="GET" class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-2">Nome da unidade</label> 
+				<div class="col-sm-5"><input class="form-control" type="text" name="nomeUnidade"/></div>
+				<button class="btn btn-default" type="submit" name="Pesquisar">Pesquisar</button>
+			</div>
 		</form>
 		<br>
 		<table class="table">

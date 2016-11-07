@@ -54,11 +54,21 @@
         return $resultado;
     }
 
-//lista financeiadores (id e tipo e nome)
+//lista financiadores (id e tipo e nome)
     function consultaFinanciadores(){
         $bd= conectaBD();
         $sql="SELECT *
                 FROM Financiador";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
+    //lista financeiadores (id e tipo e nome)
+    function consultaUnidades(){
+        $bd= conectaBD();
+        $sql="SELECT *
+                FROM Unidade";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -156,6 +166,22 @@
         $bd= conectaBD();
         $sql=" INSERT INTO Projeto_Pesquisa ( Objetivo, Descricao, Orcamento, Atividade, ID_Fin) 
         VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //insere bem
+    //retorna true se inseriu e false se deu erro
+    function insereBem($identificador, $localizacao, $valor, $data_aquisicao, $tipo){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Bens ( Identificador, Localizacao, Valor, Data_de_Aquisicao, Tipo) 
+        VALUES ('".$identificador."','". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;

@@ -35,6 +35,7 @@
 		    	
 			</tbody>
 		</table>
+		<h3>Bolsas recebidas pelo aluno</h3>
 	</div>
 </main>
 <?php 

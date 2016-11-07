@@ -11,7 +11,7 @@
 		</p>
 		<br>
 		<p>
-			A universidade possui um total de <?php echo mysqli_fetch_array(somaValorBens())[total] ?> reais em bens.
+			A universidade possui um total de <?php echo mysqli_fetch_array(somaValorBens())['total'] ?> reais em bens.
 		</p>
 		
 		<br>
@@ -37,11 +37,11 @@
 		    		$bens = consultaBens();
 		    		while ($dados = mysqli_fetch_array($bens)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados[Identificador]."</td>";
-		    			echo "<td>".$dados[Localizacao]."</td>";
-		    			echo "<td>".$dados[Valor]."</td>";
-		    			echo "<td>".$dados[Data_de_Aquisicao]."</td>";
-		    			echo "<td>".$dados[Tipo]."</td>";
+		    			echo "<td>".$dados['Identificador']."</td>";
+		    			echo "<td>".$dados['Localizacao']."</td>";
+		    			echo "<td>".$dados['Valor']."</td>";
+		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";
+		    			echo "<td>".$dados['Tipo']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

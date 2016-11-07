@@ -9,12 +9,9 @@
 			Nessa tela, são exibidas as informações sobre cada bem que a universidade
 			possui, como prédios, carros e equipamentos.
 		</p>
-		<br>
 		<p>
 			A universidade possui um total de <?php echo mysqli_fetch_array(somaValorBens())['total'] ?> reais em bens.
 		</p>
-		
-		<br>
 		<h3>Pesquisar bens de uma determinada unidade:</h3>
 		<form action="bensUnidade.php" method="GET" class="form-horizontal">
 			<div class="form-group">

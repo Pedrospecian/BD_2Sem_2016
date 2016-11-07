@@ -10,7 +10,6 @@
 			graduação, como notas e frequência obtidas em disciplinas e bolsas que o
 			aluno recebe durante o período em que está na universidade.
 		</p>
-		<br>
 		<table class="table">
 			<thead>
 				<tr>

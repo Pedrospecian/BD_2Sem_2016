@@ -136,9 +136,6 @@
 		    	?>
 			</tbody>
 		</table>
-		
-		<br>
-		
 		<h3>Projetos de extensão</h3>
 		<table class="table">
 			<thead>
@@ -162,11 +159,7 @@
 		    		}
 		    	?>
 			</tbody>
-		</table>
-		
-		
-		
-		
+		</table>	
 	</div>
 </main>
 <?php 

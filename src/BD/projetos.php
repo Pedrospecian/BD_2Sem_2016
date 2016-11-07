@@ -141,7 +141,7 @@
 			<thead>
 				<tr>
 		        	<th>Objetivo</th>
-		        	<th>Orcamento</th>
+		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
 		     	</tr>

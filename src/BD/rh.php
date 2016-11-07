@@ -9,6 +9,11 @@
 			e funcionários. São exibidos: férias, licenças, advertências, afastamentos 
 			remunerados e afastamentos não remunerados.
 		</p>
+		<h3>Férias e Licenças</h3>
+
+	    <h3>Advertências</h3>
+
+	    <h3>Afastamentos</h3>
 		
 	</div>
 </main>

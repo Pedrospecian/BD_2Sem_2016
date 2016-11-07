@@ -22,9 +22,20 @@
 //listar todos os professores
     function consultaTodosProfessores(){
         $bd= conectaBD();
-        $sql = "SELECT nome, carreira, nivel
+        $sql = "SELECT *
                 FROM Professor
-                INNER JOIN Usuario ON Professor.ID_Usu = Usuario.ID_Usu";
+                INNER JOIN Usuario ON Professor.ID_Usu = Usuario.ID_Usuario";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
+    //listar todos os funcionarios
+    function consultaTodosFuncionarios(){
+        $bd= conectaBD();
+        $sql = "SELECT *
+                FROM Funcionario
+                INNER JOIN Usuario ON Funcionario.ID_Usu = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -147,17 +158,23 @@
         $bd->close();
         return $resultado;
     }
-    
+
+    //funcao para consultar o historico de um dado aluno
     function consultaHistoricoAluno($idAluno){
         $sql="SELECT Aluno.ID_Aluno, Disciplinas.ID_Dis, Notas, Frequencia, Disciplinas.Codigo, Disciplinas.nome
                 FROM Aluno
                 INNER JOIN Historico ON Historico.ID_Alu = Aluno.ID_Aluno
-                AND ID_Aluno = '1'
+                AND ID_Aluno = '".$idAluno."'
                 INNER JOIN Disciplinas ON Disciplinas.ID_dis = Historico.ID_Dis";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
+    }
+
+    //funcao para consultar as ocorrencias de um dado professor ou funcionario
+    function consultaOcorrencias($id){
+        //falta implementar a consulta
     }
 
     //insere projeto pesquisa

@@ -21,7 +21,7 @@
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Oco']."</td>";
-		    			echo "<td>".$dados['tipo_ocorrencia']."</td>";
+		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
 		    		}

@@ -28,7 +28,7 @@
 			    		$professores = consultaTodosProfessores();
 			    		while ($dados = mysqli_fetch_array($professores)) {
 			    			echo "<tr>";
-			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Professor']."'></td>";
+			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
 			    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
 			    			echo "<td>".$dados['cpf']."</td>";
 			    			echo "<td>".$dados['carreira']."</td>";
@@ -58,10 +58,10 @@
 			    		$funcionarios = consultaTodosFuncionarios();
 			    		while ($dados = mysqli_fetch_array($funcionarios)) {
 			    			echo "<tr>";
-			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Fun']."'></td>";
+			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
 			    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
 			    			echo "<td>".$dados['cpf']."</td>";
-			    			echo "<td>".$dados['funcao']."</td>";
+			    			//echo "<td>".$dados['funcao']."</td>";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Detalhes</button></td>";
 			    			echo "</tr>";
 			    		}

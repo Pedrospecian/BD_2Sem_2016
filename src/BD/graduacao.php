@@ -25,7 +25,7 @@
 			    		$alunos = consultaTodosAlunos();
 			    		while ($dados = mysqli_fetch_array($alunos)) {
 			    			echo "<tr>";
-			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Aluno']."'></td>";
+			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
 			    			echo "<td>".$dados['nome']."<input type='hidden' name='nomeAluno' value='".$dados['nome']."'></td>";
 			    			echo "<td>".$dados['cpf']."</td>";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Detalhes</button></td>";

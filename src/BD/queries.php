@@ -24,7 +24,7 @@
         $bd= conectaBD();
         $sql = "SELECT *
                 FROM Professor
-                INNER JOIN Usuario ON Professor.ID_Usu = Usuario.ID_Usuario";
+                INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -35,7 +35,7 @@
         $bd= conectaBD();
         $sql = "SELECT *
                 FROM Funcionario
-                INNER JOIN Usuario ON Funcionario.ID_Usu = Usuario.ID_Usuario";
+                INNER JOIN Usuario ON Funcionario.ID_Usuario = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

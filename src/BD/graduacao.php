@@ -22,7 +22,7 @@
 		    <tbody>
 		    	<form action="detalheAluno.php" method="get">
 			    	<?php
-			    		$alunos = consultaTodosAlunos();
+			    		$alunos = consultaAlunosGraduacao();
 			    		while ($dados = mysqli_fetch_array($alunos)) {
 			    			echo "<tr>";
 			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";

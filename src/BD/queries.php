@@ -147,10 +147,9 @@
     //recebe como parametro o nome da unidade
     function somaValorBensUnidade($nomeUnidade){
         $bd= conectaBD();
-        $sql="SELECT SUM(Valor) AS total
+        $sql="SELECT SUM( Valor ) AS total
                 FROM Bens
-                INNER JOIN Possui ON Bens.ID_Ben = Possui.ID_Ben
-                INNER JOIN Unidade ON Possui.ID_Unidade = Unidade.ID_Unidade
+                INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
                 AND nome = '".$nomeUnidade."'";
         $resultado = $bd->query($sql);
         $bd->close();

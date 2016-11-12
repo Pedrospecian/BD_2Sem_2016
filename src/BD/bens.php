@@ -80,7 +80,7 @@
 		    		$bens = consultaBens();
 		    		while ($dados = mysqli_fetch_array($bens)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados['Identificador']."</td>";
+		    			echo "<td>".$dados['ID_bem']."</td>";
 		    			echo "<td>".$dados['Localizacao']."</td>";
 		    			echo "<td>".$dados['Valor']."</td>";
 		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";

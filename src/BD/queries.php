@@ -9,7 +9,7 @@
 	    $sql="SELECT *
                 FROM Usuario
                 INNER JOIN Aluno 
-                ON Aluno.ID_Usuario = Usuario.ID_Usuario";
+                ON Aluno.ID_Aluno = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         //var_dump($resultado);
         //while ($dados = mysqli_fetch_array($resultado)) {

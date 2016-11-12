@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: 127.0.0.1
--- Data de Criação: 12-Nov-2016 às 20:02
+-- Data de Criação: 12-Nov-2016 às 21:08
 -- Versão do servidor: 5.5.50-0ubuntu0.14.04.1
 -- versão do PHP: 5.5.9-1ubuntu4.19
 
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `Aluno` (
 --
 
 INSERT INTO `Aluno` (`ID_Usuario`, `Ori_ID_Usuario`, `ID_Cur`) VALUES
-(1, NULL, 1);
+(1, NULL, 1),
+(4, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -52,21 +53,23 @@ INSERT INTO `Aluno` (`ID_Usuario`, `Ori_ID_Usuario`, `ID_Cur`) VALUES
 CREATE TABLE IF NOT EXISTS `Bens` (
   `Localizacao` char(255) NOT NULL,
   `Valor` int(11) NOT NULL,
-  `ID_bem` int(11) NOT NULL,
+  `ID_bem` int(11) NOT NULL AUTO_INCREMENT,
   `Data_de_Aquisicao` date NOT NULL,
   `Tipo` char(255) NOT NULL,
   `ID_Unidade` int(11) NOT NULL,
   PRIMARY KEY (`ID_bem`),
   UNIQUE KEY `ID_Bens_IND` (`ID_bem`),
   KEY `FKPossui_IND` (`ID_Unidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `Bens`
 --
 
 INSERT INTO `Bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo`, `ID_Unidade`) VALUES
-('localização do ben', 100, 1, '2016-11-01', 'tipo do bem', 1);
+('nome', 13, 1, '2016-11-04', 'tipo na tela', 1),
+('localizaÃ§Ã£o', 133, 3, '0000-00-00', 'tipo na tela 3', 1),
+('teste data', 1333, 4, '2016-11-19', 'tipo na tela 4', 1);
 
 -- --------------------------------------------------------
 
@@ -115,14 +118,15 @@ CREATE TABLE IF NOT EXISTS `Cursos` (
   UNIQUE KEY `SID_Cursos_IND` (`Codigo`),
   KEY `FKOferecimento_IND` (`ID_Disciplina`),
   KEY `FKComposicao_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `Cursos`
 --
 
 INSERT INTO `Cursos` (`ID_Cur`, `Codigo`, `Nome`, `ID_Disciplina`, `ID_Unidade`) VALUES
-(1, 200, 'nome do curso', 1, 1);
+(1, 200, 'nome do curso', 1, 1),
+(2, 22, 'nome da pos', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -335,6 +339,13 @@ CREATE TABLE IF NOT EXISTS `Ocorrencias` (
   UNIQUE KEY `ID_Ocorrencias_IND` (`ID_Ocorrencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `Ocorrencias`
+--
+
+INSERT INTO `Ocorrencias` (`ID_Ocorrencia`, `Tipo_Ocorrencia`) VALUES
+(1, 'tipo da ocorrencia');
+
 -- --------------------------------------------------------
 
 --
@@ -362,7 +373,14 @@ CREATE TABLE IF NOT EXISTS `Pos_Graduacao` (
   UNIQUE KEY `FKCur_Pos_ID` (`ID_Cur`),
   UNIQUE KEY `ID_IND` (`ID_Pos`),
   UNIQUE KEY `FKCur_Pos_IND` (`ID_Cur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `Pos_Graduacao`
+--
+
+INSERT INTO `Pos_Graduacao` (`ID_Pos`, `ID_Cur`) VALUES
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -507,7 +525,8 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 INSERT INTO `Usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`, `ID_Unidade`) VALUES
 (1, 'nome do usuario', '666.666.666-66', 'sexo do usuario', '2016-11-01', 1),
 (2, 'nome do funcionario', '666.666.666-66', 'sexo do funcionario', '2016-11-01', 1),
-(3, 'nome do professor', '666.666.666-66', 'sexo do professor', '2016-11-01', 1);
+(3, 'nome do professor', '666.666.666-66', 'sexo do professor', '2016-11-01', 1),
+(4, 'nome aluno pos', '666.666.666-66', 'sexo d', '2016-11-01', 1);
 
 --
 -- Constraints for dumped tables

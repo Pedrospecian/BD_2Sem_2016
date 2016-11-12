@@ -1,5 +1,6 @@
 <?php 
 	include "header.html"; 
+	include "queries.php";
 ?>
 <main>
 	<div class="container">

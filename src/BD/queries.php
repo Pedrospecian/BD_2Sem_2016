@@ -133,12 +133,10 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
-        $sql="SELECT Bens.ID_Ben, Identificador, Localizacao, Valor, Data_de_Aquisicao, Bens.tipo tipoBem, Unidade.ID_Unidade,
-                nome AS nomeUnidade, Unidade.tipo AS tipoUnidade
+        $sql="SELECT Bens.ID_Bem, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, nome AS nomeUnidade, Unidade.tipo AS tipoUnidade
                 FROM Bens
-                INNER JOIN Possui ON Bens.ID_Ben = Possui.ID_Ben
-                INNER JOIN Unidade ON Possui.ID_Unidade = Unidade.ID_Unidade
-                AND nome = '".$nomeUnidade."'";
+                INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
+                AND Unidade.nome = '".$nomeUnidade."'";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

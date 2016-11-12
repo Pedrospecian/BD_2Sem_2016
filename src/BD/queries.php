@@ -78,6 +78,19 @@
         return $resultado;
     }
     
+//listar todos os cursos da pós
+    function consultaAlunosPos(){
+        $bd= conectaBD();
+        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.ID_Cur, Cursos.Nome
+                FROM Usuario
+                INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
+                INNER JOIN Pos_Graduacao ON Aluno.ID_Cur = Pos_Graduacao.ID_Cur
+                INNER JOIN Cursos ON Cursos.ID_Cur = Pos_Graduacao.ID_Cur";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
 
 //lista financiadores (id e tipo e nome)
     function consultaFinanciadores(){

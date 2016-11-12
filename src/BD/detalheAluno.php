@@ -26,7 +26,7 @@
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['Codigo']."</td>";
-		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td>".$dados['Nome']."</td>";
 		    			echo "<td>".$dados['Notas']."</td>";
 		    			echo "<td>".$dados['Frequencia']."</td>";
 		    			echo "</tr>";

@@ -62,6 +62,7 @@
 			    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
 			    			echo "<td>".$dados['cpf']."</td>";
 			    			//echo "<td>".$dados['funcao']."</td>";
+			    			echo "<td></td>";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Detalhes</button></td>";
 			    			echo "</tr>";
 			    		}

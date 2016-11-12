@@ -88,7 +88,7 @@
     //lista projetos de extensao
     function consultaProjetoExtensao(){
         $bd= conectaBD();
-        $sql="SELECT ID_Projeto_extensao, objetivo, orcamento, atividades, nome
+        $sql="SELECT ID_ProjetoExtensao, objetivo, orcamento, atividades, nome
             FROM Projeto_Extensao
             INNER JOIN Financiador 
             ON Projeto_Extensao.ID_Financiador = Financiador.ID_Financiador";
@@ -100,10 +100,10 @@
     //lista projetos d pesquisa
     function consultaProjetoPesquisa(){
         $bd= conectaBD();
-        $sql="SELECT ID_Projeto_Pesquisa, objetivo, orcamento, atividade, nome
+        $sql="SELECT ID_ProjetoPesquisa, objetivo, orcamento, atividade, nome
             FROM Projeto_Pesquisa
             INNER JOIN Financiador 
-            ON Projeto_Pesquisa.ID_Fin = Financiador.ID_Financiador";
+            ON Projeto_Pesquisa.ID_Financiador = Financiador.ID_Financiador";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -161,7 +161,7 @@
         $sql="SELECT Aluno.ID_Usuario, Disciplinas.ID_Disciplina, Notas, Frequencia, Disciplinas.Codigo, Disciplinas.Nome
                 FROM Aluno
                 INNER JOIN Historico ON Historico.ID_Usuario = Aluno.ID_Usuario
-                AND ID_Usuario = '".$idAluno."'
+                AND Aluno.ID_Usuario = '".$idAluno."'
                 INNER JOIN Disciplinas ON Disciplinas.ID_Disciplina = Historico.ID_Disciplina";
         $bd= conectaBD();
         $resultado = $bd->query($sql);

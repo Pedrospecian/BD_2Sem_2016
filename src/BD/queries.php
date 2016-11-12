@@ -199,10 +199,10 @@
 
     //insere bem
     //retorna true se inseriu e false se deu erro
-    function insereBem($identificador, $localizacao, $valor, $data_aquisicao, $tipo){
+    function insereBem($idUnidade, $localizacao, $valor, $data_aquisicao, $tipo){
         $bd= conectaBD();
-        $sql=" INSERT INTO Bens ( Identificador, Localizacao, Valor, Data_de_Aquisicao, Tipo) 
-        VALUES ('".$identificador."','". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."');";
+        $sql=" INSERT INTO  Bens (Localizacao, Valor, Data_de_Aquisicao, Tipo, ID_Unidade)
+            VALUES ('". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."','".$idUnidade."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;

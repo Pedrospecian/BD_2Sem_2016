@@ -16,13 +16,13 @@
 		<form action="insereBem.php" method="GET" class="form-horizontal">
 			<div class="row">
 				<div class="form-group">
-					<label for="localizacao" class="control-label col-sm-2 text-right">Localização</label>
+					<label for="unidade" class="control-label col-sm-2 text-right">Unidade</label>
 					<div class="col-sm-5">
-						<select class="form-control" name="localizacao">
+						<select class="form-control" name="unidade">
 							<?php
 								$unidades = consultaUnidades();
 								while ($dados = mysqli_fetch_array($unidades)) {
-									echo "<option value=".$dados['nome'].">".$dados['nome']."</option>";
+									echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
 						        }
 							?>
 						</select>
@@ -31,8 +31,8 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="identificador" class="control-label col-sm-2 text-right">Identificador</label>
-					<div class="col-sm-5"><input class="form-control" type="text" name="identificador"/></div>
+					<label for="localizacao" class="control-label col-sm-2 text-right">Localização</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="localizacao"/></div>
 				</div>
 			</div>
 			<div class="row">

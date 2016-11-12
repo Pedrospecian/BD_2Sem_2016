@@ -174,7 +174,14 @@
 
     //funcao para consultar as ocorrencias de um dado professor ou funcionario
     function consultaOcorrencias($id){
-        //falta implementar a consulta
+        //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
+        $sql="SELECT *
+        FROM Ocorrencias";
+        $bd= conectaBD();
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+
     }
 
     //insere projeto pesquisa

@@ -22,9 +22,20 @@
 //listar todos os professores
     function consultaTodosProfessores(){
         $bd= conectaBD();
-        $sql = "SELECT nome, carreira, nivel
+        $sql = "SELECT *
                 FROM Professor
-                INNER JOIN Usuario ON Professor.ID_Usu = Usuario.ID_Usu";
+                INNER JOIN Usuario ON Professor.ID_Usu = Usuario.ID_Usuario";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
+    //listar todos os funcionarios
+    function consultaTodosFuncionarios(){
+        $bd= conectaBD();
+        $sql = "SELECT *
+                FROM Funcionario
+                INNER JOIN Usuario ON Funcionario.ID_Usu = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -54,11 +65,21 @@
         return $resultado;
     }
 
-//lista financeiadores (id e tipo e nome)
+//lista financiadores (id e tipo e nome)
     function consultaFinanciadores(){
         $bd= conectaBD();
         $sql="SELECT *
                 FROM Financiador";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
+    //lista financeiadores (id e tipo e nome)
+    function consultaUnidades(){
+        $bd= conectaBD();
+        $sql="SELECT *
+                FROM Unidade";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -137,17 +158,23 @@
         $bd->close();
         return $resultado;
     }
-    
+
+    //funcao para consultar o historico de um dado aluno
     function consultaHistoricoAluno($idAluno){
         $sql="SELECT Aluno.ID_Aluno, Disciplinas.ID_Dis, Notas, Frequencia, Disciplinas.Codigo, Disciplinas.nome
                 FROM Aluno
                 INNER JOIN Historico ON Historico.ID_Alu = Aluno.ID_Aluno
-                AND ID_Aluno = '1'
+                AND ID_Aluno = '".$idAluno."'
                 INNER JOIN Disciplinas ON Disciplinas.ID_dis = Historico.ID_Dis";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
+    }
+
+    //funcao para consultar as ocorrencias de um dado professor ou funcionario
+    function consultaOcorrencias($id){
+        //falta implementar a consulta
     }
 
     //insere projeto pesquisa
@@ -156,6 +183,22 @@
         $bd= conectaBD();
         $sql=" INSERT INTO Projeto_Pesquisa ( Objetivo, Descricao, Orcamento, Atividade, ID_Fin) 
         VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //insere bem
+    //retorna true se inseriu e false se deu erro
+    function insereBem($identificador, $localizacao, $valor, $data_aquisicao, $tipo){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Bens ( Identificador, Localizacao, Valor, Data_de_Aquisicao, Tipo) 
+        VALUES ('".$identificador."','". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;

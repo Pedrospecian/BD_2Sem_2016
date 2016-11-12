@@ -12,6 +12,51 @@
 		<p>
 			A universidade possui um total de <?php echo mysqli_fetch_array(somaValorBens())['total'] ?> reais em bens.
 		</p>
+		<h3>Inserir novo bem:</h3>
+		<form action="insereBem.php" method="GET" class="form-horizontal">
+			<div class="row">
+				<div class="form-group">
+					<label for="localizacao" class="control-label col-sm-2 text-right">Localização</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="localizacao">
+							<?php
+								$unidades = consultaUnidades();
+								while ($dados = mysqli_fetch_array($unidades)) {
+									echo "<option value=".$dados['nome'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="identificador" class="control-label col-sm-2 text-right">Identificador</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="identificador"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="valor" class="control-label col-sm-2 text-right">Valor</label>
+					<div class="col-sm-5"><input class="form-control" type="number" name="valor"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="data-aquisicao" class="control-label col-sm-2 text-right">Data de Aquisição</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-aquisicao"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="tipo" class="control-label col-sm-2 text-right">Tipo</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="tipo"/></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-default col-sm-offset-2" type="submit" name="InserirBem">Inserir Bem</button>
+			</div>
+		</form>
 		<h3>Pesquisar bens de uma determinada unidade:</h3>
 		<form action="bensUnidade.php" method="GET" class="form-horizontal">
 			<div class="form-group">

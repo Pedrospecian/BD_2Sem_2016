@@ -5,7 +5,7 @@
 <main>
 	<div class="container">
 		<h2>Aluno: <?php echo $_GET['nomeAluno'];?></h2>
-	    <h3>Projetos de extensão do aluno:</h3>
+	    <h3>Projetos de extensão do aluno</h3>
 
 	    <h3>Projetos de pesquisa do aluno</h3>
 
@@ -35,6 +35,7 @@
 		    	
 			</tbody>
 		</table>
+		<h3>Bolsas recebidas pelo aluno</h3>
 	</div>
 </main>
 <?php 

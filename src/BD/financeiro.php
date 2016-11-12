@@ -9,6 +9,11 @@
 			faculdade, abrangendo folha de pagamento, compras feitas pela universidade
 			e verbas recebidas.
 		</p>
+		<h3>Folha de Pagamento</h3>
+
+	    <h3>Compras Feitas pela Universidade</h3>
+
+	    <h3>Verbas Recebidas</h3>
 	</div>
 </main>
 <?php 

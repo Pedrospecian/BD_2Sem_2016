@@ -158,11 +158,11 @@
 
     //funcao para consultar o historico de um dado aluno
     function consultaHistoricoAluno($idAluno){
-        $sql="SELECT Aluno.ID_Aluno, Disciplinas.ID_Dis, Notas, Frequencia, Disciplinas.Codigo, Disciplinas.nome
+        $sql="SELECT Aluno.ID_Usuario, Disciplinas.ID_Disciplina, Notas, Frequencia, Disciplinas.Codigo, Disciplinas.Nome
                 FROM Aluno
-                INNER JOIN Historico ON Historico.ID_Alu = Aluno.ID_Aluno
-                AND ID_Aluno = '".$idAluno."'
-                INNER JOIN Disciplinas ON Disciplinas.ID_dis = Historico.ID_Dis";
+                INNER JOIN Historico ON Historico.ID_Usuario = Aluno.ID_Usuario
+                AND ID_Usuario = '".$idAluno."'
+                INNER JOIN Disciplinas ON Disciplinas.ID_Disciplina = Historico.ID_Disciplina";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();

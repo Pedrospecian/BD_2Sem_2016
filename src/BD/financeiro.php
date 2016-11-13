@@ -38,6 +38,30 @@
 		</table>
 
 	    <h3>Verbas Recebidas</h3>
+	    <p>
+			A universidade já recebeu um total de <?php echo mysqli_fetch_array(somaValorVerbas())['total'] ?> reais em verbas.
+		</p>
+	    <table class="table">
+			<thead>
+				<tr>
+		        	<th>Valor</th>
+		        	<th>Data</th>
+		        	<th>Unidade</th>
+		     	</tr>
+    		</thead>
+		    <tbody>
+		    	<?php
+		    		$verbas = consultaVerbas();
+		    		while ($dados = mysqli_fetch_array($verbas)) {
+		    			echo "<tr>";
+		    			echo "<td>".$dados['Valor']."</td>";
+		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td>".$dados['ID_Unidade']."</td>";
+		    			echo "</tr>";
+		    		}
+		    	?>
+			</tbody>
+		</table>		
 	</div>
 </main>
 <?php 

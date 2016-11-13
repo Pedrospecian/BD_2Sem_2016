@@ -93,6 +93,16 @@
     }
     
 
+    function consultaVerbas(){        
+        $bd= conectaBD();
+        //var_dump($bd);
+        $sql="SELECT *
+                FROM Verba";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
 //lista financiadores (id e tipo e nome)
     function consultaFinanciadores(){
         $bd= conectaBD();
@@ -152,6 +162,16 @@
         $bd= conectaBD();
         $sql="SELECT SUM( Valor ) AS total
                 FROM Bens";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
+    //funcao para retornar valor total de todas as verbas
+    function somaValorVerbas(){
+        $bd= conectaBD();
+        $sql="SELECT SUM( Valor ) AS total
+                FROM Verba";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

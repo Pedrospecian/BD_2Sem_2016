@@ -13,6 +13,48 @@
 			curso (qualificação, para mestrado e doutorado, e defesa de trabalho final
 			para todos os casos).
 		</p>
+		<h3>Inserir novo aluno:</h3>
+		<form action="insereAluno.php" method="GET" class="form-horizontal">
+			<div class="row">
+				<div class="form-group">
+					<label for="nome" class="control-label col-sm-2 text-right">Nome</label>
+					<div class="col-sm-5">
+						<input class="form-control" type="text" name="nome">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="cpf" class="control-label col-sm-2 text-right">CPF</label>
+					<div class="col-sm-5"><input class="form-control" type="text" name="cpf"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="data-nascimento" class="control-label col-sm-2 text-right">Data de Nascimento</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-nascimento"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="curso" class="control-label col-sm-2 text-right">Curso</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="curso">
+							<option value="">--</option>
+							<?php
+								//$unidades = consultaUnidades();
+								//while ($dados = mysqli_fetch_array($unidades)) {
+								//	echo "<option value=".$dados['ID_Curso'].">".$dados['nome']."</option>";
+						        //}
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-default col-sm-offset-2" type="submit" name="InserirAluno">Inserir Aluno</button>
+			</div>
+		</form>
 		<table class="table">
 			<thead>
 				<tr>

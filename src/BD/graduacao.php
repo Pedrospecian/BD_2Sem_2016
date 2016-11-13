@@ -20,7 +20,7 @@
 		     	</tr>
     		</thead>
 		    <tbody>
-		    	<form action="detalheAluno.php" method="get">
+		    	<form action="detalheAlunoGraduacao.php" method="get">
 			    	<?php
 			    		$alunos = consultaAlunosGraduacao();
 			    		while ($dados = mysqli_fetch_array($alunos)) {

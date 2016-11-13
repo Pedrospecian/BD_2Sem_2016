@@ -4,7 +4,7 @@
 ?>
 <main>
 	<div class="container">
-		<h2>Aluno: <?php echo $_GET['nomeAluno'];?></h2>
+		<h2>Aluno Pós-Graduação: <?php echo $_GET['nomeAluno'];?></h2>
 	    <h3>Projetos de extensão do aluno</h3>
 	    <table class="table">
 			<thead>
@@ -19,8 +19,8 @@
 		    <tbody>
 		        
 		    	<?php
-		    		//$alunos = consultaHistoricoAluno($_GET['idAluno']);
-		    		//while ($dados = mysqli_fetch_array($alunos)) {
+		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
 		    			echo "<td></td>";
@@ -28,7 +28,7 @@
 		    			echo "<td></td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
-		    		//}
+		    		}
 		    	?>
 		    	
 			</tbody>
@@ -48,8 +48,8 @@
 		    <tbody>
 		        
 		    	<?php
-		    		//$alunos = consultaHistoricoAluno($_GET['idAluno']);
-		    		//while ($dados = mysqli_fetch_array($alunos)) {
+		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
 		    			echo "<td></td>";
@@ -57,7 +57,7 @@
 		    			echo "<td></td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
-		    		//}
+		    		}
 		    	?>
 		    	
 			</tbody>
@@ -79,7 +79,7 @@
 		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados['Codigo']."</td>";
+		    			echo "<td>".$dados['ID_Disciplina']."</td>";
 		    			echo "<td>".$dados['Nome']."</td>";
 		    			echo "<td>".$dados['Notas']."</td>";
 		    			echo "<td>".$dados['Frequencia']."</td>";
@@ -102,15 +102,39 @@
 		    <tbody>
 		        
 		    	<?php
-		    		//$alunos = consultaHistoricoAluno($_GET['idAluno']);
-		    		//while ($dados = mysqli_fetch_array($alunos)) {
+		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
 		    			echo "<td></td>";
 		    			echo "<td></td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
-		    		//}
+		    		}
+		    	?>
+		    	
+			</tbody>
+		</table>
+		<h3>Datas Importantes do curso de <?php echo $_GET['nomeAluno'];?></h3>
+		<table class="table">
+			<thead>
+			    <tr>
+	    		    <th>Etapa</th>
+	    		    <th>Data</th>
+	    		    <th>Nota do aluno</th>
+	    		    <th>Frequencia do aluno</th>
+			   	</tr>
+	    	</thead>
+		    <tbody>
+		        
+		    	<?php
+		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<tr>";
+		    			echo "<td></td>";
+		    			echo "<td></td>";
+		    			echo "</tr>";
+		    		}
 		    	?>
 		    	
 			</tbody>

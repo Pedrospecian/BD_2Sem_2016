@@ -41,7 +41,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">ID Financiador</label>
+					<label for="atividade" class="control-label col-sm-2 text-right">Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
 							<option value="">--</option>
@@ -50,6 +50,23 @@
 								while ($dados = mysqli_fetch_array($financiadores)) {
 									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="atividade" class="control-label col-sm-2 text-right">Aluno</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="idFinanciador">
+							<option value="">--</option>
+							<?php
+								$alunos = consultaTodosAlunos();
+								while ($dados = mysqli_fetch_array($alunos)) {
+									//<option value="volvo">Volvo</option>
+									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>
 						</select>
@@ -93,7 +110,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">ID Financiador</label>
+					<label for="atividade" class="control-label col-sm-2 text-right">Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
 							<option value="">--</option>
@@ -102,6 +119,23 @@
 								while ($dados = mysqli_fetch_array($financiadores)) {
 									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="atividade" class="control-label col-sm-2 text-right">Aluno</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="idAluno">
+							<option value="">--</option>
+							<?php
+								$alunos = consultaTodosAlunos();
+								while ($dados = mysqli_fetch_array($alunos)) {
+									//<option value="volvo">Volvo</option>
+									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>
 						</select>

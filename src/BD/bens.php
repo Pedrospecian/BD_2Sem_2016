@@ -73,6 +73,8 @@
 		        	<th>Valor</th>
 		        	<th>Data de aquisição</th>
 		        	<th>Tipo</th>
+		        	<th>alterar</th>
+		        	<th>apagar</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -85,6 +87,8 @@
 		    			echo "<td>".$dados['Valor']."</td>";
 		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";
 		    			echo "<td>".$dados['Tipo']."</td>";
+		    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

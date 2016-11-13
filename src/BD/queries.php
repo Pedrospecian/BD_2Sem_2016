@@ -209,6 +209,30 @@
 
     }
 
+    //insere aluno de graduacao
+
+    //insere aluno de pos-graduacao
+
+    //altera aluno de graduacao
+    function atualizaAlunoGraduacao($idAluno){
+        $sql="";
+    }
+
+    //altera aluno de pos graduacao
+    function atualizaAlunoPos($idAluno){
+        $sql="";
+    }
+
+    //deleta aluno de graduacao
+    function deletaAlunoGraduacao($idAluno){
+        $sql="";
+    }
+
+    //deleta aluno de pos graduacao
+    function deletaAlunoPos($idAluno){
+        $sql="";
+    }
+
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro
     function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador){

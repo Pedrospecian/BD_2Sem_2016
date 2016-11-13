@@ -20,6 +20,8 @@
 		        	<th>nome</th>
 		        	<th>cpf</th>
 		        	<th>detalhes</th>
+		        	<th>alterar</th>
+		        	<th>apagar</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -32,6 +34,8 @@
 			    			echo "<td>".$dados['nome']."<input type='hidden' name='nomeAluno' value='".$dados['nome']."'></td>";
 			    			echo "<td>".$dados['cpf']."</td>";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Detalhes</button></td>";
+			    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
+			    			echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
 			    			echo "</tr>";
 			    		}
 			    	?>

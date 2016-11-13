@@ -11,6 +11,8 @@
 	            echo "inseriu";
 	        }
 	    ?>
+	    <br>
+	    <a href="projetos.php">Voltar</a>
 
 	</div>
 </main>

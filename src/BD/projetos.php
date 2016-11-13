@@ -44,11 +44,12 @@
 					<label for="atividade" class="control-label col-sm-2 text-right">ID Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
+							<option value="">--</option>
 							<?php
 								$financiadores = consultaFinanciadores();
 								while ($dados = mysqli_fetch_array($financiadores)) {
 									//<option value="volvo">Volvo</option>
-									echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
+									echo "<option value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
 						        }
 							?>
 						</select>
@@ -95,11 +96,12 @@
 					<label for="atividade" class="control-label col-sm-2 text-right">ID Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
+							<option value="">--</option>
 							<?php
 								$financiadores = consultaFinanciadores();
 								while ($dados = mysqli_fetch_array($financiadores)) {
 									//<option value="volvo">Volvo</option>
-									echo "<option value=".$dados['ID_Financiador'].">".$dados['Nome']."</option>";
+									echo "<option value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
 						        }
 							?>
 						</select>
@@ -153,7 +155,7 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
-		    			echo "<td>".$dados['atividades']."</td>";
+		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
 		    			echo "</tr>";
 		    		}

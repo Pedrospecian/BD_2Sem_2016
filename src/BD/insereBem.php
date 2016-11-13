@@ -11,6 +11,8 @@
 	            echo "inseriu";
 	        }
 	    ?>
+	    <br>
+	    <a href="bens.php">Voltar</a>
 
 	</div>
 </main>

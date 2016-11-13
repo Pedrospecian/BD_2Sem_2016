@@ -213,9 +213,12 @@
     //retorna true se inseriu e false se deu erro
     function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador){
         $bd= conectaBD();
-        $sql=" INSERT INTO Projeto_Pesquisa ( Objetivo, Descricao, Orcamento, Atividade, ID_Fin) 
+        $sql=" INSERT INTO Projeto ( Objetivo, Descricao, Orcamento, Atividade, ID_Financiador) 
         VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
         if ($bd->query($sql) === TRUE) {
+             $sql_projetopesquisa= "INSERT INTO Projeto_Pesquisa (ID_Projeto) 
+                VALUES ('1');";
+            $bd->query($sql_projetopesquisa);
             $bd->close();
             return TRUE;
         } else {
@@ -244,10 +247,13 @@
      //insere projeto extensao
     //retorna true se inseriu e false se deu erro
     function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador){
-            $bd= conectaBD();
-        $sql= "INSERT INTO Projeto_Extensao (objetivo, descricao, orcamento, atividades, ID_Financiador) 
+        $bd= conectaBD();
+        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador) 
              VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.");";
         if ($bd->query($sql) === TRUE) {
+            $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
+                VALUES ('1');";
+            $bd->query($sql_projetoextensao);
             $bd->close();
             return TRUE;
         } else {

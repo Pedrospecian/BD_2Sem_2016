@@ -48,7 +48,7 @@
         $sql="SELECT *
             FROM Cursos
             INNER JOIN Graduacao 
-            ON Cursos.ID_Cur = Graduacao.ID_Cur";
+            ON Cursos.Codigo = Graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -60,7 +60,7 @@
         $sql="SELECT *
             FROM Cursos
             INNER JOIN Pos_Graduacao 
-            ON Cursos.ID_Cur = Pos_Graduacao.ID_Cur";
+            ON Cursos.Codigo = Pos_Graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -69,11 +69,11 @@
     //listar todos os alunos da graduação
     function consultaAlunosGraduacao(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.ID_Cur, Cursos.Nome
+        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
                 FROM Usuario
                 INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
-                INNER JOIN Graduacao ON Aluno.ID_Cur = Graduacao.ID_Cur
-                INNER JOIN Cursos ON Cursos.ID_Cur = Graduacao.ID_Cur";
+                INNER JOIN Graduacao ON Aluno.Codigo = Graduacao.Codigo
+                INNER JOIN Cursos ON Cursos.Codigo = Graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -82,11 +82,11 @@
 //listar todos os cursos da pós
     function consultaAlunosPos(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.ID_Cur, Cursos.Nome
+        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
                 FROM Usuario
                 INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
-                INNER JOIN Pos_Graduacao ON Aluno.ID_Cur = Pos_Graduacao.ID_Cur
-                INNER JOIN Cursos ON Cursos.ID_Cur = Pos_Graduacao.ID_Cur";
+                INNER JOIN Pos_Graduacao ON Aluno.Codigo = Pos_Graduacao.Codigo
+                INNER JOIN Cursos ON Cursos.Codigo = Pos_Graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -116,10 +116,10 @@
     //lista projetos de extensao
     function consultaProjetoExtensao(){
         $bd= conectaBD();
-        $sql="SELECT ID_ProjetoExtensao, objetivo, orcamento, atividades, nome
-            FROM Projeto_Extensao
-            INNER JOIN Financiador 
-            ON Projeto_Extensao.ID_Financiador = Financiador.ID_Financiador";
+        $sql="SELECT Projeto_Extensao.ID_Projeto, objetivo, orcamento, atividade, nome
+                FROM Projeto_Extensao
+                INNER JOIN Projeto ON Projeto_Extensao.ID_Projeto = Projeto.ID_Projeto
+                INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -128,10 +128,10 @@
     //lista projetos d pesquisa
     function consultaProjetoPesquisa(){
         $bd= conectaBD();
-        $sql="SELECT ID_ProjetoPesquisa, objetivo, orcamento, atividade, nome
-            FROM Projeto_Pesquisa
-            INNER JOIN Financiador 
-            ON Projeto_Pesquisa.ID_Financiador = Financiador.ID_Financiador";
+        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, atividade, nome
+                FROM Projeto_Pesquisa
+                INNER JOIN Projeto ON Projeto_Pesquisa.ID_Projeto = Projeto.ID_Projeto
+                INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

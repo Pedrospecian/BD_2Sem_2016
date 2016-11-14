@@ -42,10 +42,26 @@
 						<select class="form-control" name="curso">
 							<option value="">--</option>
 							<?php
-								//$unidades = consultaUnidades();
-								//while ($dados = mysqli_fetch_array($unidades)) {
-								//	echo "<option value=".$dados['ID_Curso'].">".$dados['nome']."</option>";
-						        //}
+								$unidades = consultaCursosPos();
+								while ($dados = mysqli_fetch_array($unidades)) {
+									echo "<option value=".$dados['Codigo'].">".$dados['Nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="unidade" class="control-label col-sm-2 text-right">Unidade</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="unidade">
+							<option value="">--</option>
+							<?php
+								$unidades = consultaUnidades();
+								while ($dados = mysqli_fetch_array($unidades)) {
+									echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+						        }
 							?>
 						</select>
 					</div>

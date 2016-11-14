@@ -156,6 +156,8 @@
 		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
+		        	<th>alterar</th>
+		        	<th>apagar</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -167,6 +169,8 @@
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
 		    		}
 		    	?>
@@ -180,6 +184,8 @@
 		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
+		        	<th>alterar</th>
+		        	<th>apagar</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -191,6 +197,8 @@
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

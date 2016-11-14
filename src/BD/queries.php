@@ -229,9 +229,23 @@
 
     }
 
-    //insere aluno de graduacao
-
-    //insere aluno de pos-graduacao
+    //insere aluno
+    function insereAluno($nome, $cpf, $dataNasc, $unidade, $curso){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
+        VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
+        if ($bd->query($sql) === TRUE) {
+             $sql_aluno= "INSERT INTO Aluno (ID_Usuario, Codigo) 
+                VALUES ('".mysqli_insert_id($bd)."', '".$curso."');";
+            $bd->query($sql_aluno);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
 
     //altera aluno de graduacao
     function atualizaAlunoGraduacao($idAluno){
@@ -253,15 +267,61 @@
         $sql="";
     }
 
+    //insere professor
+    function insereProfessor($nome, $cpf, $dataNasc, $carreira, $nivel, $unidade){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
+        VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
+        if ($bd->query($sql) === TRUE) {
+            $sql_professor= "INSERT INTO Professor (ID_Usuario, carreira, nivel) 
+                VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
+            $bd->query($sql_professor);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //altera professor
+
+    //deleta professor
+
+    //insere funcionario
+    function insereFuncionario($nome, $cpf, $dataNasc, $funcao, $unidade){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
+        VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
+        if ($bd->query($sql) === TRUE) {
+            $sql_funcionario= "INSERT INTO Funcionario (ID_Usuario, Funcao) 
+                VALUES ('".mysqli_insert_id($bd)."', '".$funcao."');";
+            //$sql_funcionario= "INSERT INTO Funcionario (ID_Usuario) 
+            //    VALUES ('".mysqli_insert_id($bd)."');";
+            $bd->query($sql_funcionario);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //altera funcionario
+
+    //deleta funcionario
+
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro
-    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador){
+    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador, $idAluno){
         $bd= conectaBD();
-        $sql=" INSERT INTO Projeto ( Objetivo, Descricao, Orcamento, Atividade, ID_Financiador) 
-        VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
+        $sql=" INSERT INTO Projeto ( Objetivo, Descricao, Orcamento, Atividade, ID_Financiador, ID_Usuario) 
+        VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."','". $idAluno."');";
         if ($bd->query($sql) === TRUE) {
              $sql_projetopesquisa= "INSERT INTO Projeto_Pesquisa (ID_Projeto) 
-                VALUES ('1');";
+                VALUES ('".mysqli_insert_id($bd)."');";
             $bd->query($sql_projetopesquisa);
             $bd->close();
             return TRUE;
@@ -290,13 +350,13 @@
     
      //insere projeto extensao
     //retorna true se inseriu e false se deu erro
-    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador){
+    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno){
         $bd= conectaBD();
-        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador) 
-             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.");";
+        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador, ID_Usuario) 
+             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.",'". $idAluno."');";
         if ($bd->query($sql) === TRUE) {
             $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
-                VALUES ('1');";
+                VALUES ('".mysqli_insert_id($bd)."');";
             $bd->query($sql_projetoextensao);
             $bd->close();
             return TRUE;

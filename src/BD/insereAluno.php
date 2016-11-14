@@ -6,13 +6,13 @@
 	<div class="container">
 	    <?php
             var_dump($_GET);
-	        $inseriu = insereBem($_GET['unidade'], $_GET['localizacao'], $_GET['valor'], $_GET['data-aquisicao'], $_GET['tipo']);
+	        $inseriu = insereAluno( $_GET['nome'], $_GET['cpf'], $_GET['data-nascimento'], $_GET['unidade'], $_GET['curso']);
 	        if($inseriu == TRUE){
-	            echo "Bem cadastrado com sucesso!";
+	            echo "Aluno cadastrado com sucesso!";
 	        }
 	    ?>
 	    <br>
-	    <a href="bens.php">Voltar</a>
+	    <a href="index.php">Voltar</a>
 
 	</div>
 </main>

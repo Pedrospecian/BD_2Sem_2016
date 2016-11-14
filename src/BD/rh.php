@@ -49,6 +49,22 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="unidade" class="control-label col-sm-2 text-right">Unidade</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="unidade">
+							<option value="">--</option>
+							<?php
+								$unidades = consultaUnidades();
+								while ($dados = mysqli_fetch_array($unidades)) {
+									echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
 			<div class="form-group">
 				<button class="btn btn-default col-sm-offset-2" type="submit" name="InserirProfessor">Inserir Professor</button>
 			</div>
@@ -61,6 +77,7 @@
 		        	<th>cpf</th>
 		        	<th>carreira</th>
 		        	<th>nivel</th>
+		        	<th>unidade</th>
 		        	<th>ocorrências</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -77,6 +94,7 @@
 			    			echo "<td>".$dados['cpf']."</td>";
 			    			echo "<td>".$dados['carreira']."</td>";
 			    			echo "<td>".$dados['nivel']."</td>";
+			    			echo "<td>".$dados['ID_Unidade']."</td>";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Ocorrências</button></td>";
 			    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
 			    			echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
@@ -106,9 +124,31 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
+					<label for="data-nascimento" class="control-label col-sm-2 text-right">Data de Nascimento</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-nascimento"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
 					<label for="funcao" class="control-label col-sm-2 text-right">Função</label>
 					<div class="col-sm-5">
 						<input class="form-control" type="text" name="funcao">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="unidade" class="control-label col-sm-2 text-right">Unidade</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="unidade">
+							<option value="">--</option>
+							<?php
+								$unidades = consultaUnidades();
+								while ($dados = mysqli_fetch_array($unidades)) {
+									echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -123,6 +163,7 @@
 		        	<th>nome</th>
 		        	<th>cpf</th>
 		        	<th>função</th>
+		        	<th>unidade</th>
 		        	<th>ocorrências</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -137,7 +178,8 @@
 			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
 			    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
 			    			echo "<td>".$dados['cpf']."</td>";
-			    			//echo "<td>".$dados['funcao']."</td>";
+			    			echo "<td>".$dados['Funcao']."</td>";
+			    			echo "<td>".$dados['ID_Unidade']."</td>";
 			    			echo "<td></td>";
 			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Ocorrências</button></td>";
 			    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";

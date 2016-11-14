@@ -19,6 +19,7 @@
 					<label for="unidade" class="control-label col-sm-2 text-right">Unidade</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="unidade">
+							<option value="">--</option>
 							<?php
 								$unidades = consultaUnidades();
 								while ($dados = mysqli_fetch_array($unidades)) {

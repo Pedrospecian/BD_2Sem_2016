@@ -164,6 +164,7 @@
 					<th></th>
 		        	<th>nome</th>
 		        	<th>cpf</th>
+		        	<th>data nascimento</th>
 		        	<th>função</th>
 		        	<th>unidade</th>
 		        	<th>ocorrências</th>
@@ -179,9 +180,10 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
 		    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
-		    			echo "<td>".$dados['cpf']."</td>";
-		    			echo "<td>".$dados['Funcao']."</td>";
-		    			echo "<td>".$dados['ID_Unidade']."</td>";
+		    			echo "<td>".$dados['cpf']."<input type='hidden' name='cpf' value='".$dados['cpf']."'></td>";
+		    			echo "<td>".$dados['data_de_nascimento']."<input type='hidden' name='data-nascimento' value='".$dados['data_de_nascimento']."'></td>";
+		    			echo "<td>".$dados['Funcao']."<input type='hidden' name='funcao' value='".$dados['Funcao']."'></td>";
+		    			echo "<td>".$dados['ID_Unidade']."<input type='hidden' name='unidade' value='".$dados['ID_Unidade']."'></td>";
 		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Ocorrências</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";

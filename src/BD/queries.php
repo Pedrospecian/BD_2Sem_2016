@@ -344,8 +344,42 @@
     }
 
     //altera funcionario
+    function atualizaFuncionario($id, $nome, $cpf, $dataNasc, $funcao, $unidade){
+        $bd= conectaBD();
+        $sql=" UPDATE Usuario 
+        SET Nome='".$nome."', CPF='".$cpf."', data_de_nascimento='".$dataNasc."', ID_Unidade='".$unidade."' 
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $sql_professor= "UPDATE Funcionario
+                SET Funcao='".$funcao."' 
+                WHERE ID_Usuario='".$id."';";
+            $bd->query($sql_professor);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
 
     //deleta funcionario
+    function deletaFuncionario($id){
+        $bd= conectaBD();
+        $sql=" DELETE FROM Funcionario 
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $sql_funcionario= "DELETE FROM Usuario
+                WHERE ID_Usuario='".$id."';";
+            $bd->query($sql_funcionario);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro

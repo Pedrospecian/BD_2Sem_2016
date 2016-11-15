@@ -78,6 +78,7 @@
 		        	<th>nome</th>
 		        	<th>cpf</th>
 		        	<th>data nascimento</th>
+		        	<th>unidade</th>
 		        	<th>detalhes</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -93,6 +94,7 @@
 		    			echo "<td>".$dados['nome']."<input type='hidden' name='nomeAluno' value='".$dados['nome']."'></td>";
 		    			echo "<td>".$dados['cpf']."<input type='hidden' name='cpfAluno' value='".$dados['cpf']."'></td>";
 		    			echo "<td>".$dados['data_de_nascimento']."<input type='hidden' name='dataNasc' value='".$dados['data_de_nascimento']."'></td>";
+		    			echo "<td>".$dados['ID_Unidade']."<input type='hidden' name='unidade' value='".$dados['ID_Unidade']."'></td>";
 		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Detalhes</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";

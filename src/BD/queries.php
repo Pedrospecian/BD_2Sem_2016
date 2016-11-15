@@ -246,15 +246,20 @@
         $bd->close();
         return FALSE;
     }
-
-    //altera aluno de graduacao
-    function atualizaAlunoGraduacao($idAluno){
-        $sql="";
-    }
-
-    //altera aluno de pos graduacao
-    function atualizaAlunoPos($idAluno){
-        $sql="";
+    //altera aluno
+    function atualizaAluno($id, $nome, $cpf, $dataNasc, $unidade){
+        $bd= conectaBD();
+        $sql=" UPDATE Usuario 
+        SET Nome='".$nome."', CPF='".$cpf."', data_de_nascimento='".$dataNasc."', ID_Unidade='".$unidade."'
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
     }
 
     //deleta aluno de graduacao

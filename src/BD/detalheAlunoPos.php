@@ -5,7 +5,7 @@
 <main>
 	<div class="container">
 		<?php if(isset($_POST['detalhes'])) { ?>
-		<h2>Aluno Pós-Graduação: <?php echo $_GET['nomeAluno'];?></h2>
+		<h2>Aluno Pós-Graduação: <?php echo $_POST['nomeAluno'];?></h2>
 	    <h3>Projetos de extensão do aluno</h3>
 	    <table class="table">
 			<thead>
@@ -20,7 +20,7 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
@@ -49,7 +49,7 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
@@ -77,7 +77,7 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Disciplina']."</td>";
@@ -103,7 +103,7 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
@@ -116,7 +116,7 @@
 		    	
 			</tbody>
 		</table>
-		<h3>Datas Importantes do curso de <?php echo $_GET['nomeAluno'];?></h3>
+		<h3>Datas Importantes do curso de <?php echo $_POST['nomeAluno'];?></h3>
 		<table class="table">
 			<thead>
 			    <tr>
@@ -129,7 +129,7 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_GET['idAluno']);
+		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
 		    			echo "<td></td>";
@@ -142,7 +142,52 @@
 		</table>
 		<?php }
 		if(isset($_POST['update'])) { ?>
-			atualiza aluno pos
+			<form action="atualizaAluno.php" method="GET" class="form-horizontal">
+				<input type="hidden" name="idAluno-alt" value="<?php echo $_POST['idAluno']; ?>"/>
+				<div class="row">
+					<div class="form-group">
+						<label for="nome-alt" class="control-label col-sm-2 text-right">Nome</label>
+						<div class="col-sm-5">
+							<input class="form-control" type="text" name="nome-alt" value="<?php echo $_POST['nomeAluno']; ?>">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="cpf-alt" class="control-label col-sm-2 text-right">CPF</label>
+						<div class="col-sm-5"><input class="form-control" type="text" name="cpf-alt" value="<?php echo $_POST['cpfAluno']; ?>"/></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="data-nascimento-alt" class="control-label col-sm-2 text-right">Data de Nascimento</label>
+						<div class="col-sm-5"><input class="form-control" type="date" name="data-nascimento-alt" value="<?php echo $_POST['dataNasc']; ?>"/></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="unidade-alt" class="control-label col-sm-2 text-right">Unidade</label>
+						<div class="col-sm-5">
+							<select class="form-control" name="unidade-alt">
+								<option value="">--</option>
+								<?php
+									$unidades = consultaUnidades();
+									while ($dados = mysqli_fetch_array($unidades)) {
+										if($dados['ID_Unidade']==$_POST['unidade']) {
+											echo "<option selected value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+										}else {
+											echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+										}
+							        }
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-default col-sm-offset-2" type="submit" name="AtualizarAluno">Atualizar Aluno</button>
+				</div>
+			</form>
 		<?php }
 		if(isset($_POST['delete'])) {
 			echo "deleta";

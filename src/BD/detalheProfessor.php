@@ -8,12 +8,35 @@
 		if(isset($_POST["detalhes"])) { ?>
 		<h2>Professor: <?php echo $_POST['nome'];?></h2>
 	    <h3>Ocorrências</h3>
+	    <h4>Inserir nova Ocorrência</h4>
+	    <form method="GET" action="insereOcorrencia.php" class="form-horizontal">
+	    	<input type="hidden" name="id-oco" value="<?php echo $_POST['id']; ?>"/>
+	    	<div class="row">
+	    		<div class="form-group">
+	    			<label for="tipo-oco" class="control-label col-sm-2 text-right">Tipo</label>
+	    			<div class="col-sm-5">
+	    				<input class="form-control" type="text" name="tipo-oco">
+	    			</div>
+	    		</div>
+	    		<div class="form-group">
+	    			<label for="data-oco" class="control-label col-sm-2 text-right">Data</label>
+	    			<div class="col-sm-5">
+	    				<input class="form-control" type="date" name="data-oco">
+	    			</div>
+	    		</div>
+    			<div class="form-group">
+					<button class="btn btn-default col-sm-offset-2" type="submit" name="InserirOcorrencia">Inserir Ocorrência</button>
+				</div>
+	    	</div>
+	    </form>
 		<table class="table">
 			<thead>
 			    <tr>
 	    		    <th>Código Ocorrência</th>
 	    		    <th>Tipo da Ocorrência</th>
 	    		    <th>Data</th>
+	    		    <th>Alterar</th>
+	    		    <th>Apagar</th>
 			   	</tr>
 	    	</thead>
 		    <tbody>
@@ -24,7 +47,9 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Oco']."</td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
-		    			echo "<td></td>";
+		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

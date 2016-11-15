@@ -431,6 +431,25 @@
         return FALSE;
     }
 
+    //insere projeto extensao
+    //retorna true se inseriu e false se deu erro
+    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno){
+        $bd= conectaBD();
+        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador, ID_Usuario) 
+             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.",'". $idAluno."');";
+        if ($bd->query($sql) === TRUE) {
+            $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
+                VALUES ('".mysqli_insert_id($bd)."');";
+            $bd->query($sql_projetoextensao);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
     //insere bem
     //retorna true se inseriu e false se deu erro
     function insereBem($idUnidade, $localizacao, $valor, $data_aquisicao, $tipo){
@@ -478,24 +497,7 @@
         return FALSE;
     }
     
-     //insere projeto extensao
-    //retorna true se inseriu e false se deu erro
-    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno){
-        $bd= conectaBD();
-        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador, ID_Usuario) 
-             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.",'". $idAluno."');";
-        if ($bd->query($sql) === TRUE) {
-            $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
-                VALUES ('".mysqli_insert_id($bd)."');";
-            $bd->query($sql_projetoextensao);
-            $bd->close();
-            return TRUE;
-        } else {
-            echo "Error: " . $sql . "<br>" . $bd->error;
-        }
-        $bd->close();
-        return FALSE;
-    }
+    
     
     //Liste o nome de todos os professores que tiveram, entre suas atribuições, cargos relacionados a funções 
     //gratificadas e/ou cargos comissionados. Nessa listagem, informe o nome do professor, as datas referentes ao 

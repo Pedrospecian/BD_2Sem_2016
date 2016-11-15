@@ -13,6 +13,8 @@
 	    		    <th>Código Ocorrência</th>
 	    		    <th>Tipo da Ocorrência</th>
 	    		    <th>Data</th>
+	    		    <th>Alterar</th>
+	    		    <th>Apagar</th>
 			   	</tr>
 	    	</thead>
 		    <tbody>
@@ -23,7 +25,9 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Oco']."</td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
-		    			echo "<td></td>";
+		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

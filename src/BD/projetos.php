@@ -134,7 +134,6 @@
 							<?php
 								$alunos = consultaTodosAlunos();
 								while ($dados = mysqli_fetch_array($alunos)) {
-									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>

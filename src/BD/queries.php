@@ -347,6 +347,37 @@
         $bd->close();
         return FALSE;
     }
+
+    //atualiza bem
+    function atualizaBem($idBem, $unidade, $localizacao, $valor, $data, $tipo){
+        $bd= conectaBD();
+        $sql=" UPDATE Bens 
+            SET Localizacao='".$localizacao."', Valor='".$valor."', Data_de_Aquisicao='".$data."', Tipo='".$tipo."', ID_Unidade='".$unidade."'
+            WHERE ID_bem='".$idBem."';";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //deleta bem
+    function deletaBem($idBem){
+        $bd= conectaBD();
+        $sql=" DELETE FROM Bens 
+            WHERE ID_bem='".$idBem."';";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
     
      //insere projeto extensao
     //retorna true se inseriu e false se deu erro

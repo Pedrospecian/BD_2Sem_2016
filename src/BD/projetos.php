@@ -164,14 +164,16 @@
 		    	<?php
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<form action='detalheProjetoPesquisa.php' method='get'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
-		    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
-			    		echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
+		    			echo "</form>";
 		    		}
 		    	?>
 			</tbody>
@@ -192,14 +194,16 @@
 		    	<?php
 		    		$alunos = consultaProjetoExtensao();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<form action='detalheProjetoExtensao.php' method='get'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
-		    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
-			    		echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
+		    			echo "</form>";
 		    		}
 		    	?>
 			</tbody>

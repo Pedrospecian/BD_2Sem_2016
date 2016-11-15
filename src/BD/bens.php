@@ -82,15 +82,18 @@
 		    	<?php
 		    		$bens = consultaBens();
 		    		while ($dados = mysqli_fetch_array($bens)) {
+		    			echo "<form action='detalheBens.php' method='post'>";
 		    			echo "<tr>";
-		    			echo "<td>".$dados['ID_bem']."</td>";
-		    			echo "<td>".$dados['Localizacao']."</td>";
-		    			echo "<td>".$dados['Valor']."</td>";
-		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";
-		    			echo "<td>".$dados['Tipo']."</td>";
-		    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
-			    		echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "<td>".$dados['ID_bem']."<input type='hidden' name='idBem' value='".$dados['ID_bem']."'/></td>";
+		    			echo "<input type='hidden' name='unidade' value='".$dados['ID_Unidade']."'/>";
+		    			echo "<td>".$dados['Localizacao']."<input type='hidden' name='localizacao' value='".$dados['Localizacao']."'/></td>";
+		    			echo "<td>".$dados['Valor']."<input type='hidden' name='valor' value='".$dados['Valor']."'/></td>";
+		    			echo "<td>".$dados['Data_de_Aquisicao']."<input type='hidden' name='data-aquisicao' value='".$dados['Data_de_Aquisicao']."'/></td>";
+		    			echo "<td>".$dados['Tipo']."<input type='hidden' name='tipo' value='".$dados['Tipo']."'/></td>";
+		    			echo "<td><button type='submit' name='update' value='update' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='submit' name='delete' value='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
+		    			echo "</form>";
 		    		}
 		    	?>
 			</tbody>

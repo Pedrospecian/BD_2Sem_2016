@@ -82,22 +82,22 @@
 		        	<th>apagar</th>
 		     	</tr>
     		</thead>
-		    <tbody>
-		    	<form action="detalheAlunoPos.php" method="get">
-			    	<?php
-			    		$alunos = consultaAlunosPos();
-			    		while ($dados = mysqli_fetch_array($alunos)) {
-			    			echo "<tr>";
-			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
-			    			echo "<td>".$dados['nome']."<input type='hidden' name='nomeAluno' value='".$dados['nome']."'></td>";
-			    			echo "<td>".$dados['cpf']."</td>";
-			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Detalhes</button></td>";
-			    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
-			    			echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
-			    			echo "</tr>";
-			    		}
-			    	?>
-		    	</form>
+		    <tbody>		    	
+		    	<?php
+		    		$alunos = consultaAlunosPos();
+		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			echo "<form action='detalheAlunoPos.php' method='get'>";
+		    			echo "<tr>";
+		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['nome']."<input type='hidden' name='nomeAluno' value='".$dados['nome']."'></td>";
+		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Detalhes</button></td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "</tr>";
+		    			echo "</form>";
+		    		}
+		    	?>		    	
 			</tbody>
 		</table>
 	</div>

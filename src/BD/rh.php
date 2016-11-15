@@ -83,25 +83,25 @@
 		        	<th>apagar</th>
 		     	</tr>
     		</thead>
-		    <tbody>
-		    	<form action="detalheRH.php" method="get">
-			    	<?php
-			    		$professores = consultaTodosProfessores();
-			    		while ($dados = mysqli_fetch_array($professores)) {
-			    			echo "<tr>";
-			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
-			    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
-			    			echo "<td>".$dados['cpf']."</td>";
-			    			echo "<td>".$dados['carreira']."</td>";
-			    			echo "<td>".$dados['nivel']."</td>";
-			    			echo "<td>".$dados['ID_Unidade']."</td>";
-			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Ocorrências</button></td>";
-			    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
-			    			echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
-			    			echo "</tr>";
-			    		}
-			    	?>
-		    	</form>
+		    <tbody>		    	
+		    	<?php
+		    		$professores = consultaTodosProfessores();
+		    		while ($dados = mysqli_fetch_array($professores)) {
+		    			echo "<form action='detalheRH.php' method='get'>";
+		    			echo "<tr>";
+		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
+		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td>".$dados['carreira']."</td>";
+		    			echo "<td>".$dados['nivel']."</td>";
+		    			echo "<td>".$dados['ID_Unidade']."</td>";
+		    			echo "<td><button type='submit' value='detalhes' value='detalhes' class='btn btn-default'>Ocorrências</button></td>";
+		    			echo "<td><button type='submit' value='update' value='update' class='btn btn-info'>Alterar</button></td>";
+		    			echo "<td><button type='submit' value='delete' value='delete' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "</tr>";
+		    			echo "</form>";
+		    		}
+		    	?>		    	
 			</tbody>
 		</table>
 
@@ -169,25 +169,25 @@
 		        	<th>apagar</th>
 		     	</tr>
     		</thead>
-		    <tbody>
-		    	<form action="detalheRH.php" method="get">
-			    	<?php
-			    		$funcionarios = consultaTodosFuncionarios();
-			    		while ($dados = mysqli_fetch_array($funcionarios)) {
-			    			echo "<tr>";
-			    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
-			    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
-			    			echo "<td>".$dados['cpf']."</td>";
-			    			echo "<td>".$dados['Funcao']."</td>";
-			    			echo "<td>".$dados['ID_Unidade']."</td>";
-			    			echo "<td></td>";
-			    			echo "<td><button type='submit' value='1' class='btn btn-default'>Ocorrências</button></td>";
-			    			echo "<td><button type='button' value='1' class='btn btn-info'>Alterar</button></td>";
-			    			echo "<td><button type='button' value='1' class='btn btn-danger'>Apagar</button></td>";
-			    			echo "</tr>";
-			    		}
-			    	?>
-		    	</form>
+		    <tbody>		    	
+		    	<?php
+		    		$funcionarios = consultaTodosFuncionarios();
+		    		while ($dados = mysqli_fetch_array($funcionarios)) {
+		    			echo "<form action='detalheRH.php' method='get'>";
+		    			echo "<tr>";
+		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
+		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td>".$dados['Funcao']."</td>";
+		    			echo "<td>".$dados['ID_Unidade']."</td>";
+		    			echo "<td></td>";
+		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Ocorrências</button></td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "</tr>";
+		    			echo "</form>";
+		    		}
+		    	?>		    	
 			</tbody>
 		</table>
 

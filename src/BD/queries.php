@@ -286,8 +286,42 @@
     }
 
     //altera professor
+    function atualizaProfessor($id, $nome, $cpf, $dataNasc, $carreira, $nivel, $unidade){
+        $bd= conectaBD();
+        $sql=" UPDATE Usuario 
+        SET Nome='".$nome."', CPF='".$cpf."', data_de_nascimento='".$dataNasc."', ID_Unidade='".$unidade."' 
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $sql_professor= "UPDATE Professor
+                SET carreira='".$carreira."', nivel='".$nivel."' 
+                WHERE ID_Usuario='".$id."';";
+            $bd->query($sql_professor);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
 
     //deleta professor
+    function deletaProfessor($id){
+        $bd= conectaBD();
+        $sql=" DELETE FROM Professor 
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $sql_professor= "DELETE FROM Usuario
+                WHERE ID_Usuario='".$id."';";
+            $bd->query($sql_professor);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
 
     //insere funcionario
     function insereFuncionario($nome, $cpf, $dataNasc, $funcao, $unidade){

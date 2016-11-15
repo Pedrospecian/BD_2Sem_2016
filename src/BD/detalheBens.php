@@ -22,8 +22,7 @@
 										echo "<option selected value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
 									}else {
 										echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
-									}
-									
+									}									
 						        }
 							?>
 						</select>
@@ -61,8 +60,8 @@
 	<?php }
 	if(isset($_POST["delete"])) {
 		var_dump($_POST);
-	    $inseriu = deletaBem($_POST['idBem']);
-	    if($inseriu == TRUE){
+	    $deletou = deletaBem($_POST['idBem']);
+	    if($deletou == TRUE){
 	        echo "Bem excluído com sucesso!";
 	        echo "<br>";
 	    	echo "<a href='bens.php'>Voltar</a>";

@@ -4,7 +4,7 @@
 ?>
 <main>
 	<div class="container">
-		<h2>Professor/Funcionário: <?php echo $_GET['nome'];?></h2>
+		<h2>Funcionário: <?php echo $_GET['nome'];?></h2>
 	    <h3>Ocorrências</h3>
 		<table class="table">
 			<thead>
@@ -17,8 +17,8 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaOcorrencias($_GET['id']);
-		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    		$ocorrencias = consultaOcorrencias($_GET['id']);
+		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Oco']."</td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";

@@ -75,6 +75,7 @@
 					<th></th>
 		        	<th>nome</th>
 		        	<th>cpf</th>
+		        	<th>data nascimento</th>
 		        	<th>carreira</th>
 		        	<th>nivel</th>
 		        	<th>unidade</th>
@@ -87,17 +88,18 @@
 		    	<?php
 		    		$professores = consultaTodosProfessores();
 		    		while ($dados = mysqli_fetch_array($professores)) {
-		    			echo "<form action='detalheRH.php' method='get'>";
+		    			echo "<form action='detalheProfessor.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
 		    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
-		    			echo "<td>".$dados['cpf']."</td>";
-		    			echo "<td>".$dados['carreira']."</td>";
-		    			echo "<td>".$dados['nivel']."</td>";
-		    			echo "<td>".$dados['ID_Unidade']."</td>";
-		    			echo "<td><button type='submit' value='detalhes' value='detalhes' class='btn btn-default'>Ocorrências</button></td>";
-		    			echo "<td><button type='submit' value='update' value='update' class='btn btn-info'>Alterar</button></td>";
-		    			echo "<td><button type='submit' value='delete' value='delete' class='btn btn-danger'>Apagar</button></td>";
+		    			echo "<td>".$dados['cpf']."<input type='hidden' name='cpf' value='".$dados['cpf']."'/></td>";
+		    			echo "<td>".$dados['data_de_nascimento']."<input type='hidden' name='data-nascimento' value='".$dados['data_de_nascimento']."'/></td>";
+		    			echo "<td>".$dados['carreira']."<input type='hidden' name='carreira' value='".$dados['carreira']."'/></td>";
+		    			echo "<td>".$dados['nivel']."<input type='hidden' name='nivel' value='".$dados['nivel']."' /></td>";
+		    			echo "<td>".$dados['ID_Unidade']."<input type='hidden' name='unidade' value='".$dados['ID_Unidade']."' /></td>";
+		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Ocorrências</button></td>";
+		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
 		    			echo "</form>";
 		    		}
@@ -173,14 +175,13 @@
 		    	<?php
 		    		$funcionarios = consultaTodosFuncionarios();
 		    		while ($dados = mysqli_fetch_array($funcionarios)) {
-		    			echo "<form action='detalheRH.php' method='get'>";
+		    			echo "<form action='detalheFuncionario.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='id' value='".$dados['ID_Usuario']."'></td>";
 		    			echo "<td>".$dados['nome']."<input type='hidden' name='nome' value='".$dados['nome']."'></td>";
 		    			echo "<td>".$dados['cpf']."</td>";
 		    			echo "<td>".$dados['Funcao']."</td>";
 		    			echo "<td>".$dados['ID_Unidade']."</td>";
-		    			echo "<td></td>";
 		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Ocorrências</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";

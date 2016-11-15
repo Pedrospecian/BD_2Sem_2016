@@ -263,13 +263,39 @@
     }
 
     //deleta aluno de graduacao
-    function deletaAlunoGraduacao($idAluno){
-        $sql="";
+    function deletaAlunoGraduacao($id){
+        $bd= conectaBD();
+        $sql=" DELETE FROM Aluno 
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $sql_aluno= "DELETE FROM Usuario
+                WHERE ID_Usuario='".$id."';";
+            $bd->query($sql_aluno);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
     }
 
     //deleta aluno de pos graduacao
-    function deletaAlunoPos($idAluno){
-        $sql="";
+    function deletaAlunoPos($id){
+        $bd= conectaBD();
+        $sql=" DELETE FROM Aluno 
+        WHERE ID_Usuario='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $sql_aluno= "DELETE FROM Usuario
+                WHERE ID_Usuario='".$id."';";
+            $bd->query($sql_aluno);
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
     }
 
     //insere professor

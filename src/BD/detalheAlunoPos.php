@@ -190,7 +190,13 @@
 			</form>
 		<?php }
 		if(isset($_POST['delete'])) {
-			echo "deleta";
+			var_dump($_POST);
+			$deletou = deletaAlunoPos($_POST['idAluno']);
+		    if($deletou == TRUE){
+		        echo "Aluno excluído com sucesso!";
+		        echo "<br>";
+		    	echo "<a href='pos-graduacao.php'>Voltar</a>";
+		    }
 		}
 		?>
 	</div>

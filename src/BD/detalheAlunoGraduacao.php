@@ -166,7 +166,13 @@
 			</form>
 		<?php }
 		if(isset($_POST['delete'])) {
-			echo "deleta aluno graduacao";
+			var_dump($_POST);
+			$deletou = deletaAlunoGraduacao($_POST['idAluno']);
+		    if($deletou == TRUE){
+		        echo "Aluno excluído com sucesso!";
+		        echo "<br>";
+		    	echo "<a href='graduacao.php'>Voltar</a>";
+		    }
 		}
 		?>
 	</div>

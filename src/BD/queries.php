@@ -248,7 +248,7 @@
     function insereOcorrenciaFuncionario($id, $tipo, $data){
         $bd= conectaBD();
         $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data) 
-        VALUES ('".$id."','". $tipo."','". $data."', '1');";
+        VALUES ('".$id."','". $tipo."','". $data."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;

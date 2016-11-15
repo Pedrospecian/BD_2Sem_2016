@@ -23,7 +23,7 @@
 		    		$ocorrencias = consultaOcorrencias($_POST['id']);
 		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados['ID_Oco']."</td>";
+		    			echo "<td>".$dados['ID_Ocorrencia']."</td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
 		    			echo "<td>".$dados['Data']."</td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";

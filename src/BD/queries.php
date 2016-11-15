@@ -226,7 +226,21 @@
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
+    }
 
+    //insere aluno
+    function insereOcorrencia($id, $tipo, $data){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data) 
+        VALUES ('".$id."','". $tipo."','". $data."');";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
     }
 
     //insere aluno

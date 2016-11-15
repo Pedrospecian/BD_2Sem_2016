@@ -6,7 +6,7 @@
 	<div class="container">
 	    <?php
             var_dump($_GET);
-	        $inseriu = insereOcorrencia( $_GET['nome'], $_GET['cpf'], $_GET['data-nascimento'], $_GET['funcao'], $_GET['unidade']);
+	        $inseriu = insereOcorrencia( $_GET['id-oco'], $_GET['tipo-oco'], $_GET['data-oco']);
 	        if($inseriu == TRUE){
 	            echo "Ocorrência cadastrada com sucesso!";
 	        }

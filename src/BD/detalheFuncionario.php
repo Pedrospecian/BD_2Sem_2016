@@ -5,7 +5,7 @@
 <main>
 	<div class="container">
 		<?php if(isset($_POST['detalhes'])){ ?>
-		<h2>Funcionário: <?php echo $_GET['nome'];?></h2>
+		<h2>Funcionário: <?php echo $_POST['nome'];?></h2>
 	    <h3>Ocorrências</h3>
 		<table class="table">
 			<thead>
@@ -18,7 +18,7 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$ocorrencias = consultaOcorrencias($_GET['id']);
+		    		$ocorrencias = consultaOcorrencias($_POST['id']);
 		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Oco']."</td>";

@@ -4,6 +4,7 @@
 ?>
 <main>
 	<div class="container">
+		<?php if(isset($_POST['detalhes'])) { ?>
 		<h2>Aluno Pós-Graduação: <?php echo $_GET['nomeAluno'];?></h2>
 	    <h3>Projetos de extensão do aluno</h3>
 	    <table class="table">
@@ -139,6 +140,14 @@
 		    	
 			</tbody>
 		</table>
+		<?php }
+		if(isset($_POST['update'])) { ?>
+			atualiza aluno pos
+		<?php }
+		if(isset($_POST['delete'])) {
+			echo "deleta";
+		}
+		?>
 	</div>
 </main>
 <?php 

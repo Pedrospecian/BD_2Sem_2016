@@ -69,7 +69,7 @@
     //listar todos os alunos da graduação
     function consultaAlunosGraduacao(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
+        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.data_de_nascimento, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
                 FROM Usuario
                 INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
                 INNER JOIN Graduacao ON Aluno.Codigo = Graduacao.Codigo
@@ -79,10 +79,10 @@
         return $resultado;
     }
     
-//listar todos os cursos da pós
+    //listar todos os alunos da pós
     function consultaAlunosPos(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
+        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.data_de_nascimento, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
                 FROM Usuario
                 INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
                 INNER JOIN Pos_Graduacao ON Aluno.Codigo = Pos_Graduacao.Codigo
@@ -103,7 +103,7 @@
         return $resultado;
     }
 
-//lista financiadores (id e tipo e nome)
+    //lista financiadores (id e tipo e nome)
     function consultaFinanciadores(){
         $bd= conectaBD();
         $sql="SELECT *

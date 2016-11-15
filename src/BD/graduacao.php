@@ -74,6 +74,7 @@
 					<th></th>
 		        	<th>nome</th>
 		        	<th>cpf</th>
+		        	<th>data nascimento</th>
 		        	<th>detalhes</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -83,11 +84,12 @@
 		    	<?php
 		    		$alunos = consultaAlunosGraduacao();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			echo "<form action='detalheAlunoGraduacao.php' method='get'>";
+		    			echo "<form action='detalheAlunoGraduacao.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Usuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
 		    			echo "<td>".$dados['nome']."<input type='hidden' name='nomeAluno' value='".$dados['nome']."'></td>";
-		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td>".$dados['cpf']."<input type='hidden' name='cpfAluno' value='".$dados['cpf']."'></td>";
+		    			echo "<td>".$dados['data_de_nascimento']."<input type='hidden' name='dataNasc' value='".$dados['data_de_nascimento']."'></td>";
 		    			echo "<td><button type='submit' value='detalhes' name='detalhes' class='btn btn-default'>Detalhes</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 		    			echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";

@@ -9,8 +9,8 @@
 		<h2>Professor: <?php echo $_POST['nome'];?></h2>
 	    <h3>Ocorrências</h3>
 	    <h4>Inserir nova Ocorrência</h4>
-	    <form method="GET" action="insereOcorrencia.php" class="form-horizontal">
-	    	<input type="hidden" name="id-oco" value="<?php echo $_POST['id']; ?>"/>
+	    <form method="GET" action="insereOcorrenciaProfessor.php" class="form-horizontal">
+	    	<input type="hidden" name="id-ocorr" value="<?php echo $_POST['id']; ?>"/>
 	    	<div class="row">
 	    		<div class="form-group">
 	    			<label for="tipo-oco" class="control-label col-sm-2 text-right">Tipo</label>
@@ -44,13 +44,15 @@
 		    	<?php
 		    		$ocorrencias = consultaOcorrencias($_POST['id']);
 		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
+		    			echo "<form method='post' action='detalheOcorrencia.php'>";
 		    			echo "<tr>";
-		    			echo "<td>".$dados['ID_Ocorrencia']."</td>";
-		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
-		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td>".$dados['ID_Ocorrencia']."<input type='hidden' name='id-oco' value='".$dados['ID_Ocorrencia']."'/></td>";
+		    			echo "<td>".$dados['Tipo_Ocorrencia']."<input type='hidden' name='tipo-oco' value='".$dados['Tipo_Ocorrencia']."'/></td>";
+		    			echo "<td>".$dados['Data']."<input type='hidden' name='data-oco' value='".$dados['Data']."'/></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
+		    			echo "</form>";
 		    		}
 		    	?>
 		    	

@@ -221,18 +221,65 @@
     function consultaOcorrencias($id){
         //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
         $sql="SELECT *
-        FROM Ocorrencias";
+        FROM Ocorrencias
+        WHERE ID_Usuario='".$id."'";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
     }
 
-    //insere aluno
-    function insereOcorrencia($id, $tipo, $data){
+    //insere ocorrencia de professor
+    function insereOcorrenciaProfessor($id, $tipo, $data){
         $bd= conectaBD();
         $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data) 
         VALUES ('".$id."','". $tipo."','". $data."');";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //insere ocorrencia de professor
+    function insereOcorrenciaFuncionario($id, $tipo, $data){
+        $bd= conectaBD();
+        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data) 
+        VALUES ('".$id."','". $tipo."','". $data."', '1');";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //atualiza ocorrencia
+    function atualizaOcorrencia($id, $tipo, $data){
+        $bd= conectaBD();
+        $sql=" UPDATE Ocorrencias
+        SET Tipo_Ocorrencia='".$tipo."', Data='".$data."' 
+        WHERE ID_Ocorrencia='".$id."';";
+        if ($bd->query($sql) === TRUE) {
+            $bd->close();
+            return TRUE;
+        } else {
+            echo "Error: " . $sql . "<br>" . $bd->error;
+        }
+        $bd->close();
+        return FALSE;
+    }
+
+    //deleta ocorrencia
+    function deletaOcorrencia($id){
+        $bd= conectaBD();
+        $sql="DELETE FROM Ocorrencias 
+        WHERE ID_Ocorrencia='".$id."';";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;
@@ -320,7 +367,8 @@
         if ($bd->query($sql) === TRUE) {
             $sql_professor= "INSERT INTO Professor (ID_Usuario, carreira, nivel) 
                 VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
-            $bd->query($sql_professor);
+            if($bd->query($sql_professor)===FALSE)return FALSE;
+
             $bd->close();
             return TRUE;
         } else {

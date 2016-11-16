@@ -476,7 +476,7 @@
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro
-    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador, $idAluno, $idProfessor){
+    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador, $idAluno, $idProfessor, $bolsa){
         $bd= conectaBD();
         $sql=" INSERT INTO Projeto ( Objetivo, Descricao, Orcamento, Atividade, ID_Financiador) 
         VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
@@ -487,6 +487,9 @@
             $bd->query($sql_projetopesquisa);
             if($idAluno!=null){
                 $sql='UPDATE Aluno SET Ori_ID_Usuario =  '.$idProfessor.' WHERE  ID_Usuario ='.$idAluno;
+                $bd->query($sql);
+                $sql= "INSERT INTO Participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
+                var_dump($sql);
                 $bd->query($sql);
             }
             $bd->close();
@@ -500,16 +503,19 @@
 
     //insere projeto extensao
     //retorna true se inseriu e false se deu erro
-    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno, $idProfessor){
+    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno, $idProfessor, $bolsa){
         $bd= conectaBD();
         $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador) 
              VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.")";
         if ($bd->query($sql) === TRUE) {
+            $idProjeto=mysqli_insert_id($bd);
             $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
-                VALUES ('".mysqli_insert_id($bd)."');";
+                VALUES ('".$idProjeto."');";
             $bd->query($sql_projetoextensao);
             if($idAluno!=null){
                 $sql='UPDATE Aluno SET Ori_ID_Usuario =  '.$idProfessor.' WHERE  ID_Usuario ='.$idAluno;
+                $bd->query($sql);
+                $sql= "INSERT INTO Participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
                 $bd->query($sql);
             }
             $bd->close();

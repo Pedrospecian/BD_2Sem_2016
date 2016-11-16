@@ -6,7 +6,7 @@
 	<div class="container">
 	    <?php
             var_dump($_GET);
-	        $inseriu = inserePesquisa( $_GET['objetivo'], $_GET['descricao'], $_GET['orcamento'], $_GET['atividade'], $_GET['idFinanciador'], $_GET['idAluno']);
+	        $inseriu = inserePesquisa( $_GET['objetivo'], $_GET['descricao'], $_GET['orcamento'], $_GET['atividade'], $_GET['idFinanciador'], $_GET['idAluno'], $_GET['professor']);
 	        if($inseriu == TRUE){
 	            echo "Projeto de Pesquisa inserido com sucesso!";
 	        }

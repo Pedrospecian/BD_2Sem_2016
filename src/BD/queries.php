@@ -476,14 +476,19 @@
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro
-    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador, $idAluno){
+    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador, $idAluno, $idProfessor){
         $bd= conectaBD();
-        $sql=" INSERT INTO Projeto ( Objetivo, Descricao, Orcamento, Atividade, ID_Financiador, ID_Usuario) 
-        VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."','". $idAluno."');";
+        $sql=" INSERT INTO Projeto ( Objetivo, Descricao, Orcamento, Atividade, ID_Financiador) 
+        VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividade."','". $idFiananciador."');";
         if ($bd->query($sql) === TRUE) {
-             $sql_projetopesquisa= "INSERT INTO Projeto_Pesquisa (ID_Projeto) 
-                VALUES ('".mysqli_insert_id($bd)."');";
+            $idProjeto=mysqli_insert_id($bd);
+            $sql_projetopesquisa= "INSERT INTO Projeto_Pesquisa (ID_Projeto) 
+                VALUES ('".$idProjeto."');";
             $bd->query($sql_projetopesquisa);
+            if($idAluno!=null){
+                $sql='UPDATE Aluno SET Ori_ID_Usuario =  '.$idProfessor.' WHERE  ID_Usuario ='.$idAluno;
+                $bd->query($sql);
+            }
             $bd->close();
             return TRUE;
         } else {

@@ -90,32 +90,6 @@
 		    	
 			</tbody>
 		</table>
-		<h3>Bolsas recebidas pelo aluno</h3>
-		<table class="table">
-			<thead>
-			    <tr>
-	    		    <th>Código disciplina</th>
-	    		    <th>Nome disciplina</th>
-	    		    <th>Nota do aluno</th>
-	    		    <th>Frequencia do aluno</th>
-			   	</tr>
-	    	</thead>
-		    <tbody>
-		        
-		    	<?php
-		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
-		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			echo "<tr>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "</tr>";
-		    		}
-		    	?>
-		    	
-			</tbody>
-		</table>
 		<h3>Datas Importantes do curso de <?php echo $_POST['nomeAluno'];?></h3>
 		<table class="table">
 			<thead>

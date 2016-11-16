@@ -41,7 +41,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">Financiador</label>
+					<label for="idFinanciador" class="control-label col-sm-2 text-right">Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
 							<option value="">--</option>
@@ -58,13 +58,30 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">Aluno</label>
+					<label for="idAluno" class="control-label col-sm-2 text-right">Aluno</label>
 					<div class="col-sm-5">
-						<select class="form-control" name="idFinanciador">
+						<select class="form-control" name="idAluno">
 							<option value="">--</option>
 							<?php
 								$alunos = consultaTodosAlunos();
 								while ($dados = mysqli_fetch_array($alunos)) {
+									//<option value="volvo">Volvo</option>
+									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="professor" class="control-label col-sm-2 text-right">Professor Coordenador</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="professor">
+							<option value="">--</option>
+							<?php
+								$professores = consultaTodosProfessores();
+								while ($dados = mysqli_fetch_array($professores)) {
 									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
@@ -110,7 +127,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">Financiador</label>
+					<label for="idFinanciador" class="control-label col-sm-2 text-right">Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
 							<option value="">--</option>
@@ -127,7 +144,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">Aluno</label>
+					<label for="idAluno" class="control-label col-sm-2 text-right">Aluno</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idAluno">
 							<option value="">--</option>
@@ -155,6 +172,8 @@
 		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
+		        	<th>Aluno</th>
+		        	<th>Professor</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
 		     	</tr>
@@ -163,12 +182,14 @@
 		    	<?php
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			echo "<form action='detalheProjetoPesquisa.php' method='get'>";
+		    			echo "<form action='detalheProjetoPesquisa.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td></td>";
+		    			echo "<td></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
@@ -185,6 +206,8 @@
 		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
+		        	<th>Aluno</th>
+		        	<th>Calendário</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
 		     	</tr>
@@ -193,12 +216,14 @@
 		    	<?php
 		    		$alunos = consultaProjetoExtensao();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			echo "<form action='detalheProjetoExtensao.php' method='get'>";
+		    			echo "<form action='detalheProjetoExtensao.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td></td>";
+		    			echo "<td><button type='submit' value='calendario' name='calendario' class='btn btn-default'>Calendário</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";

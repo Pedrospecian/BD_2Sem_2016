@@ -75,6 +75,12 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
+					<label for="bolsa" class="control-label col-sm-2 text-right">Bolsa</label>
+					<div class="col-sm-5"><input class="form-control" type="number" name="bolsa"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
 					<label for="professor" class="control-label col-sm-2 text-right">Professor Coordenador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="professor">
@@ -151,6 +157,29 @@
 							<?php
 								$alunos = consultaTodosAlunos();
 								while ($dados = mysqli_fetch_array($alunos)) {
+									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="bolsa" class="control-label col-sm-2 text-right">Bolsa</label>
+					<div class="col-sm-5"><input class="form-control" type="number" name="bolsa"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="professor" class="control-label col-sm-2 text-right">Professor Coordenador</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="professor">
+							<option value="">--</option>
+							<?php
+								$professores = consultaTodosProfessores();
+								while ($dados = mysqli_fetch_array($professores)) {
+									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>

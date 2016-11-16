@@ -6,7 +6,7 @@
 	<div class="container">
 	    <?php
             var_dump($_GET);
-	        $inseriu = insereExtensao( $_GET['objetivo'], $_GET['descricao'], $_GET['orcamento'], $_GET['atividade'], $_GET['idFinanciador'], $_GET['idAluno'], $_GET['professor']);
+	        $inseriu = insereExtensao( $_GET['objetivo'], $_GET['descricao'], $_GET['orcamento'], $_GET['atividade'], $_GET['idFinanciador'], $_GET['idAluno'], $_GET['professor'], $_GET['bolsa']);
 	        if($inseriu == TRUE){
 	            echo "Projeto de extensão cadastrado com sucesso!";
 	        }

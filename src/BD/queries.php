@@ -500,14 +500,18 @@
 
     //insere projeto extensao
     //retorna true se inseriu e false se deu erro
-    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno){
+    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno, $idProfessor){
         $bd= conectaBD();
-        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador, ID_Usuario) 
-             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.",'". $idAluno."');";
+        $sql= "INSERT INTO Projeto (objetivo, descricao, orcamento, atividade, ID_Financiador) 
+             VALUES ('".$objetivo."','". $descricao."','". $orcamento."','". $atividades."',".$idFinanciador.")";
         if ($bd->query($sql) === TRUE) {
             $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
                 VALUES ('".mysqli_insert_id($bd)."');";
             $bd->query($sql_projetoextensao);
+            if($idAluno!=null){
+                $sql='UPDATE Aluno SET Ori_ID_Usuario =  '.$idProfessor.' WHERE  ID_Usuario ='.$idAluno;
+                $bd->query($sql);
+            }
             $bd->close();
             return TRUE;
         } else {

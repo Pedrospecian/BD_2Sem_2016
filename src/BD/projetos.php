@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label for="orcamento" class="control-label col-sm-2 text-right">Orçamento</label>
-					<div class="col-sm-5"><input class="form-control" type="text" name="orcamento"/></div>
+					<div class="col-sm-5"><input class="form-control" type="number" name="orcamento"/></div>
 				</div>
 			</div>
 			<div class="row">
@@ -94,6 +94,18 @@
 							?>
 						</select>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="data-inicio" class="control-label col-sm-2 text-right">Data de inicio</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-inicio"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="data-fim" class="control-label col-sm-2 text-right">Data de termino</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-fim"/></div>
 				</div>
 			</div>
 			<div class="row">
@@ -122,7 +134,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label for="orcamento" class="control-label col-sm-2 text-right">Orçamento</label>
-					<div class="col-sm-5"><input class="form-control" type="text" name="orcamento"/></div>
+					<div class="col-sm-5"><input class="form-control" type="number" name="orcamento"/></div>
 				</div>
 			</div>
 			<div class="row">
@@ -185,6 +197,18 @@
 							?>
 						</select>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="data-inicio" class="control-label col-sm-2 text-right">Data de inicio</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-inicio"/></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label for="data-fim" class="control-label col-sm-2 text-right">Data de termino</label>
+					<div class="col-sm-5"><input class="form-control" type="date" name="data-fim"/></div>
 				</div>
 			</div>
 			<div class="row">

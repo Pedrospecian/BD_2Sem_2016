@@ -35,12 +35,6 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">Atividade</label>
-					<div class="col-sm-5"><input class="form-control" type="text" name="atividade"/></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
 					<label for="idFinanciador" class="control-label col-sm-2 text-right">Financiador</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="idFinanciador">
@@ -135,12 +129,6 @@
 				<div class="form-group">
 					<label for="orcamento" class="control-label col-sm-2 text-right">Orçamento</label>
 					<div class="col-sm-5"><input class="form-control" type="number" name="orcamento"/></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<label for="atividade" class="control-label col-sm-2 text-right">Atividade</label>
-					<div class="col-sm-5"><input class="form-control" type="text" name="atividade"/></div>
 				</div>
 			</div>
 			<div class="row">

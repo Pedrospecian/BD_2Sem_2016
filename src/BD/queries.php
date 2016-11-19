@@ -541,10 +541,10 @@
 
     //insere projeto pesquisa
     //retorna true se inseriu e false se deu erro
-    function inserePesquisa($objetivo, $descricao, $orcamento, $atividade, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
+    function inserePesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
-        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, ID_Financiador)
-        VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", '". $atividade."', ". $orcamento.", ". $idFiananciador.")";
+        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
+        VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", ". $orcamento.", ". $idFiananciador.")";
         var_dump($sql);
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
@@ -569,10 +569,10 @@
 
     //insere projeto extensao
     //retorna true se inseriu e false se deu erro
-    function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
+    function insereExtensao( $objetivo, $descricao, $orcamento, $idFinanciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
-        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, ID_Financiador)
-        VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", '".$atividades."', ". $orcamento.", ". $idFinanciador.")";
+        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
+        VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", ". $orcamento.", ". $idFinanciador.")";
         var_dump($sql);
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);

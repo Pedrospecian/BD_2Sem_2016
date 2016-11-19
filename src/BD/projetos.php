@@ -213,7 +213,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<button type="submit" class="btn btn-default col-sm-3 col-sm-offset-1">Criar projeto de pesquisa</button>
+					<button type="submit" class="btn btn-default col-sm-3 col-sm-offset-1">Criar projeto de Extensao</button>
 				</div>
 			</div>
 		</form>

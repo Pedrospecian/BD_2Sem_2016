@@ -147,6 +147,32 @@
         return $resultado;
     }
     
+    //consulta projeto de pesquisa de um aluno
+    function consultaProjetoPesquisaAluno($idAluno){
+        $bd= conectaBD();
+        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, Projeto.ID_Projeto
+                    FROM Projeto
+                    INNER JOIN Projeto_Pesquisa ON Projeto.ID_Projeto = Projeto_Pesquisa.ID_Projeto
+                    INNER JOIN Participa ON Participa.ID_Projeto = Projeto_Pesquisa.ID_Projeto
+                    WHERE ID_Usuario =".$idAluno;
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
+    function consultaProjetoExtensaoAluno($idAluno){
+        $bd= conectaBD();
+        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, Projeto.ID_Projeto
+                    FROM Projeto
+                    INNER JOIN Projeto_Extensao ON Projeto.ID_Projeto = Projeto_Extensao.ID_Projeto
+                    INNER JOIN Participa ON Participa.ID_Projeto = Projeto_Extensao.ID_Projeto
+                    WHERE ID_Usuario =".$idAluno;
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
+    
     //lista todas as informacoes dos bens
     function consultaBens(){
         $bd= conectaBD();
@@ -506,18 +532,19 @@
     //retorna true se inseriu e false se deu erro
     function insereExtensao( $objetivo, $descricao, $orcamento, $atividades, $idFinanciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
-         $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, ID_Financiador)
+        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, ID_Financiador)
         VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", '".$atividades."', ". $orcamento.", ". $idFinanciador.")";
+        var_dump($sql);
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
             $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto) 
                 VALUES ('".$idProjeto."');";
+                var_dump($sql);
             $bd->query($sql_projetoextensao);
             if($idAluno!=null){
-                $sql='UPDATE Aluno SET Ori_ID_Usuario =  '.$idProfessor.' WHERE  ID_Usuario ='.$idAluno;
-                $bd->query($sql);
                 $sql= "INSERT INTO Participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
                 $bd->query($sql);
+                var_dump($sql);
             }
             $bd->close();
             return TRUE;

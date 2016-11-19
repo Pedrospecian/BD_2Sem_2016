@@ -197,6 +197,7 @@
                     WHERE Participa.ID_Usuario =".$idAluno;
         $resultado = $bd->query($sql);
         $bd->close();
+        var_dump($sql);
         return $resultado;
     }
     
@@ -569,7 +570,7 @@
     function inserePesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
         $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
-        VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", ". $orcamento.", ". $idFiananciador.")";
+        VALUES ('".$objetivo."',' ".$dataInicio."', '". $descricao."',' ".$dataFim."', ". $orcamento.", ". $idFiananciador.")";
         var_dump($sql);
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
@@ -598,7 +599,7 @@
     function insereExtensao( $objetivo, $descricao, $orcamento, $idFinanciador, $idAluno, $idServidor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
         $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
-        VALUES ('".$objetivo."', ".$dataInicio.", '". $descricao."', ".$dataFim.", ". $orcamento.", ". $idFinanciador.")";
+        VALUES ('".$objetivo."',' ".$dataInicio."', '". $descricao."',' ".$dataFim."', ". $orcamento.", ". $idFinanciador.")";
         var_dump($sql);
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);

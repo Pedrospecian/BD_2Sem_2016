@@ -11,7 +11,6 @@
 			<thead>
 			    <tr>
 	    		    <th>Descrição</th>
-	    		    <th>Atividade</th>
 	    		    <th>Orçamento</th>
 	    		    <th>Data Início</th>
 	    		    <th>Data Término</th>
@@ -20,14 +19,13 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
+		    		$alunos = consultaProjetoExtensaoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<tr>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
+		    			echo "<td>".$dados["Descricao"]."</td>";
+		    			echo "<td>".$dados["Orcamento"]."</td>";
+		    			echo "<td>".$dados['Data_Inicio']."</td>";
+		    			echo "<td>".$dados['Data_Termino']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>
@@ -40,7 +38,6 @@
 			<thead>
 			    <tr>
 	    		    <th>Descrição</th>
-	    		    <th>Atividade</th>
 	    		    <th>Orçamento</th>
 	    		    <th>Data Início</th>
 	    		    <th>Data Término</th>
@@ -49,14 +46,14 @@
 		    <tbody>
 		        
 		    	<?php
-		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
+		    		$alunos = consultaProjetoPesquisaAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			var_dump($dados);
 		    			echo "<tr>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
+		    			echo "<td>".$dados["Descricao"]."</td>";
+		    			echo "<td>".$dados["Orcamento"]."</td>";
+		    			echo "<td>".$dados['Data_Inicio']."</td>";
+		    			echo "<td>".$dados['Data_Termino']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

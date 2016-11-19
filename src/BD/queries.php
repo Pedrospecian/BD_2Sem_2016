@@ -200,6 +200,17 @@
         return $resultado;
     }
     
+    function consultaAtividades($idProjeto){
+        $bd= conectaBD();
+        $sql="SELECT Extensao_Possui.ID_Ati, localizacao, Data_Atividade , ID_Projeto
+                FROM Extensao_Possui
+                INNER JOIN Atividades_Extensao ON Atividades_Extensao.ID_Ati = Extensao_Possui.ID_Ati
+                WHERE Extensao_Possui.ID_Projeto =".$idProjeto;
+                var_dump($sql);
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
     
     //lista todas as informacoes dos bens
     function consultaBens(){

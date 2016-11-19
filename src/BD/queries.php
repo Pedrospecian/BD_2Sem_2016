@@ -619,6 +619,21 @@
         $bd->close();
         return FALSE;
     }
+    
+    function insereAtividade($idProjeto, $data, $localizacao){
+         $bd= conectaBD();
+        $sql="INSERT INTO Atividades_Extensao (Localizacao, Data_Atividade) VALUES ('".$localizacao."', '".$data."')";
+        var_dump($sql);
+        if($bd->query($sql)){
+            $idAtividade=mysqli_insert_id($bd);
+            $sql="INSERT INTO Extensao_Possui (`ID_Ati`, `ID_Projeto`) VALUES (".$idAtividade.", ".$idProjeto.")";
+            var_dump($sql);
+            $bd->query($sql);
+        }
+        $bd->close();
+        return TRUE;
+        
+    }
 
     //insere bem
     //retorna true se inseriu e false se deu erro

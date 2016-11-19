@@ -9,13 +9,19 @@
 		if(isset($_GET['update'])){ ?>
 			atualiza dados de projeto de extensao
 		<?php }
-		if(isset($_GET['delete'])){
-			echo "deleta projeto de extensao";
-		}?>
+			if(isset($_GET['delete'])){
+				echo "deleta projeto de extensao";
+			}
+			if($_GET['localizacao']){
+				insereAtividade($_GET['idProjeto'], $_GET['data'], $_GET['localizacao']);
+			}
+		
+		?>
 	</div>
 	<h1>Adicionar atividade</h1>
-	<form action="inserePesquisa.php" method="get" class="form-horizontal">			
+	<form action="#" method="get" class="form-horizontal">			
 		<div class="row">
+			<input type="hidden" name="idProjeto" value=<?php echo "'".$_GET['idProjeto']."'";?>/>
 			<div class="row">
 				<div class="form-group">
 					<label for="localizacao" class="control-label col-sm-2 text-right">Localizacao</label>
@@ -45,14 +51,12 @@
     		</thead>
 		    <tbody>
 		    	<?php
-		    		$atividades = consultaAtividades($_GET['calendario']);
+		    		$atividades = consultaAtividades($_GET['idProjeto']);
 		    		while ($dados = mysqli_fetch_array($atividades)) {
-		    			echo "<form action='detalheProjetoExtensao.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['localizacao']."</td>";
 		    			echo "<td>".$dados['Data_Atividade']."</td>";
 		    			echo "</tr>";
-		    			echo "</form>";
 		    		}
 		    	?>
 			</tbody>

@@ -265,7 +265,7 @@
 		    			//echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['financiadorNome']."</td>";
 		    			echo "<td>".$dados['usuarioNome']."</td>";
-		    			echo "<td><button type='submit' value=".$dados['ID_Projeto']." name='calendario' class='btn btn-default'>Calendário</button></td>";
+		    			echo "<td><button type='submit' value=".$dados['ID_Projeto']." name='idProjeto' class='btn btn-default'>Calendário</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";

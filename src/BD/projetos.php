@@ -235,14 +235,15 @@
 		    	<?php
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
+		    			var_dump($dados);
 		    			echo "<form action='detalheProjetoPesquisa.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
 		    			echo "<td>".$dados['atividade']."</td>";
-		    			echo "<td>".$dados['nome']."</td>";
-		    			echo "<td></td>";
-		    			echo "<td></td>";
+		    			echo "<td>".$dados['nomeFinanciador']."</td>";
+		    			echo "<td>".$dados['nomeUsuario']."</td>";
+		    			echo "<td>".(consultaCoordenadorProjeto($dados['ID_Projeto'])['nome'])."</td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";

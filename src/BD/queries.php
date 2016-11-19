@@ -138,13 +138,27 @@
     //lista projetos d pesquisa
     function consultaProjetoPesquisa(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, atividade, nome
+        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, atividade, Financiador.nome as nomeFinanciador, Usuario.nome as nomeUsuario
                 FROM Projeto_Pesquisa
                 INNER JOIN Projeto ON Projeto_Pesquisa.ID_Projeto = Projeto.ID_Projeto
-                INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador";
+                INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador
+                INNER JOIN Participa ON Participa.ID_Projeto = Projeto.ID_Projeto
+                INNER JOIN Usuario ON Participa.ID_Usuario = Usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
+    }
+    
+    function consultaCoordenadorProjeto($idProjeto){
+        $bd= conectaBD();
+        $sql="SELECT Usuario.nome
+                FROM Coordena
+                INNER JOIN Usuario ON Coordena.ID_Usuario = Usuario.ID_Usuario
+                WHERE ID_Projeto =".$idProjeto;
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return mysqli_fetch_array($resultado);
+        
     }
     
     //consulta projeto de pesquisa de um aluno

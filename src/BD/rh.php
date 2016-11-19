@@ -252,7 +252,6 @@
 		    			echo "<td>".$dados['Data']."</td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
-		    			echo "</form>";
 		    		}
 		    	?>		    	
 			</tbody>

@@ -126,7 +126,7 @@
     //lista projetos de extensao
     function consultaProjetoExtensao(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Extensao.ID_Projeto, objetivo, orcamento, atividade, nome
+        $sql="SELECT Projeto_Extensao.ID_Projeto, objetivo, orcamento, nome
                 FROM Projeto_Extensao
                 INNER JOIN Projeto ON Projeto_Extensao.ID_Projeto = Projeto.ID_Projeto
                 INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador";
@@ -138,7 +138,7 @@
     //lista projetos d pesquisa
     function consultaProjetoPesquisa(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, atividade, Financiador.nome as nomeFinanciador, Usuario.nome as nomeUsuario
+        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, Financiador.nome as nomeFinanciador, Usuario.nome as nomeUsuario
                 FROM Projeto_Pesquisa
                 INNER JOIN Projeto ON Projeto_Pesquisa.ID_Projeto = Projeto.ID_Projeto
                 INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador
@@ -164,7 +164,7 @@
     //consulta projeto de pesquisa de um aluno
     function consultaProjetoPesquisaAluno($idAluno){
         $bd= conectaBD();
-        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, Projeto.ID_Projeto
+        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Orcamento, Projeto.ID_Projeto
                     FROM Projeto
                     INNER JOIN Projeto_Pesquisa ON Projeto.ID_Projeto = Projeto_Pesquisa.ID_Projeto
                     INNER JOIN Participa ON Participa.ID_Projeto = Projeto_Pesquisa.ID_Projeto
@@ -176,11 +176,11 @@
     
     function consultaProjetoExtensaoAluno($idAluno){
         $bd= conectaBD();
-        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Atividade, Orcamento, Projeto.ID_Projeto
+        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Orcamento, Projeto.ID_Projeto
                     FROM Projeto
                     INNER JOIN Projeto_Extensao ON Projeto.ID_Projeto = Projeto_Extensao.ID_Projeto
                     INNER JOIN Participa ON Participa.ID_Projeto = Projeto_Extensao.ID_Projeto
-                    WHERE ID_Usuario =".$idAluno;
+                    WHERE Participa.ID_Usuario =".$idAluno;
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

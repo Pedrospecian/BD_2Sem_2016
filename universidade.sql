@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: 127.0.0.1
--- Data de Criação: 16-Nov-2016 às 23:42
+-- Data de Criação: 19-Nov-2016 às 18:50
 -- Versão do servidor: 5.5.50-0ubuntu0.14.04.1
 -- versão do PHP: 5.5.9-1ubuntu4.19
 
@@ -19,6 +19,37 @@ SET time_zone = "+00:00";
 --
 -- Base de Dados: `universidade`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Acervo_Biblioteca`
+--
+
+CREATE TABLE IF NOT EXISTS `Acervo_Biblioteca` (
+  `B_Item_Id` bigint(20) NOT NULL,
+  `B_Item_Nome` char(255) NOT NULL,
+  `B_Item_Tipo` char(255) NOT NULL,
+  `ID_Bib` int(11) NOT NULL,
+  PRIMARY KEY (`B_Item_Id`),
+  UNIQUE KEY `ID_Acervo_Biblioteca_IND` (`B_Item_Id`),
+  KEY `FKBiblioteca_Possui_IND` (`ID_Bib`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Acervo_Museu`
+--
+
+CREATE TABLE IF NOT EXISTS `Acervo_Museu` (
+  `M_Item_Id` int(11) NOT NULL,
+  `M_Item_Nome` char(1) NOT NULL,
+  `ID_Unidade` int(11) NOT NULL,
+  PRIMARY KEY (`M_Item_Id`),
+  UNIQUE KEY `ID_Acervo_Museu_IND` (`M_Item_Id`),
+  KEY `FKMuseu_Possui_IND` (`ID_Unidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -40,21 +71,21 @@ CREATE TABLE IF NOT EXISTS `Aluno` (
 
 INSERT INTO `Aluno` (`ID_Usuario`, `Codigo`) VALUES
 (1, 1),
-(3, 2);
+(2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Atividade_Possui`
+-- Estrutura da tabela `Atividades_Extensao`
 --
 
-CREATE TABLE IF NOT EXISTS `Atividade_Possui` (
-  `ID_Cal` int(11) NOT NULL,
-  `ID_Projeto` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Cal`,`ID_Projeto`),
-  UNIQUE KEY `ID_Atividade_Possui_IND` (`ID_Cal`,`ID_Projeto`),
-  KEY `FKAti_Pro_IND` (`ID_Projeto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `Atividades_Extensao` (
+  `ID_Ati` int(11) NOT NULL AUTO_INCREMENT,
+  `Localizacao` char(255) NOT NULL,
+  `Data_Atividade` date NOT NULL,
+  PRIMARY KEY (`ID_Ati`),
+  UNIQUE KEY `ID_IND` (`ID_Ati`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -65,33 +96,28 @@ CREATE TABLE IF NOT EXISTS `Atividade_Possui` (
 CREATE TABLE IF NOT EXISTS `Bens` (
   `Localizacao` char(255) NOT NULL,
   `Valor` int(11) NOT NULL,
-  `ID_bem` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_bem` int(11) NOT NULL,
   `Data_de_Aquisicao` date NOT NULL,
   `Tipo` char(255) NOT NULL,
   `ID_Unidade` int(11) NOT NULL,
   PRIMARY KEY (`ID_bem`),
   UNIQUE KEY `ID_Bens_IND` (`ID_bem`),
   KEY `FKPossui_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Extraindo dados da tabela `Bens`
---
-
-INSERT INTO `Bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo`, `ID_Unidade`) VALUES
-('localizaÃ§Ã£o', 4545, 1, '2016-11-03', 'tipo do bem', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Calendario`
+-- Estrutura da tabela `Biblioteca`
 --
 
-CREATE TABLE IF NOT EXISTS `Calendario` (
-  `ID_Cal` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_Calendario` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Cal`),
-  UNIQUE KEY `ID_IND` (`ID_Cal`)
+CREATE TABLE IF NOT EXISTS `Biblioteca` (
+  `ID_Bib` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_Unidade` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_Bib`),
+  UNIQUE KEY `ID_IND` (`ID_Bib`),
+  UNIQUE KEY `FKEnsino_Possui3_ID` (`ID_Unidade`),
+  UNIQUE KEY `FKEnsino_Possui3_IND` (`ID_Unidade`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -102,12 +128,34 @@ CREATE TABLE IF NOT EXISTS `Calendario` (
 
 CREATE TABLE IF NOT EXISTS `Coordena` (
   `ID_Projeto` bigint(20) NOT NULL,
-  `Indice_Pequisador` char(1) NOT NULL,
-  `Bolsa` int(11) NOT NULL,
+  `Indice_Pequisador` int(11) NOT NULL,
+  `Bolsa_Pesquisador` int(11) NOT NULL,
   `ID_Usuario` int(11) NOT NULL,
   PRIMARY KEY (`ID_Projeto`),
-  UNIQUE KEY `FKCoo_Pro_IND` (`ID_Projeto`),
-  KEY `FKCoo_Pro_1_IND` (`ID_Usuario`)
+  UNIQUE KEY `FKCoo_Pro_1_IND` (`ID_Projeto`),
+  KEY `FKCoo_Pro_IND` (`ID_Usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `Coordena`
+--
+
+INSERT INTO `Coordena` (`ID_Projeto`, `Indice_Pequisador`, `Bolsa_Pesquisador`, `ID_Usuario`) VALUES
+(1, 14, 43423, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Creditos`
+--
+
+CREATE TABLE IF NOT EXISTS `Creditos` (
+  `ID_Res` int(11) NOT NULL,
+  `Nro_de_Creditos` int(11) NOT NULL,
+  `ID_Usuario` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Res`),
+  UNIQUE KEY `FKCre_Res_IND` (`ID_Res`),
+  KEY `FKCre_Usu_IND` (`ID_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -119,19 +167,17 @@ CREATE TABLE IF NOT EXISTS `Coordena` (
 CREATE TABLE IF NOT EXISTS `Cursos` (
   `Codigo` bigint(20) NOT NULL AUTO_INCREMENT,
   `Nome` char(255) NOT NULL,
-  `ID_Unidade` int(11) NOT NULL,
   PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `ID_Cursos_IND` (`Codigo`),
-  KEY `FKComposicao_IND` (`ID_Unidade`)
+  UNIQUE KEY `ID_Cursos_IND` (`Codigo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `Cursos`
 --
 
-INSERT INTO `Cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
-(1, 'nome do curso da graduação', 1),
-(2, 'nome do curso da pos', 1);
+INSERT INTO `Cursos` (`Codigo`, `Nome`) VALUES
+(1, 'nome do curso de graduação'),
+(2, 'nome do curso de pos');
 
 -- --------------------------------------------------------
 
@@ -161,19 +207,45 @@ CREATE TABLE IF NOT EXISTS `Doutorado` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Exerce`
+-- Estrutura da tabela `Emprestimos`
 --
 
-CREATE TABLE IF NOT EXISTS `Exerce` (
-  `E_A_ID_Usuario` int(11) NOT NULL,
-  `E_F_ID_Usuario` int(11) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `Emprestimos` (
+  `Data_Inicio` date NOT NULL,
+  `Id_Emprestimo` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Data_Devolucao` date NOT NULL,
+  `B_Item_Id` bigint(20) NOT NULL,
+  PRIMARY KEY (`Id_Emprestimo`),
+  UNIQUE KEY `ID_Emprestimos_IND` (`Id_Emprestimo`),
+  KEY `FKEmpresta_IND` (`B_Item_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Ensino`
+--
+
+CREATE TABLE IF NOT EXISTS `Ensino` (
+  `ID_Unidade` int(11) NOT NULL,
+  `Codigo` bigint(20) NOT NULL,
+  PRIMARY KEY (`ID_Unidade`),
+  UNIQUE KEY `FKUni_Ens_IND` (`ID_Unidade`),
+  KEY `FKComposicao_IND` (`Codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Extensao_Possui`
+--
+
+CREATE TABLE IF NOT EXISTS `Extensao_Possui` (
+  `ID_Ati` int(11) NOT NULL,
   `ID_Projeto` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Projeto`,`E_A_ID_Usuario`,`ID_Usuario`,`E_F_ID_Usuario`),
-  UNIQUE KEY `ID_Exerce_IND` (`ID_Projeto`,`E_A_ID_Usuario`,`ID_Usuario`,`E_F_ID_Usuario`),
-  KEY `FKExe_Pro_IND` (`ID_Usuario`),
-  KEY `FKExe_Fun_IND` (`E_F_ID_Usuario`),
-  KEY `FKExe_Alu_IND` (`E_A_ID_Usuario`)
+  PRIMARY KEY (`ID_Projeto`,`ID_Ati`),
+  UNIQUE KEY `ID_Extensao_Possui_IND` (`ID_Projeto`,`ID_Ati`),
+  KEY `FKExt_Ati_IND` (`ID_Ati`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -195,8 +267,8 @@ CREATE TABLE IF NOT EXISTS `Financiador` (
 --
 
 INSERT INTO `Financiador` (`Tipo`, `nome`, `ID_Financiador`) VALUES
-('financiador privado', 'nome do financiador privado', 1),
-('fiannciador publico', 'tipo do financiador pubic', 2);
+('privado', 'nome do privado', 1),
+('publico', 'nome do publico', 2);
 
 -- --------------------------------------------------------
 
@@ -206,7 +278,7 @@ INSERT INTO `Financiador` (`Tipo`, `nome`, `ID_Financiador`) VALUES
 
 CREATE TABLE IF NOT EXISTS `Folha_de_Pagamento` (
   `ID_Usuario` int(11) NOT NULL,
-  `salario` int(11) NOT NULL,
+  `Salario` int(11) NOT NULL,
   PRIMARY KEY (`ID_Usuario`),
   UNIQUE KEY `FKServidor_Recebe_IND` (`ID_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -229,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `Funcionario` (
 --
 
 INSERT INTO `Funcionario` (`ID_Usuario`, `Funcao`) VALUES
-(5, 'funcao do funcionario');
+(4, 'funcao');
 
 -- --------------------------------------------------------
 
@@ -261,9 +333,21 @@ CREATE TABLE IF NOT EXISTS `Historico` (
   `ID_Disciplina` int(11) NOT NULL,
   `Notas` int(11) NOT NULL,
   `Frequencia` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`,`ID_Disciplina`),
-  UNIQUE KEY `ID_Historico_IND` (`ID_Usuario`,`ID_Disciplina`),
-  KEY `FKHis_Dis_IND` (`ID_Disciplina`)
+  PRIMARY KEY (`ID_Disciplina`,`ID_Usuario`),
+  UNIQUE KEY `ID_Historico_IND` (`ID_Disciplina`,`ID_Usuario`),
+  KEY `FKHis_Alu_IND` (`ID_Usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Hospital`
+--
+
+CREATE TABLE IF NOT EXISTS `Hospital` (
+  `ID_Unidade` int(11) DEFAULT NULL,
+  UNIQUE KEY `FKEnsino_Possui1_ID` (`ID_Unidade`),
+  UNIQUE KEY `FKEnsino_Possui1_IND` (`ID_Unidade`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -310,13 +394,26 @@ CREATE TABLE IF NOT EXISTS `Mestrado_Profissional` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `Museu`
+--
+
+CREATE TABLE IF NOT EXISTS `Museu` (
+  `ID_Unidade` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Unidade`),
+  UNIQUE KEY `FKUni_Mus_IND` (`ID_Unidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `Ocorrencias`
 --
 
 CREATE TABLE IF NOT EXISTS `Ocorrencias` (
   `ID_Ocorrencia` int(11) NOT NULL AUTO_INCREMENT,
   `Tipo_Ocorrencia` char(255) NOT NULL,
-  `Data` date NOT NULL,
+  `Data_Inicio` date NOT NULL,
+  `Data_Final` date NOT NULL,
   `ID_Usuario` int(11) NOT NULL,
   PRIMARY KEY (`ID_Ocorrencia`),
   UNIQUE KEY `ID_Ocorrencias_IND` (`ID_Ocorrencia`),
@@ -332,9 +429,9 @@ CREATE TABLE IF NOT EXISTS `Ocorrencias` (
 CREATE TABLE IF NOT EXISTS `Oferecimento` (
   `Codigo` bigint(20) NOT NULL,
   `ID_Disciplina` int(11) NOT NULL,
-  PRIMARY KEY (`Codigo`,`ID_Disciplina`),
-  UNIQUE KEY `ID_Oferecimento_IND` (`Codigo`,`ID_Disciplina`),
-  KEY `FKOfe_Dis_IND` (`ID_Disciplina`)
+  PRIMARY KEY (`ID_Disciplina`,`Codigo`),
+  UNIQUE KEY `ID_Oferecimento_IND` (`ID_Disciplina`,`Codigo`),
+  KEY `FKOfe_Cur_IND` (`Codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -347,9 +444,9 @@ CREATE TABLE IF NOT EXISTS `Participa` (
   `ID_Usuario` int(11) NOT NULL,
   `ID_Projeto` bigint(20) NOT NULL,
   `Bolsa` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`,`ID_Projeto`),
-  UNIQUE KEY `ID_Participa_IND` (`ID_Usuario`,`ID_Projeto`),
-  KEY `FKPar_Pro_IND` (`ID_Projeto`)
+  PRIMARY KEY (`ID_Projeto`,`ID_Usuario`),
+  UNIQUE KEY `ID_Participa_IND` (`ID_Projeto`,`ID_Usuario`),
+  KEY `FKPar_Alu_IND` (`ID_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -357,7 +454,8 @@ CREATE TABLE IF NOT EXISTS `Participa` (
 --
 
 INSERT INTO `Participa` (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES
-(3, 1, 400);
+(1, 1, 400),
+(2, 2, 500);
 
 -- --------------------------------------------------------
 
@@ -397,7 +495,7 @@ CREATE TABLE IF NOT EXISTS `Professor` (
 --
 
 INSERT INTO `Professor` (`ID_Usuario`, `carreira`, `nivel`) VALUES
-(4, 'carreira do professor', 'nivel do professor');
+(3, 'carreira', 'nivel');
 
 -- --------------------------------------------------------
 
@@ -410,21 +508,21 @@ CREATE TABLE IF NOT EXISTS `Projeto` (
   `Data_Inicio` date NOT NULL,
   `Descricao` char(255) NOT NULL,
   `Data_Termino` date NOT NULL,
-  `Atividade` char(255) NOT NULL,
   `Orcamento` bigint(20) NOT NULL,
   `ID_Projeto` bigint(20) NOT NULL AUTO_INCREMENT,
   `ID_Financiador` int(11) NOT NULL,
   PRIMARY KEY (`ID_Projeto`),
   UNIQUE KEY `ID_Projeto_IND` (`ID_Projeto`),
   KEY `FKFinancia_IND` (`ID_Financiador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `Projeto`
 --
 
-INSERT INTO `Projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `Atividade`, `Orcamento`, `ID_Projeto`, `ID_Financiador`) VALUES
-('objetivo do projeto de pesquisa', '0000-00-00', 'descriÃ§Ã£o do projeto de pesquisa', '0000-00-00', 'atividade do projeto de pesquisa', 0, 1, 1);
+INSERT INTO `Projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `Orcamento`, `ID_Projeto`, `ID_Financiador`) VALUES
+('objetivo da pes', '2016-11-02', 'descricao da pesquisa', '2016-11-17', 32432, 1, 1),
+('objetivo da extensao', '2016-11-30', 'descricao da extensao', '2016-11-23', 54543, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -434,9 +532,18 @@ INSERT INTO `Projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `
 
 CREATE TABLE IF NOT EXISTS `Projeto_Extensao` (
   `ID_Projeto` bigint(20) NOT NULL,
+  `ID_Usuario` int(11) NOT NULL,
   PRIMARY KEY (`ID_Projeto`),
-  UNIQUE KEY `FKPro_Pro_1_IND` (`ID_Projeto`)
+  UNIQUE KEY `FKPro_Pro_1_IND` (`ID_Projeto`),
+  KEY `FKexerce_IND` (`ID_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `Projeto_Extensao`
+--
+
+INSERT INTO `Projeto_Extensao` (`ID_Projeto`, `ID_Usuario`) VALUES
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -460,6 +567,35 @@ INSERT INTO `Projeto_Pesquisa` (`ID_Projeto`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `Reitoria`
+--
+
+CREATE TABLE IF NOT EXISTS `Reitoria` (
+  `Cnpj` varchar(20) NOT NULL,
+  `ID_Unidade` int(11) NOT NULL,
+  PRIMARY KEY (`Cnpj`),
+  UNIQUE KEY `ID_Reitoria_IND` (`Cnpj`),
+  KEY `FKAdmnistra_IND` (`ID_Unidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Restaurante`
+--
+
+CREATE TABLE IF NOT EXISTS `Restaurante` (
+  `ID_Res` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_Unidade` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_Res`),
+  UNIQUE KEY `ID_IND` (`ID_Res`),
+  UNIQUE KEY `FKEnsino_Possui2_ID` (`ID_Unidade`),
+  UNIQUE KEY `FKEnsino_Possui2_IND` (`ID_Unidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `Servidor`
 --
 
@@ -474,8 +610,8 @@ CREATE TABLE IF NOT EXISTS `Servidor` (
 --
 
 INSERT INTO `Servidor` (`ID_Usuario`) VALUES
-(4),
-(5);
+(3),
+(4);
 
 -- --------------------------------------------------------
 
@@ -484,9 +620,9 @@ INSERT INTO `Servidor` (`ID_Usuario`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Unidade` (
-  `nome` char(255) NOT NULL,
+  `Nome_Unidade` char(255) NOT NULL,
   `ID_Unidade` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` char(255) NOT NULL,
+  `Endereco` char(255) NOT NULL,
   PRIMARY KEY (`ID_Unidade`),
   UNIQUE KEY `ID_Unidade_IND` (`ID_Unidade`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -495,8 +631,8 @@ CREATE TABLE IF NOT EXISTS `Unidade` (
 -- Extraindo dados da tabela `Unidade`
 --
 
-INSERT INTO `Unidade` (`nome`, `ID_Unidade`, `tipo`) VALUES
-('nome da unidade', 1, 'tipo da unidade');
+INSERT INTO `Unidade` (`Nome_Unidade`, `ID_Unidade`, `Endereco`) VALUES
+('nome da unidade', 1, 'endereço da unidade');
 
 -- --------------------------------------------------------
 
@@ -514,17 +650,17 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   PRIMARY KEY (`ID_Usuario`),
   UNIQUE KEY `ID_Usuario_IND` (`ID_Usuario`),
   KEY `FKCadastro_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `Usuario`
 --
 
 INSERT INTO `Usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`, `ID_Unidade`) VALUES
-(1, 'nome do aluno de graduaÃ§Ã£o', '666.666.66-66', '', '2016-11-02', 1),
-(3, 'nome do aluno de pos', '6567568', '', '2016-11-03', 1),
-(4, 'nome do professor', '3213', 'sexo do professor', '2016-11-01', 1),
-(5, 'nome do funcionario', '312', 'sexo do funcionario', '2016-11-01', 1);
+(1, 'nome do aluno de graduação', '42432423', 'sexo', '2016-11-01', 1),
+(2, 'nome do aluno de pos', '4324254', 'sex', '2016-11-01', 1),
+(3, 'nome do professor', '42543', 'se', '2016-11-17', 1),
+(4, 'nome do funcionario', '4543', 's', '2016-11-03', 1);
 
 -- --------------------------------------------------------
 
@@ -544,18 +680,23 @@ CREATE TABLE IF NOT EXISTS `Verba` (
 --
 
 --
+-- Limitadores para a tabela `Acervo_Biblioteca`
+--
+ALTER TABLE `Acervo_Biblioteca`
+  ADD CONSTRAINT `FKBiblioteca_Possui_FK` FOREIGN KEY (`ID_Bib`) REFERENCES `Biblioteca` (`ID_Bib`);
+
+--
+-- Limitadores para a tabela `Acervo_Museu`
+--
+ALTER TABLE `Acervo_Museu`
+  ADD CONSTRAINT `FKMuseu_Possui_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Museu` (`ID_Unidade`);
+
+--
 -- Limitadores para a tabela `Aluno`
 --
 ALTER TABLE `Aluno`
   ADD CONSTRAINT `FKcursa_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
   ADD CONSTRAINT `FKUsu_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Usuario` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Atividade_Possui`
---
-ALTER TABLE `Atividade_Possui`
-  ADD CONSTRAINT `FKAti_Cal` FOREIGN KEY (`ID_Cal`) REFERENCES `Calendario` (`ID_Cal`),
-  ADD CONSTRAINT `FKAti_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Extensao` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `Bens`
@@ -564,17 +705,24 @@ ALTER TABLE `Bens`
   ADD CONSTRAINT `FKPossui_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
 
 --
+-- Limitadores para a tabela `Biblioteca`
+--
+ALTER TABLE `Biblioteca`
+  ADD CONSTRAINT `FKEnsino_Possui3_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Ensino` (`ID_Unidade`);
+
+--
 -- Limitadores para a tabela `Coordena`
 --
 ALTER TABLE `Coordena`
-  ADD CONSTRAINT `FKCoo_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Pesquisa` (`ID_Projeto`),
-  ADD CONSTRAINT `FKCoo_Pro_1_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKCoo_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`),
+  ADD CONSTRAINT `FKCoo_Pro_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Pesquisa` (`ID_Projeto`);
 
 --
--- Limitadores para a tabela `Cursos`
+-- Limitadores para a tabela `Creditos`
 --
-ALTER TABLE `Cursos`
-  ADD CONSTRAINT `FKComposicao_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
+ALTER TABLE `Creditos`
+  ADD CONSTRAINT `FKCre_Res_FK` FOREIGN KEY (`ID_Res`) REFERENCES `Restaurante` (`ID_Res`),
+  ADD CONSTRAINT `FKCre_Usu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Usuario` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `Doutorado`
@@ -583,13 +731,24 @@ ALTER TABLE `Doutorado`
   ADD CONSTRAINT `FKPos_Dou_FK` FOREIGN KEY (`Codigo`) REFERENCES `Pos_Graduacao` (`Codigo`);
 
 --
--- Limitadores para a tabela `Exerce`
+-- Limitadores para a tabela `Emprestimos`
 --
-ALTER TABLE `Exerce`
-  ADD CONSTRAINT `FKExe_Alu_FK` FOREIGN KEY (`E_A_ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKExe_Fun_FK` FOREIGN KEY (`E_F_ID_Usuario`) REFERENCES `Funcionario` (`ID_Usuario`),
-  ADD CONSTRAINT `FKExe_Pro_1` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Extensao` (`ID_Projeto`),
-  ADD CONSTRAINT `FKExe_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
+ALTER TABLE `Emprestimos`
+  ADD CONSTRAINT `FKEmpresta_FK` FOREIGN KEY (`B_Item_Id`) REFERENCES `Acervo_Biblioteca` (`B_Item_Id`);
+
+--
+-- Limitadores para a tabela `Ensino`
+--
+ALTER TABLE `Ensino`
+  ADD CONSTRAINT `FKComposicao_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
+  ADD CONSTRAINT `FKUni_Ens_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
+
+--
+-- Limitadores para a tabela `Extensao_Possui`
+--
+ALTER TABLE `Extensao_Possui`
+  ADD CONSTRAINT `FKExt_Ati_FK` FOREIGN KEY (`ID_Ati`) REFERENCES `Atividades_Extensao` (`ID_Ati`),
+  ADD CONSTRAINT `FKExt_Pro` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Extensao` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `Folha_de_Pagamento`
@@ -613,8 +772,14 @@ ALTER TABLE `Graduacao`
 -- Limitadores para a tabela `Historico`
 --
 ALTER TABLE `Historico`
-  ADD CONSTRAINT `FKHis_Alu` FOREIGN KEY (`ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKHis_Dis_FK` FOREIGN KEY (`ID_Disciplina`) REFERENCES `Disciplinas` (`ID_Disciplina`);
+  ADD CONSTRAINT `FKHis_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
+  ADD CONSTRAINT `FKHis_Dis` FOREIGN KEY (`ID_Disciplina`) REFERENCES `Disciplinas` (`ID_Disciplina`);
+
+--
+-- Limitadores para a tabela `Hospital`
+--
+ALTER TABLE `Hospital`
+  ADD CONSTRAINT `FKEnsino_Possui1_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Ensino` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `Indice_de_Desempenho`
@@ -637,6 +802,12 @@ ALTER TABLE `Mestrado_Profissional`
   ADD CONSTRAINT `FKPos_Mes_1_FK` FOREIGN KEY (`Codigo`) REFERENCES `Pos_Graduacao` (`Codigo`);
 
 --
+-- Limitadores para a tabela `Museu`
+--
+ALTER TABLE `Museu`
+  ADD CONSTRAINT `FKUni_Mus_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
+
+--
 -- Limitadores para a tabela `Ocorrencias`
 --
 ALTER TABLE `Ocorrencias`
@@ -646,15 +817,15 @@ ALTER TABLE `Ocorrencias`
 -- Limitadores para a tabela `Oferecimento`
 --
 ALTER TABLE `Oferecimento`
-  ADD CONSTRAINT `FKOfe_Cur` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
-  ADD CONSTRAINT `FKOfe_Dis_FK` FOREIGN KEY (`ID_Disciplina`) REFERENCES `Disciplinas` (`ID_Disciplina`);
+  ADD CONSTRAINT `FKOfe_Cur_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
+  ADD CONSTRAINT `FKOfe_Dis` FOREIGN KEY (`ID_Disciplina`) REFERENCES `Disciplinas` (`ID_Disciplina`);
 
 --
 -- Limitadores para a tabela `Participa`
 --
 ALTER TABLE `Participa`
-  ADD CONSTRAINT `FKPar_Alu` FOREIGN KEY (`ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKPar_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Pesquisa` (`ID_Projeto`);
+  ADD CONSTRAINT `FKPar_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
+  ADD CONSTRAINT `FKPar_Pro` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `Pos_Graduacao`
@@ -678,6 +849,7 @@ ALTER TABLE `Projeto`
 -- Limitadores para a tabela `Projeto_Extensao`
 --
 ALTER TABLE `Projeto_Extensao`
+  ADD CONSTRAINT `FKexerce_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Servidor` (`ID_Usuario`),
   ADD CONSTRAINT `FKPro_Pro_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto` (`ID_Projeto`);
 
 --
@@ -685,6 +857,18 @@ ALTER TABLE `Projeto_Extensao`
 --
 ALTER TABLE `Projeto_Pesquisa`
   ADD CONSTRAINT `FKPro_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto` (`ID_Projeto`);
+
+--
+-- Limitadores para a tabela `Reitoria`
+--
+ALTER TABLE `Reitoria`
+  ADD CONSTRAINT `FKAdmnistra_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
+
+--
+-- Limitadores para a tabela `Restaurante`
+--
+ALTER TABLE `Restaurante`
+  ADD CONSTRAINT `FKEnsino_Possui2_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Ensino` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `Servidor`

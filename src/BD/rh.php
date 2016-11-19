@@ -193,6 +193,70 @@
 		    	?>		    	
 			</tbody>
 		</table>
+		
+		<h1>Ocorrencia dos professores</h1>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>nome do professor</th>
+		        	<th>cpf</th>
+		        	<th>Tipo de ocorrenciadata</th>
+		        	<th>Data inicio</th>
+		        	<th>data fim</th>
+		        	<th>alterar</th>
+		        	<th>apagar</th>
+		     	</tr>
+    		</thead>
+		    <tbody>		    	
+		    	<?php
+		    		$ocorrencias = consultaOcorrenciaProfessores();
+		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
+		    			echo "<form action='detalheAlunoGraduacao.php' method='post'>";
+		    			echo "<tr>";
+		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
+		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td></td>";
+		    			echo "</tr>";
+		    			echo "</form>";
+		    		}
+		    	?>		    	
+			</tbody>
+		</table>
+		<br/>
+		
+		
+		<h1>Ocorrencia dos funcionários</h1>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>nome do professor</th>
+		        	<th>cpf</th>
+		        	<th>Tipo de ocorrenciadata</th>
+		        	<th>Data inicio</th>
+		        	<th>data fim</th>
+		        	<th>alterar</th>
+		        	<th>apagar</th>
+		     	</tr>
+    		</thead>
+		    <tbody>		    	
+		    	<?php
+		    		$ocorrencias = consultaOcorrenciaFuncionarios();
+		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
+		    			echo "<form action='detalheAlunoGraduacao.php' method='post'>";
+		    			echo "<tr>";
+		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
+		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td></td>";
+		    			echo "</tr>";
+		    			echo "</form>";
+		    		}
+		    	?>		    	
+			</tbody>
+		</table>
 
 	</div>
 </main>

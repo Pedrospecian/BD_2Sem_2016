@@ -259,10 +259,35 @@
 
     //funcao para consultar as ocorrencias de um dado professor ou funcionario
     function consultaOcorrencias($id){
-        //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
         $sql="SELECT *
         FROM Ocorrencias
         WHERE ID_Usuario='".$id."'";
+        $bd= conectaBD();
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
+    function consultaOcorrenciaProfessores(){
+         //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
+        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data
+                FROM Ocorrencias
+                INNER JOIN Professor
+                INNER JOIN Usuario ON Usuario.ID_Usuario = Professor.ID_Usuario
+                WHERE Ocorrencias.ID_Usuario = Professor.ID_Usuario";
+        $bd= conectaBD();
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+    
+    function consultaOcorrenciaFuncionarios(){
+         //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
+        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data
+                FROM Ocorrencias
+                INNER JOIN Funcionario
+                INNER JOIN Usuario ON Usuario.ID_Usuario = Funcionario.ID_Usuario
+                WHERE Ocorrencias.ID_Usuario = Funcionario.ID_Usuario";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();

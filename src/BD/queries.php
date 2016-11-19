@@ -247,10 +247,11 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
-        $sql="SELECT Bens.ID_Bem, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, nome AS nomeUnidade, Unidade.tipo AS tipoUnidade
+        $sql="SELECT Bens.ID_Bem, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
                 FROM Bens
                 INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
-                AND Unidade.nome = '".$nomeUnidade."'";
+                AND Nome_Unidade ='".$nomeUnidade."'";
+                var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -264,7 +265,7 @@
         $sql="SELECT SUM( Valor ) AS total
                 FROM Bens
                 INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
-                AND nome = '".$nomeUnidade."'";
+                AND Nome_Unidade = '".$nomeUnidade."'";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

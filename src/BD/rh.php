@@ -58,7 +58,7 @@
 							<?php
 								$unidades = consultaUnidades();
 								while ($dados = mysqli_fetch_array($unidades)) {
-									echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+									echo "<option value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
 						        }
 							?>
 						</select>
@@ -147,7 +147,7 @@
 							<?php
 								$unidades = consultaUnidades();
 								while ($dados = mysqli_fetch_array($unidades)) {
-									echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+									echo "<option value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
 						        }
 							?>
 						</select>

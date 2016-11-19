@@ -213,7 +213,7 @@
 		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
-		        	<th>Aluno</th>
+		        	<!--<th>Aluno</th>-->
 		        	<th>Professor</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -223,12 +223,12 @@
 		    	<?php
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			var_dump($dados);
+		    			//var_dump($dados);
 		    			echo "<form action='detalheProjetoPesquisa.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
-		    			echo "<td>".$dados['atividade']."</td>";
+		    			//echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nomeFinanciador']."</td>";
 		    			echo "<td>".$dados['nomeUsuario']."</td>";
 		    			echo "<td>".(consultaCoordenadorProjeto($dados['ID_Projeto'])['nome'])."</td>";
@@ -246,7 +246,7 @@
 				<tr>
 		        	<th>Objetivo</th>
 		        	<th>Orçamento</th>
-		        	<th>Atividade</th>
+		        	<!--<th>Atividade</th>-->
 		        	<th>Fiananciador</th>
 		        	<th>Aluno</th>
 		        	<th>Calendário</th>
@@ -262,7 +262,7 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
-		    			echo "<td>".$dados['atividade']."</td>";
+		    			//echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['financiadorNome']."</td>";
 		    			echo "<td>".$dados['usuarioNome']."</td>";
 		    			echo "<td><button type='submit' value=".$dados['ID_Projeto']." name='calendario' class='btn btn-default'>Calendário</button></td>";

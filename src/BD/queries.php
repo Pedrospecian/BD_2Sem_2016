@@ -57,7 +57,7 @@
     //lista todos os servidores
     function consultaFolhaPagamento(){
         $bd= conectaBD();
-        $sql="SELECT Servidor.ID_Usuario, Salario, data
+        $sql="SELECT Servidor.ID_Usuario, Salario, Data
                 FROM Folha_de_Pagamento
                 INNER JOIN Servidor ON Servidor.ID_Usuario = Folha_de_Pagamento.ID_Usuario
                 INNER JOIN Usuario ON Servidor.ID_Usuario = Usuario.ID_Usuario";

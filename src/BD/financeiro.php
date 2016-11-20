@@ -27,7 +27,7 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Usuario']."</td>";
 		    			echo "<td>".$dados['Salario']."</td>";
-		    			echo "<td>".$dados['data']."</td>";
+		    			echo "<td>".$dados['Data']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

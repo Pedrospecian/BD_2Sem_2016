@@ -211,6 +211,7 @@
 		        	<th>Aluno</th>
 		        	<th>Bolsa do aluno</th>
 		        	<th>Professor</th>
+		        	<th>Indice pesquisa</th>
 		        	<th>Data de inicio</th>
 		        	<th>Data de termino</th>
 		        	<th>alterar</th>
@@ -233,6 +234,7 @@
 		    			echo "<td>".$dados['nomeUsuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
 		    			echo "<td>".$dados['bolsa']."<input type='hidden' name='bolsa' value='".$dados['bolsa']."'></td>";
 		    			echo "<td>".$coordenador['nome']."<input type='hidden' name='coordenador' value='".$coordenador['ID_Usuario']."'></td>";
+		    			echo "<td>".$coordenador['Indice_Pequisador']."<input type='hidden' name='indicePesquisa' value='".$coordenador['Indice_Pequisador']."'></td>";
 		    			echo "<td>".$dados['Data_Inicio']."<input type='hidden' name='dataInicio' value='".$dados['Data_Inicio']."'></td>";
 		    			echo "<td>".$dados['Data_Termino']."<input type='hidden' name='dataTermino' value='".$dados['Data_Termino']."'></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";

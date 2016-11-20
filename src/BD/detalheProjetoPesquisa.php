@@ -101,6 +101,12 @@
 				</div>
 				<div class="row">
 					<div class="form-group">
+						<label for="indice" class="control-label col-sm-2 text-right">Indice da pesquisa</label>
+						<div class="col-sm-5"><input class="form-control" type="number" name="indice" value="<?php echo $_POST['indicePesquisa']; ?>"/></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
 						<label for="data-inicio" class="control-label col-sm-2 text-right">Data de inicio</label>
 						<div class="col-sm-5"><input class="form-control" type="date" name="data-inicio" value="<?php echo $_POST['dataInicio']; ?>"/></div>
 					</div>

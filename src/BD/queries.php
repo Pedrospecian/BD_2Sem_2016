@@ -177,7 +177,7 @@
     
     function consultaCoordenadorProjeto($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT Usuario.nome, Usuario.ID_Usuario
+        $sql="SELECT Usuario.nome, Usuario.ID_Usuario, Indice_Pequisador
                 FROM Coordena
                 INNER JOIN Usuario ON Coordena.ID_Usuario = Usuario.ID_Usuario
                 WHERE ID_Projeto =".$idProjeto;
@@ -734,6 +734,27 @@
         $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati=".$idAtividade;
         $bd->query($sql);
         $bd->close();
+    }
+    
+    function alteraPesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim, $idProjeto, $indicePesquisador){
+        $bd= conectaBD();
+        $sql = "UPDATE Projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
+        WHERE ID_Projeto=".$idProjeto;
+        var_dump($sql);
+        if ($bd->query($sql) === TRUE) {
+            if($idAluno!=null){
+                $sql="UPDATE Coordena SET Indice_Pequisador=".$indicePesquisador." ,Bolsa_Pesquisador=".$bolsa.",ID_Usuario=".$idProfessor."
+                   WHERE ID_Projeto=".$idProjeto;
+                    var_dump($sql);
+                $bd->query($sql);
+                $sql= "UPDATE Participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
+                WHERE ID_Projeto=".$idProjeto;
+                var_dump($sql);
+                $bd->query($sql);
+            }
+            $bd->close();
+            return TRUE;
+        }
     }
     
     

@@ -696,6 +696,39 @@
         return FALSE;
     }
     
+    function deletaPesquisa($idProjeto){
+        $bd= conectaBD();
+        $sql= "DELETE FROM Participa WHERE ID_Projeto =".$idProjeto;
+        var_dump($sql);
+        $bd->query($sql);
+        $sql= "DELETE FROM Coordena WHERE ID_Projeto=".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Projeto_Pesquisa WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Projeto WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $bd->close();
+    }
+    
+    function deletaExtensao($idProjeto){
+        $bd= conectaBD();
+        $sql= "SELECT ID_Ati FROM Extensao_Possui WHERE ID_Projeto =".$idProjeto;
+        $atividades= $bd->query($sql);
+        while($dados = mysqli_fetch_array($atividades)){
+            $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati=".$dados['ID_Ati'];
+        }
+        var_dump($sql);
+        $sql= "DELETE FROM Extensao_Possui WHERE ID_Projeto=".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Participa WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Projeto_Extensao WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Projeto WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $bd->close();
+    }
+    
     
     
     //Liste o nome de todos os professores que tiveram, entre suas atribuições, cargos relacionados a funções 

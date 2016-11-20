@@ -11,6 +11,30 @@
 			e verbas recebidas.
 		</p>
 		<h3>Folha de Pagamento</h3>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>Identificador</th>
+		        	<th>Valor</th>
+		        	<th>Data de aquisição</th>
+		        	<th>Tipo</th>
+		     	</tr>
+    		</thead>
+		    <tbody>
+		    	<?php
+		    		$bens = consultaFolhaPagamento();
+		    		while ($dados = mysqli_fetch_array($bens)) {
+		    			echo "<tr>";
+		    			echo "<td>".$dados['ID_bem']."</td>";
+		    			echo "<td>".$dados['Valor']."</td>";
+		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";
+		    			echo "<td>".$dados['Tipo']."</td>";
+		    			echo "</tr>";
+		    		}
+		    	?>
+			</tbody>
+		</table>
+
 
 	    <h3>Compras Feitas pela Universidade</h3>
 	    <table class="table">

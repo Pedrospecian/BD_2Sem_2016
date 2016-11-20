@@ -150,7 +150,7 @@
     //lista projetos de extensao
     function consultaProjetoExtensao(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Extensao.ID_Projeto, objetivo, orcamento, Financiador.nome as financiadorNome, Usuario.nome as usuarioNome
+        $sql="SELECT Projeto_Extensao.ID_Projeto, objetivo, orcamento, Financiador.nome as financiadorNome, Usuario.nome as usuarioNome, descricao, bolsa, Participa.ID_Usuario, Financiador.id_Financiador, Data_Inicio, Data_Termino
                 FROM Projeto_Extensao
                 INNER JOIN Projeto ON Projeto_Extensao.ID_Projeto = Projeto.ID_Projeto
                 INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador
@@ -164,7 +164,7 @@
     //lista projetos d pesquisa
     function consultaProjetoPesquisa(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, Financiador.nome as nomeFinanciador, Usuario.nome as nomeUsuario
+        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, Financiador.nome as nomeFinanciador, Usuario.nome as nomeUsuario, descricao, bolsa, Participa.ID_Usuario, Financiador.id_Financiador, Data_Inicio, Data_Termino
                 FROM Projeto_Pesquisa
                 INNER JOIN Projeto ON Projeto_Pesquisa.ID_Projeto = Projeto.ID_Projeto
                 INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador
@@ -177,7 +177,7 @@
     
     function consultaCoordenadorProjeto($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT Usuario.nome
+        $sql="SELECT Usuario.nome, Usuario.ID_Usuario
                 FROM Coordena
                 INNER JOIN Usuario ON Coordena.ID_Usuario = Usuario.ID_Usuario
                 WHERE ID_Projeto =".$idProjeto;

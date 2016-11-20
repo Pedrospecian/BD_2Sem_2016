@@ -696,6 +696,20 @@
         return FALSE;
     }
     
+    function deletaPesquisa($idProjeto){
+        $bd= conectaBD();
+        $sql= "DELETE FROM Participa WHERE ID_Projeto =".$idProjeto;
+        var_dump($sql);
+        $bd->query($sql);
+        $sql= "DELETE FROM Coordena WHERE ID_Projeto=".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Projeto_Pesquisa WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM Projeto WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $bd->close();
+    }
+    
     
     
     //Liste o nome de todos os professores que tiveram, entre suas atribuições, cargos relacionados a funções 

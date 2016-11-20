@@ -5,11 +5,9 @@
 <main>
 	<div class="container">
 		<?php 
-		if(isset($_POST['update'])){ ?>
-			atualiza dados de projeto de pesquisa
-			<?php 
-		}
-		if(isset($_POST['update'])) { var_dump($_POST)?>
+		if(isset($_POST['update'])){
+			echo "atualiza dados de projeto de pesquisa";
+			var_dump($_POST)?>
 			<form action="atualizaProjetoPesquisa.php" method="GET" class="form-horizontal">
 				<input type="hidden" name="idProjeto-alt" value="<?php echo $_POST['idProjeto']; ?>"/>
 				<div class="row">
@@ -132,6 +130,9 @@
 		
 		if(isset($_POST['delete'])){
 			echo "deleta projeto de pesquisa";
+			var_dump($_POST);
+			deletaPesquisa($_POST['idProjeto']);
+			echo "Deletado";
 		}?>
 	</div>
 </main>

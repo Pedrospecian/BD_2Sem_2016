@@ -715,7 +715,7 @@
         $sql= "SELECT ID_Ati FROM Extensao_Possui WHERE ID_Projeto =".$idProjeto;
         $atividades= $bd->query($sql);
         while($dados = mysqli_fetch_array($atividades)){
-            $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati=".$dados['ID_Ati'];
+            deletarAtividade($dados['ID_Ati']);
         }
         var_dump($sql);
         $sql= "DELETE FROM Extensao_Possui WHERE ID_Projeto=".$idProjeto;
@@ -725,6 +725,13 @@
         $sql= "DELETE FROM Projeto_Extensao WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
         $sql= "DELETE FROM Projeto WHERE ID_Projeto =".$idProjeto;
+        $bd->query($sql);
+        $bd->close();
+    }
+    
+    function deletarAtividade($idAtividade){
+        $bd= conectaBD();
+        $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati=".$idAtividade;
         $bd->query($sql);
         $bd->close();
     }

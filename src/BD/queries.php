@@ -64,7 +64,7 @@
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
-    }0
+    }
     
 //listar todos os cursos da graduação
     function consultaCursosGraduacao(){

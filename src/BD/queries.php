@@ -783,6 +783,23 @@
         return FALSE;
     }
     
+    function alteraAtividade($idAtividade, $localizacao, $data){
+        $bd= conectaBD();
+        $sql="UPDATE  Atividades_Extensao SET Localizacao =  '".$localizacao."', Data_Atividade =  '".$data."' WHERE  ID_Ati=".$idAtividade;
+        $bd->query($sql);
+        $bd->close();
+    }
+    
+    function deletaAtividade($idAtividade){
+        $bd= conectaBD();
+        $sql="DELETE FROM Extensao_Possui WHERE ID_Ati =".$idAtividade;
+        $bd->query($sql);
+        $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati= ".$idAtividade;
+        $bd->query($sql);
+        $bd->close();
+    }
+    
+    
     
     
     //Liste o nome de todos os professores que tiveram, entre suas atribuições, cargos relacionados a funções 

@@ -154,17 +154,24 @@
  			<thead>
  				<tr>
  		        	<th>Localização</th>
- 		        	<th>data</th>
+ 		        	<th>Data</th>
+ 		        	<th>Alterar</th>
+ 		        	<th>Deletar</th>
  		     	</tr>
      		</thead>
  		    <tbody>
  		    	<?php
  		    		$atividades = consultaAtividades($_GET['idProjeto']);
  		    		while ($dados = mysqli_fetch_array($atividades)) {
+ 		    			echo "<form action='detalheAtividade.php' method='GET'>";
+ 		    			echo "<input type='hidden' name='id' value='".$dados['ID_Ati']."'";
  		    			echo "<tr>";
- 		    			echo "<td>".$dados['localizacao']."</td>";
- 		    			echo "<td>".$dados['Data_Atividade']."</td>";
+ 		    			echo "<td>".$dados['localizacao']."<input type='hidden' name='local' value='".$dados['localizacao']."'></td>";
+ 		    			echo "<td>".$dados['Data_Atividade']."<input type='hidden' name='data' value='".$dados['Data_Atividade']."'></td>";
+ 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
+			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
  		    			echo "</tr>";
+ 		    			echo "</form>";
  		    		}
  		    	?>
  			</tbody>

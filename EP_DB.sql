@@ -1,709 +1,708 @@
--- phpMyAdmin SQL Dump
--- version 4.0.10deb1
--- http://www.phpmyadmin.net
---
--- Máquina: 127.0.0.1
--- Data de Criação: 13-Nov-2016 às 13:55
--- Versão do servidor: 5.5.50-0ubuntu0.14.04.1
--- versão do PHP: 5.5.9-1ubuntu4.19
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Base de Dados: `universidade`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Aluno`
---
-
-CREATE TABLE IF NOT EXISTS `Aluno` (
-  `ID_Usuario` int(11) NOT NULL,
-  `Ori_ID_Usuario` int(11) DEFAULT NULL,
-  `Codigo` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`),
-  UNIQUE KEY `FKUsu_Alu_IND` (`ID_Usuario`),
-  KEY `FKOrientacao_IND` (`Ori_ID_Usuario`),
-  KEY `FKcursa_IND` (`Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Aluno`
---
-
-INSERT INTO `Aluno` (`ID_Usuario`, `Ori_ID_Usuario`, `Codigo`) VALUES
-(1, NULL, 1),
-(4, NULL, 2);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Atividade_Possui`
---
-
-CREATE TABLE IF NOT EXISTS `Atividade_Possui` (
-  `ID_Cal` int(11) NOT NULL,
-  `ID_Projeto` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Cal`,`ID_Projeto`),
-  UNIQUE KEY `ID_Atividade_Possui_IND` (`ID_Cal`,`ID_Projeto`),
-  KEY `FKAti_Pro_IND` (`ID_Projeto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Bens`
---
-
-CREATE TABLE IF NOT EXISTS `Bens` (
-  `Localizacao` char(255) NOT NULL,
-  `Valor` int(11) NOT NULL,
-  `ID_bem` int(11) NOT NULL AUTO_INCREMENT,
-  `Data_de_Aquisicao` date NOT NULL,
-  `Tipo` char(255) NOT NULL,
-  `ID_Unidade` int(11) NOT NULL,
-  PRIMARY KEY (`ID_bem`),
-  UNIQUE KEY `ID_Bens_IND` (`ID_bem`),
-  KEY `FKPossui_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Extraindo dados da tabela `Bens`
---
-
-INSERT INTO `Bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo`, `ID_Unidade`) VALUES
-('localizaÃ§Ã£ov', 4555, 1, '2016-11-02', 'tipo do bem', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Calendario`
---
-
-CREATE TABLE IF NOT EXISTS `Calendario` (
-  `ID_Cal` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_Calendario` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Cal`),
-  UNIQUE KEY `ID_IND` (`ID_Cal`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Coordena`
---
-
-CREATE TABLE IF NOT EXISTS `Coordena` (
-  `ID_Projeto` bigint(20) NOT NULL,
-  `Indice_Pequisador` char(1) NOT NULL,
-  `Bolsa` char(1) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Projeto`),
-  UNIQUE KEY `FKCoo_Pro_IND` (`ID_Projeto`),
-  KEY `FKCoo_Pro_1_IND` (`ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Cursos`
---
-
-CREATE TABLE IF NOT EXISTS `Cursos` (
-  `Codigo` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Nome` char(255) NOT NULL,
-  `ID_Unidade` int(11) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `ID_Cursos_IND` (`Codigo`),
-  KEY `FKComposicao_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Extraindo dados da tabela `Cursos`
---
-
-INSERT INTO `Cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
-(1, 'nome do curso', 1),
-(2, 'curso de pos', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Disciplinas`
---
-
-CREATE TABLE IF NOT EXISTS `Disciplinas` (
-  `ID_Disciplina` int(11) NOT NULL AUTO_INCREMENT,
-  `Nome` char(255) NOT NULL,
-  PRIMARY KEY (`ID_Disciplina`),
-  UNIQUE KEY `ID_Disciplinas_IND` (`ID_Disciplina`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Doutorado`
---
-
-CREATE TABLE IF NOT EXISTS `Doutorado` (
-  `Codigo` bigint(20) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `FKPos_Dou_IND` (`Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Exerce`
---
-
-CREATE TABLE IF NOT EXISTS `Exerce` (
-  `E_A_ID_Usuario` int(11) NOT NULL,
-  `E_F_ID_Usuario` int(11) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
-  `ID_Projeto` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Projeto`,`E_A_ID_Usuario`,`ID_Usuario`,`E_F_ID_Usuario`),
-  UNIQUE KEY `ID_Exerce_IND` (`ID_Projeto`,`E_A_ID_Usuario`,`ID_Usuario`,`E_F_ID_Usuario`),
-  KEY `FKExe_Pro_IND` (`ID_Usuario`),
-  KEY `FKExe_Fun_IND` (`E_F_ID_Usuario`),
-  KEY `FKExe_Alu_IND` (`E_A_ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Financiador`
---
-
-CREATE TABLE IF NOT EXISTS `Financiador` (
-  `Tipo` char(255) NOT NULL,
-  `nome` char(255) NOT NULL,
-  `ID_Financiador` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID_Financiador`),
-  UNIQUE KEY `ID_Financiador_IND` (`ID_Financiador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Extraindo dados da tabela `Financiador`
---
-
-INSERT INTO `Financiador` (`Tipo`, `nome`, `ID_Financiador`) VALUES
-('privado', 'nome do financiador', 1),
-('publico', 'nome do financiador publico', 2);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Folha_de_Pagamento`
---
-
-CREATE TABLE IF NOT EXISTS `Folha_de_Pagamento` (
-  `R_F_ID_Usuario` int(11) NOT NULL,
-  PRIMARY KEY (`R_F_ID_Usuario`),
-  UNIQUE KEY `FKRec_Fol_IND` (`R_F_ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Funcionario`
---
-
-CREATE TABLE IF NOT EXISTS `Funcionario` (
-  `ID_Usuario` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`),
-  UNIQUE KEY `FKUsu_Fun_IND` (`ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Funcionario`
---
-
-INSERT INTO `Funcionario` (`ID_Usuario`) VALUES
-(3);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Graduacao`
---
-
-CREATE TABLE IF NOT EXISTS `Graduacao` (
-  `Codigo` bigint(20) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `FKCur_Gra_IND` (`Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Graduacao`
---
-
-INSERT INTO `Graduacao` (`Codigo`) VALUES
-(1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Historico`
---
-
-CREATE TABLE IF NOT EXISTS `Historico` (
-  `ID_Usuario` int(11) NOT NULL,
-  `ID_Disciplina` int(11) NOT NULL,
-  `Notas` int(11) NOT NULL,
-  `Frequencia` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`,`ID_Disciplina`),
-  UNIQUE KEY `ID_Historico_IND` (`ID_Usuario`,`ID_Disciplina`),
-  KEY `FKHis_Dis_IND` (`ID_Disciplina`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Indice_de_Desempenho`
---
-
-CREATE TABLE IF NOT EXISTS `Indice_de_Desempenho` (
-  `Codigo` bigint(20) NOT NULL,
-  `Indice_Curso` char(1) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
-  `I_A_ID_Usuario` int(11) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `FKInd_Cur_IND` (`Codigo`),
-  KEY `FKInd_Pro_IND` (`ID_Usuario`),
-  KEY `FKInd_Alu_IND` (`I_A_ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Mestrado_Academico`
---
-
-CREATE TABLE IF NOT EXISTS `Mestrado_Academico` (
-  `Codigo` bigint(20) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `FKPos_Mes_IND` (`Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Mestrado_Profissional`
---
-
-CREATE TABLE IF NOT EXISTS `Mestrado_Profissional` (
-  `Codigo` bigint(20) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `FKPos_Mes_1_IND` (`Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Ocorrencias`
---
-
-CREATE TABLE IF NOT EXISTS `Ocorrencias` (
-  `ID_Ocorrencia` int(11) NOT NULL,
-  `Tipo_Ocorrencia` char(255) NOT NULL,
-  `ID_Usuario` int(11) DEFAULT NULL,
-  `Fun_ID_Usuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID_Ocorrencia`),
-  UNIQUE KEY `ID_Ocorrencias_IND` (`ID_Ocorrencia`),
-  KEY `FKprofessor_tem_IND` (`ID_Usuario`),
-  KEY `FKfuncionario_tem_IND` (`Fun_ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Oferecimento`
---
-
-CREATE TABLE IF NOT EXISTS `Oferecimento` (
-  `Codigo` bigint(20) NOT NULL,
-  `ID_Disciplina` int(11) NOT NULL,
-  PRIMARY KEY (`Codigo`,`ID_Disciplina`),
-  UNIQUE KEY `ID_Oferecimento_IND` (`Codigo`,`ID_Disciplina`),
-  KEY `FKOfe_Dis_IND` (`ID_Disciplina`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Participa`
---
-
-CREATE TABLE IF NOT EXISTS `Participa` (
-  `ID_Usuario` int(11) NOT NULL,
-  `ID_Projeto` bigint(20) NOT NULL,
-  `Bolsa` char(1) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`,`ID_Projeto`),
-  UNIQUE KEY `ID_Participa_IND` (`ID_Usuario`,`ID_Projeto`),
-  KEY `FKPar_Pro_IND` (`ID_Projeto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Pos_Graduacao`
---
-
-CREATE TABLE IF NOT EXISTS `Pos_Graduacao` (
-  `Codigo` bigint(20) NOT NULL,
-  PRIMARY KEY (`Codigo`),
-  UNIQUE KEY `FKCur_Pos_IND` (`Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Pos_Graduacao`
---
-
-INSERT INTO `Pos_Graduacao` (`Codigo`) VALUES
-(2);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Professor`
---
-
-CREATE TABLE IF NOT EXISTS `Professor` (
-  `ID_Usuario` int(11) NOT NULL,
-  `carreira` char(255) NOT NULL,
-  `nivel` char(255) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`),
-  UNIQUE KEY `FKUsu_Pro_IND` (`ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Professor`
---
-
-INSERT INTO `Professor` (`ID_Usuario`, `carreira`, `nivel`) VALUES
-(2, 'carreira', 'nivel');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Projeto`
---
-
-CREATE TABLE IF NOT EXISTS `Projeto` (
-  `objetivo` char(255) NOT NULL,
-  `Data_Inicio` date NOT NULL,
-  `Descricao` char(255) NOT NULL,
-  `Data_Termino` date NOT NULL,
-  `Atividade` char(255) NOT NULL,
-  `Orcamento` int(20) NOT NULL,
-  `ID_Projeto` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ID_Financiador` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Projeto`),
-  UNIQUE KEY `ID_Projeto_IND` (`ID_Projeto`),
-  KEY `FKFinancia_IND` (`ID_Financiador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Extraindo dados da tabela `Projeto`
---
-
-INSERT INTO `Projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `Atividade`, `Orcamento`, `ID_Projeto`, `ID_Financiador`) VALUES
-('objetivo do projeto de pesquisa', '2016-11-01', 'descrição do projeto de pesquisa', '2016-11-19', 'atividade  do projeto de pesquisa', 2000, 1, 1),
-('objetivo do projeto de extensao', '2016-11-01', 'descrção do projeto de extensao', '2016-11-05', 'atividade do projeto de extensao', 5000, 2, 2);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Projeto_Extensao`
---
-
-CREATE TABLE IF NOT EXISTS `Projeto_Extensao` (
-  `ID_Projeto` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Projeto`),
-  UNIQUE KEY `FKPro_Pro_1_IND` (`ID_Projeto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Projeto_Extensao`
---
-
-INSERT INTO `Projeto_Extensao` (`ID_Projeto`) VALUES
-(2);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Projeto_Pesquisa`
---
-
-CREATE TABLE IF NOT EXISTS `Projeto_Pesquisa` (
-  `ID_Projeto` bigint(20) NOT NULL,
-  PRIMARY KEY (`ID_Projeto`),
-  UNIQUE KEY `FKPro_Pro_IND` (`ID_Projeto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `Projeto_Pesquisa`
---
-
-INSERT INTO `Projeto_Pesquisa` (`ID_Projeto`) VALUES
-(1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Recebe`
---
-
-CREATE TABLE IF NOT EXISTS `Recebe` (
-  `R_F_ID_Usuario` int(11) NOT NULL,
-  `Salario` int(11) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
-  PRIMARY KEY (`R_F_ID_Usuario`),
-  UNIQUE KEY `FKRec_Fun_IND` (`R_F_ID_Usuario`),
-  KEY `FKRec_Pro_IND` (`ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Unidade`
---
-
-CREATE TABLE IF NOT EXISTS `Unidade` (
-  `nome` char(255) NOT NULL,
-  `ID_Unidade` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` char(255) NOT NULL,
-  PRIMARY KEY (`ID_Unidade`),
-  UNIQUE KEY `ID_Unidade_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Extraindo dados da tabela `Unidade`
---
-
-INSERT INTO `Unidade` (`nome`, `ID_Unidade`, `tipo`) VALUES
-('nome da unidade', 1, 'tipo da unidade');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Usuario`
---
-
-CREATE TABLE IF NOT EXISTS `Usuario` (
-  `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` char(255) NOT NULL,
-  `cpf` char(14) NOT NULL,
-  `Sexo` char(255) NOT NULL,
-  `data_de_nascimento` date NOT NULL,
-  `ID_Unidade` int(11) NOT NULL,
-  PRIMARY KEY (`ID_Usuario`),
-  UNIQUE KEY `ID_Usuario_IND` (`ID_Usuario`),
-  KEY `FKCadastro_IND` (`ID_Unidade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Extraindo dados da tabela `Usuario`
---
-
-INSERT INTO `Usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`, `ID_Unidade`) VALUES
-(1, 'nome do aluno', '666.666.666-66', 'masc', '2016-11-01', 1),
-(2, 'nome do professor', '666.666.666-66', 'masc', '2016-11-01', 1),
-(3, 'nome do funcionario', '666.666.666-66', 'masc', '2016-11-01', 1),
-(4, 'nome do aluno da pos', '666.666.666-66', 'masc', '2016-11-01', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `Verba`
---
-
-CREATE TABLE IF NOT EXISTS `Verba` (
-  `Valor` bigint(20) NOT NULL,
-  `Data` date NOT NULL,
-  `ID_Unidade` int(11) NOT NULL,
-  KEY `FKganha_IND` (`ID_Unidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Constraints for dumped tables
---
-
---
--- Limitadores para a tabela `Aluno`
---
-ALTER TABLE `Aluno`
-  ADD CONSTRAINT `FKcursa_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
-  ADD CONSTRAINT `FKOrientacao_FK` FOREIGN KEY (`Ori_ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`),
-  ADD CONSTRAINT `FKUsu_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Usuario` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Atividade_Possui`
---
-ALTER TABLE `Atividade_Possui`
-  ADD CONSTRAINT `FKAti_Cal` FOREIGN KEY (`ID_Cal`) REFERENCES `Calendario` (`ID_Cal`),
-  ADD CONSTRAINT `FKAti_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Extensao` (`ID_Projeto`);
-
---
--- Limitadores para a tabela `Bens`
---
-ALTER TABLE `Bens`
-  ADD CONSTRAINT `FKPossui_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
-
---
--- Limitadores para a tabela `Coordena`
---
-ALTER TABLE `Coordena`
-  ADD CONSTRAINT `FKCoo_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Pesquisa` (`ID_Projeto`),
-  ADD CONSTRAINT `FKCoo_Pro_1_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Cursos`
---
-ALTER TABLE `Cursos`
-  ADD CONSTRAINT `FKComposicao_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
-
---
--- Limitadores para a tabela `Doutorado`
---
-ALTER TABLE `Doutorado`
-  ADD CONSTRAINT `FKPos_Dou_FK` FOREIGN KEY (`Codigo`) REFERENCES `Pos_Graduacao` (`Codigo`);
-
---
--- Limitadores para a tabela `Exerce`
---
-ALTER TABLE `Exerce`
-  ADD CONSTRAINT `FKExe_Alu_FK` FOREIGN KEY (`E_A_ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKExe_Fun_FK` FOREIGN KEY (`E_F_ID_Usuario`) REFERENCES `Funcionario` (`ID_Usuario`),
-  ADD CONSTRAINT `FKExe_Pro_1` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Extensao` (`ID_Projeto`),
-  ADD CONSTRAINT `FKExe_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Folha_de_Pagamento`
---
-ALTER TABLE `Folha_de_Pagamento`
-  ADD CONSTRAINT `FKRec_Fol_FK` FOREIGN KEY (`R_F_ID_Usuario`) REFERENCES `Recebe` (`R_F_ID_Usuario`);
-
---
--- Limitadores para a tabela `Funcionario`
---
-ALTER TABLE `Funcionario`
-  ADD CONSTRAINT `FKUsu_Fun_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Usuario` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Graduacao`
---
-ALTER TABLE `Graduacao`
-  ADD CONSTRAINT `FKCur_Gra_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`);
-
---
--- Limitadores para a tabela `Historico`
---
-ALTER TABLE `Historico`
-  ADD CONSTRAINT `FKHis_Alu` FOREIGN KEY (`ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKHis_Dis_FK` FOREIGN KEY (`ID_Disciplina`) REFERENCES `Disciplinas` (`ID_Disciplina`);
-
---
--- Limitadores para a tabela `Indice_de_Desempenho`
---
-ALTER TABLE `Indice_de_Desempenho`
-  ADD CONSTRAINT `FKInd_Alu_FK` FOREIGN KEY (`I_A_ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKInd_Cur_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
-  ADD CONSTRAINT `FKInd_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Mestrado_Academico`
---
-ALTER TABLE `Mestrado_Academico`
-  ADD CONSTRAINT `FKPos_Mes_FK` FOREIGN KEY (`Codigo`) REFERENCES `Pos_Graduacao` (`Codigo`);
-
---
--- Limitadores para a tabela `Mestrado_Profissional`
---
-ALTER TABLE `Mestrado_Profissional`
-  ADD CONSTRAINT `FKPos_Mes_1_FK` FOREIGN KEY (`Codigo`) REFERENCES `Pos_Graduacao` (`Codigo`);
-
---
--- Limitadores para a tabela `Ocorrencias`
---
-ALTER TABLE `Ocorrencias`
-  ADD CONSTRAINT `FKfuncionario_tem_FK` FOREIGN KEY (`Fun_ID_Usuario`) REFERENCES `Funcionario` (`ID_Usuario`),
-  ADD CONSTRAINT `FKprofessor_tem_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Oferecimento`
---
-ALTER TABLE `Oferecimento`
-  ADD CONSTRAINT `FKOfe_Cur` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`),
-  ADD CONSTRAINT `FKOfe_Dis_FK` FOREIGN KEY (`ID_Disciplina`) REFERENCES `Disciplinas` (`ID_Disciplina`);
-
---
--- Limitadores para a tabela `Participa`
---
-ALTER TABLE `Participa`
-  ADD CONSTRAINT `FKPar_Alu` FOREIGN KEY (`ID_Usuario`) REFERENCES `Aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKPar_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto_Pesquisa` (`ID_Projeto`);
-
---
--- Limitadores para a tabela `Pos_Graduacao`
---
-ALTER TABLE `Pos_Graduacao`
-  ADD CONSTRAINT `FKCur_Pos_FK` FOREIGN KEY (`Codigo`) REFERENCES `Cursos` (`Codigo`);
-
---
--- Limitadores para a tabela `Professor`
---
-ALTER TABLE `Professor`
-  ADD CONSTRAINT `FKUsu_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Usuario` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Projeto`
---
-ALTER TABLE `Projeto`
-  ADD CONSTRAINT `FKFinancia_FK` FOREIGN KEY (`ID_Financiador`) REFERENCES `Financiador` (`ID_Financiador`);
-
---
--- Limitadores para a tabela `Projeto_Extensao`
---
-ALTER TABLE `Projeto_Extensao`
-  ADD CONSTRAINT `FKPro_Pro_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto` (`ID_Projeto`);
-
---
--- Limitadores para a tabela `Projeto_Pesquisa`
---
-ALTER TABLE `Projeto_Pesquisa`
-  ADD CONSTRAINT `FKPro_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `Projeto` (`ID_Projeto`);
-
---
--- Limitadores para a tabela `Recebe`
---
-ALTER TABLE `Recebe`
-  ADD CONSTRAINT `FKRec_Fun_FK` FOREIGN KEY (`R_F_ID_Usuario`) REFERENCES `Funcionario` (`ID_Usuario`),
-  ADD CONSTRAINT `FKRec_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `Professor` (`ID_Usuario`);
-
---
--- Limitadores para a tabela `Usuario`
---
-ALTER TABLE `Usuario`
-  ADD CONSTRAINT `FKCadastro_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
-
---
--- Limitadores para a tabela `Verba`
---
-ALTER TABLE `Verba`
-  ADD CONSTRAINT `FKganha_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `Unidade` (`ID_Unidade`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- Database Section
+-- ________________ 
+
+create database ENTIDADE_RELACIONAMENTO;
+use ENTIDADE_RELACIONAMENTO;
+
+
+-- Tables Section
+-- _____________ 
+
+create table Acervo_Biblioteca (
+     B_Item_Id bigint not null,
+     B_Item_Nome char(255) not null,
+     B_Item_Tipo char(255) not null,
+     ID_Bib int not null,
+     constraint ID_Acervo_Biblioteca_ID primary key (B_Item_Id));
+
+create table Acervo_Museu (
+     M_Item_Id int not null,
+     M_Item_Nome char(1) not null,
+     ID_Unidade int not null,
+     constraint ID_Acervo_Museu_ID primary key (M_Item_Id));
+
+create table Aluno (
+     ID_Usuario int not null,
+     Codigo bigint not null,
+     constraint FKUsu_Alu_ID primary key (ID_Usuario));
+
+create table Atividades_Extensao (
+     ID_Ati int not null auto_increment,
+     Localizacao char(255) not null,
+     Data_Atividade date not null,
+     constraint ID_ID primary key (ID_Ati));
+
+create table Bens (
+     Localizacao char(255) not null,
+     Valor int not null,
+     ID_bem int not null,
+     Data_de_Aquisicao date not null,
+     Tipo char(255) not null,
+     ID_Unidade int not null,
+     constraint ID_Bens_ID primary key (ID_bem));
+
+create table Biblioteca (
+     ID_Bib int not null auto_increment,
+     ID_Unidade int,
+     constraint ID_ID primary key (ID_Bib),
+     constraint FKEnsino_Possui3_ID unique (ID_Unidade));
+
+create table Cursos (
+     Codigo bigint not null,
+     Nome char(255) not null,
+     constraint ID_Cursos_ID primary key (Codigo));
+
+create table Disciplinas (
+     ID_Disciplina int not null,
+     Nome char(255) not null,
+     constraint ID_Disciplinas_ID primary key (ID_Disciplina));
+
+create table Doutorado (
+     Codigo bigint not null,
+     constraint FKStr_Dou_ID primary key (Codigo));
+
+create table Emprestimos (
+     Data_Inicio date not null,
+     Id_Emprestimo bigint not null,
+     Data_Devolucao date not null,
+     B_Item_Id bigint not null,
+     constraint ID_Emprestimos_ID primary key (Id_Emprestimo));
+
+create table Ensino (
+     ID_Unidade int not null,
+     Codigo bigint not null,
+     constraint FKUni_Ens_ID primary key (ID_Unidade));
+
+create table Especializacao (
+     Codigo bigint not null,
+     constraint FKLac_Esp_ID primary key (Codigo));
+
+create table MBA (
+     Codigo bigint not null,
+     constraint FKLac_MBA_ID primary key (Codigo));
+
+create table Lactu_Sensu (
+     Codigo bigint not null,
+     constraint FKPos_Lac_ID primary key (Codigo));
+
+create table Strictu_Sensu (
+     Codigo bigint not null,
+     Data_final_qualifiacao date not null,
+     constraint FKPos_Str_ID primary key (Codigo));
+
+create table Financiador (
+     Tipo char(255) not null,
+     nome char(255) not null,
+     ID_Financiador int not null,
+     constraint ID_Financiador_ID primary key (ID_Financiador));
+
+create table Folha_de_Pagamento (
+     ID_Usuario int not null,
+     Salario int not null,
+     constraint FKServidor_Recebe_ID primary key (ID_Usuario));
+
+create table Funcionario (
+     ID_Usuario int not null,
+     Funcao char(255) not null,
+     constraint FKSer_Fun_ID primary key (ID_Usuario));
+
+create table Graduacao (
+     Codigo bigint not null,
+     constraint FKCur_Gra_ID primary key (Codigo));
+
+create table Hospital (
+     ID_Unidade int,
+     constraint FKEnsino_Possui1_ID unique (ID_Unidade));
+
+create table Mestrado_Academico (
+     Codigo bigint not null,
+     constraint FKStr_Mes_ID primary key (Codigo));
+
+create table Mestrado_Profissional (
+     Codigo bigint not null,
+     constraint FKStr_Mes_1_ID primary key (Codigo));
+
+create table Museu (
+     ID_Unidade int not null,
+     constraint FKUni_Mus_ID primary key (ID_Unidade));
+
+create table Atribuicoes (
+     Data_inicio date,
+     Id_Atribuicoes int not null,
+     nome_cargo char(255) not null,
+     Data_fim date,
+     ID_Usuario int not null,
+     constraint ID_Atribuicoes_ID primary key (Id_Atribuicoes));
+
+create table Coordena (
+     ID_Projeto bigint not null,
+     Indice_Pequisador int not null,
+     Bolsa_Pesquisador int not null,
+     ID_Usuario int not null,
+     constraint FKCoo_Pro_1_ID primary key (ID_Projeto));
+
+create table Creditos (
+     ID_Res int not null,
+     Nro_de_Creditos int not null,
+     ID_Usuario int not null,
+     constraint FKCre_Res_ID primary key (ID_Res));
+
+create table Historico (
+     ID_Usuario int not null,
+     ID_Disciplina int not null,
+     Notas int not null,
+     Frequencia int not null,
+     constraint ID_Historico_ID primary key (ID_Disciplina, ID_Usuario));
+
+create table Indice_de_Desempenho (
+     Codigo bigint not null,
+     Indice_Curso char(1) not null,
+     ID_Usuario int not null,
+     I_A_ID_Usuario int not null,
+     constraint FKInd_Cur_ID primary key (Codigo));
+
+create table Ocorrencias (
+     ID_Ocorrencia int not null,
+     Tipo_Ocorrencia char(255) not null,
+     Data_Inicio date not null,
+     Data_Final date not null,
+     ID_Usuario int not null,
+     constraint ID_Ocorrencias_ID primary key (ID_Ocorrencia));
+
+create table Oferecimento (
+     Codigo bigint not null,
+     ID_Disciplina int not null,
+     constraint ID_Oferecimento_ID primary key (ID_Disciplina, Codigo));
+
+create table Participa (
+     ID_Usuario int not null,
+     ID_Projeto bigint not null,
+     Bolsa int not null,
+     constraint ID_Participa_ID primary key (ID_Projeto, ID_Usuario));
+
+create table Pos_Graduacao (
+     Codigo bigint not null,
+     Data_defesa_do_Trabalho_final date not null,
+     constraint FKCur_Pos_ID primary key (Codigo));
+
+create table Professor (
+     ID_Usuario int not null,
+     nivel char(255) not null,
+     carreira char(255) not null,
+     constraint FKSer_Pro_ID primary key (ID_Usuario));
+
+create table Projeto (
+     objetivo char(255) not null,
+     Data_Inicio date not null,
+     Descricao char(255) not null,
+     Data_Termino date not null,
+     Orcamento bigint not null,
+     ID_Projeto bigint not null,
+     ID_Financiador int not null,
+     constraint ID_Projeto_ID primary key (ID_Projeto));
+
+create table Projeto_Extensao (
+     ID_Projeto bigint not null,
+     ID_Usuario int not null,
+     ID_Ati int not null,
+     constraint FKPro_Pro_1_ID primary key (ID_Projeto));
+
+create table Projeto_Pesquisa (
+     ID_Projeto bigint not null,
+     constraint FKPro_Pro_ID primary key (ID_Projeto));
+
+create table Reitoria (
+     Cnpj varchar(20) not null,
+     ID_Unidade int not null,
+     constraint ID_Reitoria_ID primary key (Cnpj));
+
+create table Restaurante (
+     ID_Res int not null auto_increment,
+     ID_Unidade int,
+     constraint ID_ID primary key (ID_Res),
+     constraint FKEnsino_Possui2_ID unique (ID_Unidade));
+
+create table Servidor (
+     ID_Usuario int not null,
+     constraint FKUsu_Ser_ID primary key (ID_Usuario));
+
+create table Unidade (
+     Nome_Unidade char(255) not null,
+     ID_Unidade int not null,
+     Endereco char(255) not null,
+     constraint ID_Unidade_ID primary key (ID_Unidade));
+
+create table Usuario (
+     ID_Usuario int not null,
+     nome char(255) not null,
+     cpf char(14) not null,
+     Sexo char(255) not null,
+     data_de_nascimento date not null,
+     ID_Unidade int not null,
+     constraint ID_Usuario_ID primary key (ID_Usuario));
+
+create table Verba (
+     Valor bigint not null,
+     Data date not null,
+     ID_Unidade int not null);
+
+
+-- Constraints Section
+-- ___________________ 
+
+alter table Acervo_Biblioteca add constraint FKBiblioteca_Possui_FK
+     foreign key (ID_Bib)
+     references Biblioteca (ID_Bib);
+
+alter table Acervo_Museu add constraint FKMuseu_Possui_FK
+     foreign key (ID_Unidade)
+     references Museu (ID_Unidade);
+
+alter table Aluno add constraint FKUsu_Alu_FK
+     foreign key (ID_Usuario)
+     references Usuario (ID_Usuario);
+
+alter table Aluno add constraint FKcursa_FK
+     foreign key (Codigo)
+     references Cursos (Codigo);
+
+alter table Bens add constraint FKPossui_FK
+     foreign key (ID_Unidade)
+     references Unidade (ID_Unidade);
+
+-- Not implemented
+-- alter table Biblioteca add constraint ID_CHK
+--     check(exists(select * from Acervo_Biblioteca
+--                  where Acervo_Biblioteca.ID_Bib = ID_Bib)); 
+
+alter table Biblioteca add constraint FKEnsino_Possui3_FK
+     foreign key (ID_Unidade)
+     references Ensino (ID_Unidade);
+
+-- Not implemented
+-- alter table Cursos add constraint ID_Cursos_CHK
+--     check(exists(select * from Indice_de_Desempenho
+--                  where Indice_de_Desempenho.Codigo = Codigo)); 
+
+-- Not implemented
+-- alter table Cursos add constraint ID_Cursos_CHK
+--     check(exists(select * from Oferecimento
+--                  where Oferecimento.Codigo = Codigo)); 
+
+alter table Doutorado add constraint FKStr_Dou_FK
+     foreign key (Codigo)
+     references Strictu_Sensu (Codigo);
+
+alter table Emprestimos add constraint FKEmpresta_FK
+     foreign key (B_Item_Id)
+     references Acervo_Biblioteca (B_Item_Id);
+
+-- Not implemented
+-- alter table Ensino add constraint FKUni_Ens_CHK
+--     check(exists(select * from Hospital
+--                  where Hospital.ID_Unidade = ID_Unidade)); 
+
+-- Not implemented
+-- alter table Ensino add constraint FKUni_Ens_CHK
+--     check(exists(select * from Restaurante
+--                  where Restaurante.ID_Unidade = ID_Unidade)); 
+
+-- Not implemented
+-- alter table Ensino add constraint FKUni_Ens_CHK
+--     check(exists(select * from Biblioteca
+--                  where Biblioteca.ID_Unidade = ID_Unidade)); 
+
+alter table Ensino add constraint FKUni_Ens_FK
+     foreign key (ID_Unidade)
+     references Unidade (ID_Unidade);
+
+alter table Ensino add constraint FKComposicao_FK
+     foreign key (Codigo)
+     references Cursos (Codigo);
+
+alter table Especializacao add constraint FKLac_Esp_FK
+     foreign key (Codigo)
+     references Lactu_Sensu (Codigo);
+
+alter table MBA add constraint FKLac_MBA_FK
+     foreign key (Codigo)
+     references Lactu_Sensu (Codigo);
+
+alter table Lactu_Sensu add constraint FKPos_Lac_FK
+     foreign key (Codigo)
+     references Pos_Graduacao (Codigo);
+
+alter table Strictu_Sensu add constraint FKPos_Str_FK
+     foreign key (Codigo)
+     references Pos_Graduacao (Codigo);
+
+-- Not implemented
+-- alter table Financiador add constraint ID_Financiador_CHK
+--     check(exists(select * from Projeto
+--                  where Projeto.ID_Financiador = ID_Financiador)); 
+
+alter table Folha_de_Pagamento add constraint FKServidor_Recebe_FK
+     foreign key (ID_Usuario)
+     references Servidor (ID_Usuario);
+
+alter table Funcionario add constraint FKSer_Fun_FK
+     foreign key (ID_Usuario)
+     references Servidor (ID_Usuario);
+
+alter table Graduacao add constraint FKCur_Gra_FK
+     foreign key (Codigo)
+     references Cursos (Codigo);
+
+alter table Hospital add constraint FKEnsino_Possui1_FK
+     foreign key (ID_Unidade)
+     references Ensino (ID_Unidade);
+
+alter table Mestrado_Academico add constraint FKStr_Mes_FK
+     foreign key (Codigo)
+     references Strictu_Sensu (Codigo);
+
+alter table Mestrado_Profissional add constraint FKStr_Mes_1_FK
+     foreign key (Codigo)
+     references Strictu_Sensu (Codigo);
+
+-- Not implemented
+-- alter table Museu add constraint FKUni_Mus_CHK
+--     check(exists(select * from Acervo_Museu
+--                  where Acervo_Museu.ID_Unidade = ID_Unidade)); 
+
+alter table Museu add constraint FKUni_Mus_FK
+     foreign key (ID_Unidade)
+     references Unidade (ID_Unidade);
+
+alter table Atribuicoes add constraint FKProfessor_possui_FK
+     foreign key (ID_Usuario)
+     references Professor (ID_Usuario);
+
+alter table Coordena add constraint FKCoo_Pro_1_FK
+     foreign key (ID_Projeto)
+     references Projeto_Pesquisa (ID_Projeto);
+
+alter table Coordena add constraint FKCoo_Pro_FK
+     foreign key (ID_Usuario)
+     references Professor (ID_Usuario);
+
+alter table Creditos add constraint FKCre_Usu_FK
+     foreign key (ID_Usuario)
+     references Usuario (ID_Usuario);
+
+alter table Creditos add constraint FKCre_Res_FK
+     foreign key (ID_Res)
+     references Restaurante (ID_Res);
+
+alter table Historico add constraint FKHis_Dis
+     foreign key (ID_Disciplina)
+     references Disciplinas (ID_Disciplina);
+
+alter table Historico add constraint FKHis_Alu_FK
+     foreign key (ID_Usuario)
+     references Aluno (ID_Usuario);
+
+alter table Indice_de_Desempenho add constraint FKInd_Pro_FK
+     foreign key (ID_Usuario)
+     references Professor (ID_Usuario);
+
+alter table Indice_de_Desempenho add constraint FKInd_Cur_FK
+     foreign key (Codigo)
+     references Cursos (Codigo);
+
+alter table Indice_de_Desempenho add constraint FKInd_Alu_FK
+     foreign key (I_A_ID_Usuario)
+     references Aluno (ID_Usuario);
+
+alter table Ocorrencias add constraint FKServidor_tem_FK
+     foreign key (ID_Usuario)
+     references Servidor (ID_Usuario);
+
+alter table Oferecimento add constraint FKOfe_Dis
+     foreign key (ID_Disciplina)
+     references Disciplinas (ID_Disciplina);
+
+alter table Oferecimento add constraint FKOfe_Cur_FK
+     foreign key (Codigo)
+     references Cursos (Codigo);
+
+alter table Participa add constraint FKPar_Pro
+     foreign key (ID_Projeto)
+     references Projeto (ID_Projeto);
+
+alter table Participa add constraint FKPar_Alu_FK
+     foreign key (ID_Usuario)
+     references Aluno (ID_Usuario);
+
+alter table Pos_Graduacao add constraint FKCur_Pos_FK
+     foreign key (Codigo)
+     references Cursos (Codigo);
+
+alter table Professor add constraint FKSer_Pro_FK
+     foreign key (ID_Usuario)
+     references Servidor (ID_Usuario);
+
+alter table Projeto add constraint FKFinancia_FK
+     foreign key (ID_Financiador)
+     references Financiador (ID_Financiador);
+
+alter table Projeto_Extensao add constraint FKPro_Pro_1_FK
+     foreign key (ID_Projeto)
+     references Projeto (ID_Projeto);
+
+alter table Projeto_Extensao add constraint FKexerce_FK
+     foreign key (ID_Usuario)
+     references Servidor (ID_Usuario);
+
+alter table Projeto_Extensao add constraint FKExtensao_Possui_FK
+     foreign key (ID_Ati)
+     references Atividades_Extensao (ID_Ati);
+
+-- Not implemented
+-- alter table Projeto_Pesquisa add constraint FKPro_Pro_CHK
+--     check(exists(select * from Coordena
+--                  where Coordena.ID_Projeto = ID_Projeto)); 
+
+alter table Projeto_Pesquisa add constraint FKPro_Pro_FK
+     foreign key (ID_Projeto)
+     references Projeto (ID_Projeto);
+
+alter table Reitoria add constraint FKAdmnistra_FK
+     foreign key (ID_Unidade)
+     references Unidade (ID_Unidade);
+
+-- Not implemented
+-- alter table Restaurante add constraint ID_CHK
+--     check(exists(select * from Creditos
+--                  where Creditos.ID_Res = ID_Res)); 
+
+alter table Restaurante add constraint FKEnsino_Possui2_FK
+     foreign key (ID_Unidade)
+     references Ensino (ID_Unidade);
+
+-- Not implemented
+-- alter table Servidor add constraint FKUsu_Ser_CHK
+--     check(exists(select * from Folha_de_Pagamento
+--                  where Folha_de_Pagamento.ID_Usuario = ID_Usuario)); 
+
+alter table Servidor add constraint FKUsu_Ser_FK
+     foreign key (ID_Usuario)
+     references Usuario (ID_Usuario);
+
+-- Not implemented
+-- alter table Unidade add constraint ID_Unidade_CHK
+--     check(exists(select * from Reitoria
+--                  where Reitoria.ID_Unidade = ID_Unidade)); 
+
+-- Not implemented
+-- alter table Usuario add constraint ID_Usuario_CHK
+--     check(exists(select * from Creditos
+--                  where Creditos.ID_Usuario = ID_Usuario)); 
+
+alter table Usuario add constraint FKCadastro_FK
+     foreign key (ID_Unidade)
+     references Unidade (ID_Unidade);
+
+alter table Verba add constraint FKganha_FK
+     foreign key (ID_Unidade)
+     references Unidade (ID_Unidade);
+
+
+-- Index Section
+-- _____________ 
+
+create unique index ID_Acervo_Biblioteca_IND
+     on Acervo_Biblioteca (B_Item_Id);
+
+create index FKBiblioteca_Possui_IND
+     on Acervo_Biblioteca (ID_Bib);
+
+create unique index ID_Acervo_Museu_IND
+     on Acervo_Museu (M_Item_Id);
+
+create index FKMuseu_Possui_IND
+     on Acervo_Museu (ID_Unidade);
+
+create unique index FKUsu_Alu_IND
+     on Aluno (ID_Usuario);
+
+create index FKcursa_IND
+     on Aluno (Codigo);
+
+create unique index ID_IND
+     on Atividades_Extensao (ID_Ati);
+
+create unique index ID_Bens_IND
+     on Bens (ID_bem);
+
+create index FKPossui_IND
+     on Bens (ID_Unidade);
+
+create unique index ID_IND
+     on Biblioteca (ID_Bib);
+
+create unique index FKEnsino_Possui3_IND
+     on Biblioteca (ID_Unidade);
+
+create unique index ID_Cursos_IND
+     on Cursos (Codigo);
+
+create unique index ID_Disciplinas_IND
+     on Disciplinas (ID_Disciplina);
+
+create unique index FKStr_Dou_IND
+     on Doutorado (Codigo);
+
+create unique index ID_Emprestimos_IND
+     on Emprestimos (Id_Emprestimo);
+
+create index FKEmpresta_IND
+     on Emprestimos (B_Item_Id);
+
+create unique index FKUni_Ens_IND
+     on Ensino (ID_Unidade);
+
+create index FKComposicao_IND
+     on Ensino (Codigo);
+
+create unique index FKLac_Esp_IND
+     on Especializacao (Codigo);
+
+create unique index FKLac_MBA_IND
+     on MBA (Codigo);
+
+create unique index FKPos_Lac_IND
+     on Lactu_Sensu (Codigo);
+
+create unique index FKPos_Str_IND
+     on Strictu_Sensu (Codigo);
+
+create unique index ID_Financiador_IND
+     on Financiador (ID_Financiador);
+
+create unique index FKServidor_Recebe_IND
+     on Folha_de_Pagamento (ID_Usuario);
+
+create unique index FKSer_Fun_IND
+     on Funcionario (ID_Usuario);
+
+create unique index FKCur_Gra_IND
+     on Graduacao (Codigo);
+
+create unique index FKEnsino_Possui1_IND
+     on Hospital (ID_Unidade);
+
+create unique index FKStr_Mes_IND
+     on Mestrado_Academico (Codigo);
+
+create unique index FKStr_Mes_1_IND
+     on Mestrado_Profissional (Codigo);
+
+create unique index FKUni_Mus_IND
+     on Museu (ID_Unidade);
+
+create unique index ID_Atribuicoes_IND
+     on Atribuicoes (Id_Atribuicoes);
+
+create index FKProfessor_possui_IND
+     on Atribuicoes (ID_Usuario);
+
+create unique index FKCoo_Pro_1_IND
+     on Coordena (ID_Projeto);
+
+create index FKCoo_Pro_IND
+     on Coordena (ID_Usuario);
+
+create index FKCre_Usu_IND
+     on Creditos (ID_Usuario);
+
+create unique index FKCre_Res_IND
+     on Creditos (ID_Res);
+
+create unique index ID_Historico_IND
+     on Historico (ID_Disciplina, ID_Usuario);
+
+create index FKHis_Alu_IND
+     on Historico (ID_Usuario);
+
+create index FKInd_Pro_IND
+     on Indice_de_Desempenho (ID_Usuario);
+
+create unique index FKInd_Cur_IND
+     on Indice_de_Desempenho (Codigo);
+
+create index FKInd_Alu_IND
+     on Indice_de_Desempenho (I_A_ID_Usuario);
+
+create unique index ID_Ocorrencias_IND
+     on Ocorrencias (ID_Ocorrencia);
+
+create index FKServidor_tem_IND
+     on Ocorrencias (ID_Usuario);
+
+create unique index ID_Oferecimento_IND
+     on Oferecimento (ID_Disciplina, Codigo);
+
+create index FKOfe_Cur_IND
+     on Oferecimento (Codigo);
+
+create unique index ID_Participa_IND
+     on Participa (ID_Projeto, ID_Usuario);
+
+create index FKPar_Alu_IND
+     on Participa (ID_Usuario);
+
+create unique index FKCur_Pos_IND
+     on Pos_Graduacao (Codigo);
+
+create unique index FKSer_Pro_IND
+     on Professor (ID_Usuario);
+
+create unique index ID_Projeto_IND
+     on Projeto (ID_Projeto);
+
+create index FKFinancia_IND
+     on Projeto (ID_Financiador);
+
+create unique index FKPro_Pro_1_IND
+     on Projeto_Extensao (ID_Projeto);
+
+create index FKexerce_IND
+     on Projeto_Extensao (ID_Usuario);
+
+create index FKExtensao_Possui_IND
+     on Projeto_Extensao (ID_Ati);
+
+create unique index FKPro_Pro_IND
+     on Projeto_Pesquisa (ID_Projeto);
+
+create unique index ID_Reitoria_IND
+     on Reitoria (Cnpj);
+
+create index FKAdmnistra_IND
+     on Reitoria (ID_Unidade);
+
+create unique index ID_IND
+     on Restaurante (ID_Res);
+
+create unique index FKEnsino_Possui2_IND
+     on Restaurante (ID_Unidade);
+
+create unique index FKUsu_Ser_IND
+     on Servidor (ID_Usuario);
+
+create unique index ID_Unidade_IND
+     on Unidade (ID_Unidade);
+
+create unique index ID_Usuario_IND
+     on Usuario (ID_Usuario);
+
+create index FKCadastro_IND
+     on Usuario (ID_Unidade);
+
+create index FKganha_IND
+     on Verba (ID_Unidade);
+

@@ -93,7 +93,7 @@
 			</tbody>
 		</table>
 		<?php }
-		if(isset($_POST['update'])) { ?>
+		if(isset($_POST['update'])) { var_dump($_POST) ?>
 			<form action="atualizaAluno.php" method="GET" class="form-horizontal">
 				<input type="hidden" name="idAluno-alt" value="<?php echo $_POST['idAluno']; ?>"/>
 				<div class="row">
@@ -126,7 +126,7 @@
 									$unidades = consultaUnidades();
 									while ($dados = mysqli_fetch_array($unidades)) {
 										if($dados['ID_Unidade']==$_POST['unidade']) {
-											echo "<option selected value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
+	                                       	echo "<option selected value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
 										}else {
 											echo "<option value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
 										}

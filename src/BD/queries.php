@@ -786,6 +786,7 @@
     function alteraAtividade($idAtividade, $localizacao, $data){
         $bd= conectaBD();
         $sql="UPDATE  Atividades_Extensao SET Localizacao =  '".$localizacao."', Data_Atividade =  '".$data."' WHERE  ID_Ati=".$idAtividade;
+        var_dump($sql);
         $bd->query($sql);
         $bd->close();
     }

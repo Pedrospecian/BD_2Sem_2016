@@ -206,10 +206,13 @@
 				<tr>
 		        	<th>Objetivo</th>
 		        	<th>Orçamento</th>
-		        	<th>Atividade</th>
+		        	<th>Descrição</th>
 		        	<th>Fiananciador</th>
 		        	<th>Aluno</th>
+		        	<th>Bolsa do aluno</th>
 		        	<th>Professor</th>
+		        	<th>Data de inicio</th>
+		        	<th>Data de termino</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
 		     	</tr>
@@ -219,14 +222,19 @@
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			var_dump($dados);
+		    			$coordenador = (consultaCoordenadorProjeto($dados['ID_Projeto']));
 		    			echo "<form action='detalheProjetoPesquisa.php' method='post'>";
 		    			echo "<tr>";
-		    			echo "<td>".$dados['objetivo']."</td>";
-		    			echo "<td>".$dados['orcamento']."</td>";
-		    			echo "<td>".$dados['atividade']."</td>";
-		    			echo "<td>".$dados['nomeFinanciador']."</td>";
-		    			echo "<td>".$dados['nomeUsuario']."</td>";
-		    			echo "<td>".(consultaCoordenadorProjeto($dados['ID_Projeto'])['nome'])."</td>";
+		    			echo "<input type='hidden' name='idProjeto' value='".$dados['ID_Projeto']."'>";
+		    			echo "<td>".$dados['objetivo']."<input type='hidden' name='objetivo' value='".$dados['objetivo']."'></td>";
+		    			echo "<td>".$dados['orcamento']."<input type='hidden' name='orcamento' value='".$dados['orcamento']."'></td>";
+		    			echo "<td>".$dados['descricao']."<input type='hidden' name='descricao' value='".$dados['descricao']."'></td>";
+		    			echo "<td>".$dados['nomeFinanciador']."<input type='hidden' name='idFinanciador' value='".$dados['id_Financiador']."'></td>";
+		    			echo "<td>".$dados['nomeUsuario']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['bolsa']."<input type='hidden' name='bolsa' value='".$dados['bolsa']."'></td>";
+		    			echo "<td>".$coordenador['nome']."<input type='hidden' name='coordenador' value='".$coordenador['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['Data_Inicio']."<input type='hidden' name='dataInicio' value='".$dados['Data_Inicio']."'></td>";
+		    			echo "<td>".$dados['Data_Termino']."<input type='hidden' name='dataTermino' value='".$dados['Data_Termino']."'></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";
@@ -241,9 +249,13 @@
 				<tr>
 		        	<th>Objetivo</th>
 		        	<th>Orçamento</th>
-		        	<!--<th>Atividade</th>-->
+		        	<th>Descricao</th>
 		        	<th>Fiananciador</th>
 		        	<th>Aluno</th>
+		        	<th>Bolsa do aluno</th>
+		        	<th>Servidor</th>
+		        	<th>Data de inicio</th>
+		        	<th>Data de termino</th>
 		        	<th>Calendário</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -255,10 +267,16 @@
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			echo "<form action='detalheProjetoExtensao.php' method='GET'>";
 		    			echo "<tr>";
-		    			echo "<td>".$dados['objetivo']."</td>";
-		    			echo "<td>".$dados['orcamento']."</td>";
-		    			echo "<td>".$dados['financiadorNome']."</td>";
-		    			echo "<td>".$dados['usuarioNome']."</td>";
+		    			echo "<input type='hidden' name='idProjeto' value='".$dados['ID_Projeto']."'>";
+		    			echo "<td>".$dados['objetivo']."<input type='hidden' name='objetivo' value='".$dados['objetivo']."'></td>";
+		    			echo "<td>".$dados['orcamento']."<input type='hidden' name='orcamento' value='".$dados['orcamento']."'></td>";
+		    			echo "<td>".$dados['descricao']."<input type='hidden' name='descricao' value='".$dados['descricao']."'></td>";
+		    			echo "<td>".$dados['financiadorNome']."<input type='hidden' name='idFinanciador' value='".$dados['id_Financiador']."'></td>";
+		    			echo "<td>".$dados['usuarioNome']."<input type='hidden' name='idAluno' value='".$dados['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['bolsa']."<input type='hidden' name='bolsa' value='".$dados['bolsa']."'></td>";
+		    			echo "<td>".$coordenador['nome']."<input type='hidden' name='coordenador' value='".$coordenador['ID_Usuario']."'></td>";
+		    			echo "<td>".$dados['Data_Inicio']."<input type='hidden' name='dataInicio' value='".$dados['Data_Inicio']."'></td>";
+		    			echo "<td>".$dados['Data_Termino']."<input type='hidden' name='dataTermino' value='".$dados['Data_Termino']."'></td>";
 		    			echo "<td><button type='submit' value=".$dados['ID_Projeto']." name='idProjeto' class='btn btn-default'>Calendário</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";

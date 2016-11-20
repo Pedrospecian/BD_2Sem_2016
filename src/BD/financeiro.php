@@ -25,10 +25,9 @@
 		    		$bens = consultaFolhaPagamento();
 		    		while ($dados = mysqli_fetch_array($bens)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados['ID_bem']."</td>";
-		    			echo "<td>".$dados['Valor']."</td>";
-		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";
-		    			echo "<td>".$dados['Tipo']."</td>";
+		    			echo "<td>".$dados['ID_Usuario']."</td>";
+		    			echo "<td>".$dados['Salario']."</td>";
+		    			echo "<td>".$dados['data']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

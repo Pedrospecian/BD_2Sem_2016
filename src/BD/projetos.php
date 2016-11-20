@@ -42,7 +42,6 @@
 							<?php
 								$financiadores = consultaFinanciadores();
 								while ($dados = mysqli_fetch_array($financiadores)) {
-									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
 						        }
 							?>
@@ -59,7 +58,6 @@
 							<?php
 								$alunos = consultaTodosAlunos();
 								while ($dados = mysqli_fetch_array($alunos)) {
-									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>
@@ -82,7 +80,6 @@
 							<?php
 								$professores = consultaTodosProfessores();
 								while ($dados = mysqli_fetch_array($professores)) {
-									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>
@@ -140,7 +137,6 @@
 							<?php
 								$financiadores = consultaFinanciadores();
 								while ($dados = mysqli_fetch_array($financiadores)) {
-									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
 						        }
 							?>
@@ -177,9 +173,8 @@
 						<select class="form-control" name="servidor">
 							<option value="">--</option>
 							<?php
-								$professores = consutlaServidores();
+								$professores = consultaServidores();
 								while ($dados = mysqli_fetch_array($professores)) {
-									//<option value="volvo">Volvo</option>
 									echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 						        }
 							?>
@@ -213,7 +208,7 @@
 		        	<th>Orçamento</th>
 		        	<th>Atividade</th>
 		        	<th>Fiananciador</th>
-		        	<!--<th>Aluno</th>-->
+		        	<th>Aluno</th>
 		        	<th>Professor</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
@@ -223,12 +218,12 @@
 		    	<?php
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			//var_dump($dados);
+		    			var_dump($dados);
 		    			echo "<form action='detalheProjetoPesquisa.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
-		    			//echo "<td>".$dados['atividade']."</td>";
+		    			echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['nomeFinanciador']."</td>";
 		    			echo "<td>".$dados['nomeUsuario']."</td>";
 		    			echo "<td>".(consultaCoordenadorProjeto($dados['ID_Projeto'])['nome'])."</td>";
@@ -262,7 +257,6 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['objetivo']."</td>";
 		    			echo "<td>".$dados['orcamento']."</td>";
-		    			//echo "<td>".$dados['atividade']."</td>";
 		    			echo "<td>".$dados['financiadorNome']."</td>";
 		    			echo "<td>".$dados['usuarioNome']."</td>";
 		    			echo "<td><button type='submit' value=".$dados['ID_Projeto']." name='idProjeto' class='btn btn-default'>Calendário</button></td>";

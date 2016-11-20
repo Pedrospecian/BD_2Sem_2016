@@ -11,6 +11,7 @@
 		<?php }
 			if(isset($_GET['delete'])){
 				echo "deleta projeto de extensao";
+				deletaExtensao($_GET['idProjeto']);
 			}
 			if($_GET['localizacao']){
 				insereAtividade($_GET['idProjeto'], $_GET['data'], $_GET['localizacao']);

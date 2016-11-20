@@ -9,5 +9,4 @@ ALTER TABLE  `Emprestimos` CHANGE  `Id_Emprestimo`  `Id_Emprestimo` BIGINT( 20 )
 ALTER TABLE  `Disciplinas` CHANGE  `ID_Disciplina`  `ID_Disciplina` INT( 11 ) NOT NULL AUTO_INCREMENT ;
 ALTER TABLE  `Cursos` CHANGE  `Codigo`  `Codigo` BIGINT( 20 ) NOT NULL AUTO_INCREMENT ;
 ALTER TABLE  `Bens` CHANGE  `ID_bem`  `ID_bem` INT( 11 ) NOT NULL AUTO_INCREMENT ;
-ALTER TABLE `atribuicoes` CHANGE `Id_Atribuicoes` `Id_Atribuicoes` INT(11) NOT NULL AUTO_INCREMENT;
 

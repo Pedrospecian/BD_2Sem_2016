@@ -21,8 +21,8 @@
         return $resultado;
 	}
 	
-	//lista todos os funcionarios
-	function consutlaServidores(){
+	//lista todos os servidores
+	function consultaServidores(){
         $bd= conectaBD();
         $sql="SELECT Usuario.ID_Usuario, nome
                 FROM Servidor
@@ -53,6 +53,18 @@
         $bd->close();
         return $resultado;
     }
+
+    //lista todos os servidores
+    function consultaFolhaPagamento(){
+        $bd= conectaBD();
+        $sql="SELECT Usuario.ID_Usuario, nome, Salario
+                FROM Servidor
+                INNER JOIN Usuario ON Servidor.ID_Usuario = Usuario.ID_Usuario
+                INNER JOIN Graduacao ON folha_de_pagamento.ID_Usuario = Servidor.ID_Usuario";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }0
     
 //listar todos os cursos da graduação
     function consultaCursosGraduacao(){

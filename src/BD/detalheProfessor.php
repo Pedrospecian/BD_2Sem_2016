@@ -19,9 +19,15 @@
 	    			</div>
 	    		</div>
 	    		<div class="form-group">
-	    			<label for="data-oco" class="control-label col-sm-2 text-right">Data</label>
+	    			<label for="data-ini-oco" class="control-label col-sm-2 text-right">Data Inicio</label>
 	    			<div class="col-sm-5">
-	    				<input class="form-control" type="date" name="data-oco">
+	    				<input class="form-control" type="date" name="data-ini-oco">
+	    			</div>
+	    		</div>
+	    		<div class="form-group">
+	    			<label for="data-fin-oco" class="control-label col-sm-2 text-right">Data Final</label>
+	    			<div class="col-sm-5">
+	    				<input class="form-control" type="date" name="data-fin-oco">
 	    			</div>
 	    		</div>
     			<div class="form-group">
@@ -34,7 +40,8 @@
 			    <tr>
 	    		    <th>Código Ocorrência</th>
 	    		    <th>Tipo da Ocorrência</th>
-	    		    <th>Data</th>
+	    		    <th>Data Início</th>
+	    		    <th>Data Final</th>
 	    		    <th>Alterar</th>
 	    		    <th>Apagar</th>
 			   	</tr>
@@ -48,7 +55,8 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['ID_Ocorrencia']."<input type='hidden' name='id-oco' value='".$dados['ID_Ocorrencia']."'/></td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."<input type='hidden' name='tipo-oco' value='".$dados['Tipo_Ocorrencia']."'/></td>";
-		    			echo "<td>".$dados['Data']."<input type='hidden' name='data-oco' value='".$dados['Data']."'/></td>";
+		    			echo "<td>".$dados['Data_Inicio']."<input type='hidden' name='data-ini-oco' value='".$dados['Data_Inicio']."'/></td>";
+		    			echo "<td>".$dados['Data_Final']."<input type='hidden' name='data-fin-oco' value='".$dados['Data_Final']."'/></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";

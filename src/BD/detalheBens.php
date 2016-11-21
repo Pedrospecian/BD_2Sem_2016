@@ -21,7 +21,7 @@
 									if($dados['ID_Unidade']==$_POST['unidade']) {
 										echo "<option selected value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
 									}else {
-										echo "<option value=".$dados['ID_Unidade'].">".$dados['nome']."</option>";
+										echo "<option value=".$dados['ID_Unidade'].">".$dados['Nome_Unidade']."</option>";
 									}									
 						        }
 							?>

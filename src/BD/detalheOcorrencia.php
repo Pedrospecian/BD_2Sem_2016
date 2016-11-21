@@ -18,8 +18,14 @@
 				</div>
 				<div class="row">
 					<div class="form-group">
-						<label for="data-alt" class="control-label col-sm-2 text-right">Data</label>
-						<div class="col-sm-5"><input class="form-control" type="date" name="data-alt" value="<?php echo $_POST['data-oco']; ?>"/></div>
+						<label for="data-ini-alt" class="control-label col-sm-2 text-right">Data Inicio</label>
+						<div class="col-sm-5"><input class="form-control" type="date" name="data-ini-alt" value="<?php echo $_POST['data-ini-oco']; ?>"/></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="data-fin- alt" class="control-label col-sm-2 text-right">Data Final</label>
+						<div class="col-sm-5"><input class="form-control" type="date" name="data-fin-alt" value="<?php echo $_POST['data-fin-oco']; ?>"/></div>
 					</div>
 				</div>
 				<div class="form-group">

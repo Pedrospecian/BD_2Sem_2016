@@ -3,7 +3,7 @@
 -- *--------------------------------------------
 -- * DB-MAIN version: 9.3.0              
 -- * Generator date: Feb 16 2016              
--- * Generation date: Sun Nov 20 16:34:03 2016 
+-- * Generation date: Sun Nov 20 16:33:32 2016 
 -- * LUN file: C:\wampserver\www\Trabalho\BD_2Sem_2016\PARTEB.lun 
 -- * Schema: ENTIDADE_RELACIONAMENTO/1 
 -- ********************************************* 
@@ -12,8 +12,8 @@
 -- Database Section
 -- ________________ 
 
-create database universidade;
-use universidade;
+create database ENTIDADE_RELACIONAMENTO;
+use ENTIDADE_RELACIONAMENTO;
 
 
 -- Tables Section

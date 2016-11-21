@@ -57,10 +57,8 @@
     //lista todos os servidores
     function consultaFolhaPagamento(){
         $bd= conectaBD();
-        $sql="SELECT Servidor.ID_Usuario, Salario, data
-                FROM Folha_de_Pagamento
-                INNER JOIN Servidor ON Servidor.ID_Usuario = Folha_de_Pagamento.ID_Usuario
-                INNER JOIN Usuario ON Servidor.ID_Usuario = Usuario.ID_Usuario";
+        $sql="SELECT *
+                FROM Folha_de_Pagamento";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -309,11 +307,11 @@
     
     function consultaOcorrenciaProfessores(){
          //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
-        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data
+        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
                 FROM Ocorrencias
                 INNER JOIN Professor
                 INNER JOIN Usuario ON Usuario.ID_Usuario = Professor.ID_Usuario
-                WHERE Ocorrencias.ID_Usuario = Professor.ID_Usuario";
+                WHERE Ocorrencias.ID_Usuario = Professor.ID_Usuario;";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
@@ -322,11 +320,11 @@
     
     function consultaOcorrenciaFuncionarios(){
          //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
-        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data
+        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
                 FROM Ocorrencias
                 INNER JOIN Funcionario
                 INNER JOIN Usuario ON Usuario.ID_Usuario = Funcionario.ID_Usuario
-                WHERE Ocorrencias.ID_Usuario = Funcionario.ID_Usuario";
+                WHERE Ocorrencias.ID_Usuario = Funcionario.ID_Usuario;";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
@@ -336,8 +334,8 @@
     //insere ocorrencia de professor
     function insereOcorrenciaProfessor($id, $tipo, $data){
         $bd= conectaBD();
-        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data) 
-        VALUES ('".$id."','". $tipo."','". $data."');";
+        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data_Inicio, Data_Final) 
+        VALUES ('".$id."','". $tipo."','". $data."', '".$data."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;
@@ -349,10 +347,10 @@
     }
 
     //insere ocorrencia de professor
-    function insereOcorrenciaFuncionario($id, $tipo, $data){
+    function insereOcorrenciaFuncionario($id, $tipo, $data_inicio, $data_final){
         $bd= conectaBD();
-        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data) 
-        VALUES ('".$id."','". $tipo."','". $data."');";
+        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data_Inicio, Data_Final) 
+        VALUES ('".$id."','". $tipo."','". $data_inicio."', '".$data_final."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;
@@ -364,10 +362,10 @@
     }
 
     //atualiza ocorrencia
-    function atualizaOcorrencia($id, $tipo, $data){
+    function atualizaOcorrencia($id, $tipo, $data_inicio, $data_final){
         $bd= conectaBD();
         $sql=" UPDATE Ocorrencias
-        SET Tipo_Ocorrencia='".$tipo."', Data='".$data."' 
+        SET Tipo_Ocorrencia='".$tipo."', Data_Inicio='".$data_inicio."', Data_Final='".$data_final."' 
         WHERE ID_Ocorrencia='".$id."';";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
@@ -471,7 +469,14 @@
         if ($bd->query($sql) === TRUE) {
             $sql_professor= "INSERT INTO Professor (ID_Usuario, carreira, nivel) 
                 VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
-            if($bd->query($sql_professor)===FALSE)return FALSE;
+            $sql_servidor= "INSERT INTO Servidor (ID_Usuario, Data) 
+                VALUES ('".mysqli_insert_id($bd)."', '".Date('Y-m-d')."');";
+                $sql_folhapagamento= "INSERT INTO Folha_de_pagamento (ID_Usuario, Data, salario) 
+                VALUES ('".mysqli_insert_id($bd)."', '2016-11-10', '870');";
+            if($bd->query($sql_professor)===FALSE && $bd->query($sql_servidor)===FALSE && $bd->query($sql_folhapagamento)===FALSE){
+                echo "Error: " . $sql . "<br>" . $bd->error;
+                return FALSE;
+            }
 
             $bd->close();
             return TRUE;
@@ -523,16 +528,27 @@
     //insere funcionario
     function insereFuncionario($nome, $cpf, $dataNasc, $funcao, $unidade){
         $bd= conectaBD();
-        $sql=" INSERT INTO Usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
-        VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
+        $sql="INSERT INTO Usuario(nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
+        VALUES ('".$nome."','".$cpf."', 'm', '".$dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
+            $ident=mysqli_insert_id($bd);
             $sql_funcionario= "INSERT INTO Funcionario (ID_Usuario, Funcao) 
-                VALUES ('".mysqli_insert_id($bd)."', '".$funcao."');";
+                VALUES ('".$ident."', '".$funcao."');";
+            $sql_servidor= "INSERT INTO Servidor (ID_Usuario, Data) 
+                VALUES ('".$ident."', '".Date('Y-m-d')."');";
+            $sql_folhapagamento= "INSERT INTO folha_de_pagamento (Data, salario) 
+                VALUES ('2016-12-10', '870');";
+                //var_dump($bd->query($sql_funcionario));
+            if($bd->query($sql_funcionario)===FALSE && $bd->query($sql_servidor)===FALSE && $bd->query($sql_folhapagamento)===FALSE){
+                echo "Error: " . $sql . "<br>" . $bd->error;
+                return FALSE;
+            }
             //$sql_funcionario= "INSERT INTO Funcionario (ID_Usuario) 
             //    VALUES ('".mysqli_insert_id($bd)."');";
             $bd->query($sql_funcionario);
             $bd->close();
             return TRUE;
+
         } else {
             echo "Error: " . $sql . "<br>" . $bd->error;
         }

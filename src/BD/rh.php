@@ -194,17 +194,15 @@
 			</tbody>
 		</table>
 		
-		<h1>Ocorrencia dos professores</h1>
+		<h1>Ocorrencias dos professores</h1>
 		<table class="table">
 			<thead>
 				<tr>
 		        	<th>nome do professor</th>
 		        	<th>cpf</th>
-		        	<th>Tipo de ocorrenciadata</th>
+		        	<th>Tipo de ocorrencia</th>
 		        	<th>Data inicio</th>
 		        	<th>data fim</th>
-		        	<th>alterar</th>
-		        	<th>apagar</th>
 		     	</tr>
     		</thead>
 		    <tbody>		    	
@@ -216,7 +214,8 @@
 		    			echo "<td>".$dados['nome']."</td>";
 		    			echo "<td>".$dados['cpf']."</td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
-		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td>".$dados['Data_Inicio']."</td>";
+		    			echo "<td>".$dados['Data_Final']."</td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
 		    			echo "</form>";
@@ -227,17 +226,15 @@
 		<br/>
 		
 		
-		<h1>Ocorrencia dos funcionários</h1>
+		<h1>Ocorrencias dos funcionários</h1>
 		<table class="table">
 			<thead>
 				<tr>
-		        	<th>nome do professor</th>
+		        	<th>nome do funcionário</th>
 		        	<th>cpf</th>
-		        	<th>Tipo de ocorrenciadata</th>
+		        	<th>Tipo de ocorrencia</th>
 		        	<th>Data inicio</th>
 		        	<th>data fim</th>
-		        	<th>alterar</th>
-		        	<th>apagar</th>
 		     	</tr>
     		</thead>
 		    <tbody>		    	
@@ -249,7 +246,8 @@
 		    			echo "<td>".$dados['nome']."</td>";
 		    			echo "<td>".$dados['cpf']."</td>";
 		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
-		    			echo "<td>".$dados['Data']."</td>";
+		    			echo "<td>".$dados['Data_Inicio']."</td>";
+		    			echo "<td>".$dados['Data_Final']."</td>";
 		    			echo "<td></td>";
 		    			echo "</tr>";
 		    		}

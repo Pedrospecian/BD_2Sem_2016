@@ -15,8 +15,8 @@ SET time_zone = "+00:00";
 --
 -- Base de Dados: `ENTIDADE_RELACIONAMENTO`
 --
-create database ENTIDADE_RELACIONAMENTO;
-use ENTIDADE_RELACIONAMENTO;
+create database universidade;
+use universidade;
 
 -- --------------------------------------------------------
 

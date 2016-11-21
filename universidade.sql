@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Nov-2016 às 21:17
+-- Generation Time: 21-Nov-2016 às 23:16
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -61,16 +61,16 @@ CREATE TABLE `aluno` (
 --
 
 INSERT INTO `aluno` (`ID_Usuario`, `Codigo`) VALUES
-(20, 1),
-(21, 2),
-(22, 3),
-(23, 4),
-(24, 5),
-(25, 6),
-(26, 7),
-(27, 8),
-(28, 9),
-(29, 10);
+(20, 16),
+(23, 16),
+(26, 16),
+(29, 16),
+(21, 18),
+(24, 18),
+(27, 18),
+(22, 19),
+(25, 19),
+(28, 19);
 
 -- --------------------------------------------------------
 
@@ -160,7 +160,10 @@ INSERT INTO `cursos` (`Codigo`, `Nome`) VALUES
 (7, 'História'),
 (8, 'Ciências Sociais'),
 (9, 'Direito'),
-(10, 'Engenharia');
+(10, 'Engenharia'),
+(16, 'MBA em Marketing'),
+(18, 'Gestão de Projetos em Tecnologia da Informação'),
+(19, 'Pesquisa com foco em Epidemiologia');
 
 -- --------------------------------------------------------
 
@@ -248,6 +251,21 @@ CREATE TABLE `folha_de_pagamento` (
   `ID_Usuario` int(11) NOT NULL,
   `Salario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `folha_de_pagamento`
+--
+
+INSERT INTO `folha_de_pagamento` (`ID_Usuario`, `Salario`) VALUES
+(5, 10000),
+(6, 8000),
+(7, 8000),
+(8, 9000),
+(9, 10000),
+(10, 2500),
+(12, 2500),
+(18, 2500),
+(19, 2500);
 
 -- --------------------------------------------------------
 
@@ -392,6 +410,15 @@ CREATE TABLE `participa` (
 CREATE TABLE `pos_graduacao` (
   `Codigo` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `pos_graduacao`
+--
+
+INSERT INTO `pos_graduacao` (`Codigo`) VALUES
+(16),
+(18),
+(19);
 
 -- --------------------------------------------------------
 
@@ -923,7 +950,7 @@ ALTER TABLE `biblioteca`
 -- AUTO_INCREMENT for table `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `Codigo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Codigo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `disciplinas`
 --
@@ -958,7 +985,7 @@ ALTER TABLE `restaurante`
 -- AUTO_INCREMENT for table `unidade`
 --
 ALTER TABLE `unidade`
-  MODIFY `ID_Unidade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID_Unidade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `usuario`
 --

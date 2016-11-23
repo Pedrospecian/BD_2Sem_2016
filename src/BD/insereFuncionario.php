@@ -5,7 +5,6 @@
 <main>
 	<div class="container">
 	    <?php
-            var_dump($_GET);
 	        $inseriu = insereFuncionario( $_GET['nome'], $_GET['cpf'], $_GET['data-nascimento'], $_GET['funcao'], $_GET['unidade']);
 	        if($inseriu == TRUE){
 	            echo "Funcionário cadastrado com sucesso!";

@@ -275,7 +275,8 @@
     function consultaBens(){
         $bd= conectaBD();
         $sql="SELECT * 
-                FROM  Bens ";
+                FROM  Bens, Unidade
+                WHERE Bens.ID_Unidade = Unidade.ID_Unidade";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

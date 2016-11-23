@@ -8,4 +8,4 @@ WHERE Codigo IN
 	);
 
 Enunciado: 
-Lista todos os dados dos cursos nos quais o aluno está matriculado.
+Lista todos os dados dos cursos nos quais o aluno de ID='id' (que é especificado) está matriculado.

@@ -74,6 +74,8 @@
 		        	<th>Valor</th>
 		        	<th>Data de aquisição</th>
 		        	<th>Tipo</th>
+		        	<th>ID Unidade</th>
+		        	<th>Nome Unidade</th>
 		        	<th>alterar</th>
 		        	<th>apagar</th>
 		     	</tr>
@@ -90,6 +92,8 @@
 		    			echo "<td>".$dados['Valor']."<input type='hidden' name='valor' value='".$dados['Valor']."'/></td>";
 		    			echo "<td>".$dados['Data_de_Aquisicao']."<input type='hidden' name='data-aquisicao' value='".$dados['Data_de_Aquisicao']."'/></td>";
 		    			echo "<td>".$dados['Tipo']."<input type='hidden' name='tipo' value='".$dados['Tipo']."'/></td>";
+		    			echo "<td>".$dados['ID_Unidade'].'</td>';
+		    			echo "<td>".$dados['Nome_Unidade'].'</td>';
 		    			echo "<td><button type='submit' name='update' value='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' name='delete' value='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";

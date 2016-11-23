@@ -1,0 +1,8 @@
+Consulta:
+SELECT ID_Usuario,Count(ID_Disciplina) 
+FROM historico 
+GROUP BY ID_Usuario 
+HAVING Count(ID_Disciplina)>2;
+
+Enunciado:
+Lista todos os alunos inscritos em mais de duas disciplinas

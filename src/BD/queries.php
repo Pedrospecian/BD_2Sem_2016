@@ -57,10 +57,8 @@
     //lista todos os servidores
     function consultaFolhaPagamento(){
         $bd= conectaBD();
-        $sql="SELECT Servidor.ID_Usuario, Salario, Data
-                FROM Folha_de_Pagamento
-                INNER JOIN Servidor ON Servidor.ID_Usuario = Folha_de_Pagamento.ID_Usuario
-                INNER JOIN Usuario ON Servidor.ID_Usuario = Usuario.ID_Usuario";
+        $sql="SELECT Salario, Data
+                FROM Folha_de_Pagamento";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -90,6 +88,20 @@
         return $resultado;
     }
     
+//listar todos os cursos da pós
+    function consultaCursosLatuSensu(){
+        $bd= conectaBD();
+        $sql="SELECT *
+            FROM Cursos
+            INNER JOIN Pos_Graduacao ON Cursos.Codigo = Pos_Graduacao.Codigo
+            INNER JOIN Latu_Sensu ON Cursos.Codigo = Latu_Sensu.Codigo
+            LEFT JOIN Aluno ON Latu_Sensu.Codigo = Aluno.Codigo
+            ORDER BY Latu_Sensu.Valor_Mensalidade";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
     //listar todos os alunos da graduação
     function consultaAlunosGraduacao(){
         $bd= conectaBD();

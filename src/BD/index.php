@@ -52,6 +52,10 @@
 				<a href="projetos.php">Gerenciamento de Projetos</a>
 				<br>
 				<a href="bens.php">Gerenciamento de Bens</a>
+				<br>
+				<a href="unidades.php">Unidades</a>
+				<br>
+				<a href="cursos.php">Cursos</a>
 			</div>
 		</div>
 	</div>

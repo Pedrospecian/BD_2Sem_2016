@@ -14,7 +14,6 @@
 		<table class="table">
 			<thead>
 				<tr>
-		        	<th>ID Servidor</th>
 		        	<th>Salário</th>
 		        	<th>Data</th>
 		     	</tr>
@@ -25,7 +24,6 @@
 		    		while ($dados = mysqli_fetch_array($bens)) {
 		    			echo "<tr>";
 		    			//echo "<td>".$dados['ID_Usuario']."</td>";
-		    			echo "<td></td>";
 		    			echo "<td>".$dados['Salario']."</td>";
 		    			echo "<td>".$dados['Data']."</td>";
 		    			echo "</tr>";

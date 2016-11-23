@@ -1,0 +1,8 @@
+Consulta:
+SELECT *
+FROM Professor
+INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
+LEFT JOIN Atribuicoes on Professor.ID_Usuario = Atribuicoes.ID_Usuario
+
+Enunciado:
+Seleciona todos os professores, indicando os que tem atribuições.

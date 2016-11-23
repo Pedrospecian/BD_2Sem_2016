@@ -94,7 +94,7 @@
 			</tbody>
 		</table>
 		<?php }
-		if(isset($_POST['update'])) { var_dump($_POST) ?>
+		if(isset($_POST['update'])) {  ?>
 			<form action="atualizaAluno.php" method="GET" class="form-horizontal">
 				<input type="hidden" name="idAluno-alt" value="<?php echo $_POST['idAluno']; ?>"/>
 				<div class="row">
@@ -143,7 +143,6 @@
 			</form>
 		<?php }
 		if(isset($_POST['delete'])) {
-			var_dump($_POST);
 			$deletou = deletaAlunoGraduacao($_POST['idAluno']);
 		    if($deletou == TRUE){
 		        echo "Aluno excluído com sucesso!";

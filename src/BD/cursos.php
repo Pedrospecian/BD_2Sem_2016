@@ -65,29 +65,21 @@
 		        	<th>Código do Curso</th>
 		        	<th>Nome do Curso</th>
 		        	<th>Unidade do Curso</th>
-		        	<th>Defesa Final</th>
 		        	<th>Valor Mensalidade</th>
-		        	<th>Aluno ID</th>
-		        	<th>Isento (ID do Curso Isento)</th>
+		        	<th>Qte Alunos Isenções</th>
 		     	</tr>
     		</thead>
 		    <tbody>
 		    	<?php
 					$cursos = consultaCursosLatuSensu();
 					
-				    while ($dados = mysqli_fetch_array($cursos)) {  		
+				    while ($dados = mysqli_fetch_array($cursos)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['Codigo']."</td>";
 		    			echo "<td>".$dados['Nome']."</td>";
 		    			echo "<td>".$dados['ID_Unidade']."</td>";
-		    			echo "<td>".$dados['Data_defesa_do_Trabalho_final']."</td>";
 		    			echo "<td>".$dados['Valor_Mensalidade']."</td>";
-		    			echo "<td>".$dados['ID_Usuario']."</td>";
-		    			if($dados['Ise_Codigo'] && $dados['Ise_Codigo']==$dados['Codigo']) {
-		    				echo "<td>Sim (".$dados['Ise_Codigo'].")</td>";
-		    			} else {
-		    				echo "<td>Não (--)</td>";
-		    			}
+		    			echo "<td>".$dados['Qte_Isentos']."</td>";
 		    			
 		    			echo "</tr>";
 		    		}

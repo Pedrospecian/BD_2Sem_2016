@@ -56,6 +56,8 @@
 				<a href="unidades.php">Unidades</a>
 				<br>
 				<a href="cursos.php">Cursos</a>
+				<br>
+				<a href="atribuicoes.php">Atribuições de Professores</a>
 			</div>
 		</div>
 	</div>

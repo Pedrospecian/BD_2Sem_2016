@@ -43,6 +43,18 @@
         return $resultado;
     }
 
+//listar todas as atribuicoes de professores
+    function consultaAtribuicoesProfessores(){
+        $bd= conectaBD();
+        $sql = "SELECT *
+                FROM Professor
+                INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
+                LEFT JOIN Atribuicoes on Professor.ID_Usuario = Atribuicoes.ID_Usuario";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
     //listar todos os funcionarios
     function consultaTodosFuncionarios(){
         $bd= conectaBD();

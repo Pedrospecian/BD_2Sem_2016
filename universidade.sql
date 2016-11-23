@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 22-Nov-2016 às 19:14
+-- Generation Time: 23-Nov-2016 às 12:20
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -62,16 +62,16 @@ CREATE TABLE `aluno` (
 --
 
 INSERT INTO `aluno` (`ID_Usuario`, `Codigo`, `Ise_Codigo`) VALUES
-(20, 1, NULL),
-(21, 2, NULL),
-(22, 3, NULL),
-(23, 4, NULL),
-(24, 5, NULL),
-(25, 6, NULL),
+(20, 7, NULL),
+(21, 8, NULL),
+(22, 7, NULL),
+(23, 8, NULL),
+(24, 7, NULL),
+(25, 8, NULL),
 (26, 7, NULL),
 (27, 8, NULL),
-(28, 9, NULL),
-(29, 10, NULL);
+(28, 7, NULL),
+(29, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -99,6 +99,14 @@ CREATE TABLE `atribuicoes` (
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `atribuicoes`
+--
+
+INSERT INTO `atribuicoes` (`Data_inicio`, `Id_Atribuicoes`, `Nome_Atribuicao`, `Data_fim`, `ID_Usuario`) VALUES
+('2016-02-01', 1, 'Coordenador', '2016-11-30', 9),
+('2012-02-01', 2, 'Reitor', '2016-11-30', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -122,8 +130,17 @@ CREATE TABLE `bens` (
 
 CREATE TABLE `biblioteca` (
   `ID_Bib` int(11) NOT NULL,
-  `ID_Unidade` int(11) DEFAULT NULL
+  `ID_Unidade` int(11) DEFAULT NULL,
+  `B_Nome` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `biblioteca`
+--
+
+INSERT INTO `biblioteca` (`ID_Bib`, `ID_Unidade`, `B_Nome`) VALUES
+(1, 1, 'Biblioteca da EACH'),
+(2, 6, 'Biblioteca do Faculdade de Direito');
 
 -- --------------------------------------------------------
 
@@ -158,24 +175,21 @@ CREATE TABLE `creditos` (
 
 CREATE TABLE `cursos` (
   `Codigo` bigint(20) NOT NULL,
-  `Nome` char(255) NOT NULL
+  `Nome` char(255) NOT NULL,
+  `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `cursos`
 --
 
-INSERT INTO `cursos` (`Codigo`, `Nome`) VALUES
-(1, 'Gestão Ambiental'),
-(2, 'Gestão de Políticas Públicas'),
-(3, 'Sistemas de Informação'),
-(4, 'Obstetrícia'),
-(5, 'Oceanografia'),
-(6, 'Geografia'),
-(7, 'História'),
-(8, 'Ciências Sociais'),
-(9, 'Direito'),
-(10, 'Engenharia');
+INSERT INTO `cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
+(1, 'Sistemas de Informação', 1),
+(3, 'Gestão de Políticas Públicas', 1),
+(4, 'Administração', 6),
+(6, 'Direito', 5),
+(7, 'MBA em Marketing', 6),
+(8, 'MBA em Gestão de Negócios', 6);
 
 -- --------------------------------------------------------
 
@@ -187,6 +201,18 @@ CREATE TABLE `disciplinas` (
   `ID_Disciplina` int(11) NOT NULL,
   `Nome` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `disciplinas`
+--
+
+INSERT INTO `disciplinas` (`ID_Disciplina`, `Nome`) VALUES
+(1, 'Banco de Dados'),
+(2, 'Inteligência Artificial'),
+(3, 'Microeconomia e Políticas Públicas'),
+(4, 'Ética e Políticas Públicas'),
+(5, 'Direito Constitucional'),
+(6, 'Fundamentos de Administração');
 
 -- --------------------------------------------------------
 
@@ -218,18 +244,28 @@ CREATE TABLE `emprestimos` (
 --
 
 CREATE TABLE `ensino` (
-  `ID_Unidade` int(11) NOT NULL,
-  `Codigo` bigint(20) NOT NULL
+  `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `ensino`
+--
+
+INSERT INTO `ensino` (`ID_Unidade`) VALUES
+(1),
+(5),
+(6),
+(21);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `especializacao`
+-- Estrutura da tabela `extensao_possui`
 --
 
-CREATE TABLE `especializacao` (
-  `Codigo` bigint(20) NOT NULL
+CREATE TABLE `extensao_possui` (
+  `ID_Ati` int(11) NOT NULL,
+  `ID_Projeto` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -244,6 +280,14 @@ CREATE TABLE `financiador` (
   `ID_Financiador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `financiador`
+--
+
+INSERT INTO `financiador` (`Tipo`, `nome`, `ID_Financiador`) VALUES
+('Público', 'A', 1),
+('Privado', 'B', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -252,7 +296,8 @@ CREATE TABLE `financiador` (
 
 CREATE TABLE `folha_de_pagamento` (
   `Salario` int(11) NOT NULL,
-  `Data` date NOT NULL
+  `Data` date NOT NULL,
+  `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -276,6 +321,16 @@ CREATE TABLE `graduacao` (
   `Codigo` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `graduacao`
+--
+
+INSERT INTO `graduacao` (`Codigo`) VALUES
+(1),
+(3),
+(4),
+(6);
+
 -- --------------------------------------------------------
 
 --
@@ -296,7 +351,8 @@ CREATE TABLE `historico` (
 --
 
 CREATE TABLE `hospital` (
-  `ID_Unidade` int(11) DEFAULT NULL
+  `ID_Unidade` int(11) DEFAULT NULL,
+  `H_Nome` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -315,22 +371,12 @@ CREATE TABLE `indice_de_desempenho` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lactu_sensu`
+-- Estrutura da tabela `latu_sensu`
 --
 
-CREATE TABLE `lactu_sensu` (
+CREATE TABLE `latu_sensu` (
   `Codigo` bigint(20) NOT NULL,
   `Valor_Mensalidade` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `mba`
---
-
-CREATE TABLE `mba` (
-  `Codigo` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -360,7 +406,8 @@ CREATE TABLE `mestrado_profissional` (
 --
 
 CREATE TABLE `museu` (
-  `ID_Unidade` int(11) NOT NULL
+  `ID_Unidade` int(11) NOT NULL,
+  `M_Nome` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -377,6 +424,14 @@ CREATE TABLE `ocorrencias` (
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `ocorrencias`
+--
+
+INSERT INTO `ocorrencias` (`ID_Ocorrencia`, `Tipo_Ocorrencia`, `Data_Inicio`, `Data_Final`, `ID_Usuario`) VALUES
+(1, 'Licença', '2016-08-01', '2016-08-30', 5),
+(2, 'Licença', '2016-05-01', '2016-05-30', 6);
+
 -- --------------------------------------------------------
 
 --
@@ -387,6 +442,18 @@ CREATE TABLE `oferecimento` (
   `Codigo` bigint(20) NOT NULL,
   `ID_Disciplina` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `oferecimento`
+--
+
+INSERT INTO `oferecimento` (`Codigo`, `ID_Disciplina`) VALUES
+(1, 1),
+(1, 2),
+(3, 3),
+(3, 4),
+(6, 5),
+(4, 6);
 
 -- --------------------------------------------------------
 
@@ -411,6 +478,14 @@ CREATE TABLE `pos_graduacao` (
   `Data_defesa_do_Trabalho_final` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `pos_graduacao`
+--
+
+INSERT INTO `pos_graduacao` (`Codigo`, `Data_defesa_do_Trabalho_final`) VALUES
+(7, '0000-00-00'),
+(8, '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -422,6 +497,17 @@ CREATE TABLE `professor` (
   `nivel` char(255) NOT NULL,
   `carreira` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `professor`
+--
+
+INSERT INTO `professor` (`ID_Usuario`, `nivel`, `carreira`) VALUES
+(5, 'A', 'Titular'),
+(6, 'B', 'Doutor'),
+(7, 'C', 'Doutor'),
+(8, 'A', 'Livre Docente'),
+(9, 'A', 'Titular');
 
 -- --------------------------------------------------------
 
@@ -439,6 +525,16 @@ CREATE TABLE `projeto` (
   `ID_Financiador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `projeto`
+--
+
+INSERT INTO `projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `Orcamento`, `ID_Projeto`, `ID_Financiador`) VALUES
+('Urbanismo na Gestão Pública', '2016-03-01', 'Urbanismo na Gestão Pública', '2016-11-01', 2000, 2011, 1),
+('Informática para alunos do Ensino Fundamental', '2016-03-01', 'Informática para alunos do Ensino Fundamental', '2016-11-01', 2000, 2012, 2),
+('Pesquisa em Mineração de Dados', '2016-03-01', 'Pesquisa em Mineração de Dados', '2016-11-01', 3000, 2013, 1),
+('Pesquisa em Direito Digital', '2016-03-01', 'Pesquisa em Direito Digital', '2016-11-01', 3500, 2014, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -447,9 +543,16 @@ CREATE TABLE `projeto` (
 
 CREATE TABLE `projeto_extensao` (
   `ID_Projeto` bigint(20) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
-  `ID_Ati` int(11) NOT NULL
+  `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `projeto_extensao`
+--
+
+INSERT INTO `projeto_extensao` (`ID_Projeto`, `ID_Usuario`) VALUES
+(2012, 5),
+(2011, 6);
 
 -- --------------------------------------------------------
 
@@ -460,6 +563,14 @@ CREATE TABLE `projeto_extensao` (
 CREATE TABLE `projeto_pesquisa` (
   `ID_Projeto` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `projeto_pesquisa`
+--
+
+INSERT INTO `projeto_pesquisa` (`ID_Projeto`) VALUES
+(2013),
+(2014);
 
 -- --------------------------------------------------------
 
@@ -480,8 +591,17 @@ CREATE TABLE `reitoria` (
 
 CREATE TABLE `restaurante` (
   `ID_Res` int(11) NOT NULL,
-  `ID_Unidade` int(11) DEFAULT NULL
+  `ID_Unidade` int(11) DEFAULT NULL,
+  `R_Nome` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `restaurante`
+--
+
+INSERT INTO `restaurante` (`ID_Res`, `ID_Unidade`, `R_Nome`) VALUES
+(1, 1, 'Restaurante da EACH'),
+(2, 5, 'Restaurante da Faculdade de Direito');
 
 -- --------------------------------------------------------
 
@@ -490,9 +610,23 @@ CREATE TABLE `restaurante` (
 --
 
 CREATE TABLE `servidor` (
-  `ID_Usuario` int(11) NOT NULL,
-  `Data` date NOT NULL
+  `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `servidor`
+--
+
+INSERT INTO `servidor` (`ID_Usuario`) VALUES
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(12),
+(18),
+(19);
 
 -- --------------------------------------------------------
 
@@ -523,12 +657,8 @@ CREATE TABLE `unidade` (
 
 INSERT INTO `unidade` (`Nome_Unidade`, `ID_Unidade`, `Endereco`) VALUES
 ('Escola de Artes, Ciências e Humanidades', 1, 'Rua Arlindo Béttio, 1000 Ermelino Matarazzo, SP'),
-('Escola de Comunicações e Artes', 2, 'Av. Prof. Lúcio Martins Rodrigues, 443 Cidade Universitária, SP'),
-('Faculdade de Arquitetura e Urbanismo', 4, 'Rua do Lago, 876\r\nCidade Universitária, SP'),
 ('Faculdade de Direito', 5, 'Largo São Francisco, 95\r\nSão Paulo, SP'),
-('Faculdade de Filosofia, Letras e Ciências Humanas', 6, 'Rua do Lago, 717\r\nCidade Universitária, SP'),
-('Faculdade de Medicina', 7, 'Av. Dr. Arnaldo, 455\r\nSão Paulo, SP'),
-('Instituto Oceanográfico', 10, 'Praça do Oceanográfico, 191\r\nCidade Universitária, SP'),
+('Faculdade de Economia, Administração e Contabilidade', 6, 'Av. Prof. Luciano Gualberto, 908 - Butantã, São Paulo - SP, 05508-010'),
 ('Reitoria', 21, 'R. da Reitoria, 374 - Butantã, São Paulo - SP');
 
 -- --------------------------------------------------------
@@ -552,24 +682,24 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`, `ID_Unidade`) VALUES
 (5, 'Márcio Costa', '183.427.466-40', 'Masculino', '1971-03-23', 1),
-(6, 'Fernanda Almeida', '880.185.271-13', 'Feminino', '1971-10-20', 2),
-(7, 'Paulo Antunes', '384.126.948-64', 'Masculino', '1971-11-23', 4),
+(6, 'Fernanda Almeida', '880.185.271-13', 'Feminino', '1971-10-20', 1),
+(7, 'Paulo Antunes', '384.126.948-64', 'Masculino', '1971-11-23', 5),
 (8, 'Laura Santos', '582.223.411-97', 'Feminino', '1972-07-10', 5),
 (9, 'Cláudia Silva', '455.979.542-88', 'Feminino', '1973-02-05', 6),
-(10, 'João Santos', '325.184.027-48', 'Masculino', '1973-05-01', 7),
+(10, 'João Santos', '325.184.027-48', 'Masculino', '1973-05-01', 6),
 (12, 'José Oliveira', '227.064.963-04', 'Masculino', '1973-09-20', 1),
-(18, 'Fábio Lima', '027.728.832-05', 'Masculino', '1975-08-18', 10),
+(18, 'Fábio Lima', '027.728.832-05', 'Masculino', '1975-08-18', 21),
 (19, 'Raquel Ferreira', '166.234.703-01', 'Feminino', '1976-12-09', 1),
 (20, 'Mateus Barros', '140.342.783-66', 'Masculino', '1994-03-21', 1),
-(21, 'Juliana Oliveira', '851.860.336-69', 'Feminino', '1994-05-26', 2),
-(22, 'Vinícius Ferreira', '428.481.728-00', 'Masculino', '1994-11-17', 4),
+(21, 'Juliana Oliveira', '851.860.336-69', 'Feminino', '1994-05-26', 1),
+(22, 'Vinícius Ferreira', '428.481.728-00', 'Masculino', '1994-11-17', 5),
 (23, 'Patrícia Costa', '872.669.135-35', 'Feminino', '1995-03-16', 5),
 (24, 'Roberta Almeida', '328.689.635-79', 'Feminino', '1995-04-20', 6),
-(25, 'Fábio Santos', '867.449.174-04', 'Masculino', '1995-11-03', 7),
-(26, 'Denise Silva', '789.822.516-34', 'Feminino', '1996-01-12', 10),
+(25, 'Fábio Santos', '867.449.174-04', 'Masculino', '1995-11-03', 6),
+(26, 'Denise Silva', '789.822.516-34', 'Feminino', '1996-01-12', 21),
 (27, 'Felipe Prado', '523.124.337-02', 'Masculino', '1996-01-31', 1),
-(28, 'Natália Santos', '002.889.189-91', 'Feminino', '1996-09-04', 2),
-(29, 'Daniel Ferreira', '188.122.978-54', 'Masculino', '1996-12-13', 4);
+(28, 'Natália Santos', '002.889.189-91', 'Feminino', '1996-09-04', 1),
+(29, 'Daniel Ferreira', '188.122.978-54', 'Masculino', '1996-12-13', 5);
 
 -- --------------------------------------------------------
 
@@ -665,7 +795,8 @@ ALTER TABLE `creditos`
 --
 ALTER TABLE `cursos`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Cursos_IND` (`Codigo`);
+  ADD UNIQUE KEY `ID_Cursos_IND` (`Codigo`),
+  ADD KEY `FKComposicao_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `disciplinas`
@@ -694,15 +825,15 @@ ALTER TABLE `emprestimos`
 --
 ALTER TABLE `ensino`
   ADD PRIMARY KEY (`ID_Unidade`),
-  ADD UNIQUE KEY `FKUni_Ens_IND` (`ID_Unidade`),
-  ADD KEY `FKComposicao_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKUni_Ens_IND` (`ID_Unidade`);
 
 --
--- Indexes for table `especializacao`
+-- Indexes for table `extensao_possui`
 --
-ALTER TABLE `especializacao`
-  ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `FKLac_Esp_IND` (`Codigo`);
+ALTER TABLE `extensao_possui`
+  ADD PRIMARY KEY (`ID_Projeto`,`ID_Ati`),
+  ADD UNIQUE KEY `ID_Extensao_Possui_IND` (`ID_Projeto`,`ID_Ati`),
+  ADD KEY `FKExt_Ati_IND` (`ID_Ati`);
 
 --
 -- Indexes for table `financiador`
@@ -716,7 +847,8 @@ ALTER TABLE `financiador`
 --
 ALTER TABLE `folha_de_pagamento`
   ADD PRIMARY KEY (`Data`),
-  ADD UNIQUE KEY `ID_Folha_de_Pagamento_IND` (`Data`);
+  ADD UNIQUE KEY `ID_Folha_de_Pagamento_IND` (`Data`),
+  ADD KEY `FKServidor_Recebe_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `funcionario`
@@ -757,18 +889,11 @@ ALTER TABLE `indice_de_desempenho`
   ADD KEY `FKInd_Alu_IND` (`I_A_ID_Usuario`);
 
 --
--- Indexes for table `lactu_sensu`
+-- Indexes for table `latu_sensu`
 --
-ALTER TABLE `lactu_sensu`
+ALTER TABLE `latu_sensu`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `FKPos_Lac_IND` (`Codigo`);
-
---
--- Indexes for table `mba`
---
-ALTER TABLE `mba`
-  ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `FKLac_MBA_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKPos_Lat_IND` (`Codigo`);
 
 --
 -- Indexes for table `mestrado_academico`
@@ -843,8 +968,7 @@ ALTER TABLE `projeto`
 ALTER TABLE `projeto_extensao`
   ADD PRIMARY KEY (`ID_Projeto`),
   ADD UNIQUE KEY `FKPro_Pro_1_IND` (`ID_Projeto`),
-  ADD KEY `FKexerce_IND` (`ID_Usuario`),
-  ADD KEY `FKExtensao_Possui_IND` (`ID_Ati`);
+  ADD KEY `FKexerce_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `projeto_pesquisa`
@@ -875,9 +999,7 @@ ALTER TABLE `restaurante`
 --
 ALTER TABLE `servidor`
   ADD PRIMARY KEY (`ID_Usuario`),
-  ADD UNIQUE KEY `FKServidor_Recebe_ID` (`Data`),
-  ADD UNIQUE KEY `FKUsu_Ser_IND` (`ID_Usuario`),
-  ADD UNIQUE KEY `FKServidor_Recebe_IND` (`Data`);
+  ADD UNIQUE KEY `FKUsu_Ser_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `strictu_sensu`
@@ -920,12 +1042,12 @@ ALTER TABLE `atividades_extensao`
 -- AUTO_INCREMENT for table `biblioteca`
 --
 ALTER TABLE `biblioteca`
-  MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `restaurante`
 --
 ALTER TABLE `restaurante`
-  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -946,7 +1068,7 @@ ALTER TABLE `acervo_museu`
 -- Limitadores para a tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD CONSTRAINT `FKIsencao_na_inscricao_FK` FOREIGN KEY (`Ise_Codigo`) REFERENCES `especializacao` (`Codigo`),
+  ADD CONSTRAINT `FKIsencao_na_inscricao_FK` FOREIGN KEY (`Ise_Codigo`) REFERENCES `latu_sensu` (`Codigo`),
   ADD CONSTRAINT `FKUsu_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
   ADD CONSTRAINT `FKcursa_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
 
@@ -983,6 +1105,12 @@ ALTER TABLE `creditos`
   ADD CONSTRAINT `FKCre_Usu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`);
 
 --
+-- Limitadores para a tabela `cursos`
+--
+ALTER TABLE `cursos`
+  ADD CONSTRAINT `FKComposicao_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
+
+--
 -- Limitadores para a tabela `doutorado`
 --
 ALTER TABLE `doutorado`
@@ -998,14 +1126,20 @@ ALTER TABLE `emprestimos`
 -- Limitadores para a tabela `ensino`
 --
 ALTER TABLE `ensino`
-  ADD CONSTRAINT `FKComposicao_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
   ADD CONSTRAINT `FKUni_Ens_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
--- Limitadores para a tabela `especializacao`
+-- Limitadores para a tabela `extensao_possui`
 --
-ALTER TABLE `especializacao`
-  ADD CONSTRAINT `FKLac_Esp_FK` FOREIGN KEY (`Codigo`) REFERENCES `lactu_sensu` (`Codigo`);
+ALTER TABLE `extensao_possui`
+  ADD CONSTRAINT `FKExt_Ati_FK` FOREIGN KEY (`ID_Ati`) REFERENCES `atividades_extensao` (`ID_Ati`),
+  ADD CONSTRAINT `FKExt_Pro` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto_extensao` (`ID_Projeto`);
+
+--
+-- Limitadores para a tabela `folha_de_pagamento`
+--
+ALTER TABLE `folha_de_pagamento`
+  ADD CONSTRAINT `FKServidor_Recebe_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `funcionario`
@@ -1041,16 +1175,10 @@ ALTER TABLE `indice_de_desempenho`
   ADD CONSTRAINT `FKInd_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
 
 --
--- Limitadores para a tabela `lactu_sensu`
+-- Limitadores para a tabela `latu_sensu`
 --
-ALTER TABLE `lactu_sensu`
-  ADD CONSTRAINT `FKPos_Lac_FK` FOREIGN KEY (`Codigo`) REFERENCES `pos_graduacao` (`Codigo`);
-
---
--- Limitadores para a tabela `mba`
---
-ALTER TABLE `mba`
-  ADD CONSTRAINT `FKLac_MBA_FK` FOREIGN KEY (`Codigo`) REFERENCES `lactu_sensu` (`Codigo`);
+ALTER TABLE `latu_sensu`
+  ADD CONSTRAINT `FKPos_Lat_FK` FOREIGN KEY (`Codigo`) REFERENCES `pos_graduacao` (`Codigo`);
 
 --
 -- Limitadores para a tabela `mestrado_academico`
@@ -1112,7 +1240,6 @@ ALTER TABLE `projeto`
 -- Limitadores para a tabela `projeto_extensao`
 --
 ALTER TABLE `projeto_extensao`
-  ADD CONSTRAINT `FKExtensao_Possui_FK` FOREIGN KEY (`ID_Ati`) REFERENCES `atividades_extensao` (`ID_Ati`),
   ADD CONSTRAINT `FKPro_Pro_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`),
   ADD CONSTRAINT `FKexerce_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
@@ -1138,7 +1265,6 @@ ALTER TABLE `restaurante`
 -- Limitadores para a tabela `servidor`
 --
 ALTER TABLE `servidor`
-  ADD CONSTRAINT `FKServidor_Recebe_FK` FOREIGN KEY (`Data`) REFERENCES `folha_de_pagamento` (`Data`),
   ADD CONSTRAINT `FKUsu_Ser_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`);
 
 --

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Nov-2016 às 17:39
+-- Generation Time: 23-Nov-2016 às 18:17
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -194,12 +194,12 @@ CREATE TABLE `cursos` (
 --
 
 INSERT INTO `cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
-(1, 'Sistemas de InformaÃ§Ã£o', 1),
-(3, 'GestÃ£o de PolÃ­ticas PÃºblicas', 1),
-(4, 'AdministraÃ§Ã£o', 6),
+(1, 'Sistemas de Informacao', 1),
+(3, 'Gestao de Politicas Publicas', 1),
+(4, 'Administraçao', 6),
 (6, 'Direito', 5),
 (7, 'MBA em Marketing', 6),
-(8, 'MBA em GestÃ£o de NegÃ³cios', 6);
+(8, 'MBA em Gestao de Negocios', 6);
 
 -- --------------------------------------------------------
 
@@ -218,11 +218,11 @@ CREATE TABLE `disciplinas` (
 
 INSERT INTO `disciplinas` (`ID_Disciplina`, `Nome`) VALUES
 (1, 'Banco de Dados'),
-(2, 'InteligÃªncia Artificial'),
-(3, 'Microeconomia e PolÃ­ticas PÃºblicas'),
-(4, 'Ã‰tica e PolÃ­ticas PÃºblicas'),
+(2, 'Inteligencia Artificial'),
+(3, 'Microeconomia e Polí­ticas Publicas'),
+(4, 'Etica e Politicas Publicas'),
 (5, 'Direito Constitucional'),
-(6, 'Fundamentos de AdministraÃ§Ã£o');
+(6, 'Fundamentos de Administracao');
 
 -- --------------------------------------------------------
 
@@ -472,8 +472,8 @@ CREATE TABLE `ocorrencias` (
 --
 
 INSERT INTO `ocorrencias` (`ID_Ocorrencia`, `Tipo_Ocorrencia`, `Data_Inicio`, `Data_Final`, `ID_Usuario`) VALUES
-(1, 'LicenÃ§a', '2016-08-01', '2016-08-30', 5),
-(2, 'LicenÃ§a', '2016-05-01', '2016-05-30', 6);
+(1, 'Licenca', '2016-08-01', '2016-08-30', 5),
+(2, 'Licenca', '2016-05-01', '2016-05-30', 6);
 
 -- --------------------------------------------------------
 
@@ -574,9 +574,9 @@ CREATE TABLE `projeto` (
 --
 
 INSERT INTO `projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `Orcamento`, `ID_Projeto`, `ID_Financiador`) VALUES
-('Urbanismo na Gestão Pública', '2016-03-01', 'Urbanismo na Gestão Pública', '2016-11-01', 2000, 2011, 1),
-('InformÃ¡tica para alunos do Ensino Fundamental', '2016-03-01', 'Informática para alunos do Ensino Fundamental', '2016-11-01', 2000, 2012, 2),
-('Pesquisa em Mineração de Dados', '2016-03-01', 'Pesquisa em Mineração de Dados', '2016-11-01', 3000, 2013, 1),
+('Urbanismo na Gestao Publica', '2016-03-01', 'Urbanismo na Gestao Publica', '2016-11-01', 2000, 2011, 1),
+('Informatica para alunos do Ensino Fundamental', '2016-03-01', 'Informatica para alunos do Ensino Fundamental', '2016-11-01', 2000, 2012, 2),
+('Pesquisa em Mineracao de Dados', '2016-03-01', 'Pesquisa em Mineracao de Dados', '2016-11-01', 3000, 2013, 1),
 ('Pesquisa em Direito Digital', '2016-03-01', 'Pesquisa em Direito Digital', '2016-11-01', 3500, 2014, 2);
 
 -- --------------------------------------------------------
@@ -626,6 +626,13 @@ CREATE TABLE `reitoria` (
   `Cnpj` varchar(20) NOT NULL,
   `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `reitoria`
+--
+
+INSERT INTO `reitoria` (`Cnpj`, `ID_Unidade`) VALUES
+('26723506000112', 21);
 
 -- --------------------------------------------------------
 
@@ -700,10 +707,10 @@ CREATE TABLE `unidade` (
 --
 
 INSERT INTO `unidade` (`Nome_Unidade`, `ID_Unidade`, `Endereco`) VALUES
-('Escola de Artes, CiÃªncias e Humanidades', 1, 'Rua Arlindo BÃ©ttio, 1000 Ermelino Matarazzo, SP'),
-('Faculdade de Direito', 5, 'Largo SÃ£o Francisco, 95\r\nSÃ£o Paulo, SP'),
-('Faculdade de Economia, AdministraÃ§Ã£o e Contabilidade', 6, 'Av. Prof. Luciano Gualberto, 908 - ButantÃ£, SÃ£o Paulo - SP, 05508-010'),
-('Reitoria', 21, 'R. da Reitoria, 374 - ButantÃ£, SÃ£o Paulo - SP');
+('Escola de Artes, Ciencias e Humanidades', 1, 'Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP'),
+('Faculdade de Direito', 5, 'Largo Sao Francisco, 95\r\nSao Paulo, SP'),
+('Faculdade de Economia, Administracao e Contabilidade', 6, 'Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP, 05508-010'),
+('Reitoria', 21, 'R. da Reitoria, 374 - Butanta, Sao Paulo - SP');
 
 -- --------------------------------------------------------
 
@@ -725,31 +732,31 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`, `ID_Unidade`) VALUES
-(5, 'MÃ¡rcio Costa', '183.427.466-40', 'Masculino', '1971-03-23', 1),
+(5, 'Marcio Costa', '183.427.466-40', 'Masculino', '1971-03-23', 1),
 (6, 'Fernanda Almeida', '880.185.271-13', 'Feminino', '1971-10-20', 1),
 (7, 'Paulo Antunes', '384.126.948-64', 'Masculino', '1971-11-23', 5),
 (8, 'Laura Santos', '582.223.411-97', 'Feminino', '1972-07-10', 5),
-(9, 'ClÃ¡udia Silva', '455.979.542-88', 'Feminino', '1973-02-05', 6),
-(10, 'JoÃ£o Santos', '325.184.027-48', 'Masculino', '1973-05-01', 6),
-(12, 'JosÃ© Oliveira', '227.064.963-04', 'Masculino', '1973-09-20', 1),
-(18, 'FÃ¡bio Lima', '027.728.832-05', 'Masculino', '1975-08-18', 21),
+(9, 'Claudia Silva', '455.979.542-88', 'Feminino', '1973-02-05', 6),
+(10, 'Joao Santos', '325.184.027-48', 'Masculino', '1973-05-01', 6),
+(12, 'Jose Oliveira', '227.064.963-04', 'Masculino', '1973-09-20', 1),
+(18, 'Fabio Lima', '027.728.832-05', 'Masculino', '1975-08-18', 21),
 (19, 'Raquel Ferreira', '166.234.703-01', 'Feminino', '1976-12-09', 1),
 (20, 'Mateus Barros', '140.342.783-66', 'Masculino', '1994-03-21', 1),
 (21, 'Juliana Oliveira', '851.860.336-69', 'Feminino', '1994-05-26', 1),
-(22, 'VinÃ­cius Ferreira', '428.481.728-00', 'Masculino', '1994-11-17', 5),
-(23, 'PatrÃ­cia Costa', '872.669.135-35', 'Feminino', '1995-03-16', 5),
+(22, 'Vinicius Ferreira', '428.481.728-00', 'Masculino', '1994-11-17', 5),
+(23, 'Patri­cia Costa', '872.669.135-35', 'Feminino', '1995-03-16', 5),
 (24, 'Roberta Almeida', '328.689.635-79', 'Feminino', '1995-04-20', 6),
-(25, 'FÃ¡bio Santos', '867.449.174-04', 'Masculino', '1995-11-03', 6),
+(25, 'Fabio Santos', '867.449.174-04', 'Masculino', '1995-11-03', 6),
 (26, 'Denise Silva', '789.822.516-34', 'Feminino', '1996-01-12', 21),
 (27, 'Felipe Prado', '523.124.337-02', 'Masculino', '1996-01-31', 1),
-(28, 'NatÃ¡lia Santos', '002.889.189-91', 'Feminino', '1996-09-04', 1),
+(28, 'Natalia Santos', '002.889.189-91', 'Feminino', '1996-09-04', 1),
 (29, 'Daniel Ferreira', '188.122.978-54', 'Masculino', '1996-12-13', 5),
-(30, 'JoÃ£o Oliveira', '662.118.796-36', 'Masculino', '1994-05-20', 1),
+(30, 'Joao Oliveira', '662.118.796-36', 'Masculino', '1994-05-20', 1),
 (31, 'Renata Sanchez', '842.319.617-86', 'Feminino', '1994-07-20', 5),
 (32, 'Carlos Silva', '389.178.887-80', 'Masculino', '1994-04-07', 6),
-(33, 'PatrÃ­cia Carvalho', '871.636.259-44', 'Feminino', '1991-04-15', 21),
+(33, 'Patricia Carvalho', '871.636.259-44', 'Feminino', '1991-04-15', 21),
 (34, 'Luis Silveira', '878.624.370-55', 'Masculino', '1991-12-20', 1),
-(35, 'JÃºlia Silva', '064.311.508-05', 'Feminino', '1994-07-20', 6),
+(35, 'Julia Silva', '064.311.508-05', 'Feminino', '1994-07-20', 6),
 (36, 'Daniel Silva', '829.057.644-73', 'Masculino', '1993-07-05', 21),
 (37, 'Ana Clara', '463.407.505-91', 'Feminino', '1995-04-25', 5),
 (38, 'Pedro Almeida', '314.199.712-80', 'Masculino', '1995-12-27', 1),

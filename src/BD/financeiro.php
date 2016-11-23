@@ -60,7 +60,7 @@
 
 	    <h3>Verbas Recebidas</h3>
 	    <p>
-			A universidade já recebeu um total de <?php echo mysqli_fetch_array(somaValorVerbas())['total'] ?> reais em verbas.
+			A universidade já recebeu um total de <?php echo mysqli_fetch_array(somaValorVerbas())['total']; ?> reais em verbas.
 		</p>
 	    <table class="table">
 			<thead>

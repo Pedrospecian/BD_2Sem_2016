@@ -223,8 +223,6 @@
 		    	?>		    	
 			</tbody>
 		</table>
-		<br/>
-		
 		
 		<h1>Ocorrencias dos funcionários</h1>
 		<table class="table">
@@ -252,6 +250,42 @@
 		    			echo "</tr>";
 		    		}
 		    	?>		    	
+			</tbody>
+		</table>
+
+		<h2>Professores sem registros de ocorrência</h2>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>nome</th>
+		        	<th>cpf</th>
+		        	<th>nível</th>
+		        	<th>carreira</th>
+		        	<th>ID Unidade</th>
+		        	<th>ID Ocorrencia</th>
+		        	<th>Tipo Ocorrencia</th>
+		        	<th>Data Início</th>
+		        	<th>Data Final</th>
+		     	</tr>
+    		</thead>
+		    <tbody>		   
+				<?php 
+					$professoresSemOcorrencia = consultaProfessoresSemOcorrencia();
+			    	while ($dados = mysqli_fetch_array($professoresSemOcorrencia)) {
+			    		//var_dump($dados);
+			    		echo "<tr>";
+		    			echo "<td>".$dados['nome']."</td>";
+		    			echo "<td>".$dados['cpf']."</td>";
+		    			echo "<td>".$dados['nivel']."</td>";
+		    			echo "<td>".$dados['carreira']."</td>";
+		    			echo "<td>".$dados['ID_Unidade']."</td>";
+		    			echo "<td>".$dados['ID_Ocorrencia']."</td>";
+		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
+		    			echo "<td>".$dados['Data_Inicio']."</td>";
+		    			echo "<td>".$dados['Data_Final']."</td>";
+		    			echo "</tr>";
+			    	}
+				?>
 			</tbody>
 		</table>
 

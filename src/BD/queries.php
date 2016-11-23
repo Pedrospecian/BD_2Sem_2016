@@ -43,6 +43,18 @@
         return $resultado;
     }
 
+//listar todos os professores
+    function consultaProfessoresSemOcorrencia(){
+        $bd= conectaBD();
+        $sql = "SELECT *
+                FROM Professor
+                INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
+                LEFT JOIN Ocorrencias ON Professor.ID_Usuario = Ocorrencias.ID_Usuario";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
 //listar todas as atribuicoes de professores
     function consultaAtribuicoesProfessores(){
         $bd= conectaBD();

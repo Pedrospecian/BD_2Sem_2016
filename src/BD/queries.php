@@ -87,6 +87,16 @@
         $bd->close();
         return $resultado;
     }
+
+    function consultaNomeCursoPorAluno($id) {
+        $bd= conectaBD();
+        $sql="SELECT *
+            FROM Cursos
+            WHERE Codigo IN (SELECT Codigo FROM Aluno WHERE ID_Usuario='".$id."')";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
     
 //listar todos os cursos da graduação
     function consultaCursosGraduacao(){

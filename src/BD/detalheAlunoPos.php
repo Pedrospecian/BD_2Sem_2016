@@ -6,6 +6,7 @@
 	<div class="container">
 		<?php if(isset($_POST['detalhes'])) { ?>
 		<h2>Aluno Pós-Graduação: <?php echo $_POST['nomeAluno'];?></h2>
+		<h2>Curso: <?php echo mysqli_fetch_array(consultaNomeCursoPorAluno($_POST['idAluno']))['Nome']; ?></h2>
 	    <h3>Projetos de extensão do aluno</h3>
 	    <table class="table">
 			<thead>

@@ -57,15 +57,10 @@
     //lista todos os servidores
     function consultaFolhaPagamento(){
         $bd= conectaBD();
-<<<<<<< HEAD
-        $sql="SELECT *
-                FROM Folha_de_Pagamento";
-=======
         $sql="SELECT Servidor.ID_Usuario, Salario, Data
                 FROM Folha_de_Pagamento
                 INNER JOIN Servidor ON Servidor.ID_Usuario = Folha_de_Pagamento.ID_Usuario
                 INNER JOIN Usuario ON Servidor.ID_Usuario = Usuario.ID_Usuario";
->>>>>>> 42b97290d783506057c04affed770a06ae11f516
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -476,8 +471,8 @@
         if ($bd->query($sql) === TRUE) {
             $sql_professor= "INSERT INTO Professor (ID_Usuario, carreira, nivel) 
                 VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
-            $sql_servidor= "INSERT INTO Servidor (ID_Usuario, Data) 
-                VALUES ('".mysqli_insert_id($bd)."', '".Date('Y-m-d')."');";
+            $sql_servidor= "INSERT INTO Servidor (ID_Usuario) 
+                VALUES ('".mysqli_insert_id($bd)."');";
                 $sql_folhapagamento= "INSERT INTO Folha_de_pagamento (ID_Usuario, Data, salario) 
                 VALUES ('".mysqli_insert_id($bd)."', '2016-11-10', '870');";
             if($bd->query($sql_professor)===FALSE && $bd->query($sql_servidor)===FALSE && $bd->query($sql_folhapagamento)===FALSE){
@@ -541,8 +536,8 @@
             $ident=mysqli_insert_id($bd);
             $sql_funcionario= "INSERT INTO Funcionario (ID_Usuario, Funcao) 
                 VALUES ('".$ident."', '".$funcao."');";
-            $sql_servidor= "INSERT INTO Servidor (ID_Usuario, Data) 
-                VALUES ('".$ident."', '".Date('Y-m-d')."');";
+            $sql_servidor= "INSERT INTO Servidor (ID_Usuario) 
+                VALUES ('".$ident."');";
             $sql_folhapagamento= "INSERT INTO folha_de_pagamento (Data, salario) 
                 VALUES ('2016-12-10', '870');";
                 //var_dump($bd->query($sql_funcionario));

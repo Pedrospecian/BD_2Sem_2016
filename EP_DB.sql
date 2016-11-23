@@ -3,8 +3,8 @@
 -- *--------------------------------------------
 -- * DB-MAIN version: 9.3.0              
 -- * Generator date: Feb 16 2016              
--- * Generation date: Sun Nov 20 16:34:03 2016 
--- * LUN file: C:\wampserver\www\Trabalho\BD_2Sem_2016\PARTEB.lun 
+-- * Generation date: Mon Nov 21 00:05:52 2016 
+-- * LUN file: C:\wampserver\www\Trabalho\BD_2Sem_2016\relacionalB.lun 
 -- * Schema: ENTIDADE_RELACIONAMENTO/1 
 -- ********************************************* 
 
@@ -110,6 +110,11 @@ create table Especializacao (
      Codigo bigint not null,
      constraint FKLac_Esp_ID primary key (Codigo));
 
+create table Extensao_Possui (
+     ID_Ati int not null,
+     ID_Projeto bigint not null,
+     constraint ID_Extensao_Possui_ID primary key (ID_Projeto, ID_Ati));
+
 create table Financiador (
      Tipo char(255) not null,
      nome char(255) not null,
@@ -119,7 +124,9 @@ create table Financiador (
 create table Folha_de_Pagamento (
      Salario int not null,
      Data date not null,
-     constraint ID_Folha_de_Pagamento_ID primary key (Data));
+     ID_Usuario int not null,
+     constraint ID_Folha_de_Pagamento_ID primary key (Data),
+     constraint FKServidor_Recebe_ID unique (ID_Usuario));
 
 create table Funcionario (
      ID_Usuario int not null,
@@ -212,7 +219,6 @@ create table Projeto (
 create table Projeto_Extensao (
      ID_Projeto bigint not null,
      ID_Usuario int not null,
-     ID_Ati int not null,
      constraint FKPro_Pro_1_ID primary key (ID_Projeto));
 
 create table Projeto_Pesquisa (
@@ -232,9 +238,7 @@ create table Restaurante (
 
 create table Servidor (
      ID_Usuario int not null,
-     Data date not null,
-     constraint FKUsu_Ser_ID primary key (ID_Usuario),
-     constraint FKServidor_Recebe_ID unique (Data));
+     constraint FKUsu_Ser_ID primary key (ID_Usuario));
 
 create table Strictu_Sensu (
      Codigo bigint not null,
@@ -363,15 +367,22 @@ alter table Especializacao add constraint FKLac_Esp_FK
      foreign key (Codigo)
      references Lactu_Sensu (Codigo);
 
+alter table Extensao_Possui add constraint FKExt_Pro
+     foreign key (ID_Projeto)
+     references Projeto_Extensao (ID_Projeto);
+
+alter table Extensao_Possui add constraint FKExt_Ati_FK
+     foreign key (ID_Ati)
+     references Atividades_Extensao (ID_Ati);
+
 -- Not implemented
 -- alter table Financiador add constraint ID_Financiador_CHK
 --     check(exists(select * from Projeto
 --                  where Projeto.ID_Financiador = ID_Financiador)); 
 
--- Not implemented
--- alter table Folha_de_Pagamento add constraint ID_Folha_de_Pagamento_CHK
---     check(exists(select * from Servidor
---                  where Servidor.Data = Data)); 
+alter table Folha_de_Pagamento add constraint FKServidor_Recebe_FK
+     foreign key (ID_Usuario)
+     references Servidor (ID_Usuario);
 
 alter table Funcionario add constraint FKSer_Fun_FK
      foreign key (ID_Usuario)
@@ -470,10 +481,6 @@ alter table Projeto_Extensao add constraint FKexerce_FK
      foreign key (ID_Usuario)
      references Servidor (ID_Usuario);
 
-alter table Projeto_Extensao add constraint FKExtensao_Possui_FK
-     foreign key (ID_Ati)
-     references Atividades_Extensao (ID_Ati);
-
 -- Not implemented
 -- alter table Projeto_Pesquisa add constraint FKPro_Pro_CHK
 --     check(exists(select * from Coordena
@@ -499,10 +506,6 @@ alter table Restaurante add constraint FKEnsino_Possui2_FK
 alter table Servidor add constraint FKUsu_Ser_FK
      foreign key (ID_Usuario)
      references Usuario (ID_Usuario);
-
-alter table Servidor add constraint FKServidor_Recebe_FK
-     foreign key (Data)
-     references Folha_de_Pagamento (Data);
 
 alter table Strictu_Sensu add constraint FKPos_Str_FK
      foreign key (Codigo)
@@ -608,11 +611,20 @@ create index FKComposicao_IND
 create unique index FKLac_Esp_IND
      on Especializacao (Codigo);
 
+create unique index ID_Extensao_Possui_IND
+     on Extensao_Possui (ID_Projeto, ID_Ati);
+
+create index FKExt_Ati_IND
+     on Extensao_Possui (ID_Ati);
+
 create unique index ID_Financiador_IND
      on Financiador (ID_Financiador);
 
 create unique index ID_Folha_de_Pagamento_IND
      on Folha_de_Pagamento (Data);
+
+create unique index FKServidor_Recebe_IND
+     on Folha_de_Pagamento (ID_Usuario);
 
 create unique index FKSer_Fun_IND
      on Funcionario (ID_Usuario);
@@ -689,9 +701,6 @@ create unique index FKPro_Pro_1_IND
 create index FKexerce_IND
      on Projeto_Extensao (ID_Usuario);
 
-create index FKExtensao_Possui_IND
-     on Projeto_Extensao (ID_Ati);
-
 create unique index FKPro_Pro_IND
      on Projeto_Pesquisa (ID_Projeto);
 
@@ -709,9 +718,6 @@ create unique index FKEnsino_Possui2_IND
 
 create unique index FKUsu_Ser_IND
      on Servidor (ID_Usuario);
-
-create unique index FKServidor_Recebe_IND
-     on Servidor (Data);
 
 create unique index FKPos_Str_IND
      on Strictu_Sensu (Codigo);

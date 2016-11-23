@@ -1,0 +1,10 @@
+Consulta:
+SELECT *
+FROM Cursos
+INNER JOIN Pos_Graduacao ON Cursos.Codigo = Pos_Graduacao.Codigo
+INNER JOIN Latu_Sensu ON Cursos.Codigo = Latu_Sensu.Codigo
+LEFT JOIN Aluno ON Latu_Sensu.Codigo = Aluno.Codigo
+ORDER BY Latu_Sensu.Valor_Mensalidade;
+
+Enunciado:
+Lista o código, nome, unidade, data de defesa final e valor de mensalidade de todos os cursos de pós-graduação que são latu sensu. Também são listados os alunos que estão matriculados em cada um desses cursos, informando ao lado se eles estão isentos de pagamento de mensalidade ou não. Para alunos isentos, é informado o código do curso para o qual eles possuem isenção. Os resultados são ordenados de acordo com o valor da mensalidade de cada curso.

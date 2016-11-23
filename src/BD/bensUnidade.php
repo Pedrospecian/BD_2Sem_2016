@@ -21,7 +21,6 @@
 		        	<th>Data de aquisição</th>
 		        	<th>Tipo do bem</th>
 		        	<th>Nome da unidade</th>
-		        	<th>Tipo da unidade</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -29,13 +28,12 @@
 		    		$bens = consultaBensUnidade($_GET['nomeUnidade']);
 		    		while ($dados = mysqli_fetch_array($bens)) {
 		    			echo "<tr>";
-		    			echo "<td>".$dados['Identificador']."</td>";
+		    			echo "<td>".$dados['id']."</td>";
 		    			echo "<td>".$dados['Localizacao']."</td>";
 		    			echo "<td>".$dados['Valor']."</td>";
 		    			echo "<td>".$dados['Data_de_Aquisicao']."</td>";
 		    			echo "<td>".$dados['tipoBem']."</td>";
 		    			echo "<td>".$dados['nomeUnidade']."</td>";
-		    			echo "<td>".$dados['tipoUnidade']."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>

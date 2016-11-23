@@ -1,0 +1,8 @@
+Consulta:
+SELECT Bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
+FROM Bens
+INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
+AND Nome_Unidade LIKE '%string%';
+
+Enunciado: 
+Lista o ID, localização, valor, data de aquisição e tipo de todos os bens que pertencem às unidades cujo nome contenha a palavra 'string' (especificada), listando também o ID e o nome de cada unidade com o nome contendo a 'string' especificada.

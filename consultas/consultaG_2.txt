@@ -1,0 +1,11 @@
+Consulta:
+SELECT *
+FROM Cursos
+WHERE Codigo IN 
+	(SELECT Codigo 
+	 FROM Aluno 
+	 WHERE ID_Usuario='id'
+	);
+
+Enunciado: 
+Lista todos os dados dos cursos nos quais o aluno está matriculado.

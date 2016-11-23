@@ -1,0 +1,8 @@
+Consulta:
+SELECT *
+FROM Professor
+INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
+LEFT JOIN Ocorrencias ON Professor.ID_Usuario = Ocorrencias.ID_Usuario;
+
+Enunciado: 
+Lista todos os dados dos professores, listando também os dados de ocorrências associadas a eles, quando existirem.

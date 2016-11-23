@@ -305,11 +305,11 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
-        $sql="SELECT Bens.ID_Bem, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
+        $sql="SELECT Bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
                 FROM Bens
                 INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
-                AND Nome_Unidade ='".$nomeUnidade."'";
-                var_dump($sql);
+                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
+                //var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

@@ -1,0 +1,8 @@
+Consulta:
+SELECT nome,cargo,setor,Data_inicio,Data_fim
+FROM Professor
+INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
+RIGHT JOIN Atribuicoes on Professor.ID_Usuario = Atribuicoes.ID_Usuario
+
+Enunciado:
+Seleciona os professores que tem atribuições, mostrando o cargo, o setor e o período em que foi ocupado.

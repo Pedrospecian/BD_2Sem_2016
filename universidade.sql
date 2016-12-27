@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Nov-2016 às 18:17
+-- Generation Time: 28-Dez-2016 às 00:05
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -32,6 +32,17 @@ CREATE TABLE `acervo_biblioteca` (
   `B_Item_Tipo` char(255) NOT NULL,
   `ID_Bib` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `acervo_biblioteca`
+--
+
+INSERT INTO `acervo_biblioteca` (`B_Item_Id`, `B_Item_Nome`, `B_Item_Tipo`, `ID_Bib`) VALUES
+(1, 'SIPSER, M. Introdução à Teoria da Computação. Ed. Thomson', 'Livro', 1),
+(2, 'INTRODUÇÃO A MICROECONOMIA E INTRODUÇÃO A MACROECONOMIA\r\nJoseph E.: Stigiglitz e Carl E. Walsh – Editora Campus', 'Livro', 3),
+(3, 'Montesquieu, Charles de Secondat Baron de la Brède 1689-1755\r\nDo espírito das Leis / Montesquieu ; tradução Jean Melville --  São Paulo : Martin Claret, 2010.', 'Livro', 2),
+(4, 'ELMASRI, R.; NAVATHE, S.B. “Sistemas de Bancos de Dados”, 6a Edição. Editora Pearson, 2011.', 'Livro', 1),
+(5, 'A república / Platão ; tradução Pietro Nassetti --  São Paulo : Martin Claret, 2009', 'Livro', 2);
 
 -- --------------------------------------------------------
 
@@ -79,9 +90,9 @@ INSERT INTO `aluno` (`ID_Usuario`, `Codigo`, `Ise_Codigo`) VALUES
 (34, 4, NULL),
 (35, 6, NULL),
 (36, 1, NULL),
-(37, 3, NULL),
+(37, 9, NULL),
 (38, 6, NULL),
-(39, 3, NULL);
+(39, 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -104,8 +115,9 @@ CREATE TABLE `atividades_extensao` (
 CREATE TABLE `atribuicoes` (
   `Data_inicio` date DEFAULT NULL,
   `Id_Atribuicoes` int(11) NOT NULL,
-  `Nome_Atribuicao` char(255) NOT NULL,
+  `Cargo` char(255) NOT NULL,
   `Data_fim` date DEFAULT NULL,
+  `Setor` char(255) NOT NULL,
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -113,9 +125,12 @@ CREATE TABLE `atribuicoes` (
 -- Extraindo dados da tabela `atribuicoes`
 --
 
-INSERT INTO `atribuicoes` (`Data_inicio`, `Id_Atribuicoes`, `Nome_Atribuicao`, `Data_fim`, `ID_Usuario`) VALUES
-('2016-02-01', 1, 'Coordenador', '2016-11-30', 9),
-('2012-02-01', 2, 'Reitor', '2016-11-30', 5);
+INSERT INTO `atribuicoes` (`Data_inicio`, `Id_Atribuicoes`, `Cargo`, `Data_fim`, `Setor`, `ID_Usuario`) VALUES
+('2016-02-01', 1, 'Coordenador', '2016-11-30', 'Sistemas de Informacao', 9),
+('2012-02-01', 2, 'Reitor', '2016-11-30', 'Reitoria', 5),
+('2016-02-01', 3, 'Diretor', '2016-11-30', 'Escola de Artes, Ciencias e Humanidades', 6),
+('2016-02-01', 4, 'Coordenador', '2016-11-30', 'Direito', 7),
+('2016-02-01', 5, 'Coordenador', '2016-11-30', 'MBA em Marketing', 8);
 
 -- --------------------------------------------------------
 
@@ -131,6 +146,22 @@ CREATE TABLE `bens` (
   `Tipo` char(255) NOT NULL,
   `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `bens`
+--
+
+INSERT INTO `bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo`, `ID_Unidade`) VALUES
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 20000, 1, '1995-09-15', 'Carro', 1),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 2, '2000-01-20', 'Cadeira', 2),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 800, 3, '2000-01-20', 'Projetor', 5),
+('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 4, '2000-01-20', 'Cadeira', 6),
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 3000, 5, '2005-01-12', 'Computador', 21),
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 3000, 6, '2005-01-05', 'Computador', 1),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 7, '2000-01-20', 'Cadeira', 2),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 20000, 8, '1995-09-15', 'Carro', 5),
+('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 9, '2000-01-20', 'Mesa', 6),
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 10, '1995-09-15', 'Carro', 21);
 
 -- --------------------------------------------------------
 
@@ -150,7 +181,9 @@ CREATE TABLE `biblioteca` (
 
 INSERT INTO `biblioteca` (`ID_Bib`, `ID_Unidade`, `B_Nome`) VALUES
 (1, 1, 'Biblioteca da EACH'),
-(2, 6, 'Biblioteca do Faculdade de Direito');
+(2, 5, 'Biblioteca do Faculdade de Direito'),
+(3, 6, 'Biblioteca da FEA'),
+(5, 2, 'Biblioteca da Faculdade de Medicina');
 
 -- --------------------------------------------------------
 
@@ -164,6 +197,14 @@ CREATE TABLE `coordena` (
   `Bolsa_Pesquisador` int(11) NOT NULL,
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `coordena`
+--
+
+INSERT INTO `coordena` (`ID_Projeto`, `Indice_Pequisador`, `Bolsa_Pesquisador`, `ID_Usuario`) VALUES
+(2013, 10, 5000, 9),
+(2014, 5, 3000, 7);
 
 -- --------------------------------------------------------
 
@@ -195,11 +236,19 @@ CREATE TABLE `cursos` (
 
 INSERT INTO `cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
 (1, 'Sistemas de Informacao', 1),
+(2, 'Medicina', 2),
 (3, 'Gestao de Politicas Publicas', 1),
-(4, 'Administraçao', 6),
+(4, 'Administracao', 6),
 (6, 'Direito', 5),
 (7, 'MBA em Marketing', 6),
-(8, 'MBA em Gestao de Negocios', 6);
+(8, 'MBA em Gestao de Negocios', 6),
+(9, 'MBA em Controladoria e Financas', 6),
+(10, 'Mestrado Profissional em Empreendedorismo', 6),
+(11, 'Mestrado em Direito', 5),
+(12, 'Mestrado em Sistemas de Informacão', 1),
+(13, 'Mestrado em Gestão de Políticas Públicas', 1),
+(14, 'Doutorado em Direito', 5),
+(15, 'Doutorado em Administração', 6);
 
 -- --------------------------------------------------------
 
@@ -247,6 +296,14 @@ CREATE TABLE `emprestimos` (
   `B_Item_Id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `emprestimos`
+--
+
+INSERT INTO `emprestimos` (`Data_Inicio`, `Id_Emprestimo`, `Data_Devolucao`, `B_Item_Id`) VALUES
+('2016-03-01', 1, '2016-03-23', 2),
+('2016-07-23', 2, '2016-08-03', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -263,6 +320,7 @@ CREATE TABLE `ensino` (
 
 INSERT INTO `ensino` (`ID_Unidade`) VALUES
 (1),
+(2),
 (5),
 (6),
 (21);
@@ -320,6 +378,16 @@ CREATE TABLE `funcionario` (
   `ID_Usuario` int(11) NOT NULL,
   `Funcao` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `funcionario`
+--
+
+INSERT INTO `funcionario` (`ID_Usuario`, `Funcao`) VALUES
+(10, 'Auxiliar Administrativo'),
+(12, 'Auxiliar Administrativo'),
+(18, 'Auxiliar Administrativo'),
+(19, 'Auxiliar Administrativo');
 
 -- --------------------------------------------------------
 
@@ -420,7 +488,8 @@ CREATE TABLE `latu_sensu` (
 
 INSERT INTO `latu_sensu` (`Codigo`, `Valor_Mensalidade`) VALUES
 (7, 1000),
-(8, 2000);
+(8, 2000),
+(9, 3000);
 
 -- --------------------------------------------------------
 
@@ -432,6 +501,15 @@ CREATE TABLE `mestrado_academico` (
   `Codigo` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `mestrado_academico`
+--
+
+INSERT INTO `mestrado_academico` (`Codigo`) VALUES
+(11),
+(12),
+(13);
+
 -- --------------------------------------------------------
 
 --
@@ -441,6 +519,13 @@ CREATE TABLE `mestrado_academico` (
 CREATE TABLE `mestrado_profissional` (
   `Codigo` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `mestrado_profissional`
+--
+
+INSERT INTO `mestrado_profissional` (`Codigo`) VALUES
+(10);
 
 -- --------------------------------------------------------
 
@@ -473,7 +558,10 @@ CREATE TABLE `ocorrencias` (
 
 INSERT INTO `ocorrencias` (`ID_Ocorrencia`, `Tipo_Ocorrencia`, `Data_Inicio`, `Data_Final`, `ID_Usuario`) VALUES
 (1, 'Licenca', '2016-08-01', '2016-08-30', 5),
-(2, 'Licenca', '2016-05-01', '2016-05-30', 6);
+(2, 'Licenca', '2016-05-01', '2016-05-30', 6),
+(3, 'Ferias', '2015-06-03', '2015-06-03', 19),
+(4, 'Ferias', '2015-12-02', '2015-01-02', 12),
+(5, 'Ferias', '2015-12-02', '2015-01-02', 7);
 
 -- --------------------------------------------------------
 
@@ -510,6 +598,17 @@ CREATE TABLE `participa` (
   `Bolsa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `participa`
+--
+
+INSERT INTO `participa` (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES
+(31, 2011, 400),
+(36, 2012, 400),
+(30, 2013, 600),
+(35, 2014, 400),
+(38, 2014, 400);
+
 -- --------------------------------------------------------
 
 --
@@ -527,7 +626,14 @@ CREATE TABLE `pos_graduacao` (
 
 INSERT INTO `pos_graduacao` (`Codigo`, `Data_defesa_do_Trabalho_final`) VALUES
 (7, '2016-11-30'),
-(8, '2016-11-30');
+(8, '2016-11-30'),
+(9, '2016-11-30'),
+(10, '2016-11-30'),
+(11, '2016-11-30'),
+(12, '2016-11-30'),
+(13, '2016-11-30'),
+(14, '2016-11-30'),
+(15, '2016-11-30');
 
 -- --------------------------------------------------------
 
@@ -652,7 +758,8 @@ CREATE TABLE `restaurante` (
 
 INSERT INTO `restaurante` (`ID_Res`, `ID_Unidade`, `R_Nome`) VALUES
 (1, 1, 'Restaurante da EACH'),
-(2, 5, 'Restaurante da Faculdade de Direito');
+(2, 5, 'Restaurante da Faculdade de Direito'),
+(3, NULL, 'Restaurante Central');
 
 -- --------------------------------------------------------
 
@@ -690,6 +797,16 @@ CREATE TABLE `strictu_sensu` (
   `Data_final_qualifiacao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `strictu_sensu`
+--
+
+INSERT INTO `strictu_sensu` (`Codigo`, `Data_final_qualifiacao`) VALUES
+(10, '2016-11-30'),
+(11, '2016-11-30'),
+(12, '2016-11-30'),
+(13, '2016-11-30');
+
 -- --------------------------------------------------------
 
 --
@@ -708,8 +825,9 @@ CREATE TABLE `unidade` (
 
 INSERT INTO `unidade` (`Nome_Unidade`, `ID_Unidade`, `Endereco`) VALUES
 ('Escola de Artes, Ciencias e Humanidades', 1, 'Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP'),
+('Faculdade de Medicina', 2, 'Av. Dr. Arnaldo, 455\r\nSão Paulo, SP'),
 ('Faculdade de Direito', 5, 'Largo Sao Francisco, 95\r\nSao Paulo, SP'),
-('Faculdade de Economia, Administracao e Contabilidade', 6, 'Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP, 05508-010'),
+('Faculdade de Economia, Administracao e Contabilidade', 6, 'Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP'),
 ('Reitoria', 21, 'R. da Reitoria, 374 - Butanta, Sao Paulo - SP');
 
 -- --------------------------------------------------------
@@ -773,6 +891,17 @@ CREATE TABLE `verba` (
   `Data` date NOT NULL,
   `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `verba`
+--
+
+INSERT INTO `verba` (`Valor`, `Data`, `ID_Unidade`) VALUES
+(10000000, '2016-01-01', 1),
+(14000000, '2016-01-01', 2),
+(12000000, '2016-01-01', 5),
+(15000000, '2016-01-01', 6),
+(1000000000, '2016-01-01', 21);
 
 --
 -- Indexes for dumped tables
@@ -1102,12 +1231,12 @@ ALTER TABLE `atividades_extensao`
 -- AUTO_INCREMENT for table `biblioteca`
 --
 ALTER TABLE `biblioteca`
-  MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `restaurante`
 --
 ALTER TABLE `restaurante`
-  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Dez-2016 às 19:22
+-- Generation Time: 28-Dez-2016 às 20:22
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -170,10 +170,23 @@ INSERT INTO `bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo
 ('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 4, '2000-01-20', 'Cadeira', 6, 500),
 ('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 3000, 5, '2005-01-12', 'Computador', 21, 50),
 ('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 3000, 6, '2005-01-05', 'Computador', 1, 150),
-('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 20000, 7, '2000-01-20', 'Carro', 6, 10),
+('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 3000, 7, '2000-01-20', 'Computador', 6, 50),
 ('Largo Sao Francisco, 95\r\nSao Paulo, SP', 3000, 8, '1995-09-15', 'Computador', 5, 100),
 ('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 9, '2000-01-20', 'Mesa', 6, 200),
-('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 10, '1995-09-15', 'Cadeira', 21, 200);
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 10, '1995-09-15', 'Cadeira', 21, 200),
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 800, 11, '2000-01-20', 'Projetor', 1, 70),
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 50, 12, '2000-01-20', 'Cadeira', 1, 300),
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 50, 13, '2000-01-20', 'Mesa', 1, 150),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 3000, 14, '2013-01-10', 'Computador', 2, 90),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 15, '2013-01-10', 'Mesa', 2, 100),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 500, 16, '2013-01-10', 'Projetor', 2, 65),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 20000, 17, '2013-01-10', 'Carro', 2, 6),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 50, 18, '2000-01-20', 'Mesa', 5, 80),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 30, 19, '2000-01-20', 'Cadeira', 5, 120),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 20000, 20, '2000-01-20', 'Carro', 5, 4),
+('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 20000, 21, '1995-09-15', 'Carro', 6, 4),
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 50, 22, '1995-09-15', 'Mesa', 21, 75),
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 23, '1995-09-15', 'Carro', 21, 4);
 
 -- --------------------------------------------------------
 

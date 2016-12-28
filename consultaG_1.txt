@@ -1,5 +1,5 @@
 Consulta:
-SELECT Bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
+SELECT Bens.ID_Bem AS id, Localizacao, Valor, Quantidade, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
 FROM Bens
 INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
 AND Nome_Unidade LIKE '%string%';

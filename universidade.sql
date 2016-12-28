@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Dez-2016 às 15:42
+-- Generation Time: 28-Dez-2016 às 19:22
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -170,8 +170,8 @@ INSERT INTO `bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo
 ('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 4, '2000-01-20', 'Cadeira', 6, 500),
 ('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 3000, 5, '2005-01-12', 'Computador', 21, 50),
 ('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 3000, 6, '2005-01-05', 'Computador', 1, 150),
-('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 7, '2000-01-20', 'Carro', 6, 10),
-('Largo Sao Francisco, 95\r\nSao Paulo, SP', 20000, 8, '1995-09-15', 'Computador', 5, 100),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 20000, 7, '2000-01-20', 'Carro', 6, 10),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 3000, 8, '1995-09-15', 'Computador', 5, 100),
 ('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 9, '2000-01-20', 'Mesa', 6, 200),
 ('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 10, '1995-09-15', 'Cadeira', 21, 200);
 

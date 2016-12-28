@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Dez-2016 às 12:32
+-- Generation Time: 28-Dez-2016 às 15:42
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -52,9 +52,20 @@ INSERT INTO `acervo_biblioteca` (`B_Item_Id`, `B_Item_Nome`, `B_Item_Tipo`, `ID_
 
 CREATE TABLE `acervo_museu` (
   `M_Item_Id` int(11) NOT NULL,
-  `M_Item_Nome` char(1) NOT NULL,
+  `M_Item_Nome` char(255) NOT NULL,
   `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `acervo_museu`
+--
+
+INSERT INTO `acervo_museu` (`M_Item_Id`, `M_Item_Nome`, `ID_Unidade`) VALUES
+(1, 'Taça Cerimonial', 9),
+(2, 'Tablete com escrita cuneiforme', 9),
+(3, 'Vaso Cerâmica', 9),
+(4, 'Cesto Guarani', 9),
+(5, 'Colar de contas de vidro', 9);
 
 -- --------------------------------------------------------
 
@@ -194,7 +205,7 @@ INSERT INTO `biblioteca` (`ID_Bib`, `ID_Unidade`, `B_Nome`) VALUES
 
 CREATE TABLE `coordena` (
   `ID_Projeto` bigint(20) NOT NULL,
-  `Indice_Pequisador` int(11) NOT NULL,
+  `Indice_Pesquisador` int(11) NOT NULL,
   `Bolsa_Pesquisador` int(11) NOT NULL,
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -203,7 +214,7 @@ CREATE TABLE `coordena` (
 -- Extraindo dados da tabela `coordena`
 --
 
-INSERT INTO `coordena` (`ID_Projeto`, `Indice_Pequisador`, `Bolsa_Pesquisador`, `ID_Usuario`) VALUES
+INSERT INTO `coordena` (`ID_Projeto`, `Indice_Pesquisador`, `Bolsa_Pesquisador`, `ID_Usuario`) VALUES
 (2013, 10, 5000, 9),
 (2014, 5, 3000, 7);
 
@@ -249,7 +260,10 @@ INSERT INTO `cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
 (12, 'Mestrado em Sistemas de Informacão', 1),
 (13, 'Mestrado em Gestão de Políticas Públicas', 1),
 (14, 'Doutorado em Direito', 5),
-(15, 'Doutorado em Administração', 6);
+(15, 'Doutorado em Administração', 6),
+(16, 'Doutorado em Gestão de Políticas Públicas', 1),
+(17, 'Doutorado em Medicina', 2),
+(18, 'Doutorado em Sistemas de Informação', 1);
 
 -- --------------------------------------------------------
 
@@ -283,6 +297,17 @@ INSERT INTO `disciplinas` (`ID_Disciplina`, `Nome`) VALUES
 CREATE TABLE `doutorado` (
   `Codigo` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `doutorado`
+--
+
+INSERT INTO `doutorado` (`Codigo`) VALUES
+(14),
+(15),
+(16),
+(17),
+(18);
 
 -- --------------------------------------------------------
 
@@ -455,9 +480,15 @@ INSERT INTO `historico` (`ID_Usuario`, `ID_Disciplina`, `Notas`, `Frequencia`) V
 --
 
 CREATE TABLE `hospital` (
-  `ID_Unidade` int(11) DEFAULT NULL,
-  `H_Nome` char(1) NOT NULL
+  `ID_Unidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `hospital`
+--
+
+INSERT INTO `hospital` (`ID_Unidade`) VALUES
+(10);
 
 -- --------------------------------------------------------
 
@@ -535,9 +566,17 @@ INSERT INTO `mestrado_profissional` (`Codigo`) VALUES
 --
 
 CREATE TABLE `museu` (
-  `ID_Unidade` int(11) NOT NULL,
-  `M_Nome` char(255) NOT NULL
+  `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `museu`
+--
+
+INSERT INTO `museu` (`ID_Unidade`) VALUES
+(7),
+(8),
+(9);
 
 -- --------------------------------------------------------
 
@@ -634,7 +673,10 @@ INSERT INTO `pos_graduacao` (`Codigo`, `Data_defesa_do_Trabalho_final`) VALUES
 (12, '2016-11-30'),
 (13, '2016-11-30'),
 (14, '2016-11-30'),
-(15, '2016-11-30');
+(15, '2016-11-30'),
+(16, '2016-11-30'),
+(17, '2016-11-30'),
+(18, '2016-11-30');
 
 -- --------------------------------------------------------
 
@@ -795,18 +837,23 @@ INSERT INTO `servidor` (`ID_Usuario`) VALUES
 
 CREATE TABLE `strictu_sensu` (
   `Codigo` bigint(20) NOT NULL,
-  `Data_final_qualifiacao` date NOT NULL
+  `Data_final_qualificacao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `strictu_sensu`
 --
 
-INSERT INTO `strictu_sensu` (`Codigo`, `Data_final_qualifiacao`) VALUES
+INSERT INTO `strictu_sensu` (`Codigo`, `Data_final_qualificacao`) VALUES
 (10, '2016-11-30'),
 (11, '2016-11-30'),
 (12, '2016-11-30'),
-(13, '2016-11-30');
+(13, '2016-11-30'),
+(14, '2015-11-30'),
+(15, '2015-11-30'),
+(16, '2015-11-30'),
+(17, '2015-11-30'),
+(18, '2015-11-30');
 
 -- --------------------------------------------------------
 
@@ -829,6 +876,10 @@ INSERT INTO `unidade` (`Nome_Unidade`, `ID_Unidade`, `Endereco`) VALUES
 ('Faculdade de Medicina', 2, 'Av. Dr. Arnaldo, 455\r\nSão Paulo, SP'),
 ('Faculdade de Direito', 5, 'Largo Sao Francisco, 95\r\nSao Paulo, SP'),
 ('Faculdade de Economia, Administracao e Contabilidade', 6, 'Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP'),
+('Museu de Anatomia Humana', 7, 'Av. Prof. Lineu Prestes, 2415, Butantã, \r\nSão Paulo, SP\r\n'),
+('Museu de Arte Contemporânea', 8, 'Avenida Pedro Álvares Cabral, 1301\r\n'),
+('Museu de Arqueologia e Etnologia', 9, 'Av. Prof. Almeida Prado, 1466 - São Paulo - SP'),
+('Hospital Universitário', 10, 'Av. Professor Lineu Prestes, 2565 – Butantã - São Paulo - SP'),
 ('Reitoria', 21, 'R. da Reitoria, 374 - Butanta, Sao Paulo - SP');
 
 -- --------------------------------------------------------
@@ -1354,7 +1405,7 @@ ALTER TABLE `historico`
 -- Limitadores para a tabela `hospital`
 --
 ALTER TABLE `hospital`
-  ADD CONSTRAINT `FKEnsino_Possui1_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
+  ADD CONSTRAINT `FKEnsino_Possui1_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `indice_de_desempenho`

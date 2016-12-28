@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Dez-2016 às 00:05
+-- Generation Time: 28-Dez-2016 às 12:32
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -38,11 +38,11 @@ CREATE TABLE `acervo_biblioteca` (
 --
 
 INSERT INTO `acervo_biblioteca` (`B_Item_Id`, `B_Item_Nome`, `B_Item_Tipo`, `ID_Bib`) VALUES
-(1, 'SIPSER, M. Introdução à Teoria da Computação. Ed. Thomson', 'Livro', 1),
-(2, 'INTRODUÇÃO A MICROECONOMIA E INTRODUÇÃO A MACROECONOMIA\r\nJoseph E.: Stigiglitz e Carl E. Walsh – Editora Campus', 'Livro', 3),
-(3, 'Montesquieu, Charles de Secondat Baron de la Brède 1689-1755\r\nDo espírito das Leis / Montesquieu ; tradução Jean Melville --  São Paulo : Martin Claret, 2010.', 'Livro', 2),
-(4, 'ELMASRI, R.; NAVATHE, S.B. “Sistemas de Bancos de Dados”, 6a Edição. Editora Pearson, 2011.', 'Livro', 1),
-(5, 'A república / Platão ; tradução Pietro Nassetti --  São Paulo : Martin Claret, 2009', 'Livro', 2);
+(1, 'Introducao a Teoria da Computacao - SIPSER, M.', 'Livro', 1),
+(2, 'Introducao a microeconomia e Introducao a macroeconomia - Joseph E. Stigiglitz e Carl E. Walsh', 'Livro', 3),
+(3, 'Do espírito das Leis - Montesquieu', 'Livro', 2),
+(4, 'Sistemas de Bancos de Dados - ELMASRI, R.; NAVATHE, S.B.', 'Livro', 1),
+(5, 'A república - Platão', 'Livro', 2);
 
 -- --------------------------------------------------------
 
@@ -144,24 +144,25 @@ CREATE TABLE `bens` (
   `ID_bem` int(11) NOT NULL,
   `Data_de_Aquisicao` date NOT NULL,
   `Tipo` char(255) NOT NULL,
-  `ID_Unidade` int(11) NOT NULL
+  `ID_Unidade` int(11) NOT NULL,
+  `Quantidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `bens`
 --
 
-INSERT INTO `bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo`, `ID_Unidade`) VALUES
-('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 20000, 1, '1995-09-15', 'Carro', 1),
-('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 2, '2000-01-20', 'Cadeira', 2),
-('Largo Sao Francisco, 95\r\nSao Paulo, SP', 800, 3, '2000-01-20', 'Projetor', 5),
-('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 4, '2000-01-20', 'Cadeira', 6),
-('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 3000, 5, '2005-01-12', 'Computador', 21),
-('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 3000, 6, '2005-01-05', 'Computador', 1),
-('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 7, '2000-01-20', 'Cadeira', 2),
-('Largo Sao Francisco, 95\r\nSao Paulo, SP', 20000, 8, '1995-09-15', 'Carro', 5),
-('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 9, '2000-01-20', 'Mesa', 6),
-('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 10, '1995-09-15', 'Carro', 21);
+INSERT INTO `bens` (`Localizacao`, `Valor`, `ID_bem`, `Data_de_Aquisicao`, `Tipo`, `ID_Unidade`, `Quantidade`) VALUES
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 20000, 1, '1995-09-15', 'Carro', 1, 5),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 2, '2000-01-20', 'Cadeira', 2, 500),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 800, 3, '2000-01-20', 'Projetor', 5, 100),
+('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 4, '2000-01-20', 'Cadeira', 6, 500),
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 3000, 5, '2005-01-12', 'Computador', 21, 50),
+('Rua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', 3000, 6, '2005-01-05', 'Computador', 1, 150),
+('Av. Dr. Arnaldo, 455\r\nSão Paulo, SP', 50, 7, '2000-01-20', 'Carro', 6, 10),
+('Largo Sao Francisco, 95\r\nSao Paulo, SP', 20000, 8, '1995-09-15', 'Computador', 5, 100),
+('Av. Prof. Luciano Gualberto, 908 - Butanta, Sao Paulo - SP', 50, 9, '2000-01-20', 'Mesa', 6, 200),
+('R. da Reitoria, 374 - Butanta, Sao Paulo - SP', 20000, 10, '1995-09-15', 'Cadeira', 21, 200);
 
 -- --------------------------------------------------------
 

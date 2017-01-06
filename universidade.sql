@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Jan-2017 às 16:42
+-- Generation Time: 06-Jan-2017 às 16:02
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -60,9 +60,9 @@ CREATE TABLE `acervo_museu` (
 --
 
 INSERT INTO `acervo_museu` (`M_Item_Id`, `M_Item_Nome`, `ID_Unidade`) VALUES
-(1, 'Taça Cerimonial', 9),
+(1, 'Taca Cerimonial', 9),
 (2, 'Tablete com escrita cuneiforme', 9),
-(3, 'Vaso Cerâmica', 9),
+(3, 'Vaso Ceramica', 9),
 (4, 'Cesto Guarani', 9),
 (5, 'Colar de contas de vidro', 9);
 
@@ -111,10 +111,20 @@ INSERT INTO `aluno` (`ID_Usuario`, `Codigo`, `Ise_Codigo`) VALUES
 --
 
 CREATE TABLE `atividades_extensao` (
-  `ID_Ati` int(11) NOT NULL,
   `Localizacao` char(255) NOT NULL,
-  `Data_Atividade` date NOT NULL
+  `Data_Atividade` date NOT NULL,
+  `ID_Projeto` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `atividades_extensao`
+--
+
+INSERT INTO `atividades_extensao` (`Localizacao`, `Data_Atividade`, `ID_Projeto`) VALUES
+('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-02-02', 2011),
+('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-02-02', 2012),
+('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-03-02', 2011),
+('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-03-02', 2012);
 
 -- --------------------------------------------------------
 
@@ -237,10 +247,20 @@ INSERT INTO `coordena` (`ID_Projeto`, `Indice_Pesquisador`, `Bolsa_Pesquisador`,
 --
 
 CREATE TABLE `creditos` (
-  `ID_Res` int(11) NOT NULL,
-  `Nro_de_Creditos` int(11) NOT NULL,
+  `Nro_de_creditos` char(1) NOT NULL,
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `creditos`
+--
+
+INSERT INTO `creditos` (`Nro_de_creditos`, `ID_Usuario`) VALUES
+('2', 8),
+('2', 26),
+('6', 27),
+('4', 37),
+('3', 20);
 
 -- --------------------------------------------------------
 
@@ -366,13 +386,23 @@ INSERT INTO `ensino` (`ID_Unidade`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `extensao_possui`
+-- Estrutura da tabela `exerce`
 --
 
-CREATE TABLE `extensao_possui` (
-  `ID_Ati` int(11) NOT NULL,
-  `ID_Projeto` bigint(20) NOT NULL
+CREATE TABLE `exerce` (
+  `ID_Projeto` bigint(20) NOT NULL,
+  `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `exerce`
+--
+
+INSERT INTO `exerce` (`ID_Projeto`, `ID_Usuario`) VALUES
+(2011, 6),
+(2012, 7),
+(2011, 10),
+(2012, 18);
 
 -- --------------------------------------------------------
 
@@ -402,9 +432,31 @@ INSERT INTO `financiador` (`Tipo`, `nome`, `ID_Financiador`) VALUES
 
 CREATE TABLE `folha_de_pagamento` (
   `Salario` int(11) NOT NULL,
+  `Id_Pagamento` int(11) NOT NULL,
   `Data` date NOT NULL,
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `folha_de_pagamento`
+--
+
+INSERT INTO `folha_de_pagamento` (`Salario`, `Id_Pagamento`, `Data`, `ID_Usuario`) VALUES
+(10000, 1, '2016-02-02', 5),
+(6000, 2, '2016-02-02', 6),
+(6000, 3, '2016-02-02', 7),
+(8000, 4, '2016-02-02', 8),
+(10000, 5, '2016-02-02', 9),
+(10000, 6, '2016-02-02', 5),
+(6000, 7, '2016-03-02', 6),
+(6000, 8, '2016-03-02', 7),
+(8000, 9, '2016-03-02', 8),
+(10000, 10, '2016-03-02', 9),
+(10000, 11, '2016-04-02', 5),
+(6000, 12, '2016-04-02', 6),
+(6000, 13, '2016-04-02', 7),
+(8000, 14, '2016-04-02', 8),
+(10000, 15, '2016-04-02', 9);
 
 -- --------------------------------------------------------
 
@@ -493,8 +545,15 @@ INSERT INTO `historico` (`ID_Usuario`, `ID_Disciplina`, `Notas`, `Frequencia`) V
 --
 
 CREATE TABLE `hospital` (
-  `ID_Unidade` int(11) DEFAULT NULL
+  `ID_Unidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `hospital`
+--
+
+INSERT INTO `hospital` (`ID_Unidade`) VALUES
+(10);
 
 -- --------------------------------------------------------
 
@@ -741,17 +800,16 @@ INSERT INTO `projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `
 --
 
 CREATE TABLE `projeto_extensao` (
-  `ID_Projeto` bigint(20) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL
+  `ID_Projeto` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `projeto_extensao`
 --
 
-INSERT INTO `projeto_extensao` (`ID_Projeto`, `ID_Usuario`) VALUES
-(2012, 5),
-(2011, 6);
+INSERT INTO `projeto_extensao` (`ID_Projeto`) VALUES
+(2011),
+(2012);
 
 -- --------------------------------------------------------
 
@@ -796,19 +854,19 @@ INSERT INTO `reitoria` (`Cnpj`, `ID_Unidade`) VALUES
 --
 
 CREATE TABLE `restaurante` (
-  `ID_Res` int(11) NOT NULL,
   `ID_Unidade` int(11) DEFAULT NULL,
-  `R_Nome` char(255) NOT NULL
+  `R_Nome` char(255) NOT NULL,
+  `ID_Res` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `restaurante`
 --
 
-INSERT INTO `restaurante` (`ID_Res`, `ID_Unidade`, `R_Nome`) VALUES
-(1, 1, 'Restaurante da EACH'),
-(2, 5, 'Restaurante da Faculdade de Direito'),
-(3, NULL, 'Restaurante Central');
+INSERT INTO `restaurante` (`ID_Unidade`, `R_Nome`, `ID_Res`) VALUES
+(1, 'Restaurante da EACH', 1),
+(5, 'Restaurante da Faculdade de Direito', 2),
+(NULL, 'Restaurante Central', 3);
 
 -- --------------------------------------------------------
 
@@ -971,7 +1029,7 @@ INSERT INTO `verba` (`Valor`, `Data`, `ID_Unidade`) VALUES
 ALTER TABLE `acervo_biblioteca`
   ADD PRIMARY KEY (`B_Item_Id`),
   ADD UNIQUE KEY `ID_Acervo_Biblioteca_IND` (`B_Item_Id`),
-  ADD KEY `EQU_Acerv_Bibli_IND` (`ID_Bib`);
+  ADD KEY `FKBiblioteca_Possui_IND` (`ID_Bib`);
 
 --
 -- Indexes for table `acervo_museu`
@@ -979,23 +1037,22 @@ ALTER TABLE `acervo_biblioteca`
 ALTER TABLE `acervo_museu`
   ADD PRIMARY KEY (`M_Item_Id`),
   ADD UNIQUE KEY `ID_Acervo_Museu_IND` (`M_Item_Id`),
-  ADD KEY `EQU_Acerv_Museu_IND` (`ID_Unidade`);
+  ADD KEY `FKMuseu_Possui_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`ID_Usuario`),
-  ADD UNIQUE KEY `ID_Aluno_Usuar_IND` (`ID_Usuario`),
-  ADD KEY `REF_Aluno_Curso_IND` (`Codigo`),
-  ADD KEY `REF_Aluno_Latu__IND` (`Ise_Codigo`);
+  ADD UNIQUE KEY `FKUsu_Alu_IND` (`ID_Usuario`),
+  ADD KEY `FKcursa_IND` (`Codigo`),
+  ADD KEY `FKIsencao_na_inscricao_IND` (`Ise_Codigo`);
 
 --
 -- Indexes for table `atividades_extensao`
 --
 ALTER TABLE `atividades_extensao`
-  ADD PRIMARY KEY (`ID_Ati`),
-  ADD UNIQUE KEY `ID_Atividades_Extensao_IND` (`ID_Ati`);
+  ADD KEY `FKExtensao_Possui_IND` (`ID_Projeto`);
 
 --
 -- Indexes for table `atribuicoes`
@@ -1003,7 +1060,7 @@ ALTER TABLE `atividades_extensao`
 ALTER TABLE `atribuicoes`
   ADD PRIMARY KEY (`Id_Atribuicoes`),
   ADD UNIQUE KEY `ID_Atribuicoes_IND` (`Id_Atribuicoes`),
-  ADD KEY `REF_Atrib_Profe_IND` (`ID_Usuario`);
+  ADD KEY `FKProfessor_possui_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `bens`
@@ -1011,32 +1068,30 @@ ALTER TABLE `atribuicoes`
 ALTER TABLE `bens`
   ADD PRIMARY KEY (`ID_bem`),
   ADD UNIQUE KEY `ID_Bens_IND` (`ID_bem`),
-  ADD KEY `REF_Bens_Unida_IND` (`ID_Unidade`);
+  ADD KEY `FKPossui_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `biblioteca`
 --
 ALTER TABLE `biblioteca`
   ADD PRIMARY KEY (`ID_Bib`),
-  ADD UNIQUE KEY `ID_Biblioteca_IND` (`ID_Bib`),
-  ADD UNIQUE KEY `SID_Bibli_Ensin_ID` (`ID_Unidade`),
-  ADD UNIQUE KEY `SID_Bibli_Ensin_IND` (`ID_Unidade`);
+  ADD UNIQUE KEY `ID_IND` (`ID_Bib`),
+  ADD UNIQUE KEY `FKEnsino_Possui3_ID` (`ID_Unidade`),
+  ADD UNIQUE KEY `FKEnsino_Possui3_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `coordena`
 --
 ALTER TABLE `coordena`
   ADD PRIMARY KEY (`ID_Projeto`),
-  ADD UNIQUE KEY `ID_Coord_Proje_IND` (`ID_Projeto`),
-  ADD KEY `REF_Coord_Profe_IND` (`ID_Usuario`);
+  ADD UNIQUE KEY `FKCoo_Pro_1_IND` (`ID_Projeto`),
+  ADD KEY `FKCoo_Pro_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `creditos`
 --
 ALTER TABLE `creditos`
-  ADD PRIMARY KEY (`ID_Res`),
-  ADD UNIQUE KEY `ID_Credi_Resta_IND` (`ID_Res`),
-  ADD KEY `EQU_Credi_Usuar_IND` (`ID_Usuario`);
+  ADD KEY `FKUso_Restaurantes_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `cursos`
@@ -1044,7 +1099,7 @@ ALTER TABLE `creditos`
 ALTER TABLE `cursos`
   ADD PRIMARY KEY (`Codigo`),
   ADD UNIQUE KEY `ID_Cursos_IND` (`Codigo`),
-  ADD KEY `REF_Curso_Ensin_IND` (`ID_Unidade`);
+  ADD KEY `FKComposicao_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `disciplinas`
@@ -1058,7 +1113,7 @@ ALTER TABLE `disciplinas`
 --
 ALTER TABLE `doutorado`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Douto_Stric_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKStr_Dou_IND` (`Codigo`);
 
 --
 -- Indexes for table `emprestimos`
@@ -1066,22 +1121,22 @@ ALTER TABLE `doutorado`
 ALTER TABLE `emprestimos`
   ADD PRIMARY KEY (`Id_Emprestimo`),
   ADD UNIQUE KEY `ID_Emprestimos_IND` (`Id_Emprestimo`),
-  ADD KEY `REF_Empre_Acerv_IND` (`B_Item_Id`);
+  ADD KEY `FKEmpresta_IND` (`B_Item_Id`);
 
 --
 -- Indexes for table `ensino`
 --
 ALTER TABLE `ensino`
   ADD PRIMARY KEY (`ID_Unidade`),
-  ADD UNIQUE KEY `ID_Ensin_Unida_IND` (`ID_Unidade`);
+  ADD UNIQUE KEY `FKUni_Ens_IND` (`ID_Unidade`);
 
 --
--- Indexes for table `extensao_possui`
+-- Indexes for table `exerce`
 --
-ALTER TABLE `extensao_possui`
-  ADD PRIMARY KEY (`ID_Projeto`,`ID_Ati`),
-  ADD UNIQUE KEY `ID_Extensao_Possui_IND` (`ID_Projeto`,`ID_Ati`),
-  ADD KEY `REF_Exten_Ativi_IND` (`ID_Ati`);
+ALTER TABLE `exerce`
+  ADD PRIMARY KEY (`ID_Usuario`,`ID_Projeto`),
+  ADD UNIQUE KEY `ID_exerce_IND` (`ID_Usuario`,`ID_Projeto`),
+  ADD KEY `FKexe_Pro_IND` (`ID_Projeto`);
 
 --
 -- Indexes for table `financiador`
@@ -1094,21 +1149,23 @@ ALTER TABLE `financiador`
 -- Indexes for table `folha_de_pagamento`
 --
 ALTER TABLE `folha_de_pagamento`
-  ADD KEY `EQU_Folha_Servi_IND` (`ID_Usuario`);
+  ADD PRIMARY KEY (`Id_Pagamento`),
+  ADD UNIQUE KEY `ID_Folha_de_Pagamento_IND` (`Id_Pagamento`),
+  ADD KEY `FKServidor_Recebe_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `funcionario`
 --
 ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`ID_Usuario`),
-  ADD UNIQUE KEY `ID_Funci_Servi_IND` (`ID_Usuario`);
+  ADD UNIQUE KEY `FKSer_Fun_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `graduacao`
 --
 ALTER TABLE `graduacao`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Gradu_Curso_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKCur_Gra_IND` (`Codigo`);
 
 --
 -- Indexes for table `historico`
@@ -1116,51 +1173,51 @@ ALTER TABLE `graduacao`
 ALTER TABLE `historico`
   ADD PRIMARY KEY (`ID_Disciplina`,`ID_Usuario`),
   ADD UNIQUE KEY `ID_Historico_IND` (`ID_Disciplina`,`ID_Usuario`),
-  ADD KEY `REF_Histo_Aluno_IND` (`ID_Usuario`);
+  ADD KEY `FKHis_Alu_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `hospital`
 --
 ALTER TABLE `hospital`
-  ADD UNIQUE KEY `SID_Hospi_Ensin_ID` (`ID_Unidade`),
-  ADD UNIQUE KEY `SID_Hospi_Ensin_IND` (`ID_Unidade`);
+  ADD PRIMARY KEY (`ID_Unidade`),
+  ADD UNIQUE KEY `FKUni_Hos_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `indice_de_desempenho`
 --
 ALTER TABLE `indice_de_desempenho`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Indic_Curso_IND` (`Codigo`),
-  ADD KEY `REF_Indic_Profe_IND` (`ID_Usuario`),
-  ADD KEY `REF_Indic_Aluno_IND` (`I_A_ID_Usuario`);
+  ADD UNIQUE KEY `FKInd_Cur_IND` (`Codigo`),
+  ADD KEY `FKInd_Pro_IND` (`ID_Usuario`),
+  ADD KEY `FKInd_Alu_IND` (`I_A_ID_Usuario`);
 
 --
 -- Indexes for table `latu_sensu`
 --
 ALTER TABLE `latu_sensu`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Latu__Pos_G_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKPos_Lat_IND` (`Codigo`);
 
 --
 -- Indexes for table `mestrado_academico`
 --
 ALTER TABLE `mestrado_academico`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Mestr_Stric_1_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKStr_Mes_IND` (`Codigo`);
 
 --
 -- Indexes for table `mestrado_profissional`
 --
 ALTER TABLE `mestrado_profissional`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Mestr_Stric_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKStr_Mes_1_IND` (`Codigo`);
 
 --
 -- Indexes for table `museu`
 --
 ALTER TABLE `museu`
   ADD PRIMARY KEY (`ID_Unidade`),
-  ADD UNIQUE KEY `ID_Museu_Unida_IND` (`ID_Unidade`);
+  ADD UNIQUE KEY `FKUni_Mus_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `ocorrencias`
@@ -1168,7 +1225,7 @@ ALTER TABLE `museu`
 ALTER TABLE `ocorrencias`
   ADD PRIMARY KEY (`ID_Ocorrencia`),
   ADD UNIQUE KEY `ID_Ocorrencias_IND` (`ID_Ocorrencia`),
-  ADD KEY `REF_Ocorr_Servi_IND` (`ID_Usuario`);
+  ADD KEY `FKServidor_tem_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `oferecimento`
@@ -1176,7 +1233,7 @@ ALTER TABLE `ocorrencias`
 ALTER TABLE `oferecimento`
   ADD PRIMARY KEY (`ID_Disciplina`,`Codigo`),
   ADD UNIQUE KEY `ID_Oferecimento_IND` (`ID_Disciplina`,`Codigo`),
-  ADD KEY `EQU_Ofere_Curso_IND` (`Codigo`);
+  ADD KEY `FKOfe_Cur_IND` (`Codigo`);
 
 --
 -- Indexes for table `participa`
@@ -1184,22 +1241,22 @@ ALTER TABLE `oferecimento`
 ALTER TABLE `participa`
   ADD PRIMARY KEY (`ID_Projeto`,`ID_Usuario`),
   ADD UNIQUE KEY `ID_Participa_IND` (`ID_Projeto`,`ID_Usuario`),
-  ADD KEY `REF_Parti_Aluno_IND` (`ID_Usuario`);
+  ADD KEY `FKPar_Alu_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `pos_graduacao`
 --
 ALTER TABLE `pos_graduacao`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Pos_G_Curso_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKCur_Pos_IND` (`Codigo`);
 
 --
 -- Indexes for table `professor`
 --
 ALTER TABLE `professor`
   ADD PRIMARY KEY (`ID_Usuario`),
-  ADD UNIQUE KEY `ID_Profe_Servi_IND` (`ID_Usuario`),
-  ADD KEY `REF_Profe_Curso_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKSer_Pro_IND` (`ID_Usuario`),
+  ADD KEY `FKLeciona_IND` (`Codigo`);
 
 --
 -- Indexes for table `projeto`
@@ -1207,22 +1264,21 @@ ALTER TABLE `professor`
 ALTER TABLE `projeto`
   ADD PRIMARY KEY (`ID_Projeto`),
   ADD UNIQUE KEY `ID_Projeto_IND` (`ID_Projeto`),
-  ADD KEY `EQU_Proje_Finan_IND` (`ID_Financiador`);
+  ADD KEY `FKFinancia_IND` (`ID_Financiador`);
 
 --
 -- Indexes for table `projeto_extensao`
 --
 ALTER TABLE `projeto_extensao`
   ADD PRIMARY KEY (`ID_Projeto`),
-  ADD UNIQUE KEY `ID_Proje_Proje_1_IND` (`ID_Projeto`),
-  ADD KEY `REF_Proje_Servi_IND` (`ID_Usuario`);
+  ADD UNIQUE KEY `FKPro_Pro_1_IND` (`ID_Projeto`);
 
 --
 -- Indexes for table `projeto_pesquisa`
 --
 ALTER TABLE `projeto_pesquisa`
   ADD PRIMARY KEY (`ID_Projeto`),
-  ADD UNIQUE KEY `ID_Proje_Proje_IND` (`ID_Projeto`);
+  ADD UNIQUE KEY `FKPro_Pro_IND` (`ID_Projeto`);
 
 --
 -- Indexes for table `reitoria`
@@ -1230,30 +1286,30 @@ ALTER TABLE `projeto_pesquisa`
 ALTER TABLE `reitoria`
   ADD PRIMARY KEY (`Cnpj`),
   ADD UNIQUE KEY `ID_Reitoria_IND` (`Cnpj`),
-  ADD KEY `EQU_Reito_Unida_IND` (`ID_Unidade`);
+  ADD KEY `FKAdmnistra_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `restaurante`
 --
 ALTER TABLE `restaurante`
   ADD PRIMARY KEY (`ID_Res`),
-  ADD UNIQUE KEY `ID_Restaurante_IND` (`ID_Res`),
-  ADD UNIQUE KEY `SID_Resta_Ensin_ID` (`ID_Unidade`),
-  ADD UNIQUE KEY `SID_Resta_Ensin_IND` (`ID_Unidade`);
+  ADD UNIQUE KEY `ID_Res` (`ID_Res`),
+  ADD UNIQUE KEY `FKEnsino_Possui2_ID` (`ID_Unidade`),
+  ADD UNIQUE KEY `FKEnsino_Possui2_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `servidor`
 --
 ALTER TABLE `servidor`
   ADD PRIMARY KEY (`ID_Usuario`),
-  ADD UNIQUE KEY `ID_Servi_Usuar_IND` (`ID_Usuario`);
+  ADD UNIQUE KEY `FKUsu_Ser_IND` (`ID_Usuario`);
 
 --
 -- Indexes for table `strictu_sensu`
 --
 ALTER TABLE `strictu_sensu`
   ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `ID_Stric_Pos_G_IND` (`Codigo`);
+  ADD UNIQUE KEY `FKPos_Str_IND` (`Codigo`);
 
 --
 -- Indexes for table `unidade`
@@ -1268,13 +1324,12 @@ ALTER TABLE `unidade`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`ID_Usuario`),
   ADD UNIQUE KEY `ID_Usuario_IND` (`ID_Usuario`),
-  ADD KEY `REF_Usuar_Unida_IND` (`ID_Unidade`);
+  ADD KEY `FKCadastro_IND` (`ID_Unidade`);
 
 --
 -- Indexes for table `verba`
 --
 ALTER TABLE `verba`
-  ADD KEY `REF_Verba_Unida_IND` (`ID_Unidade`),
   ADD KEY `FKganha_IND` (`ID_Unidade`);
 
 --
@@ -1282,20 +1337,10 @@ ALTER TABLE `verba`
 --
 
 --
--- AUTO_INCREMENT for table `atividades_extensao`
---
-ALTER TABLE `atividades_extensao`
-  MODIFY `ID_Ati` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `biblioteca`
 --
 ALTER TABLE `biblioteca`
   MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `restaurante`
---
-ALTER TABLE `restaurante`
-  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -1304,236 +1349,239 @@ ALTER TABLE `restaurante`
 -- Limitadores para a tabela `acervo_biblioteca`
 --
 ALTER TABLE `acervo_biblioteca`
-  ADD CONSTRAINT `EQU_Acerv_Bibli_FK` FOREIGN KEY (`ID_Bib`) REFERENCES `biblioteca` (`ID_Bib`);
+  ADD CONSTRAINT `FKBiblioteca_Possui_FK` FOREIGN KEY (`ID_Bib`) REFERENCES `biblioteca` (`ID_Bib`);
 
 --
 -- Limitadores para a tabela `acervo_museu`
 --
 ALTER TABLE `acervo_museu`
-  ADD CONSTRAINT `EQU_Acerv_Museu_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `museu` (`ID_Unidade`);
+  ADD CONSTRAINT `FKMuseu_Possui_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `museu` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD CONSTRAINT `ID_Aluno_Usuar_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
-  ADD CONSTRAINT `REF_Aluno_Curso_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
-  ADD CONSTRAINT `REF_Aluno_Latu__FK` FOREIGN KEY (`Ise_Codigo`) REFERENCES `latu_sensu` (`Codigo`);
+  ADD CONSTRAINT `FKIsencao_na_inscricao_FK` FOREIGN KEY (`Ise_Codigo`) REFERENCES `latu_sensu` (`Codigo`),
+  ADD CONSTRAINT `FKUsu_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
+  ADD CONSTRAINT `FKcursa_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
+
+--
+-- Limitadores para a tabela `atividades_extensao`
+--
+ALTER TABLE `atividades_extensao`
+  ADD CONSTRAINT `FKExtensao_Possui_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto_extensao` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `atribuicoes`
 --
 ALTER TABLE `atribuicoes`
-  ADD CONSTRAINT `REF_Atrib_Profe_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKProfessor_possui_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `bens`
 --
 ALTER TABLE `bens`
-  ADD CONSTRAINT `REF_Bens_Unida_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
+  ADD CONSTRAINT `FKPossui_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `biblioteca`
 --
 ALTER TABLE `biblioteca`
-  ADD CONSTRAINT `SID_Bibli_Ensin_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
+  ADD CONSTRAINT `FKEnsino_Possui3_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `coordena`
 --
 ALTER TABLE `coordena`
-  ADD CONSTRAINT `ID_Coord_Proje_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto_pesquisa` (`ID_Projeto`),
-  ADD CONSTRAINT `REF_Coord_Profe_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKCoo_Pro_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto_pesquisa` (`ID_Projeto`),
+  ADD CONSTRAINT `FKCoo_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `creditos`
 --
 ALTER TABLE `creditos`
-  ADD CONSTRAINT `EQU_Credi_Usuar_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
-  ADD CONSTRAINT `ID_Credi_Resta_FK` FOREIGN KEY (`ID_Res`) REFERENCES `restaurante` (`ID_Res`);
+  ADD CONSTRAINT `FKUso_Restaurantes_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `cursos`
 --
 ALTER TABLE `cursos`
-  ADD CONSTRAINT `REF_Curso_Ensin_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
+  ADD CONSTRAINT `FKComposicao_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `doutorado`
 --
 ALTER TABLE `doutorado`
-  ADD CONSTRAINT `ID_Douto_Stric_FK` FOREIGN KEY (`Codigo`) REFERENCES `strictu_sensu` (`Codigo`);
+  ADD CONSTRAINT `FKStr_Dou_FK` FOREIGN KEY (`Codigo`) REFERENCES `strictu_sensu` (`Codigo`);
 
 --
 -- Limitadores para a tabela `emprestimos`
 --
 ALTER TABLE `emprestimos`
-  ADD CONSTRAINT `REF_Empre_Acerv_FK` FOREIGN KEY (`B_Item_Id`) REFERENCES `acervo_biblioteca` (`B_Item_Id`);
+  ADD CONSTRAINT `FKEmpresta_FK` FOREIGN KEY (`B_Item_Id`) REFERENCES `acervo_biblioteca` (`B_Item_Id`);
 
 --
 -- Limitadores para a tabela `ensino`
 --
 ALTER TABLE `ensino`
-  ADD CONSTRAINT `ID_Ensin_Unida_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
+  ADD CONSTRAINT `FKUni_Ens_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
--- Limitadores para a tabela `extensao_possui`
+-- Limitadores para a tabela `exerce`
 --
-ALTER TABLE `extensao_possui`
-  ADD CONSTRAINT `REF_Exten_Ativi_FK` FOREIGN KEY (`ID_Ati`) REFERENCES `atividades_extensao` (`ID_Ati`),
-  ADD CONSTRAINT `REF_Exten_Proje` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto_extensao` (`ID_Projeto`);
+ALTER TABLE `exerce`
+  ADD CONSTRAINT `FKexe_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto_extensao` (`ID_Projeto`),
+  ADD CONSTRAINT `FKexe_Ser` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `folha_de_pagamento`
 --
 ALTER TABLE `folha_de_pagamento`
-  ADD CONSTRAINT `EQU_Folha_Servi_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKServidor_Recebe_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  ADD CONSTRAINT `ID_Funci_Servi_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKSer_Fun_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `graduacao`
 --
 ALTER TABLE `graduacao`
-  ADD CONSTRAINT `ID_Gradu_Curso_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
+  ADD CONSTRAINT `FKCur_Gra_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
 
 --
 -- Limitadores para a tabela `historico`
 --
 ALTER TABLE `historico`
-  ADD CONSTRAINT `REF_Histo_Aluno_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `REF_Histo_Disci` FOREIGN KEY (`ID_Disciplina`) REFERENCES `disciplinas` (`ID_Disciplina`);
+  ADD CONSTRAINT `FKHis_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
+  ADD CONSTRAINT `FKHis_Dis` FOREIGN KEY (`ID_Disciplina`) REFERENCES `disciplinas` (`ID_Disciplina`);
 
 --
 -- Limitadores para a tabela `hospital`
 --
 ALTER TABLE `hospital`
-  ADD CONSTRAINT `SID_Hospi_Ensin_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
+  ADD CONSTRAINT `FKUni_Hos_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `indice_de_desempenho`
 --
 ALTER TABLE `indice_de_desempenho`
-  ADD CONSTRAINT `ID_Indic_Curso_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
-  ADD CONSTRAINT `REF_Indic_Aluno_FK` FOREIGN KEY (`I_A_ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `REF_Indic_Profe_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKInd_Alu_FK` FOREIGN KEY (`I_A_ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
+  ADD CONSTRAINT `FKInd_Cur_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
+  ADD CONSTRAINT `FKInd_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `latu_sensu`
 --
 ALTER TABLE `latu_sensu`
-  ADD CONSTRAINT `ID_Latu__Pos_G_FK` FOREIGN KEY (`Codigo`) REFERENCES `pos_graduacao` (`Codigo`);
+  ADD CONSTRAINT `FKPos_Lat_FK` FOREIGN KEY (`Codigo`) REFERENCES `pos_graduacao` (`Codigo`);
 
 --
 -- Limitadores para a tabela `mestrado_academico`
 --
 ALTER TABLE `mestrado_academico`
-  ADD CONSTRAINT `ID_Mestr_Stric_1_FK` FOREIGN KEY (`Codigo`) REFERENCES `strictu_sensu` (`Codigo`);
+  ADD CONSTRAINT `FKStr_Mes_FK` FOREIGN KEY (`Codigo`) REFERENCES `strictu_sensu` (`Codigo`);
 
 --
 -- Limitadores para a tabela `mestrado_profissional`
 --
 ALTER TABLE `mestrado_profissional`
-  ADD CONSTRAINT `ID_Mestr_Stric_FK` FOREIGN KEY (`Codigo`) REFERENCES `strictu_sensu` (`Codigo`);
+  ADD CONSTRAINT `FKStr_Mes_1_FK` FOREIGN KEY (`Codigo`) REFERENCES `strictu_sensu` (`Codigo`);
 
 --
 -- Limitadores para a tabela `museu`
 --
 ALTER TABLE `museu`
-  ADD CONSTRAINT `ID_Museu_Unida_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
+  ADD CONSTRAINT `FKUni_Mus_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `ocorrencias`
 --
 ALTER TABLE `ocorrencias`
-  ADD CONSTRAINT `REF_Ocorr_Servi_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKServidor_tem_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `oferecimento`
 --
 ALTER TABLE `oferecimento`
-  ADD CONSTRAINT `EQU_Ofere_Curso_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
-  ADD CONSTRAINT `REF_Ofere_Disci` FOREIGN KEY (`ID_Disciplina`) REFERENCES `disciplinas` (`ID_Disciplina`);
+  ADD CONSTRAINT `FKOfe_Cur_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
+  ADD CONSTRAINT `FKOfe_Dis` FOREIGN KEY (`ID_Disciplina`) REFERENCES `disciplinas` (`ID_Disciplina`);
 
 --
 -- Limitadores para a tabela `participa`
 --
 ALTER TABLE `participa`
-  ADD CONSTRAINT `REF_Parti_Aluno_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `REF_Parti_Proje` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`);
+  ADD CONSTRAINT `FKPar_Alu_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
+  ADD CONSTRAINT `FKPar_Pro` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `pos_graduacao`
 --
 ALTER TABLE `pos_graduacao`
-  ADD CONSTRAINT `ID_Pos_G_Curso_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
+  ADD CONSTRAINT `FKCur_Pos_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
 
 --
 -- Limitadores para a tabela `professor`
 --
 ALTER TABLE `professor`
-  ADD CONSTRAINT `ID_Profe_Servi_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`),
-  ADD CONSTRAINT `REF_Profe_Curso_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`);
+  ADD CONSTRAINT `FKLeciona_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
+  ADD CONSTRAINT `FKSer_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `projeto`
 --
 ALTER TABLE `projeto`
-  ADD CONSTRAINT `EQU_Proje_Finan_FK` FOREIGN KEY (`ID_Financiador`) REFERENCES `financiador` (`ID_Financiador`);
+  ADD CONSTRAINT `FKFinancia_FK` FOREIGN KEY (`ID_Financiador`) REFERENCES `financiador` (`ID_Financiador`);
 
 --
 -- Limitadores para a tabela `projeto_extensao`
 --
 ALTER TABLE `projeto_extensao`
-  ADD CONSTRAINT `ID_Proje_Proje_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`),
-  ADD CONSTRAINT `REF_Proje_Servi_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `servidor` (`ID_Usuario`);
+  ADD CONSTRAINT `FKPro_Pro_1_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `projeto_pesquisa`
 --
 ALTER TABLE `projeto_pesquisa`
-  ADD CONSTRAINT `ID_Proje_Proje_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`);
+  ADD CONSTRAINT `FKPro_Pro_FK` FOREIGN KEY (`ID_Projeto`) REFERENCES `projeto` (`ID_Projeto`);
 
 --
 -- Limitadores para a tabela `reitoria`
 --
 ALTER TABLE `reitoria`
-  ADD CONSTRAINT `EQU_Reito_Unida_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
+  ADD CONSTRAINT `FKAdmnistra_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `restaurante`
 --
 ALTER TABLE `restaurante`
-  ADD CONSTRAINT `SID_Resta_Ensin_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
+  ADD CONSTRAINT `FKEnsino_Possui2_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `ensino` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `servidor`
 --
 ALTER TABLE `servidor`
-  ADD CONSTRAINT `ID_Servi_Usuar_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`);
+  ADD CONSTRAINT `FKUsu_Ser_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `strictu_sensu`
 --
 ALTER TABLE `strictu_sensu`
-  ADD CONSTRAINT `ID_Stric_Pos_G_FK` FOREIGN KEY (`Codigo`) REFERENCES `pos_graduacao` (`Codigo`);
+  ADD CONSTRAINT `FKPos_Str_FK` FOREIGN KEY (`Codigo`) REFERENCES `pos_graduacao` (`Codigo`);
 
 --
 -- Limitadores para a tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `REF_Usuar_Unida_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
+  ADD CONSTRAINT `FKCadastro_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 --
 -- Limitadores para a tabela `verba`
 --
 ALTER TABLE `verba`
-  ADD CONSTRAINT `FKganha_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`),
-  ADD CONSTRAINT `REF_Verba_Unida_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
+  ADD CONSTRAINT `FKganha_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

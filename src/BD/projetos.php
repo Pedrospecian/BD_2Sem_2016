@@ -222,7 +222,7 @@
 		    	<?php
 		    		$alunos = consultaProjetoPesquisa();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			var_dump($dados);
+		    			//var_dump($dados);
 		    			$coordenador = (consultaCoordenadorProjeto($dados['ID_Projeto']));
 		    			echo "<form action='detalheProjetoPesquisa.php' method='post'>";
 		    			echo "<tr>";

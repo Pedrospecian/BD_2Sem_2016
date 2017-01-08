@@ -58,10 +58,10 @@
 //listar todas as atribuicoes de professores
     function consultaAtribuicoesProfessores(){
         $bd= conectaBD();
-        $sql = "SELECT *
+        $sql = "SELECT nome, cargo, setor, Data_inicio, Data_fim
                 FROM professor
                 INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
-                LEFT JOIN atribuicoes on professor.ID_Usuario = atribuicoes.ID_Usuario";
+                RIGHT JOIN atribuicoes ON professor.ID_Usuario = atribuicoes.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -263,10 +263,10 @@
     
     function consultaAtividades($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT Extensao_Possui.ID_Ati, localizacao, Data_Atividade , ID_Projeto
-                FROM Extensao_Possui
-                INNER JOIN Atividades_Extensao ON Atividades_Extensao.ID_Ati = Extensao_Possui.ID_Ati
-                WHERE Extensao_Possui.ID_Projeto =".$idProjeto;
+        $sql="SELECT extensao_Possui.ID_Ati, localizacao, Data_Atividade , ID_Projeto
+                FROM extensao_possui
+                INNER JOIN atividades_extensao ON atividades_Extensao.ID_Ati = extensao_Possui.ID_Ati
+                WHERE extensao_possui.ID_Projeto =".$idProjeto;
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -307,10 +307,17 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
+<<<<<<< HEAD
         $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
                 AND Nome_Unidade LIKE '%".$nomeunidade."%'";
+=======
+        $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Quantidade, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
+                FROM bens
+                INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
+                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
+>>>>>>> f245f092a56ff24f13ef7fb98e58de7caad2a0b1
                 //var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();
@@ -325,7 +332,11 @@
         $sql="SELECT SUM( Valor ) AS total
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
+<<<<<<< HEAD
                 AND Nome_Unidade = '".$nomeunidade."'";
+=======
+                AND Nome_Unidade = '".$nomeUnidade."'";
+>>>>>>> f245f092a56ff24f13ef7fb98e58de7caad2a0b1
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -335,9 +346,9 @@
     function consultaHistoricoAluno($idAluno){
         $sql="SELECT aluno.ID_Usuario, Disciplinas.ID_Disciplina, Notas, Frequencia, Disciplinas.Nome
                 FROM aluno
-                INNER JOIN Historico ON Historico.ID_Usuario = aluno.ID_Usuario
+                INNER JOIN historico ON historico.ID_Usuario = aluno.ID_Usuario
                 AND aluno.ID_Usuario = '".$idAluno."'
-                INNER JOIN Disciplinas ON Disciplinas.ID_Disciplina = Historico.ID_Disciplina";
+                INNER JOIN disciplinas ON disciplinas.ID_Disciplina = historico.ID_Disciplina";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
@@ -448,7 +459,7 @@
         $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
         VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
-             $sql_aluno= "INSERT INTO Aluno (ID_Usuario, Codigo) 
+             $sql_aluno= "INSERT INTO aluno (ID_Usuario, Codigo) 
                 VALUES ('".mysqli_insert_id($bd)."', '".$curso."');";
             $bd->query($sql_aluno);
             $bd->close();
@@ -478,7 +489,7 @@
     //deleta aluno de graduacao
     function deletaAlunoGraduacao($id){
         $bd= conectaBD();
-        $sql=" DELETE FROM Aluno 
+        $sql=" DELETE FROM aluno 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
             $sql_aluno= "DELETE FROM usuario
@@ -496,7 +507,7 @@
     //deleta aluno de pos graduacao
     function deletaAlunoPos($id){
         $bd= conectaBD();
-        $sql=" DELETE FROM Aluno 
+        $sql=" DELETE FROM aluno 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
             $sql_aluno= "DELETE FROM usuario
@@ -519,9 +530,9 @@
         if ($bd->query($sql) === TRUE) {
             $sql_professor= "INSERT INTO professor (ID_Usuario, carreira, nivel) 
                 VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
-            $sql_servidor= "INSERT INTO Servidor (ID_Usuario) 
+            $sql_servidor= "INSERT INTO servidor (ID_Usuario) 
                 VALUES ('".mysqli_insert_id($bd)."');";
-                $sql_folhapagamento= "INSERT INTO Folha_de_pagamento (ID_Usuario, Data, salario) 
+                $sql_folhapagamento= "INSERT INTO folha_de_pagamento (ID_Usuario, Data, salario) 
                 VALUES ('".mysqli_insert_id($bd)."', '2016-11-10', '870');";
             if($bd->query($sql_professor)===FALSE && $bd->query($sql_servidor)===FALSE && $bd->query($sql_folhapagamento)===FALSE){
                 echo "Error: " . $sql . "<br>" . $bd->error;
@@ -578,13 +589,17 @@
     //insere funcionario
     function insereFuncionario($nome, $cpf, $dataNasc, $funcao, $unidade){
         $bd= conectaBD();
+<<<<<<< HEAD
         $sql="INSERT INTO usuario(nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
+=======
+        $sql="INSERT INTO usuario (nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
+>>>>>>> f245f092a56ff24f13ef7fb98e58de7caad2a0b1
         VALUES ('".$nome."','".$cpf."', 'm', '".$dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
             $ident=mysqli_insert_id($bd);
             $sql_funcionario= "INSERT INTO funcionario (ID_Usuario, Funcao) 
                 VALUES ('".$ident."', '".$funcao."');";
-            $sql_servidor= "INSERT INTO Servidor (ID_Usuario) 
+            $sql_servidor= "INSERT INTO servidor (ID_Usuario) 
                 VALUES ('".$ident."');";
             $sql_folhapagamento= "INSERT INTO folha_de_pagamento (Data, salario) 
                 VALUES ('2016-12-10', '870');";
@@ -648,18 +663,18 @@
     //retorna true se inseriu e false se deu erro
     function inserePesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
-        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
+        $sql = "INSERT INTO projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
         VALUES ('".$objetivo."',' ".$dataInicio."', '". $descricao."',' ".$dataFim."', ". $orcamento.", ". $idFiananciador.")";
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
-            $sql_projetopesquisa= "INSERT INTO Projeto_Pesquisa (ID_Projeto) 
+            $sql_projetopesquisa= "INSERT INTO projeto_pesquisa (ID_Projeto) 
                 VALUES ('".$idProjeto."');";
             $bd->query($sql_projetopesquisa);
             if($idAluno!=null){
-                $sql="INSERT INTO  Coordena (ID_Projeto ,Indice_Pequisador ,Bolsa_Pesquisador,ID_Usuario)
+                $sql="INSERT INTO  coordena (ID_Projeto ,Indice_Pequisador ,Bolsa_Pesquisador,ID_Usuario)
                     VALUES ('".$idProjeto."',  0,  ".$bolsa.",  ".$idProfessor.");";
                 $bd->query($sql);
-                $sql= "INSERT INTO Participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
+                $sql= "INSERT INTO participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
                 $bd->query($sql);
             }
             $bd->close();
@@ -675,15 +690,15 @@
     //retorna true se inseriu e false se deu erro
     function insereExtensao( $objetivo, $descricao, $orcamento, $idFinanciador, $idAluno, $idServidor, $bolsa, $dataInicio, $dataFim){
         $bd= conectaBD();
-        $sql = "INSERT INTO Projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
+        $sql = "INSERT INTO projeto (objetivo, Data_Inicio, Descricao, Data_Termino, Orcamento, ID_Financiador)
         VALUES ('".$objetivo."',' ".$dataInicio."', '". $descricao."',' ".$dataFim."', ". $orcamento.", ". $idFinanciador.")";
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
-            $sql_projetoextensao= "INSERT INTO Projeto_Extensao (ID_Projeto, ID_Usuario) 
+            $sql_projetoextensao= "INSERT INTO projeto_extensao (ID_Projeto, ID_Usuario) 
                 VALUES ('".$idProjeto."', ".$idServidor.");";
             $bd->query($sql_projetoextensao);
             if($idAluno!=null){
-                $sql= "INSERT INTO Participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
+                $sql= "INSERT INTO participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
                 $bd->query($sql);
             }
             $bd->close();
@@ -697,10 +712,10 @@
     
     function insereAtividade($idProjeto, $data, $localizacao){
          $bd= conectaBD();
-        $sql="INSERT INTO Atividades_Extensao (Localizacao, Data_Atividade) VALUES ('".$localizacao."', '".$data."')";
+        $sql="INSERT INTO atividades_extensao (Localizacao, Data_Atividade) VALUES ('".$localizacao."', '".$data."')";
         if($bd->query($sql)){
             $idAtividade=mysqli_insert_id($bd);
-            $sql="INSERT INTO Extensao_Possui (`ID_Ati`, `ID_Projeto`) VALUES (".$idAtividade.", ".$idProjeto.")";
+            $sql="INSERT INTO extensao_possui (`ID_Ati`, `ID_Projeto`) VALUES (".$idAtividade.", ".$idProjeto.")";
             $bd->query($sql);
         }
         $bd->close();
@@ -727,7 +742,7 @@
     //atualiza bem
     function atualizaBem($idBem, $unidade, $localizacao, $valor, $data, $tipo){
         $bd= conectaBD();
-        $sql=" UPDATE Bens 
+        $sql=" UPDATE bens 
             SET Localizacao='".$localizacao."', Valor='".$valor."', Data_de_Aquisicao='".$data."', Tipo='".$tipo."', ID_Unidade='".$unidade."'
             WHERE ID_bem='".$idBem."';";
         if ($bd->query($sql) === TRUE) {
@@ -757,52 +772,52 @@
     
     function deletaPesquisa($idProjeto){
         $bd= conectaBD();
-        $sql= "DELETE FROM Participa WHERE ID_Projeto =".$idProjeto;
+        $sql= "DELETE FROM participa WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
-        $sql= "DELETE FROM Coordena WHERE ID_Projeto=".$idProjeto;
+        $sql= "DELETE FROM coordena WHERE ID_Projeto=".$idProjeto;
         $bd->query($sql);
-        $sql= "DELETE FROM Projeto_Pesquisa WHERE ID_Projeto =".$idProjeto;
+        $sql= "DELETE FROM projeto_pesquisa WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
-        $sql= "DELETE FROM Projeto WHERE ID_Projeto =".$idProjeto;
+        $sql= "DELETE FROM projeto WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
         $bd->close();
     }
     
     function deletaExtensao($idProjeto){
         $bd= conectaBD();
-        $sql= "SELECT ID_Ati FROM Extensao_Possui WHERE ID_Projeto =".$idProjeto;
+        $sql= "SELECT ID_Ati FROM extensao_possui WHERE ID_Projeto =".$idProjeto;
         $atividades= $bd->query($sql);
         while($dados = mysqli_fetch_array($atividades)){
             deletarAtividade($dados['ID_Ati']);
         }
-        $sql= "DELETE FROM Extensao_Possui WHERE ID_Projeto=".$idProjeto;
+        $sql= "DELETE FROM extensao_possui WHERE ID_Projeto=".$idProjeto;
         $bd->query($sql);
-        $sql= "DELETE FROM Participa WHERE ID_Projeto =".$idProjeto;
+        $sql= "DELETE FROM participa WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
-        $sql= "DELETE FROM Projeto_Extensao WHERE ID_Projeto =".$idProjeto;
+        $sql= "DELETE FROM projeto_extensao WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
-        $sql= "DELETE FROM Projeto WHERE ID_Projeto =".$idProjeto;
+        $sql= "DELETE FROM projeto WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
         $bd->close();
     }
     
     function deletarAtividade($idAtividade){
         $bd= conectaBD();
-        $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati=".$idAtividade;
+        $sql="DELETE FROM atividades_extensao WHERE ID_Ati=".$idAtividade;
         $bd->query($sql);
         $bd->close();
     }
     
     function alteraPesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim, $idProjeto, $indicePesquisador){
         $bd= conectaBD();
-        $sql = "UPDATE Projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
+        $sql = "UPDATE projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
             WHERE ID_Projeto=".$idProjeto;
         if ($bd->query($sql) === TRUE) {
             if($idAluno!=null){
-                $sql="UPDATE Coordena SET Indice_Pequisador=".$indicePesquisador." ,Bolsa_Pesquisador=".$bolsa.",ID_Usuario=".$idProfessor."
+                $sql="UPDATE coordena SET Indice_Pequisador=".$indicePesquisador." ,Bolsa_Pesquisador=".$bolsa.",ID_Usuario=".$idProfessor."
                     WHERE ID_Projeto=".$idProjeto;
                 $bd->query($sql);
-                $sql= "UPDATE Participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
+                $sql= "UPDATE participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
                     WHERE ID_Projeto=".$idProjeto;
                 $bd->query($sql);
             }
@@ -813,16 +828,16 @@
     
     function alteraExtensao( $objetivo, $descricao, $orcamento, $idFinanciador, $idAluno, $idServidor, $bolsa, $dataInicio, $dataFim, $idProjeto){
         $bd= conectaBD();
-        $sql = "UPDATE Projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
+        $sql = "UPDATE projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
             WHERE ID_Projeto=".$idProjeto;
 
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
-            $sql= "UPDATE Projeto_Extensao SET ID_Usuario= ".$idServidor."
+            $sql= "UPDATE projeto_extensao SET ID_Usuario= ".$idServidor."
                 WHERE ID_Projeto=".$idProjeto;
             $bd->query($sql);
             if($idAluno!=null){
-                $sql= "UPDATE Participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
+                $sql= "UPDATE participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
                     WHERE ID_Projeto=".$idProjeto;
                 $bd->query($sql);
             }
@@ -837,16 +852,16 @@
     
     function alteraAtividade($idAtividade, $localizacao, $data){
         $bd= conectaBD();
-        $sql="UPDATE  Atividades_Extensao SET Localizacao =  '".$localizacao."', Data_Atividade =  '".$data."' WHERE  ID_Ati=".$idAtividade;
+        $sql="UPDATE atividades_extensao SET Localizacao =  '".$localizacao."', Data_Atividade =  '".$data."' WHERE  ID_Ati=".$idAtividade;
         $bd->query($sql);
         $bd->close();
     }
     
     function deletaAtividade($idAtividade){
         $bd= conectaBD();
-        $sql="DELETE FROM Extensao_Possui WHERE ID_Ati =".$idAtividade;
+        $sql="DELETE FROM extensao_possui WHERE ID_Ati =".$idAtividade;
         $bd->query($sql);
-        $sql="DELETE FROM Atividades_Extensao WHERE ID_Ati= ".$idAtividade;
+        $sql="DELETE FROM atividades_extensao WHERE ID_Ati= ".$idAtividade;
         $bd->query($sql);
         $bd->close();
     }

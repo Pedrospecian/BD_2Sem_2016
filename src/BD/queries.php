@@ -58,7 +58,7 @@
 //listar todas as atribuicoes de professores
     function consultaAtribuicoesProfessores(){
         $bd= conectaBD();
-        $sql = "SELECT nome, cargo, setor, Data_inicio, Data_fim
+        $sql = "SELECT *
                 FROM professor
                 INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
                 RIGHT JOIN atribuicoes ON professor.ID_Usuario = atribuicoes.ID_Usuario";

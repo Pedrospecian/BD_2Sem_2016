@@ -36,7 +36,7 @@
 		    			echo "<td>".$dados['nivel']."<input type='hidden' name='localizacao' value='".$dados['nivel']."'/></td>";
 		    			echo "<td>".$dados['carreira']."<input type='hidden' name='localizacao' value='".$dados['carreira']."'/></td>";
 		    			echo "<td>".$dados['ID_Unidade']."</td>";
-		    			echo "<td>".$dados['Nome_Atribuicao']."</td>";
+		    			echo "<td>".$dados['Cargo']."</td>";
 		    			echo "<td>".$dados['Data_inicio']."</td>";
 		    			echo "<td>".$dados['Data_fim']."</td>";
 		    			if($dados['Id_Atribuicoes']!='') {

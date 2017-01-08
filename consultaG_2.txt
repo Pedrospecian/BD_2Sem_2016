@@ -1,12 +1,13 @@
 Consulta:
-SELECT *
-FROM Cursos
-WHERE Codigo IN 
-	(SELECT Codigo 
-	 FROM Aluno 
-	 WHERE ID_Usuario='id'
+SELECT * 
+FROM cursos
+WHERE Codigo
+IN (
+	SELECT Codigo
+	FROM aluno
+	WHERE ID_Usuario'id'
 	);
 
 Enunciado: 
-Lista todos os dados do curso no qual o aluno que possui o 'id' especificado está matriculado.
-(OBS.: Em nosso banco os ids de aluno vão de 20 a 39)
+Lista todos os dados do curso no qual o aluno que possui o 'id' especificado estï¿½ matriculado.
+(OBS.: Em nosso banco os ids de aluno vï¿½o de 20 a 39)

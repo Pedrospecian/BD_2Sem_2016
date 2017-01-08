@@ -125,14 +125,15 @@
 //listar todos os cursos da pós
     function consultaCursosLatuSensu(){
         $bd= conectaBD();
-        $sql="SELECT *, (SELECT COUNT(*) FROM aluno WHERE Ise_Codigo IS NOT NULL AND Codigo=pos_graduacao.Codigo) as Qte_Isentos 
-            FROM cursos
-            INNER JOIN pos_graduacao ON cursos.Codigo = pos_graduacao.Codigo
-            INNER JOIN latu_sensu ON cursos.Codigo = latu_sensu.Codigo
-            LEFT JOIN aluno ON latu_sensu.Codigo = aluno.Codigo
+        $sql="SELECT cursos.Codigo, Nome, ID_unidade , Valor_Mensalidade,(
+                SELECT COUNT(*) FROM isencao_na_inscricao WHERE Codigo=pos_graduacao.Codigo) as Qte_Isentos 
+                FROM cursos
+                INNER JOIN pos_graduacao ON cursos.Codigo = pos_graduacao.Codigo
+                INNER JOIN latu_sensu ON cursos.Codigo = latu_sensu.Codigo
+                LEFT JOIN isencao_na_inscricao ON latu_sensu.Codigo = isencao_na_inscricao.Codigo
 
-            GROUP BY cursos.Codigo
-            ORDER BY latu_sensu.Valor_Mensalidade
+                GROUP BY cursos.Codigo
+                ORDER BY latu_sensu.Valor_Mensalidade DESC
            ";
         $resultado = $bd->query($sql);
         $bd->close();

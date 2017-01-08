@@ -66,7 +66,7 @@
 		        	<th>Nome do Curso</th>
 		        	<th>Unidade do Curso</th>
 		        	<th>Valor Mensalidade</th>
-		        	<th>Qte Alunos Isenções</th>
+		        	<th>Qte Isenções</th>
 		     	</tr>
     		</thead>
 		    <tbody>
@@ -77,7 +77,7 @@
 		    			echo "<tr>";
 		    			echo "<td>".$dados['Codigo']."</td>";
 		    			echo "<td>".$dados['Nome']."</td>";
-		    			echo "<td>".$dados['ID_Unidade']."</td>";
+		    			echo "<td>".$dados['ID_unidade']."</td>";
 		    			echo "<td>".$dados['Valor_Mensalidade']."</td>";
 		    			echo "<td>".$dados['Qte_Isentos']."</td>";
 		    			

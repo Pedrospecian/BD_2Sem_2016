@@ -58,10 +58,10 @@
 //listar todas as atribuicoes de professores
     function consultaAtribuicoesProfessores(){
         $bd= conectaBD();
-        $sql = "SELECT *
+        $sql = "SELECT nome, cargo, setor, Data_inicio, Data_fim
                 FROM professor
                 INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
-                LEFT JOIN atribuicoes on professor.ID_Usuario = atribuicoes.ID_Usuario";
+                RIGHT JOIN atribuicoes ON professor.ID_Usuario = atribuicoes.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -125,14 +125,19 @@
 //listar todos os cursos da pós
     function consultaCursosLatuSensu(){
         $bd= conectaBD();
-        $sql="SELECT *, (SELECT COUNT(*) FROM aluno WHERE Ise_Codigo IS NOT NULL AND Codigo=pos_graduacao.Codigo) as Qte_Isentos 
-            FROM cursos
-            INNER JOIN pos_graduacao ON cursos.Codigo = Pos_Graduacao.Codigo
-            INNER JOIN latu_sensu ON cursos.Codigo = Latu_Sensu.Codigo
-            LEFT JOIN aluno ON latu_sensu.Codigo = aluno.Codigo
+        $sql="SELECT cursos.Codigo, Nome, ID_unidade, Valor_Mensalidade, (
 
-            GROUP BY Cursos.Codigo
-            ORDER BY Latu_Sensu.Valor_Mensalidade
+                SELECT COUNT( * ) 
+                    FROM aluno
+                    WHERE Ise_Codigo IS NOT NULL 
+                    AND codigo = pos_graduacao.Codigo
+                    ) AS Qte_Isentos
+                FROM cursos
+                INNER JOIN pos_graduacao ON cursos.Codigo = pos_graduacao.Codigo
+                INNER JOIN latu_sensu ON cursos.Codigo = latu_sensu.Codigo
+                LEFT JOIN aluno ON latu_sensu.Codigo = aluno.Codigo
+                GROUP BY cursos.Codigo
+                ORDER BY latu_sensu.Valor_Mensalidade DESC 
            ";
         $resultado = $bd->query($sql);
         $bd->close();
@@ -307,10 +312,10 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
-        $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
+        $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Quantidade, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
-                AND nome_unidade LIKE '%".$nomeUnidade."%'";
+                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
                 //var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();

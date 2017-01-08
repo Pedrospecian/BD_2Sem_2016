@@ -226,7 +226,7 @@
     
     function consultaCoordenadorProjeto($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT usuario.nome, usuario.ID_Usuario, Indice_Pequisador
+        $sql="SELECT usuario.nome, usuario.ID_Usuario, Indice_Pesquisador
                 FROM coordena
                 INNER JOIN usuario ON coordena.ID_Usuario = usuario.ID_Usuario
                 WHERE coordena.ID_Projeto =".$idProjeto;

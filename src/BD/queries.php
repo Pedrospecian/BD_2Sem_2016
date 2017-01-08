@@ -307,17 +307,10 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
-<<<<<<< HEAD
         $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
                 AND Nome_Unidade LIKE '%".$nomeunidade."%'";
-=======
-        $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Quantidade, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
-                FROM bens
-                INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
-                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
->>>>>>> f245f092a56ff24f13ef7fb98e58de7caad2a0b1
                 //var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();
@@ -332,11 +325,7 @@
         $sql="SELECT SUM( Valor ) AS total
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
-<<<<<<< HEAD
                 AND Nome_Unidade = '".$nomeunidade."'";
-=======
-                AND Nome_Unidade = '".$nomeUnidade."'";
->>>>>>> f245f092a56ff24f13ef7fb98e58de7caad2a0b1
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -589,11 +578,7 @@
     //insere funcionario
     function insereFuncionario($nome, $cpf, $dataNasc, $funcao, $unidade){
         $bd= conectaBD();
-<<<<<<< HEAD
         $sql="INSERT INTO usuario(nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
-=======
-        $sql="INSERT INTO usuario (nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
->>>>>>> f245f092a56ff24f13ef7fb98e58de7caad2a0b1
         VALUES ('".$nome."','".$cpf."', 'm', '".$dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
             $ident=mysqli_insert_id($bd);

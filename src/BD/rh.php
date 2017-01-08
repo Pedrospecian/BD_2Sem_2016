@@ -253,7 +253,7 @@
 			</tbody>
 		</table>
 
-		<h2>Professores sem registros de ocorrência</h2>
+		<h2>Listagem de professores, exibindo ocorrências dos que possuem alguma ocorrência e "sem dados" para os que não possuem</h2>
 		<table class="table">
 			<thead>
 				<tr>
@@ -273,16 +273,24 @@
 					$professoresSemOcorrencia = consultaProfessoresSemOcorrencia();
 			    	while ($dados = mysqli_fetch_array($professoresSemOcorrencia)) {
 			    		//var_dump($dados);
+			    		$idOcor="Sem dados";
+			    		$tipoOcor="Sem dados";
+			    		$iniOcor="Sem dados";
+			    		$fimOcor="Sem dados";
+			    		if($dados['ID_Ocorrencia'])$idOcor=$dados['ID_Ocorrencia'];
+			    		if($dados['Tipo_Ocorrencia'])$tipoOcor=$dados['Tipo_Ocorrencia'];
+			    		if($dados['Data_Inicio'])$iniOcor=$dados['Data_Inicio'];
+			    		if($dados['Data_Final'])$fimOcor=$dados['Data_Final'];
 			    		echo "<tr>";
 		    			echo "<td>".$dados['nome']."</td>";
 		    			echo "<td>".$dados['cpf']."</td>";
 		    			echo "<td>".$dados['nivel']."</td>";
 		    			echo "<td>".$dados['carreira']."</td>";
 		    			echo "<td>".$dados['ID_Unidade']."</td>";
-		    			echo "<td>".$dados['ID_Ocorrencia']."</td>";
-		    			echo "<td>".$dados['Tipo_Ocorrencia']."</td>";
-		    			echo "<td>".$dados['Data_Inicio']."</td>";
-		    			echo "<td>".$dados['Data_Final']."</td>";
+		    			echo "<td>".$idOcor."</td>";
+		    			echo "<td>".$tipoOcor."</td>";
+		    			echo "<td>".$iniOcor."</td>";
+		    			echo "<td>".$fimOcor."</td>";
 		    			echo "</tr>";
 			    	}
 				?>

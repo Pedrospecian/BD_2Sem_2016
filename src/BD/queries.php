@@ -7,9 +7,9 @@
 	    $bd= conectaBD();
 	    //var_dump($bd);
 	    $sql="SELECT *
-                FROM Usuario
-                INNER JOIN Aluno 
-                ON Aluno.ID_Usuario = Usuario.ID_Usuario
+                FROM usuario
+                INNER JOIN aluno 
+                ON aluno.ID_Usuario = usuario.ID_Usuario
                 ";
         $resultado = $bd->query($sql);
         //var_dump($resultado);
@@ -24,9 +24,9 @@
 	//lista todos os servidores
 	function consultaServidores(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, nome
-                FROM Servidor
-                INNER JOIN Usuario ON Servidor.ID_Usuario = Usuario.ID_Usuario";
+        $sql="SELECT usuario.ID_Usuario, nome
+                FROM servidor
+                INNER JOIN usuario ON servidor.ID_Usuario = usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -36,8 +36,8 @@
     function consultaTodosProfessores(){
         $bd= conectaBD();
         $sql = "SELECT *
-                FROM Professor
-                INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario";
+                FROM professor
+                INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -47,9 +47,9 @@
     function consultaProfessoresSemOcorrencia(){
         $bd= conectaBD();
         $sql = "SELECT *
-                FROM Professor
-                INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
-                LEFT JOIN Ocorrencias ON Professor.ID_Usuario = Ocorrencias.ID_Usuario";
+                FROM professor
+                INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
+                LEFT JOIN ocorrencias ON professor.ID_Usuario = ocorrencias.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -59,9 +59,9 @@
     function consultaAtribuicoesProfessores(){
         $bd= conectaBD();
         $sql = "SELECT *
-                FROM Professor
-                INNER JOIN Usuario ON Professor.ID_Usuario = Usuario.ID_Usuario
-                LEFT JOIN Atribuicoes on Professor.ID_Usuario = Atribuicoes.ID_Usuario";
+                FROM professor
+                INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
+                LEFT JOIN atribuicoes on professor.ID_Usuario = atribuicoes.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -71,8 +71,8 @@
     function consultaTodosFuncionarios(){
         $bd= conectaBD();
         $sql = "SELECT *
-                FROM Funcionario
-                INNER JOIN Usuario ON Funcionario.ID_Usuario = Usuario.ID_Usuario";
+                FROM funcionario
+                INNER JOIN usuario ON funcionario.ID_Usuario = usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -82,7 +82,7 @@
     function consultaFolhaPagamento(){
         $bd= conectaBD();
         $sql="SELECT Salario, Data
-                FROM Folha_de_Pagamento";
+                FROM folha_de_pagamento";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -102,9 +102,9 @@
     function consultaCursosGraduacao(){
         $bd= conectaBD();
         $sql="SELECT *
-            FROM Cursos
-            INNER JOIN Graduacao 
-            ON Cursos.Codigo = Graduacao.Codigo";
+            FROM cursos
+            INNER JOIN graduacao 
+            ON cursos.Codigo = graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -114,9 +114,9 @@
     function consultaCursosPos(){
         $bd= conectaBD();
         $sql="SELECT *
-            FROM Cursos
-            INNER JOIN Pos_Graduacao 
-            ON Cursos.Codigo = Pos_Graduacao.Codigo";
+            FROM cursos
+            INNER JOIN pos_graduacao 
+            ON cursos.Codigo = pos_graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -125,11 +125,11 @@
 //listar todos os cursos da pós
     function consultaCursosLatuSensu(){
         $bd= conectaBD();
-        $sql="SELECT *, (SELECT COUNT(*) FROM Aluno WHERE Ise_Codigo IS NOT NULL AND Codigo=Pos_Graduacao.Codigo) as Qte_Isentos 
-            FROM Cursos
-            INNER JOIN Pos_Graduacao ON Cursos.Codigo = Pos_Graduacao.Codigo
-            INNER JOIN Latu_Sensu ON Cursos.Codigo = Latu_Sensu.Codigo
-            LEFT JOIN Aluno ON Latu_Sensu.Codigo = Aluno.Codigo
+        $sql="SELECT *, (SELECT COUNT(*) FROM aluno WHERE Ise_Codigo IS NOT NULL AND Codigo=pos_graduacao.Codigo) as Qte_Isentos 
+            FROM cursos
+            INNER JOIN pos_graduacao ON cursos.Codigo = Pos_Graduacao.Codigo
+            INNER JOIN latu_sensu ON cursos.Codigo = Latu_Sensu.Codigo
+            LEFT JOIN aluno ON latu_sensu.Codigo = aluno.Codigo
 
             GROUP BY Cursos.Codigo
             ORDER BY Latu_Sensu.Valor_Mensalidade
@@ -142,10 +142,10 @@
     //listar todos os alunos da graduação
     function consultaAlunosGraduacao(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.data_de_nascimento, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
+        $sql="SELECT usuario.ID_Usuario, usuario.nome, usuario.cpf, usuario.data_de_nascimento, usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
                 FROM Usuario
-                INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
-                INNER JOIN Graduacao ON Aluno.Codigo = Graduacao.Codigo
+                INNER JOIN Aluno ON aluno.ID_Usuario = usuario.ID_Usuario
+                INNER JOIN Graduacao ON aluno.Codigo = Graduacao.Codigo
                 INNER JOIN Cursos ON Cursos.Codigo = Graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
@@ -155,11 +155,11 @@
     //listar todos os alunos da pós
     function consultaAlunosPos(){
         $bd= conectaBD();
-        $sql="SELECT Usuario.ID_Usuario, Usuario.nome, Usuario.cpf, Usuario.data_de_nascimento, Usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
-                FROM Usuario
-                INNER JOIN Aluno ON Aluno.ID_Usuario = Usuario.ID_Usuario
-                INNER JOIN Pos_Graduacao ON Aluno.Codigo = Pos_Graduacao.Codigo
-                INNER JOIN Cursos ON Cursos.Codigo = Pos_Graduacao.Codigo";
+        $sql="SELECT usuario.ID_Usuario, usuario.nome, usuario.cpf, usuario.data_de_nascimento, usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
+                FROM usuario
+                INNER JOIN aluno ON aluno.ID_Usuario = usuario.ID_Usuario
+                INNER JOIN pos_graduacao ON aluno.Codigo = pos_graduacao.Codigo
+                INNER JOIN cursos ON cursos.Codigo = pos_graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -170,7 +170,7 @@
         $bd= conectaBD();
         //var_dump($bd);
         $sql="SELECT *
-                FROM Verba";
+                FROM verba";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -180,7 +180,7 @@
     function consultaFinanciadores(){
         $bd= conectaBD();
         $sql="SELECT *
-                FROM Financiador";
+                FROM financiador";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -199,12 +199,12 @@
     //lista projetos de extensao
     function consultaProjetoExtensao(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Extensao.ID_Projeto, objetivo, orcamento, Financiador.nome as financiadorNome, Usuario.nome as usuarioNome, descricao, bolsa, Participa.ID_Usuario, Financiador.id_Financiador, Data_Inicio, Data_Termino
-                FROM Projeto_Extensao
-                INNER JOIN Projeto ON Projeto_Extensao.ID_Projeto = Projeto.ID_Projeto
-                INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador
-                INNER JOIN Participa ON Participa.ID_Projeto = Projeto.ID_Projeto
-                INNER JOIN Usuario ON Participa.ID_Usuario = Usuario.ID_Usuario";
+        $sql="SELECT projeto_extensao.ID_Projeto, objetivo, orcamento, financiador.nome as financiadorNome, usuario.nome as usuarioNome, descricao, bolsa, participa.ID_Usuario, financiador.id_Financiador, Data_Inicio, Data_Termino
+                FROM projeto_extensao
+                INNER JOIN projeto ON projeto_extensao.ID_Projeto = projeto.ID_Projeto
+                INNER JOIN financiador ON projeto.ID_Financiador = financiador.ID_Financiador
+                INNER JOIN participa ON participa.ID_Projeto = projeto.ID_Projeto
+                INNER JOIN usuario ON participa.ID_Usuario = usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -213,12 +213,12 @@
     //lista projetos d pesquisa
     function consultaProjetoPesquisa(){
         $bd= conectaBD();
-        $sql="SELECT Projeto_Pesquisa.ID_Projeto, objetivo, orcamento, Financiador.nome as nomeFinanciador, Usuario.nome as nomeUsuario, descricao, bolsa, Participa.ID_Usuario, Financiador.id_Financiador, Data_Inicio, Data_Termino
-                FROM Projeto_Pesquisa
-                INNER JOIN Projeto ON Projeto_Pesquisa.ID_Projeto = Projeto.ID_Projeto
-                INNER JOIN Financiador ON Projeto.ID_Financiador = Financiador.ID_Financiador
-                INNER JOIN Participa ON Participa.ID_Projeto = Projeto.ID_Projeto
-                INNER JOIN Usuario ON Participa.ID_Usuario = Usuario.ID_Usuario";
+        $sql="SELECT projeto_pesquisa.ID_Projeto, objetivo, orcamento, financiador.nome as nomeFinanciador, usuario.nome as nomeUsuario, descricao, bolsa, participa.ID_Usuario, financiador.id_Financiador, Data_Inicio, Data_Termino
+                FROM projeto_pesquisa
+                INNER JOIN projeto ON projeto_pesquisa.ID_Projeto = projeto.ID_Projeto
+                INNER JOIN financiador ON projeto.ID_Financiador = financiador.ID_Financiador
+                INNER JOIN participa ON participa.ID_Projeto = projeto.ID_Projeto
+                INNER JOIN usuario ON participa.ID_Usuario = usuario.ID_Usuario";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -226,23 +226,23 @@
     
     function consultaCoordenadorProjeto($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT Usuario.nome, Usuario.ID_Usuario, Indice_Pequisador
-                FROM Coordena
-                INNER JOIN Usuario ON Coordena.ID_Usuario = Usuario.ID_Usuario
-                WHERE ID_Projeto =".$idProjeto;
+        $sql="SELECT usuario.nome, usuario.ID_Usuario, Indice_Pequisador
+                FROM coordena
+                INNER JOIN usuario ON coordena.ID_Usuario = usuario.ID_Usuario
+                WHERE coordena.ID_Projeto =".$idProjeto;
         $resultado = $bd->query($sql);
         $bd->close();
-        return mysqli_fetch_array($resultado);
+        return $resultado;
         
     }
     
     //consulta projeto de pesquisa de um aluno
     function consultaProjetoPesquisaAluno($idAluno){
         $bd= conectaBD();
-        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Orcamento, Projeto.ID_Projeto
-                    FROM Projeto
-                    INNER JOIN Projeto_Pesquisa ON Projeto.ID_Projeto = Projeto_Pesquisa.ID_Projeto
-                    INNER JOIN Participa ON Participa.ID_Projeto = Projeto_Pesquisa.ID_Projeto
+        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Orcamento, projeto.ID_Projeto
+                    FROM projeto
+                    INNER JOIN projeto_pesquisa ON projeto.ID_Projeto = projeto_pesquisa.ID_Projeto
+                    INNER JOIN participa ON participa.ID_Projeto = projeto_pesquisa.ID_Projeto
                     WHERE ID_Usuario =".$idAluno;
         $resultado = $bd->query($sql);
         $bd->close();
@@ -251,11 +251,11 @@
     
     function consultaProjetoExtensaoAluno($idAluno){
         $bd= conectaBD();
-        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Orcamento, Projeto.ID_Projeto
-                    FROM Projeto
-                    INNER JOIN Projeto_Extensao ON Projeto.ID_Projeto = Projeto_Extensao.ID_Projeto
-                    INNER JOIN Participa ON Participa.ID_Projeto = Projeto_Extensao.ID_Projeto
-                    WHERE Participa.ID_Usuario =".$idAluno;
+        $sql = "SELECT Data_Inicio, Descricao, Data_Termino, Orcamento, projeto.ID_Projeto
+                    FROM projeto
+                    INNER JOIN projeto_extensao ON projeto.ID_Projeto = projeto_extensao.ID_Projeto
+                    INNER JOIN participa ON participa.ID_Projeto = projeto_extensao.ID_Projeto
+                    WHERE participa.ID_Usuario =".$idAluno;
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -323,7 +323,7 @@
     function somaValorBensUnidade($nomeUnidade){
         $bd= conectaBD();
         $sql="SELECT SUM( Valor ) AS total
-                FROM Bens
+                FROM bens
                 INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
                 AND Nome_Unidade = '".$nomeUnidade."'";
         $resultado = $bd->query($sql);
@@ -333,10 +333,10 @@
 
     //funcao para consultar o historico de um dado aluno
     function consultaHistoricoAluno($idAluno){
-        $sql="SELECT Aluno.ID_Usuario, Disciplinas.ID_Disciplina, Notas, Frequencia, Disciplinas.Nome
-                FROM Aluno
-                INNER JOIN Historico ON Historico.ID_Usuario = Aluno.ID_Usuario
-                AND Aluno.ID_Usuario = '".$idAluno."'
+        $sql="SELECT aluno.ID_Usuario, Disciplinas.ID_Disciplina, Notas, Frequencia, Disciplinas.Nome
+                FROM aluno
+                INNER JOIN Historico ON Historico.ID_Usuario = aluno.ID_Usuario
+                AND aluno.ID_Usuario = '".$idAluno."'
                 INNER JOIN Disciplinas ON Disciplinas.ID_Disciplina = Historico.ID_Disciplina";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
@@ -357,10 +357,10 @@
     
     function consultaOcorrenciaProfessores(){
          //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
-        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
+        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
                 FROM Ocorrencias
                 INNER JOIN Professor
-                INNER JOIN Usuario ON Usuario.ID_Usuario = Professor.ID_Usuario
+                INNER JOIN Usuario ON usuario.ID_Usuario = Professor.ID_Usuario
                 WHERE Ocorrencias.ID_Usuario = Professor.ID_Usuario;";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
@@ -370,10 +370,10 @@
     
     function consultaOcorrenciaFuncionarios(){
          //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
-        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, Usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
+        $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
                 FROM Ocorrencias
                 INNER JOIN Funcionario
-                INNER JOIN Usuario ON Usuario.ID_Usuario = Funcionario.ID_Usuario
+                INNER JOIN Usuario ON usuario.ID_Usuario = Funcionario.ID_Usuario
                 WHERE Ocorrencias.ID_Usuario = Funcionario.ID_Usuario;";
         $bd= conectaBD();
         $resultado = $bd->query($sql);

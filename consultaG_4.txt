@@ -1,8 +1,8 @@
 Consulta:
-SELECT ID_Usuario,Count(ID_Disciplina) 
+SELECT ID_Usuario,AVG(Notas) as Média 
 FROM historico 
 GROUP BY ID_Usuario 
-HAVING Count(ID_Disciplina)>2;
+HAVING Média>7
 
 Enunciado:
-Lista osids de todos os alunos inscritos em mais de duas disciplinas
+Lista os ids de todos os alunos com média maior que 7

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Jan-2017 às 19:45
+-- Generation Time: 08-Jan-2017 às 20:11
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -553,6 +553,16 @@ CREATE TABLE `isencao_na_inscricao` (
   `Codigo` bigint(20) NOT NULL,
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `isencao_na_inscricao`
+--
+
+INSERT INTO `isencao_na_inscricao` (`Codigo`, `ID_Usuario`) VALUES
+(7, 20),
+(7, 24),
+(8, 23),
+(8, 25);
 
 -- --------------------------------------------------------
 

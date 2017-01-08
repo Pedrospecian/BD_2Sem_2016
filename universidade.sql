@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Jan-2017 às 20:11
+-- Generation Time: 08-Jan-2017 às 20:27
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -512,6 +512,31 @@ CREATE TABLE `historico` (
   `Notas` int(11) NOT NULL,
   `Frequencia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `historico`
+--
+
+INSERT INTO `historico` (`ID_Usuario`, `ID_Disciplina`, `Notas`, `Frequencia`) VALUES
+(30, 1, 8, 85),
+(32, 1, 8, 90),
+(36, 1, 5, 70),
+(38, 1, 8, 75),
+(31, 2, 7, 80),
+(32, 2, 6, 60),
+(36, 2, 7, 75),
+(37, 2, 9, 85),
+(31, 3, 3, 40),
+(32, 3, 4, 60),
+(35, 3, 5, 60),
+(38, 3, 6, 75),
+(30, 4, 5, 70),
+(33, 4, 3, 60),
+(34, 4, 7, 85),
+(33, 5, 4, 70),
+(34, 5, 8, 100),
+(33, 6, 5, 100),
+(35, 6, 5, 70);
 
 -- --------------------------------------------------------
 

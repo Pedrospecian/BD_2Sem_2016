@@ -91,7 +91,7 @@
     function consultaNomeCursoPorAluno($id) {
         $bd= conectaBD();
         $sql="SELECT *
-            FROM Cursos
+            FROM cursos
             WHERE Codigo IN (SELECT Codigo FROM Aluno WHERE ID_Usuario='".$id."')";
         $resultado = $bd->query($sql);
         $bd->close();
@@ -127,12 +127,12 @@
         $bd= conectaBD();
         $sql="SELECT *, (SELECT COUNT(*) FROM aluno WHERE Ise_Codigo IS NOT NULL AND Codigo=pos_graduacao.Codigo) as Qte_Isentos 
             FROM cursos
-            INNER JOIN pos_graduacao ON cursos.Codigo = Pos_Graduacao.Codigo
-            INNER JOIN latu_sensu ON cursos.Codigo = Latu_Sensu.Codigo
+            INNER JOIN pos_graduacao ON cursos.Codigo = pos_graduacao.Codigo
+            INNER JOIN latu_sensu ON cursos.Codigo = latu_sensu.Codigo
             LEFT JOIN aluno ON latu_sensu.Codigo = aluno.Codigo
 
-            GROUP BY Cursos.Codigo
-            ORDER BY Latu_Sensu.Valor_Mensalidade
+            GROUP BY cursos.Codigo
+            ORDER BY latu_sensu.Valor_Mensalidade
            ";
         $resultado = $bd->query($sql);
         $bd->close();
@@ -142,11 +142,11 @@
     //listar todos os alunos da graduação
     function consultaAlunosGraduacao(){
         $bd= conectaBD();
-        $sql="SELECT usuario.ID_Usuario, usuario.nome, usuario.cpf, usuario.data_de_nascimento, usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
-                FROM Usuario
-                INNER JOIN Aluno ON aluno.ID_Usuario = usuario.ID_Usuario
-                INNER JOIN Graduacao ON aluno.Codigo = Graduacao.Codigo
-                INNER JOIN Cursos ON Cursos.Codigo = Graduacao.Codigo";
+        $sql="SELECT usuario.ID_Usuario, usuario.nome, usuario.cpf, usuario.data_de_nascimento, usuario.ID_Unidade, cursos.Codigo, cursos.Nome
+                FROM usuario
+                INNER JOIN aluno ON aluno.ID_Usuario = usuario.ID_Usuario
+                INNER JOIN graduacao ON aluno.Codigo = graduacao.Codigo
+                INNER JOIN cursos ON cursos.Codigo = graduacao.Codigo";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -155,7 +155,7 @@
     //listar todos os alunos da pós
     function consultaAlunosPos(){
         $bd= conectaBD();
-        $sql="SELECT usuario.ID_Usuario, usuario.nome, usuario.cpf, usuario.data_de_nascimento, usuario.ID_Unidade, Cursos.Codigo, Cursos.Nome
+        $sql="SELECT usuario.ID_Usuario, usuario.nome, usuario.cpf, usuario.data_de_nascimento, usuario.ID_Unidade, cursos.Codigo, cursos.Nome
                 FROM usuario
                 INNER JOIN aluno ON aluno.ID_Usuario = usuario.ID_Usuario
                 INNER JOIN pos_graduacao ON aluno.Codigo = pos_graduacao.Codigo
@@ -190,7 +190,7 @@
     function consultaUnidades(){
         $bd= conectaBD();
         $sql="SELECT *
-                FROM Unidade";
+                FROM unidade";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -276,8 +276,8 @@
     function consultaBens(){
         $bd= conectaBD();
         $sql="SELECT * 
-                FROM  Bens, Unidade
-                WHERE Bens.ID_Unidade = Unidade.ID_Unidade";
+                FROM  bens, unidade
+                WHERE bens.ID_Unidade = unidade.ID_Unidade";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -287,7 +287,7 @@
     function somaValorBens(){
         $bd= conectaBD();
         $sql="SELECT SUM( Valor ) AS total
-                FROM Bens";
+                FROM bens";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -297,7 +297,7 @@
     function somaValorVerbas(){
         $bd= conectaBD();
         $sql="SELECT SUM( Valor ) AS total
-                FROM Verba";
+                FROM verba";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -307,10 +307,10 @@
     //recebe como parametor o nome da unidade
     function consultaBensUnidade($nomeUnidade){
         $bd= conectaBD();
-        $sql="SELECT Bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, Bens.Tipo AS tipoBem, Unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
-                FROM Bens
-                INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
-                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
+        $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
+                FROM bens
+                INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
+                AND Nome_Unidade LIKE '%".$nomeunidade."%'";
                 //var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();
@@ -324,8 +324,8 @@
         $bd= conectaBD();
         $sql="SELECT SUM( Valor ) AS total
                 FROM bens
-                INNER JOIN Unidade ON Bens.ID_Unidade = Unidade.ID_Unidade
-                AND Nome_Unidade = '".$nomeUnidade."'";
+                INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
+                AND Nome_Unidade = '".$nomeunidade."'";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -347,7 +347,7 @@
     //funcao para consultar as ocorrencias de um dado professor ou funcionario
     function consultaOcorrencias($id){
         $sql="SELECT *
-        FROM Ocorrencias
+        FROM ocorrencias
         WHERE ID_Usuario='".$id."'";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
@@ -358,10 +358,10 @@
     function consultaOcorrenciaProfessores(){
          //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
         $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
-                FROM Ocorrencias
-                INNER JOIN Professor
-                INNER JOIN Usuario ON usuario.ID_Usuario = Professor.ID_Usuario
-                WHERE Ocorrencias.ID_Usuario = Professor.ID_Usuario;";
+                FROM ocorrencias
+                INNER JOIN professor
+                INNER JOIN usuario ON usuario.ID_Usuario = professor.ID_Usuario
+                WHERE ocorrencias.ID_Usuario = professor.ID_Usuario;";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
@@ -371,10 +371,10 @@
     function consultaOcorrenciaFuncionarios(){
          //falta ajustar a consulta para filtrar as ocorrencias do professor ou funcionario especificado
         $sql="SELECT ID_Ocorrencia, Tipo_Ocorrencia, usuario.ID_Usuario, nome, cpf, Data_Inicio, Data_Final
-                FROM Ocorrencias
-                INNER JOIN Funcionario
-                INNER JOIN Usuario ON usuario.ID_Usuario = Funcionario.ID_Usuario
-                WHERE Ocorrencias.ID_Usuario = Funcionario.ID_Usuario;";
+                FROM ocorrencias
+                INNER JOIN funcionario
+                INNER JOIN usuario ON usuario.ID_Usuario = funcionario.ID_Usuario
+                WHERE ocorrencias.ID_Usuario = funcionario.ID_Usuario;";
         $bd= conectaBD();
         $resultado = $bd->query($sql);
         $bd->close();
@@ -384,7 +384,7 @@
     //insere ocorrencia de professor
     function insereOcorrenciaProfessor($id, $tipo, $data){
         $bd= conectaBD();
-        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data_Inicio, Data_Final) 
+        $sql=" INSERT INTO ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data_Inicio, Data_Final) 
         VALUES ('".$id."','". $tipo."','". $data."', '".$data."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
@@ -399,7 +399,7 @@
     //insere ocorrencia de professor
     function insereOcorrenciaFuncionario($id, $tipo, $data_inicio, $data_final){
         $bd= conectaBD();
-        $sql=" INSERT INTO Ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data_Inicio, Data_Final) 
+        $sql=" INSERT INTO ocorrencias (ID_Usuario, Tipo_Ocorrencia, Data_Inicio, Data_Final) 
         VALUES ('".$id."','". $tipo."','". $data_inicio."', '".$data_final."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
@@ -414,7 +414,7 @@
     //atualiza ocorrencia
     function atualizaOcorrencia($id, $tipo, $data_inicio, $data_final){
         $bd= conectaBD();
-        $sql=" UPDATE Ocorrencias
+        $sql=" UPDATE ocorrencias
         SET Tipo_Ocorrencia='".$tipo."', Data_Inicio='".$data_inicio."', Data_Final='".$data_final."' 
         WHERE ID_Ocorrencia='".$id."';";
         if ($bd->query($sql) === TRUE) {
@@ -430,7 +430,7 @@
     //deleta ocorrencia
     function deletaOcorrencia($id){
         $bd= conectaBD();
-        $sql="DELETE FROM Ocorrencias 
+        $sql="DELETE FROM ocorrencias 
         WHERE ID_Ocorrencia='".$id."';";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
@@ -445,7 +445,7 @@
     //insere aluno
     function insereAluno($nome, $cpf, $dataNasc, $unidade, $curso){
         $bd= conectaBD();
-        $sql=" INSERT INTO Usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
+        $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
         VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
              $sql_aluno= "INSERT INTO Aluno (ID_Usuario, Codigo) 
@@ -462,7 +462,7 @@
     //altera aluno
     function atualizaAluno($id, $nome, $cpf, $dataNasc, $unidade){
         $bd= conectaBD();
-        $sql=" UPDATE Usuario 
+        $sql=" UPDATE usuario 
         SET Nome='".$nome."', CPF='".$cpf."', data_de_nascimento='".$dataNasc."', ID_Unidade='".$unidade."'
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
@@ -481,7 +481,7 @@
         $sql=" DELETE FROM Aluno 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
-            $sql_aluno= "DELETE FROM Usuario
+            $sql_aluno= "DELETE FROM usuario
                 WHERE ID_Usuario='".$id."';";
             $bd->query($sql_aluno);
             $bd->close();
@@ -499,7 +499,7 @@
         $sql=" DELETE FROM Aluno 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
-            $sql_aluno= "DELETE FROM Usuario
+            $sql_aluno= "DELETE FROM usuario
                 WHERE ID_Usuario='".$id."';";
             $bd->query($sql_aluno);
             $bd->close();
@@ -514,10 +514,10 @@
     //insere professor
     function insereProfessor($nome, $cpf, $dataNasc, $carreira, $nivel, $unidade){
         $bd= conectaBD();
-        $sql=" INSERT INTO Usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
+        $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, ID_Unidade) 
         VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
-            $sql_professor= "INSERT INTO Professor (ID_Usuario, carreira, nivel) 
+            $sql_professor= "INSERT INTO professor (ID_Usuario, carreira, nivel) 
                 VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
             $sql_servidor= "INSERT INTO Servidor (ID_Usuario) 
                 VALUES ('".mysqli_insert_id($bd)."');";
@@ -540,11 +540,11 @@
     //altera professor
     function atualizaProfessor($id, $nome, $cpf, $dataNasc, $carreira, $nivel, $unidade){
         $bd= conectaBD();
-        $sql=" UPDATE Usuario 
+        $sql=" UPDATE usuario 
         SET Nome='".$nome."', CPF='".$cpf."', data_de_nascimento='".$dataNasc."', ID_Unidade='".$unidade."' 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
-            $sql_professor= "UPDATE Professor
+            $sql_professor= "UPDATE professor
                 SET carreira='".$carreira."', nivel='".$nivel."' 
                 WHERE ID_Usuario='".$id."';";
             $bd->query($sql_professor);
@@ -560,10 +560,10 @@
     //deleta professor
     function deletaProfessor($id){
         $bd= conectaBD();
-        $sql=" DELETE FROM Professor 
+        $sql=" DELETE FROM professor 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
-            $sql_professor= "DELETE FROM Usuario
+            $sql_professor= "DELETE FROM usuario
                 WHERE ID_Usuario='".$id."';";
             $bd->query($sql_professor);
             $bd->close();
@@ -578,11 +578,11 @@
     //insere funcionario
     function insereFuncionario($nome, $cpf, $dataNasc, $funcao, $unidade){
         $bd= conectaBD();
-        $sql="INSERT INTO Usuario(nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
+        $sql="INSERT INTO usuario(nome, cpf, Sexo , data_de_nascimento, ID_Unidade) 
         VALUES ('".$nome."','".$cpf."', 'm', '".$dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
             $ident=mysqli_insert_id($bd);
-            $sql_funcionario= "INSERT INTO Funcionario (ID_Usuario, Funcao) 
+            $sql_funcionario= "INSERT INTO funcionario (ID_Usuario, Funcao) 
                 VALUES ('".$ident."', '".$funcao."');";
             $sql_servidor= "INSERT INTO Servidor (ID_Usuario) 
                 VALUES ('".$ident."');";
@@ -593,7 +593,7 @@
                 echo "Error: " . $sql . "<br>" . $bd->error;
                 return FALSE;
             }
-            //$sql_funcionario= "INSERT INTO Funcionario (ID_Usuario) 
+            //$sql_funcionario= "INSERT INTO funcionario (ID_Usuario) 
             //    VALUES ('".mysqli_insert_id($bd)."');";
             $bd->query($sql_funcionario);
             $bd->close();
@@ -609,11 +609,11 @@
     //altera funcionario
     function atualizaFuncionario($id, $nome, $cpf, $dataNasc, $funcao, $unidade){
         $bd= conectaBD();
-        $sql=" UPDATE Usuario 
+        $sql=" UPDATE usuario 
         SET Nome='".$nome."', CPF='".$cpf."', data_de_nascimento='".$dataNasc."', ID_Unidade='".$unidade."' 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
-            $sql_professor= "UPDATE Funcionario
+            $sql_professor= "UPDATE funcionario
                 SET Funcao='".$funcao."' 
                 WHERE ID_Usuario='".$id."';";
             $bd->query($sql_professor);
@@ -629,10 +629,10 @@
     //deleta funcionario
     function deletaFuncionario($id){
         $bd= conectaBD();
-        $sql=" DELETE FROM Funcionario 
+        $sql=" DELETE FROM funcionario 
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
-            $sql_funcionario= "DELETE FROM Usuario
+            $sql_funcionario= "DELETE FROM usuario
                 WHERE ID_Usuario='".$id."';";
             $bd->query($sql_funcionario);
             $bd->close();
@@ -713,7 +713,7 @@
     function insereBem($idUnidade, $localizacao, $valor, $data_aquisicao, $tipo){
         $bd= conectaBD();
         $sql=" INSERT INTO  Bens (Localizacao, Valor, Data_de_Aquisicao, Tipo, ID_Unidade)
-            VALUES ('". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."','".$idUnidade."');";
+            VALUES ('". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."','".$idunidade."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;
@@ -743,7 +743,7 @@
     //deleta bem
     function deletaBem($idBem){
         $bd= conectaBD();
-        $sql=" DELETE FROM Bens 
+        $sql=" DELETE FROM bens 
             WHERE ID_bem='".$idBem."';";
         if ($bd->query($sql) === TRUE) {
             $bd->close();

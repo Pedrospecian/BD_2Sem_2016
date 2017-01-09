@@ -57,7 +57,7 @@
 			</tbody>
 		</table>
 
-		<h3>Cursos Latu Sensu e Isenção de Alunos</h3>
+		<h3 id="f2">Cursos Latu Sensu e Isenção de Alunos</h3>
 		<p>
 			A tabela abaixo foi gerada com a <strong>consulta F_2</strong>.
 		</p>

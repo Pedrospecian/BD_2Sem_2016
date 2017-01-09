@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td>F_2</td>
-					<td><a href="cursos.php">Cursos</a>, no final da página</td>
+					<td><a href="cursos.php#f2">Cursos</a>, no final da página</td>
 				</tr>
 				<tr>
 					<td>G_1</td>
@@ -83,11 +83,11 @@
 				</tr>
 				<tr>
 					<td>G_2</td>
-					<td>Tela de detalhes do aluno de <a href="graduacao.php">graduação</a>/<a href="pos-graduacao.php">pós-graduação</a></td>
+					<td>Tela de detalhes do aluno de <a href="graduacao.php">graduação</a> e <a href="pos-graduacao.php">pós-graduação</a></td>
 				</tr>
 				<tr>
 					<td>G_3</td>
-					<td><a href="rh.php">Recursos Humanos</a>, no final da página</td>
+					<td><a href="rh.php#g3">Recursos Humanos</a>, no final da página</td>
 				</tr>
 				<tr>
 					<td>G_4</td>

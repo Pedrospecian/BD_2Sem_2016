@@ -253,7 +253,7 @@
 			</tbody>
 		</table>
 
-		<h2>Listagem de professores e suas ocorrências</h2>
+		<h2 id="g3">Listagem de professores e suas ocorrências</h2>
 		<p>
 			Na tabela abaixo são exibidos os dados de todos os professores, exibindo as ocorrências dos que possuem alguma ocorrência e "sem dados" para os que não possuem.
 			<br>

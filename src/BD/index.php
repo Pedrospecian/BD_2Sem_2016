@@ -83,7 +83,7 @@
 				</tr>
 				<tr>
 					<td>G_2</td>
-					<td>Tela de detalhes do aluno de graduação/pós-graduação</td>
+					<td>Tela de detalhes do aluno de <a href="graduacao.php">graduação</a>/<a href="pos-graduacao.php">pós-graduação</a></td>
 				</tr>
 				<tr>
 					<td>G_3</td>

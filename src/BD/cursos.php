@@ -1,5 +1,5 @@
-<?php 
-	include "header.html"; 
+<?php
+	include "header.html";
 	include "queries.php";
 ?>
 <main>
@@ -58,6 +58,9 @@
 		</table>
 
 		<h3>Cursos Latu Sensu e Isenção de Alunos</h3>
+		<p>
+			A tabela abaixo foi gerada com a <strong>consulta F_2</strong>.
+		</p>
 
 		<table class="table">
 			<thead>
@@ -72,7 +75,7 @@
 		    <tbody>
 		    	<?php
 					$cursos = consultaCursosLatuSensu();
-					
+
 				    while ($dados = mysqli_fetch_array($cursos)) {
 		    			echo "<tr>";
 		    			echo "<td>".$dados['Codigo']."</td>";
@@ -80,7 +83,7 @@
 		    			echo "<td>".$dados['ID_unidade']."</td>";
 		    			echo "<td>".$dados['Valor_Mensalidade']."</td>";
 		    			echo "<td>".$dados['Qte_Isentos']."</td>";
-		    			
+
 		    			echo "</tr>";
 		    		}
 		    	?>
@@ -90,6 +93,6 @@
 
 	</div>
 </main>
-<?php 
-	include "footer.html"; 
+<?php
+	include "footer.html";
 ?>

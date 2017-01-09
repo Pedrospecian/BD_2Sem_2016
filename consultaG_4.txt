@@ -1,8 +1,9 @@
 Consulta:
-SELECT ID_Usuario,AVG(Notas) as Média 
-FROM historico 
-GROUP BY ID_Usuario 
-HAVING Média>7
+SELECT usuario.ID_Usuario, nome, cpf, Sexo, data_de_nascimento, ID_Unidade, AVG(Notas) as Media
+FROM historico
+INNER JOIN usuario ON usuario.ID_Usuario = historico.ID_Usuario
+GROUP BY usuario.ID_Usuario
+HAVING Media>7
 
 Enunciado:
-Lista os ids de todos os alunos com média maior que 7
+Lista os dados de todos os alunos com média maior que 7

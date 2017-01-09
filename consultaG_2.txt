@@ -1,4 +1,4 @@
-Consulta:
+﻿Consulta:
 SELECT * 
 FROM cursos
 WHERE Codigo
@@ -9,5 +9,5 @@ IN (
 	);
 
 Enunciado: 
-Lista todos os dados do curso no qual o aluno que possui o 'id' especificado est� matriculado.
-(OBS.: Em nosso banco os ids de aluno v�o de 20 a 39)
+Lista todos os dados do curso no qual o aluno que possui o 'id' especificado está matriculado.
+(OBS.: Em nosso banco os ids de aluno vão de 20 a 39)

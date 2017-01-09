@@ -1,5 +1,5 @@
-<?php 
-	include "header.html"; 
+<?php
+	include "header.html";
 	include "queries.php";
 ?>
 <main>
@@ -7,7 +7,7 @@
 		<h2 class="title">Recursos Humanos</h2>
 		<p>
 			Nessa tela, são exibidas as ocorrências referentes ao trabalho dos professores
-			e funcionários. São exibidos: férias, licenças, advertências, afastamentos 
+			e funcionários. São exibidos: férias, licenças, advertências, afastamentos
 			remunerados e afastamentos não remunerados.
 		</p>
 		<h3>Professores</h3>
@@ -84,7 +84,7 @@
 		        	<th>apagar</th>
 		     	</tr>
     		</thead>
-		    <tbody>		    	
+		    <tbody>
 		    	<?php
 		    		$professores = consultaTodosProfessores();
 		    		while ($dados = mysqli_fetch_array($professores)) {
@@ -103,7 +103,7 @@
 		    			echo "</tr>";
 		    			echo "</form>";
 		    		}
-		    	?>		    	
+		    	?>
 			</tbody>
 		</table>
 
@@ -172,7 +172,7 @@
 		        	<th>apagar</th>
 		     	</tr>
     		</thead>
-		    <tbody>		    	
+		    <tbody>
 		    	<?php
 		    		$funcionarios = consultaTodosFuncionarios();
 		    		while ($dados = mysqli_fetch_array($funcionarios)) {
@@ -190,10 +190,10 @@
 		    			echo "</tr>";
 		    			echo "</form>";
 		    		}
-		    	?>		    	
+		    	?>
 			</tbody>
 		</table>
-		
+
 		<h1>Ocorrencias dos professores</h1>
 		<table class="table">
 			<thead>
@@ -205,7 +205,7 @@
 		        	<th>data fim</th>
 		     	</tr>
     		</thead>
-		    <tbody>		    	
+		    <tbody>
 		    	<?php
 		    		$ocorrencias = consultaOcorrenciaProfessores();
 		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
@@ -220,10 +220,10 @@
 		    			echo "</tr>";
 		    			echo "</form>";
 		    		}
-		    	?>		    	
+		    	?>
 			</tbody>
 		</table>
-		
+
 		<h1>Ocorrencias dos funcionários</h1>
 		<table class="table">
 			<thead>
@@ -235,7 +235,7 @@
 		        	<th>data fim</th>
 		     	</tr>
     		</thead>
-		    <tbody>		    	
+		    <tbody>
 		    	<?php
 		    		$ocorrencias = consultaOcorrenciaFuncionarios();
 		    		while ($dados = mysqli_fetch_array($ocorrencias)) {
@@ -249,11 +249,16 @@
 		    			echo "<td></td>";
 		    			echo "</tr>";
 		    		}
-		    	?>		    	
+		    	?>
 			</tbody>
 		</table>
 
-		<h2>Listagem de professores, exibindo ocorrências dos que possuem alguma ocorrência e "sem dados" para os que não possuem</h2>
+		<h2>Listagem de professores e suas ocorrências</h2>
+		<p>
+			Na tabela abaixo são exibidos os dados de todos os professores, exibindo as ocorrências dos que possuem alguma ocorrência e "sem dados" para os que não possuem.
+			<br>
+			O resultado abaixo foi gerado com a <strong>consulta G_3</strong>
+		</p>
 		<table class="table">
 			<thead>
 				<tr>
@@ -268,10 +273,10 @@
 		        	<th>Data Final</th>
 		     	</tr>
     		</thead>
-		    <tbody>		   
-				<?php 
-					$professoresSemOcorrencia = consultaProfessoresSemOcorrencia();
-			    	while ($dados = mysqli_fetch_array($professoresSemOcorrencia)) {
+		    <tbody>
+				<?php
+					$professoresEOcorrencias = consultaProfessoresEOcorrencias();
+			    	while ($dados = mysqli_fetch_array($professoresEOcorrencias)) {
 			    		//var_dump($dados);
 			    		$idOcor="Sem dados";
 			    		$tipoOcor="Sem dados";
@@ -299,6 +304,6 @@
 
 	</div>
 </main>
-<?php 
-	include "footer.html"; 
+<?php
+	include "footer.html";
 ?>

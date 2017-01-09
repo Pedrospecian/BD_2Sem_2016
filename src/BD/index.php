@@ -1,5 +1,5 @@
-<?php 
-	include "header.html"; 
+<?php
+	include "header.html";
 ?>
 <main>
 	<div class="container">
@@ -41,9 +41,7 @@
 		<p>Clique nos links abaixo para acessar as telas do sistema:</p>
 		<div class="row">
 			<div class="col-sm-12">
-				<a href="graduacao.php">Graduação</a>
-				<br>
-				<a href="pos-graduacao.php">Pós-Graduação</a>
+				<a href="alunos.php">Alunos</a>
 				<br>
 				<a href="financeiro.php">Sistema Financeiro</a>
 				<br>
@@ -60,8 +58,45 @@
 				<a href="atribuicoes.php">Atribuições de Professores</a>
 			</div>
 		</div>
+		<h3>
+			As consultas especiais foram usadas nas seguintes telas:
+		</h3>
+		<table class="table">
+			<thead>
+				<tr>
+		        	<th>Consulta</th>
+		        	<th>Local</th>
+		     	</tr>
+    		</thead>
+		    <tbody>
+				<tr>
+					<td>F_1</td>
+					<td><a href="atribuicoes.php">Atribuições de Professores</a></td>
+				</tr>
+				<tr>
+					<td>F_2</td>
+					<td><a href="cursos.php">Cursos</a>, no final da página</td>
+				</tr>
+				<tr>
+					<td>G_1</td>
+					<td><a href="bens.php">Gerenciamento de Bens</a>, no campo de busca</td>
+				</tr>
+				<tr>
+					<td>G_2</td>
+					<td>Tela de detalhes do aluno de graduação/pós-graduação</td>
+				</tr>
+				<tr>
+					<td>G_3</td>
+					<td><a href="rh.php">Recursos Humanos</a>, no final da página</td>
+				</tr>
+				<tr>
+					<td>G_4</td>
+					<td><a href="alunos.php">Alunos</a>, no começo da página</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </main>
-<?php 
-	include "footer.html"; 
+<?php
+	include "footer.html";
 ?>

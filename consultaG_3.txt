@@ -1,8 +1,8 @@
-Consulta:
+﻿Consulta:
 SELECT * 
 FROM professor
 INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
 LEFT JOIN ocorrencias ON professor.ID_Usuario = ocorrencias.ID_Usuario;
 
 Enunciado: 
-Lista todos os dados dos professores e das ocorr�ncias, quando o professor possui ocorr�ncia.
+Lista todos os dados dos professores e das ocorrências, quando o professor possui ocorrência.

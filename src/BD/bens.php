@@ -1,5 +1,5 @@
-<?php 
-	include "header.html"; 
+<?php
+	include "header.html";
 	include "queries.php";
 ?>
 <main>
@@ -59,9 +59,12 @@
 			</div>
 		</form>
 		<h3>Pesquisar bens de uma determinada unidade:</h3>
+		<p>
+			Para a busca abaixo, é usada a <strong>consulta G_1</strong>.
+		</p>
 		<form action="bensUnidade.php" method="GET" class="form-horizontal">
 			<div class="form-group">
-				<label class="control-label col-sm-2">Nome da unidade</label> 
+				<label class="control-label col-sm-2">Nome da unidade</label>
 				<div class="col-sm-5"><input class="form-control" type="text" name="nomeUnidade"/></div>
 				<button class="btn btn-default" type="submit" name="Pesquisar">Pesquisar</button>
 			</div>
@@ -104,6 +107,6 @@
 		</table>
 	</div>
 </main>
-<?php 
-	include "footer.html"; 
+<?php
+	include "footer.html";
 ?>

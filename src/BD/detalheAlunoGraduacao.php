@@ -1,5 +1,5 @@
-<?php 
-	include "header.html"; 
+<?php
+	include "header.html";
 	include "queries.php";
 ?>
 <main>
@@ -7,6 +7,9 @@
 		<?php if(isset($_POST['detalhes'])){ ?>
 		<h2>Aluno de Graduação: <?php echo $_POST['nomeAluno'];?></h2>
 		<h2>Curso: <?php echo mysqli_fetch_array(consultaNomeCursoPorAluno($_POST['idAluno']))['Nome']; ?></h2>
+		<p>
+			Para saber o curso de <?php echo $_POST['nomeAluno']; ?>, foi usada a <strong>consulta G_2</strong>.
+		</p>
 	    <h3>Projetos de extensão do aluno</h3>
 	    <table class="table">
 			<thead>
@@ -19,21 +22,20 @@
 			   	</tr>
 	    	</thead>
 		    <tbody>
-		        
+
 		    	<?php
 		    		$alunos = consultaProjetoExtensaoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			//var_dump($dados);
 		    			echo "<tr>";
 		    			echo "<td>".$dados["Descricao"]."</td>";
-		    			//echo "<td>".$dados["Atividade"]."</td>";
 		    			echo "<td>".$dados["Orcamento"]."</td>";
 		    			echo "<td>".$dados["Data_Inicio"]."</td>";
 		    			echo "<td>".$dados["Data_Termino"]."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>
-		    	
+
 			</tbody>
 		</table>
 
@@ -42,28 +44,26 @@
 			<thead>
 			    <tr>
 	    		    <th>Descrição</th>
-	    		    <!--<th>Atividade</th>-->
 	    		    <th>Orçamento</th>
 	    		    <th>Data Início</th>
 	    		    <th>Data Término</th>
 			   	</tr>
 	    	</thead>
 		    <tbody>
-		        
+
 		    	<?php
 		    		$alunos = consultaProjetoPesquisaAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
 		    			//var_dump($dados);
 		    			echo "<tr>";
 		    			echo "<td>".$dados["Descricao"]."</td>";
-		    			//echo "<td>".$dados["Atividade"]."</td>";
 		    			echo "<td>".$dados["Orcamento"]."</td>";
 		    			echo "<td>".$dados["Data_Inicio"]."</td>";
 		    			echo "<td>".$dados["Data_Termino"]."</td>";
 		    			echo "</tr>";
 		    		}
 		    	?>
-		    	
+
 			</tbody>
 		</table>
 
@@ -78,7 +78,7 @@
 			   	</tr>
 	    	</thead>
 		    <tbody>
-		        
+
 		    	<?php
 		    		$alunos = consultaHistoricoAluno($_POST['idAluno']);
 		    		while ($dados = mysqli_fetch_array($alunos)) {
@@ -90,7 +90,7 @@
 		    			echo "</tr>";
 		    		}
 		    	?>
-		    	
+
 			</tbody>
 		</table>
 		<?php }
@@ -153,6 +153,6 @@
 		?>
 	</div>
 </main>
-<?php 
-	include "footer.html"; 
+<?php
+	include "footer.html";
 ?>

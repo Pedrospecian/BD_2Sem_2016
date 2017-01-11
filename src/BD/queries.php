@@ -214,7 +214,7 @@
 
     function consultaAtividades($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT extensao_Possui.ID_Ati, localizacao, Data_Atividade , ID_Projeto
+        $sql="SELECT extensao_possui.ID_Ati, localizacao, Data_Atividade , ID_Projeto
                 FROM extensao_possui
                 INNER JOIN atividades_extensao ON atividades_Extensao.ID_Ati = extensao_Possui.ID_Ati
                 WHERE extensao_possui.ID_Projeto =".$idProjeto;
@@ -269,7 +269,7 @@
 
     //funcao para consultar o historico de um dado aluno
     function consultaHistoricoAluno($idAluno){
-        $sql="SELECT aluno.ID_Usuario, Disciplinas.ID_Disciplina, Notas, Frequencia, Disciplinas.Nome
+        $sql="SELECT aluno.ID_Usuario, disciplinas.ID_Disciplina, Notas, Frequencia, disciplinas.Nome
                 FROM aluno
                 INNER JOIN historico ON historico.ID_Usuario = aluno.ID_Usuario
                 AND aluno.ID_Usuario = '".$idAluno."'
@@ -592,7 +592,7 @@
                 VALUES ('".$idProjeto."');";
             $bd->query($sql_projetopesquisa);
             if($idAluno!=null){
-                $sql="INSERT INTO  coordena (ID_Projeto ,Indice_Pequisador ,Bolsa_Pesquisador,ID_Usuario)
+                $sql="INSERT INTO  coordena (ID_Projeto, Indice_Pequisador, Bolsa_Pesquisador, ID_Usuario)
                     VALUES ('".$idProjeto."',  0,  ".$bolsa.",  ".$idProfessor.");";
                 $bd->query($sql);
                 $sql= "INSERT INTO participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
@@ -648,7 +648,7 @@
     //retorna true se inseriu e false se deu erro
     function insereBem($idUnidade, $localizacao, $valor, $data_aquisicao, $tipo){
         $bd= conectaBD();
-        $sql=" INSERT INTO  Bens (Localizacao, Valor, Data_de_Aquisicao, Tipo, ID_Unidade)
+        $sql=" INSERT INTO  bens (Localizacao, Valor, Data_de_Aquisicao, Tipo, ID_Unidade)
             VALUES ('". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."','".$idunidade."');";
         if ($bd->query($sql) === TRUE) {
             $bd->close();

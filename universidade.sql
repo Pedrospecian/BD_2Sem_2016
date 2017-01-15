@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Jan-2017 às 20:27
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: 15-Jan-2017 às 15:55
+-- Versão do servidor: 10.1.16-MariaDB
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -82,26 +82,22 @@ CREATE TABLE `aluno` (
 --
 
 INSERT INTO `aluno` (`ID_Usuario`, `Codigo`) VALUES
+(21, 1),
+(22, 1),
+(28, 1),
 (30, 1),
 (33, 1),
-(36, 1),
+(26, 3),
+(27, 3),
 (31, 3),
 (32, 4),
 (34, 4),
+(29, 6),
 (35, 6),
-(38, 6),
 (20, 7),
-(22, 7),
 (24, 7),
-(26, 7),
-(28, 7),
-(21, 8),
 (23, 8),
-(25, 8),
-(27, 8),
-(29, 8),
-(37, 9),
-(39, 9);
+(25, 8);
 
 -- --------------------------------------------------------
 
@@ -248,7 +244,7 @@ INSERT INTO `coordena` (`ID_Projeto`, `Indice_Pesquisador`, `Bolsa_Pesquisador`,
 CREATE TABLE `creditos` (
   `ID_Res` int(11) NOT NULL,
   `ID_Usuario` int(11) NOT NULL,
-  `Nro_de_Creditos` char(1) NOT NULL
+  `Nro_de_Creditos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -256,11 +252,11 @@ CREATE TABLE `creditos` (
 --
 
 INSERT INTO `creditos` (`ID_Res`, `ID_Usuario`, `Nro_de_Creditos`) VALUES
-(1, 10, '2'),
-(1, 35, '4'),
-(1, 37, '1'),
-(2, 25, '3'),
-(2, 26, '3');
+(1, 12, 2),
+(1, 21, 1),
+(1, 34, 4),
+(2, 22, 3),
+(2, 23, 3);
 
 -- --------------------------------------------------------
 
@@ -381,8 +377,7 @@ INSERT INTO `ensino` (`ID_Unidade`) VALUES
 (1),
 (2),
 (5),
-(6),
-(21);
+(6);
 
 -- --------------------------------------------------------
 
@@ -457,7 +452,15 @@ INSERT INTO `folha_de_pagamento` (`Salario`, `Id_Pagamento`, `Data`, `ID_Usuario
 (6000, 12, '2016-04-02', 6),
 (6000, 13, '2016-04-02', 7),
 (8000, 14, '2016-04-02', 8),
-(10000, 15, '2016-04-02', 9);
+(10000, 15, '2016-04-02', 9),
+(1500, 16, '2016-02-02', 10),
+(1500, 17, '2016-02-02', 12),
+(1500, 18, '2016-02-02', 18),
+(3000, 19, '2016-02-02', 19),
+(1500, 20, '2016-03-02', 10),
+(1500, 21, '2016-03-02', 12),
+(1500, 22, '2016-03-02', 18),
+(3000, 23, '2016-03-02', 19);
 
 -- --------------------------------------------------------
 
@@ -476,9 +479,9 @@ CREATE TABLE `funcionario` (
 
 INSERT INTO `funcionario` (`ID_Usuario`, `Funcao`) VALUES
 (10, 'Auxiliar Administrativo'),
-(12, 'Auxiliar Administrativo'),
+(12, 'Auxiliar de Limpeza'),
 (18, 'Auxiliar Administrativo'),
-(19, 'Auxiliar Administrativo');
+(19, 'Seguranca');
 
 -- --------------------------------------------------------
 
@@ -518,25 +521,26 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`ID_Usuario`, `ID_Disciplina`, `Notas`, `Frequencia`) VALUES
+(21, 1, 5, 70),
+(22, 1, 9, 85),
+(28, 1, 9, 95),
 (30, 1, 8, 85),
-(32, 1, 8, 90),
-(36, 1, 5, 70),
-(38, 1, 8, 75),
-(31, 2, 7, 80),
-(32, 2, 6, 60),
-(36, 2, 7, 75),
-(37, 2, 9, 85),
+(33, 1, 3, 60),
+(21, 2, 7, 75),
+(22, 2, 6, 75),
+(28, 2, 8, 100),
+(30, 2, 5, 70),
+(33, 2, 4, 70),
+(26, 3, 8, 75),
+(27, 3, 4, 65),
 (31, 3, 3, 40),
-(32, 3, 4, 60),
-(35, 3, 5, 60),
-(38, 3, 6, 75),
-(30, 4, 5, 70),
-(33, 4, 3, 60),
-(34, 4, 7, 85),
-(33, 5, 4, 70),
-(34, 5, 8, 100),
-(33, 6, 5, 100),
-(35, 6, 5, 70);
+(26, 4, 6, 70),
+(27, 4, 3, 50),
+(31, 4, 7, 80),
+(29, 5, 7, 90),
+(35, 5, 5, 60),
+(32, 6, 4, 60),
+(34, 6, 7, 85);
 
 -- --------------------------------------------------------
 
@@ -554,19 +558,6 @@ CREATE TABLE `hospital` (
 
 INSERT INTO `hospital` (`ID_Unidade`) VALUES
 (10);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `indice_de_desempenho`
---
-
-CREATE TABLE `indice_de_desempenho` (
-  `Codigo` bigint(20) NOT NULL,
-  `Indice_Curso` int(11) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
-  `I_A_ID_Usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -730,10 +721,10 @@ CREATE TABLE `participa` (
 
 INSERT INTO `participa` (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES
 (31, 2011, 400),
-(36, 2012, 400),
+(21, 2012, 400),
 (30, 2013, 600),
-(35, 2014, 400),
-(38, 2014, 400);
+(29, 2014, 400),
+(35, 2014, 400);
 
 -- --------------------------------------------------------
 
@@ -986,31 +977,31 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`, `ID_Unidade`) VALUES
-(5, 'Marcio Costa', '183.427.466-40', 'Masculino', '1971-03-23', 1),
+(5, 'Marcio Costa', '183.427.466-40', 'Masculino', '1971-03-23', 21),
 (6, 'Fernanda Almeida', '880.185.271-13', 'Feminino', '1971-10-20', 1),
 (7, 'Paulo Antunes', '384.126.948-64', 'Masculino', '1971-11-23', 5),
-(8, 'Laura Santos', '582.223.411-97', 'Feminino', '1972-07-10', 5),
-(9, 'Claudia Silva', '455.979.542-88', 'Feminino', '1973-02-05', 6),
+(8, 'Laura Santos', '582.223.411-97', 'Feminino', '1972-07-10', 6),
+(9, 'Claudia Silva', '455.979.542-88', 'Feminino', '1973-02-05', 1),
 (10, 'Joao Santos', '325.184.027-48', 'Masculino', '1973-05-01', 6),
 (12, 'Jose Oliveira', '227.064.963-04', 'Masculino', '1973-09-20', 1),
 (18, 'Fabio Lima', '027.728.832-05', 'Masculino', '1975-08-18', 21),
 (19, 'Raquel Ferreira', '166.234.703-01', 'Feminino', '1976-12-09', 1),
-(20, 'Mateus Barros', '140.342.783-66', 'Masculino', '1994-03-21', 1),
+(20, 'Mateus Barros', '140.342.783-66', 'Masculino', '1994-03-21', 6),
 (21, 'Juliana Oliveira', '851.860.336-69', 'Feminino', '1994-05-26', 1),
-(22, 'Vinicius Ferreira', '428.481.728-00', 'Masculino', '1994-11-17', 5),
-(23, 'Patri­cia Costa', '872.669.135-35', 'Feminino', '1995-03-16', 5),
+(22, 'Vinicius Ferreira', '428.481.728-00', 'Masculino', '1994-11-17', 1),
+(23, 'Patri­cia Costa', '872.669.135-35', 'Feminino', '1995-03-16', 6),
 (24, 'Roberta Almeida', '328.689.635-79', 'Feminino', '1995-04-20', 6),
 (25, 'Fabio Santos', '867.449.174-04', 'Masculino', '1995-11-03', 6),
-(26, 'Denise Silva', '789.822.516-34', 'Feminino', '1996-01-12', 21),
+(26, 'Denise Silva', '789.822.516-34', 'Feminino', '1996-01-12', 1),
 (27, 'Felipe Prado', '523.124.337-02', 'Masculino', '1996-01-31', 1),
 (28, 'Natalia Santos', '002.889.189-91', 'Feminino', '1996-09-04', 1),
 (29, 'Daniel Ferreira', '188.122.978-54', 'Masculino', '1996-12-13', 5),
 (30, 'Joao Oliveira', '662.118.796-36', 'Masculino', '1994-05-20', 1),
-(31, 'Renata Sanchez', '842.319.617-86', 'Feminino', '1994-07-20', 5),
+(31, 'Renata Sanchez', '842.319.617-86', 'Feminino', '1994-07-20', 1),
 (32, 'Carlos Silva', '389.178.887-80', 'Masculino', '1994-04-07', 6),
-(33, 'Patricia Carvalho', '871.636.259-44', 'Feminino', '1991-04-15', 21),
-(34, 'Luis Silveira', '878.624.370-55', 'Masculino', '1991-12-20', 1),
-(35, 'Julia Silva', '064.311.508-05', 'Feminino', '1994-07-20', 6),
+(33, 'Patricia Carvalho', '871.636.259-44', 'Feminino', '1991-04-15', 1),
+(34, 'Luis Silveira', '878.624.370-55', 'Masculino', '1991-12-20', 6),
+(35, 'Julia Silva', '064.311.508-05', 'Feminino', '1994-07-20', 5),
 (36, 'Daniel Silva', '829.057.644-73', 'Masculino', '1993-07-05', 21),
 (37, 'Ana Clara', '463.407.505-91', 'Feminino', '1995-04-25', 5),
 (38, 'Pedro Almeida', '314.199.712-80', 'Masculino', '1995-12-27', 1),
@@ -1203,15 +1194,6 @@ ALTER TABLE `historico`
 ALTER TABLE `hospital`
   ADD PRIMARY KEY (`ID_Unidade`),
   ADD UNIQUE KEY `FKUni_Hos_IND` (`ID_Unidade`);
-
---
--- Indexes for table `indice_de_desempenho`
---
-ALTER TABLE `indice_de_desempenho`
-  ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `FKInd_Cur_IND` (`Codigo`),
-  ADD KEY `FKInd_Pro_IND` (`ID_Usuario`),
-  ADD KEY `FKInd_Alu_IND` (`I_A_ID_Usuario`);
 
 --
 -- Indexes for table `isencao_na_inscricao`
@@ -1499,14 +1481,6 @@ ALTER TABLE `historico`
 --
 ALTER TABLE `hospital`
   ADD CONSTRAINT `FKUni_Hos_FK` FOREIGN KEY (`ID_Unidade`) REFERENCES `unidade` (`ID_Unidade`);
-
---
--- Limitadores para a tabela `indice_de_desempenho`
---
-ALTER TABLE `indice_de_desempenho`
-  ADD CONSTRAINT `FKInd_Alu_FK` FOREIGN KEY (`I_A_ID_Usuario`) REFERENCES `aluno` (`ID_Usuario`),
-  ADD CONSTRAINT `FKInd_Cur_FK` FOREIGN KEY (`Codigo`) REFERENCES `cursos` (`Codigo`),
-  ADD CONSTRAINT `FKInd_Pro_FK` FOREIGN KEY (`ID_Usuario`) REFERENCES `professor` (`ID_Usuario`);
 
 --
 -- Limitadores para a tabela `isencao_na_inscricao`

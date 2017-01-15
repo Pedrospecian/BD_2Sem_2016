@@ -3,7 +3,8 @@ SELECT usuario.ID_Usuario, nome, cpf, Sexo, data_de_nascimento, ID_Unidade, AVG(
 FROM historico
 INNER JOIN usuario ON usuario.ID_Usuario = historico.ID_Usuario
 GROUP BY usuario.ID_Usuario
-HAVING Media>7
+HAVING Media>=7
 
 Enunciado:
 Lista os dados de todos os alunos com média maior que 7
+

@@ -5,9 +5,9 @@ WHERE Codigo
 IN (
 	SELECT Codigo
 	FROM aluno
-	WHERE ID_Usuario'id'
+	WHERE ID_Usuario='id'
 	);
 
 Enunciado: 
 Lista todos os dados do curso no qual o aluno que possui o 'id' especificado está matriculado.
-(OBS.: Em nosso banco os ids de aluno vão de 20 a 39)
+(OBS.: Em nosso banco os ids de aluno vão de 20 a 35)

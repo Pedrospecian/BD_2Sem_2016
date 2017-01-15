@@ -854,7 +854,8 @@
         $sql = "SELECT *
                 FROM professor
                 INNER JOIN usuario ON professor.ID_Usuario = usuario.ID_Usuario
-                LEFT JOIN ocorrencias ON professor.ID_Usuario = ocorrencias.ID_Usuario";
+                LEFT JOIN ocorrencias ON professor.ID_Usuario = ocorrencias.ID_Usuario
+                WHERE ocorrencias.ID_Ocorrencia IS NOT NULL;";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -867,7 +868,7 @@
             FROM historico
             INNER JOIN usuario ON usuario.ID_Usuario = historico.ID_Usuario
             GROUP BY usuario.ID_Usuario
-            HAVING Media>7";
+            HAVING Media>=7";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;

@@ -5,4 +5,4 @@ LEFT JOIN ocorrencias ON professor.ID_Usuario = ocorrencias.ID_Usuario
 WHERE ocorrencias.ID_Ocorrencia IS NOT NULL;
 
 Enunciado: 
-Lista todos os dados dos professores e das ocorrências, quando o professor possui ocorrência.
+Lista todos os dados dos professores e das ocorrências, quando o professor possui ocorrência. Professores sem ocorrências não aparecem no resultado da consulta

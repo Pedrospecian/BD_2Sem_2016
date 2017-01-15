@@ -69,6 +69,7 @@
 		        	<th>Nome do Curso</th>
 		        	<th>Unidade do Curso</th>
 		        	<th>Valor Mensalidade</th>
+		        	<th>Possui isenções?</th>
 		        	<th>Qte Isenções</th>
 		     	</tr>
     		</thead>
@@ -82,6 +83,11 @@
 		    			echo "<td>".$dados['Nome']."</td>";
 		    			echo "<td>".$dados['ID_unidade']."</td>";
 		    			echo "<td>".$dados['Valor_Mensalidade']."</td>";
+		    			if($dados['Qte_Isentos']>0) {
+		    				echo "<td>Sim</td>";
+		    			} else {
+		    				echo "<td>Não</td>";
+		    			}
 		    			echo "<td>".$dados['Qte_Isentos']."</td>";
 
 		    			echo "</tr>";

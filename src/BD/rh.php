@@ -255,7 +255,7 @@
 
 		<h2 id="g3">Listagem de professores e suas ocorrências</h2>
 		<p>
-			Na tabela abaixo são exibidos os dados de todos os professores, exibindo as ocorrências dos que possuem alguma ocorrência e "sem dados" para os que não possuem.
+			Na tabela abaixo são exibidos os dados dos professores e das ocorrências, quando o professor possui ocorrência. Professores sem ocorrências não aparecem no resultado da consulta
 			<br>
 			O resultado abaixo foi gerado com a <strong>consulta G_3</strong>
 		</p>

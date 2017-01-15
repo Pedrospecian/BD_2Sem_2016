@@ -1,4 +1,5 @@
 -- mudanças pra auto increment
+SET FOREIGN_KEY_CHECKS = 0;
 
 ALTER TABLE  `usuario` CHANGE  `ID_Usuario`  `ID_Usuario` INT( 11 ) NOT NULL AUTO_INCREMENT ;
 ALTER TABLE  `unidade` CHANGE  `ID_Unidade`  `ID_Unidade` INT( 11 ) NOT NULL AUTO_INCREMENT ;
@@ -10,3 +11,4 @@ ALTER TABLE  `disciplinas` CHANGE  `ID_Disciplina`  `ID_Disciplina` INT( 11 ) NO
 ALTER TABLE  `cursos` CHANGE  `Codigo`  `Codigo` BIGINT( 20 ) NOT NULL AUTO_INCREMENT ;
 ALTER TABLE  `bens` CHANGE  `ID_bem`  `ID_bem` INT( 11 ) NOT NULL AUTO_INCREMENT ;
 
+SET FOREIGN_KEY_CHECKS = 1;

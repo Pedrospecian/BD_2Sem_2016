@@ -280,6 +280,15 @@
         return $resultado;
     }
 
+    function consultaDisciplinas(){
+        $sql="SELECT *
+                FROM disciplinas";
+        $bd= conectaBD();
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
     //funcao para consultar as ocorrencias de um dado professor ou funcionario
     function consultaOcorrencias($id){
         $sql="SELECT *
@@ -414,6 +423,12 @@
     //deleta aluno de graduacao
     function deletaAlunoGraduacao($id){
         $bd= conectaBD();
+        $sql=" DELETE FROM historico
+        WHERE ID_Usuario='".$id."';";
+        $bd->query($sql);
+        $sql=" DELETE FROM participa
+        WHERE ID_Usuario='".$id."';";
+        $bd->query($sql);
         $sql=" DELETE FROM aluno
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
@@ -432,6 +447,9 @@
     //deleta aluno de pos graduacao
     function deletaAlunoPos($id){
         $bd= conectaBD();
+        $sql=" DELETE FROM isencao_na_inscricao
+        WHERE ID_Usuario='".$id."';";
+        $bd->query($sql);
         $sql=" DELETE FROM aluno
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
@@ -448,18 +466,18 @@
     }
 
     //insere professor
-    function insereProfessor($nome, $cpf, $dataNasc, $carreira, $nivel, $unidade){
+    function insereProfessor($nome, $cpf, $dataNasc, $carreira, $nivel, $unidade, $codigo){
         $bd= conectaBD();
         $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, sexo, ID_Unidade)
         VALUES ('".$nome."','". $cpf."','". $dataNasc."', 'm', '".$unidade."');";
-        if ($bd->query($sql) === TRUE) {
-            $sql_professor= "INSERT INTO professor (ID_Usuario, carreira, nivel)
-                VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
+        if ($bd->query($sql) === TRUE) {            
             $sql_servidor= "INSERT INTO servidor (ID_Usuario)
                 VALUES ('".mysqli_insert_id($bd)."');";
-                $sql_folhapagamento= "INSERT INTO folha_de_pagamento (ID_Usuario, Data, salario)
+            $sql_professor= "INSERT INTO professor (ID_Usuario, carreira, nivel, Codigo)
+                VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."', '".$codigo."');";
+            $sql_folhapagamento= "INSERT INTO folha_de_pagamento (ID_Usuario, Data, salario)
                 VALUES ('".mysqli_insert_id($bd)."', '2016-11-10', '870');";
-            if($bd->query($sql_professor)===FALSE && $bd->query($sql_servidor)===FALSE && $bd->query($sql_folhapagamento)===FALSE){
+            if($bd->query($sql_servidor)===FALSE || $bd->query($sql_professor)===FALSE || $bd->query($sql_folhapagamento)===FALSE){
                 echo "Error: " . $sql . "<br>" . $bd->error;
                 return FALSE;
             }
@@ -496,6 +514,12 @@
     //deleta professor
     function deletaProfessor($id){
         $bd= conectaBD();
+        $sql=" DELETE FROM atribuicoes
+        WHERE ID_Usuario='".$id."';";
+        $bd->query($sql);
+        $sql=" DELETE FROM ocorrencias
+        WHERE ID_Usuario='".$id."';";
+        $bd->query($sql);
         $sql=" DELETE FROM professor
         WHERE ID_Usuario='".$id."';";
         if ($bd->query($sql) === TRUE) {
@@ -517,15 +541,15 @@
         $sql="INSERT INTO usuario(nome, cpf, Sexo , data_de_nascimento, ID_Unidade)
         VALUES ('".$nome."','".$cpf."', 'm', '".$dataNasc."', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
-            $ident=mysqli_insert_id($bd);
-            $sql_funcionario= "INSERT INTO funcionario (ID_Usuario, Funcao)
-                VALUES ('".$ident."', '".$funcao."');";
+            $ident=mysqli_insert_id($bd);            
             $sql_servidor= "INSERT INTO servidor (ID_Usuario)
                 VALUES ('".$ident."');";
-            $sql_folhapagamento= "INSERT INTO folha_de_pagamento (Data, salario)
-                VALUES ('2016-12-10', '870');";
+            $sql_funcionario= "INSERT INTO funcionario (ID_Usuario, Funcao)
+                VALUES ('".$ident."', '".$funcao."');";
+            $sql_folhapagamento= "INSERT INTO folha_de_pagamento (ID_Usuario, Data, salario)
+                VALUES ('".$ident."', '2016-12-10', '870');";
                 //var_dump($bd->query($sql_funcionario));
-            if($bd->query($sql_funcionario)===FALSE && $bd->query($sql_servidor)===FALSE && $bd->query($sql_folhapagamento)===FALSE){
+            if($bd->query($sql_servidor)===FALSE || $bd->query($sql_funcionario)===FALSE || $bd->query($sql_folhapagamento)===FALSE){
                 echo "Error: " . $sql . "<br>" . $bd->error;
                 return FALSE;
             }

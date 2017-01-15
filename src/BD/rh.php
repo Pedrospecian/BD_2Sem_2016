@@ -51,6 +51,22 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
+					<label for="disciplina" class="control-label col-sm-2 text-right">Disciplina</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="disciplina">
+							<option value="">--</option>
+							<?php
+								$unidades = consultaDisciplinas();
+								while ($dados = mysqli_fetch_array($unidades)) {
+									echo "<option value=".$dados['ID_Disciplina'].">".$dados['Nome']."</option>";
+						        }
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
 					<label for="unidade" class="control-label col-sm-2 text-right">Unidade</label>
 					<div class="col-sm-5">
 						<select class="form-control" name="unidade">

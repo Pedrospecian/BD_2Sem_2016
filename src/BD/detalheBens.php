@@ -59,7 +59,7 @@
 		</form>
 	<?php }
 	if(isset($_POST["delete"])) {
-		var_dump($_POST);
+		//var_dump($_POST);
 	    $deletou = deletaBem($_POST['idBem']);
 	    if($deletou == TRUE){
 	        echo "Bem excluído com sucesso!";

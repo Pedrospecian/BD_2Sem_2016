@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Jan-2017 às 15:55
+-- Generation Time: 15-Jan-2017 às 19:46
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -254,9 +254,9 @@ CREATE TABLE `creditos` (
 INSERT INTO `creditos` (`ID_Res`, `ID_Usuario`, `Nro_de_Creditos`) VALUES
 (1, 12, 2),
 (1, 21, 1),
-(1, 34, 4),
-(2, 22, 3),
-(2, 23, 3);
+(1, 22, 3),
+(2, 29, 3),
+(2, 35, 4);
 
 -- --------------------------------------------------------
 

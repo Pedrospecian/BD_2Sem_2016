@@ -10,7 +10,7 @@
 			possui, como prédios, carros e equipamentos.
 		</p>
 		<p>
-			A universidade possui um total de <?php echo mysqli_fetch_array(somaValorBensUnidade($_GET['nomeUnidade']))['total'] ?> reais em bens.
+			A universidade possui um total de <?php echo mysqli_fetch_array(somaValorBensUnidade($_GET['nomeUnidade']))['total']; ?> reais em bens.
 		</p>
 		<table class="table">
 			<thead>

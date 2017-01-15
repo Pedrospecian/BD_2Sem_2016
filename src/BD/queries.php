@@ -261,7 +261,7 @@
         $sql="SELECT SUM( Valor ) AS total
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
-                AND Nome_Unidade = '".$nomeunidade."'";
+                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -381,8 +381,8 @@
     //insere aluno
     function insereAluno($nome, $cpf, $dataNasc, $unidade, $curso){
         $bd= conectaBD();
-        $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, ID_Unidade)
-        VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
+        $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, Sexo, ID_Unidade)
+        VALUES ('".$nome."','". $cpf."','". $dataNasc."', 'm', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
              $sql_aluno= "INSERT INTO aluno (ID_Usuario, Codigo)
                 VALUES ('".mysqli_insert_id($bd)."', '".$curso."');";
@@ -450,8 +450,8 @@
     //insere professor
     function insereProfessor($nome, $cpf, $dataNasc, $carreira, $nivel, $unidade){
         $bd= conectaBD();
-        $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, ID_Unidade)
-        VALUES ('".$nome."','". $cpf."','". $dataNasc."', '".$unidade."');";
+        $sql=" INSERT INTO usuario (Nome, CPF, data_de_nascimento, sexo, ID_Unidade)
+        VALUES ('".$nome."','". $cpf."','". $dataNasc."', 'm', '".$unidade."');";
         if ($bd->query($sql) === TRUE) {
             $sql_professor= "INSERT INTO professor (ID_Usuario, carreira, nivel)
                 VALUES ('".mysqli_insert_id($bd)."', '".$carreira."', '".$nivel."');";
@@ -648,8 +648,8 @@
     //retorna true se inseriu e false se deu erro
     function insereBem($idUnidade, $localizacao, $valor, $data_aquisicao, $tipo){
         $bd= conectaBD();
-        $sql=" INSERT INTO  bens (Localizacao, Valor, Data_de_Aquisicao, Tipo, ID_Unidade)
-            VALUES ('". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."','".$idunidade."');";
+        $sql=" INSERT INTO  bens (Localizacao, Valor, Data_de_Aquisicao, Tipo, ID_Unidade, quantidade)
+            VALUES ('". $localizacao."','". $valor."','". $data_aquisicao."','". $tipo."','".$idUnidade."', 1);";
         if ($bd->query($sql) === TRUE) {
             $bd->close();
             return TRUE;
@@ -828,7 +828,7 @@
         $sql="SELECT bens.ID_Bem AS id, Localizacao, Valor, Data_de_Aquisicao, bens.Tipo AS tipoBem, unidade.ID_Unidade, Nome_Unidade AS nomeUnidade
                 FROM bens
                 INNER JOIN unidade ON bens.ID_Unidade = unidade.ID_Unidade
-                AND Nome_Unidade LIKE '%".$nomeunidade."%'";
+                AND Nome_Unidade LIKE '%".$nomeUnidade."%'";
                 //var_dump($sql);
         $resultado = $bd->query($sql);
         $bd->close();

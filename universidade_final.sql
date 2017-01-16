@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Jan-2017 às 15:55
--- Versão do servidor: 10.1.16-MariaDB
--- PHP Version: 5.5.38
+-- Generation Time: 16-Jan-2017 às 00:37
+-- Versão do servidor: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -96,6 +96,7 @@ INSERT INTO `aluno` (`ID_Usuario`, `Codigo`) VALUES
 (35, 6),
 (20, 7),
 (24, 7),
+(41, 7),
 (23, 8),
 (25, 8);
 
@@ -116,10 +117,16 @@ CREATE TABLE `atividades_extensao` (
 --
 
 INSERT INTO `atividades_extensao` (`Localizacao`, `Data_Atividade`, `ID_Projeto`) VALUES
-('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-02-02', 2011),
-('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-02-02', 2012),
-('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-03-02', 2011),
-('	\r\nRua Arlindo Bettio, 1000 Ermelino Matarazzo, SP', '2016-03-02', 2012);
+('Local 1', '2017-01-02', 2048),
+('Local 2', '2017-01-10', 2048),
+('Local 10', '2017-01-25', 2047),
+('Local 3', '2017-01-11', 2047),
+('Local 44', '2017-01-21', 2046),
+('Rua Ermelino Matarazzo, n 410', '2017-01-18', 2045),
+('Avenida Paulista, n 329', '2017-01-18', 2045),
+('Rua das Flores, n 31', '2017-01-01', 2045),
+('Rua Dr Ricardo Vilela, n 907', '2017-01-25', 2044),
+('Rua Miguel Santana, n 320', '2017-01-11', 2044);
 
 -- --------------------------------------------------------
 
@@ -212,7 +219,8 @@ INSERT INTO `biblioteca` (`ID_Bib`, `ID_Unidade`, `B_Nome`) VALUES
 (1, 1, 'Biblioteca da EACH'),
 (2, 5, 'Biblioteca do Faculdade de Direito'),
 (3, 6, 'Biblioteca da FEA'),
-(5, 2, 'Biblioteca da Faculdade de Medicina');
+(5, 2, 'Biblioteca da Faculdade de Medicina'),
+(6, 31, 'Biblioteca de Geografia');
 
 -- --------------------------------------------------------
 
@@ -232,8 +240,11 @@ CREATE TABLE `coordena` (
 --
 
 INSERT INTO `coordena` (`ID_Projeto`, `Indice_Pesquisador`, `Bolsa_Pesquisador`, `ID_Usuario`) VALUES
-(2013, 10, 5000, 9),
-(2014, 5, 3000, 7);
+(2055, 1, 2000, 5),
+(2056, 1, 4000, 8),
+(2057, 1, 4200, 6),
+(2058, 1, 3000, 6),
+(2059, 1, 1500, 9);
 
 -- --------------------------------------------------------
 
@@ -291,7 +302,15 @@ INSERT INTO `cursos` (`Codigo`, `Nome`, `ID_Unidade`) VALUES
 (15, 'Doutorado em Administração', 6),
 (16, 'Doutorado em Gestão de Políticas Públicas', 1),
 (17, 'Doutorado em Medicina', 2),
-(18, 'Doutorado em Sistemas de Informação', 1);
+(18, 'Doutorado em Sistemas de Informação', 1),
+(19, 'Especializacao em Administracao Hospitalar e de Sistemas de Saude', 2),
+(20, 'Mestrado Profissional em Gestao para Competitividade', 1),
+(21, 'DBA', 5),
+(22, 'Especializacao em Inteligencia Artificial', 5),
+(23, 'One MBA', 6),
+(24, 'Especializacao em Neurologia', 2),
+(25, 'Doutorado em Psiquiatria', 6),
+(26, 'Oceanografia', 5);
 
 -- --------------------------------------------------------
 
@@ -345,7 +364,7 @@ INSERT INTO `doutorado` (`Codigo`) VALUES
 
 CREATE TABLE `empresta` (
   `Data_Inicio` date NOT NULL,
-  `Id_Emprestimo` int(11) NOT NULL,
+  `Id_Emprestimo` bigint(20) NOT NULL,
   `Data_Devolucao` date NOT NULL,
   `ID_Usuario` int(11) NOT NULL,
   `B_Item_Id` bigint(20) NOT NULL
@@ -357,7 +376,12 @@ CREATE TABLE `empresta` (
 
 INSERT INTO `empresta` (`Data_Inicio`, `Id_Emprestimo`, `Data_Devolucao`, `ID_Usuario`, `B_Item_Id`) VALUES
 ('2016-03-01', 1, '2016-03-23', 38, 3),
-('2016-07-23', 2, '2016-08-03', 33, 1);
+('2016-07-23', 2, '2016-08-03', 33, 1),
+('2017-01-10', 3, '2017-01-26', 9, 3),
+('2017-01-02', 4, '2017-01-05', 29, 1),
+('2017-01-25', 5, '2017-01-31', 26, 4),
+('2017-01-09', 6, '2017-01-26', 43, 2),
+('2017-01-01', 7, '2017-01-10', 30, 5);
 
 -- --------------------------------------------------------
 
@@ -377,7 +401,8 @@ INSERT INTO `ensino` (`ID_Unidade`) VALUES
 (1),
 (2),
 (5),
-(6);
+(6),
+(31);
 
 -- --------------------------------------------------------
 
@@ -395,10 +420,11 @@ CREATE TABLE `exerce` (
 --
 
 INSERT INTO `exerce` (`ID_Projeto`, `ID_Usuario`) VALUES
-(2011, 6),
-(2012, 7),
-(2011, 10),
-(2012, 18);
+(2044, 18),
+(2045, 12),
+(2046, 6),
+(2047, 6),
+(2048, 19);
 
 -- --------------------------------------------------------
 
@@ -418,7 +444,12 @@ CREATE TABLE `financiador` (
 
 INSERT INTO `financiador` (`Tipo`, `nome`, `ID_Financiador`) VALUES
 ('Público', 'A', 1),
-('Privado', 'B', 2);
+('Privado', 'B', 2),
+('Público', 'C', 3),
+('Público', 'D', 4),
+('Público', 'E', 5),
+('Privado', 'F', 6),
+('Privado', 'G', 7);
 
 -- --------------------------------------------------------
 
@@ -460,7 +491,10 @@ INSERT INTO `folha_de_pagamento` (`Salario`, `Id_Pagamento`, `Data`, `ID_Usuario
 (1500, 20, '2016-03-02', 10),
 (1500, 21, '2016-03-02', 12),
 (1500, 22, '2016-03-02', 18),
-(3000, 23, '2016-03-02', 19);
+(3000, 23, '2016-03-02', 19),
+(870, 24, '2016-12-10', 43),
+(870, 25, '2016-12-10', 44),
+(870, 26, '2016-11-10', 45);
 
 -- --------------------------------------------------------
 
@@ -481,7 +515,8 @@ INSERT INTO `funcionario` (`ID_Usuario`, `Funcao`) VALUES
 (10, 'Auxiliar Administrativo'),
 (12, 'Auxiliar de Limpeza'),
 (18, 'Auxiliar Administrativo'),
-(19, 'Seguranca');
+(19, 'Seguranca'),
+(43, 'Secretaria');
 
 -- --------------------------------------------------------
 
@@ -501,7 +536,8 @@ INSERT INTO `graduacao` (`Codigo`) VALUES
 (1),
 (3),
 (4),
-(6);
+(6),
+(26);
 
 -- --------------------------------------------------------
 
@@ -557,7 +593,11 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`ID_Unidade`) VALUES
-(10);
+(10),
+(32),
+(33),
+(34),
+(35);
 
 -- --------------------------------------------------------
 
@@ -576,9 +616,10 @@ CREATE TABLE `isencao_na_inscricao` (
 
 INSERT INTO `isencao_na_inscricao` (`Codigo`, `ID_Usuario`) VALUES
 (7, 20),
-(7, 24),
 (8, 23),
-(8, 25);
+(7, 24),
+(8, 25),
+(23, 28);
 
 -- --------------------------------------------------------
 
@@ -598,7 +639,9 @@ CREATE TABLE `latu_sensu` (
 INSERT INTO `latu_sensu` (`Codigo`, `Valor_Mensalidade`) VALUES
 (7, 1000),
 (8, 2000),
-(9, 3000);
+(9, 3000),
+(23, 2500),
+(25, 1000);
 
 -- --------------------------------------------------------
 
@@ -617,7 +660,9 @@ CREATE TABLE `mestrado_academico` (
 INSERT INTO `mestrado_academico` (`Codigo`) VALUES
 (11),
 (12),
-(13);
+(13),
+(16),
+(17);
 
 -- --------------------------------------------------------
 
@@ -634,7 +679,11 @@ CREATE TABLE `mestrado_profissional` (
 --
 
 INSERT INTO `mestrado_profissional` (`Codigo`) VALUES
-(10);
+(10),
+(11),
+(13),
+(16),
+(18);
 
 -- --------------------------------------------------------
 
@@ -653,7 +702,9 @@ CREATE TABLE `museu` (
 INSERT INTO `museu` (`ID_Unidade`) VALUES
 (7),
 (8),
-(9);
+(9),
+(26),
+(27);
 
 -- --------------------------------------------------------
 
@@ -700,8 +751,8 @@ INSERT INTO `oferecimento` (`Codigo`, `ID_Disciplina`) VALUES
 (1, 2),
 (3, 3),
 (3, 4),
-(6, 5),
-(4, 6);
+(4, 6),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -720,11 +771,16 @@ CREATE TABLE `participa` (
 --
 
 INSERT INTO `participa` (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES
-(31, 2011, 400),
-(21, 2012, 400),
-(30, 2013, 600),
-(29, 2014, 400),
-(35, 2014, 400);
+(24, 2044, 2350),
+(41, 2045, 3000),
+(28, 2046, 4000),
+(28, 2047, 3200),
+(32, 2048, 2100),
+(22, 2055, 2000),
+(24, 2056, 4000),
+(41, 2057, 4200),
+(22, 2058, 3000),
+(41, 2059, 1500);
 
 -- --------------------------------------------------------
 
@@ -753,7 +809,14 @@ INSERT INTO `pos_graduacao` (`Codigo`, `Data_defesa_do_Trabalho_final`) VALUES
 (15, '2016-11-30'),
 (16, '2016-11-30'),
 (17, '2016-11-30'),
-(18, '2016-11-30');
+(18, '2016-11-30'),
+(19, '2017-01-04'),
+(20, '2017-01-12'),
+(21, '2017-01-27'),
+(22, '2017-01-31'),
+(23, '2017-01-20'),
+(24, '2017-01-24'),
+(25, '2017-01-17');
 
 -- --------------------------------------------------------
 
@@ -800,10 +863,19 @@ CREATE TABLE `projeto` (
 --
 
 INSERT INTO `projeto` (`objetivo`, `Data_Inicio`, `Descricao`, `Data_Termino`, `Orcamento`, `ID_Projeto`, `ID_Financiador`) VALUES
-('Urbanismo na Gestao Publica', '2016-03-01', 'Urbanismo na Gestao Publica', '2016-11-01', 2000, 2011, 1),
-('Informatica para alunos do Ensino Fundamental', '2016-03-01', 'Informatica para alunos do Ensino Fundamental', '2016-11-01', 2000, 2012, 2),
-('Pesquisa em Mineracao de Dados', '2016-03-01', 'Pesquisa em Mineracao de Dados', '2016-11-01', 3000, 2013, 1),
-('Pesquisa em Direito Digital', '2016-03-01', 'Pesquisa em Direito Digital', '2016-11-01', 3500, 2014, 2);
+('Pesquisa sobre Materiais Condutores', '2010-11-11', 'Pesquisa sobre Materiais Condutores', '2011-11-11', 3400, 2044, 2),
+('Pesquisa sobre Usinas TermelÃ©tricas', '2011-11-11', 'Pesquisa sobre Usinas TermelÃ©tricas', '2013-11-11', 20000, 2045, 2),
+('Floresta Urbana', '2015-02-22', 'Floresta Urbana', '2015-08-22', 3000, 2046, 6),
+('Mais Escola', '2010-06-30', 'Mais Escola', '2011-06-30', 40000, 2047, 3),
+('Mobilidade PÃºblica', '2016-04-05', 'Mobilidade PÃºblica', '2017-04-05', 3000, 2048, 3),
+('1', '1111-11-11', '1', '1111-11-11', 1, 2050, 2),
+('1', '1111-11-11', '1', '1111-11-11', 1, 2051, 2),
+('1', '1111-11-11', '1', '1111-11-11', 1, 2052, 2),
+('Pesquisa em IoT', '2000-10-04', 'Pesquisa em IoT', '2000-10-21', 12000, 2055, 3),
+('Pesquisa em Data Mining', '2010-12-12', 'Pesquisa em Data Mining', '2011-12-12', 3000, 2056, 2),
+('Pesquisa em Big Data', '2014-10-14', 'Pesquisa em Big Data', '2015-03-13', 4800, 2057, 2),
+('Projeto de Astronomia', '2014-12-21', 'Projeto de Astronomia', '2016-12-21', 2300, 2058, 1),
+('Estudo sobre Placas-mÃ£e', '2013-10-04', 'Estudo sobre Placas-mÃ£e', '2014-04-04', 3200, 2059, 1);
 
 -- --------------------------------------------------------
 
@@ -820,8 +892,11 @@ CREATE TABLE `projeto_extensao` (
 --
 
 INSERT INTO `projeto_extensao` (`ID_Projeto`) VALUES
-(2011),
-(2012);
+(2044),
+(2045),
+(2046),
+(2047),
+(2048);
 
 -- --------------------------------------------------------
 
@@ -838,8 +913,11 @@ CREATE TABLE `projeto_pesquisa` (
 --
 
 INSERT INTO `projeto_pesquisa` (`ID_Projeto`) VALUES
-(2013),
-(2014);
+(2055),
+(2056),
+(2057),
+(2058),
+(2059);
 
 -- --------------------------------------------------------
 
@@ -857,7 +935,11 @@ CREATE TABLE `reitoria` (
 --
 
 INSERT INTO `reitoria` (`Cnpj`, `ID_Unidade`) VALUES
-('26723506000112', 21);
+('26723506000112', 21),
+('3253453123129', 22),
+('1234567890', 23),
+('34345432232', 24),
+('2323543323', 25);
 
 -- --------------------------------------------------------
 
@@ -877,7 +959,10 @@ CREATE TABLE `restaurante` (
 
 INSERT INTO `restaurante` (`ID_Res`, `ID_Unidade`, `R_Nome`) VALUES
 (1, 1, 'Restaurante da EACH'),
-(2, 5, 'Restaurante da Faculdade de Direito');
+(2, 5, 'Restaurante da Faculdade de Direito'),
+(5, 31, 'Restaurante 3'),
+(6, 6, 'Bandeijao'),
+(8, 2, 'Restaurante 2');
 
 -- --------------------------------------------------------
 
@@ -902,7 +987,10 @@ INSERT INTO `servidor` (`ID_Usuario`) VALUES
 (10),
 (12),
 (18),
-(19);
+(19),
+(43),
+(44),
+(45);
 
 -- --------------------------------------------------------
 
@@ -955,7 +1043,18 @@ INSERT INTO `unidade` (`Nome_Unidade`, `ID_Unidade`, `Endereco`) VALUES
 ('Museu de Arte Contemporânea', 8, 'Avenida Pedro Álvares Cabral, 1301\r\n'),
 ('Museu de Arqueologia e Etnologia', 9, 'Av. Prof. Almeida Prado, 1466 - São Paulo - SP'),
 ('Hospital Universitário', 10, 'Av. Professor Lineu Prestes, 2565 – Butantã - São Paulo - SP'),
-('Reitoria', 21, 'R. da Reitoria, 374 - Butanta, Sao Paulo - SP');
+('Reitoria', 21, 'R. da Reitoria, 374 - Butanta, Sao Paulo - SP'),
+('Reitoria 1', 22, 'Rua Ermelino Matarazzo, n 217'),
+('Reitoria 2', 23, 'Rua Ermelino Matarazzo, n 218'),
+('Reitoria 3', 24, 'Rua Ermelino Matarazzo, n 1'),
+('Reitoria 4', 25, 'Rua Epaminondas Glicério, n 217'),
+('Museu 1', 26, 'Rua Dr. Ricardo Vilela, n 455'),
+('Museu 2', 27, 'Rua Antônio Fagundes Costa, n 12'),
+('FFLCH', 31, 'Butantã'),
+('Hospital 1', 32, 'Avenida São Paulo, n 115'),
+('Hospital 2', 33, 'Avenida Teodoro Sampaio, n 20'),
+('Hospital 3', 34, 'Rua Ermelino Matarazzo, n 640'),
+('Hospital 4', 35, 'Rua Indianápolis, n 3011');
 
 -- --------------------------------------------------------
 
@@ -994,7 +1093,7 @@ INSERT INTO `usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`
 (25, 'Fabio Santos', '867.449.174-04', 'Masculino', '1995-11-03', 6),
 (26, 'Denise Silva', '789.822.516-34', 'Feminino', '1996-01-12', 1),
 (27, 'Felipe Prado', '523.124.337-02', 'Masculino', '1996-01-31', 1),
-(28, 'Natalia Santos', '002.889.189-91', 'Feminino', '1996-09-04', 1),
+(28, 'Natalia Santos', '002.889.189-91', 'Feminino', '1996-09-04', 2),
 (29, 'Daniel Ferreira', '188.122.978-54', 'Masculino', '1996-12-13', 5),
 (30, 'Joao Oliveira', '662.118.796-36', 'Masculino', '1994-05-20', 1),
 (31, 'Renata Sanchez', '842.319.617-86', 'Feminino', '1994-07-20', 1),
@@ -1005,7 +1104,11 @@ INSERT INTO `usuario` (`ID_Usuario`, `nome`, `cpf`, `Sexo`, `data_de_nascimento`
 (36, 'Daniel Silva', '829.057.644-73', 'Masculino', '1993-07-05', 21),
 (37, 'Ana Clara', '463.407.505-91', 'Feminino', '1995-04-25', 5),
 (38, 'Pedro Almeida', '314.199.712-80', 'Masculino', '1995-12-27', 1),
-(39, 'Laura Moreira', '715.611.560-00', 'Feminino', '1991-03-28', 6);
+(39, 'Laura Moreira', '715.611.560-00', 'Feminino', '1991-03-28', 6),
+(41, 'Joel Gomes Sanchez', '242.543.563-10', 'm', '1990-10-21', 5),
+(43, 'Maria Meirelles', '302.123.124-86', 'm', '1982-12-21', 21),
+(44, 'BBBB', 'a', 'm', '1111-11-11', 1),
+(45, '454667865432', 'as1q21', 'm', '1111-11-11', 8);
 
 -- --------------------------------------------------------
 
@@ -1349,15 +1452,65 @@ ALTER TABLE `verba`
 --
 
 --
+-- AUTO_INCREMENT for table `bens`
+--
+ALTER TABLE `bens`
+  MODIFY `ID_bem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
 -- AUTO_INCREMENT for table `biblioteca`
 --
 ALTER TABLE `biblioteca`
-  MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_Bib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `cursos`
+--
+ALTER TABLE `cursos`
+  MODIFY `Codigo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  MODIFY `ID_Disciplina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `empresta`
+--
+ALTER TABLE `empresta`
+  MODIFY `Id_Emprestimo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `financiador`
+--
+ALTER TABLE `financiador`
+  MODIFY `ID_Financiador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `folha_de_pagamento`
+--
+ALTER TABLE `folha_de_pagamento`
+  MODIFY `Id_Pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `ocorrencias`
+--
+ALTER TABLE `ocorrencias`
+  MODIFY `ID_Ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `projeto`
+--
+ALTER TABLE `projeto`
+  MODIFY `ID_Projeto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2060;
 --
 -- AUTO_INCREMENT for table `restaurante`
 --
 ALTER TABLE `restaurante`
-  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Res` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `unidade`
+--
+ALTER TABLE `unidade`
+  MODIFY `ID_Unidade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- Constraints for dumped tables
 --

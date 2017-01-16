@@ -261,7 +261,7 @@
 		    	<?php
 		    		$alunos = consultaProjetoExtensao();
 		    		while ($dados = mysqli_fetch_array($alunos)) {
-		    			echo "<form action='detalheProjetoExtensao.php' method='GET'>";
+		    			echo "<form action='detalheProjetoExtensao.php' method='post'>";
 		    			echo "<tr>";
 		    			echo "<input type='hidden' name='idProjeto' value='".$dados['ID_Projeto']."'>";
 		    			echo "<td>".$dados['objetivo']."<input type='hidden' name='objetivo' value='".$dados['objetivo']."'></td>";
@@ -272,7 +272,7 @@
 		    			echo "<td>".$dados['bolsa']."<input type='hidden' name='bolsa' value='".$dados['bolsa']."'></td>";
 		    			echo "<td>".$dados['Data_Inicio']."<input type='hidden' name='dataInicio' value='".$dados['Data_Inicio']."'></td>";
 		    			echo "<td>".$dados['Data_Termino']."<input type='hidden' name='dataTermino' value='".$dados['Data_Termino']."'></td>";
-		    			echo "<td><button type='submit' value=".$dados['ID_Projeto']." name='idProjeto' class='btn btn-default'>Calendário</button></td>";
+		    			echo "<td><button type='submit' value='calendario' name='calendario' class='btn btn-default'>Calendário</button></td>";
 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
 			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
 		    			echo "</tr>";

@@ -5,9 +5,7 @@
 <main>
 	<div class="container">
 		<?php 
-		if(isset($_POST['update'])){
-			echo "atualiza dados de projeto de pesquisa";
-			var_dump($_POST)?>
+		if(isset($_POST['update'])){ ?>
 			<form action="atualizaProjetoPesquisa.php" method="GET" class="form-horizontal">
 				<input type="hidden" name="idProjeto-alt" value="<?php echo $_POST['idProjeto']; ?>"/>
 				<div class="row">
@@ -79,34 +77,6 @@
 				</div>
 				<div class="row">
 					<div class="form-group">
-						<label for="professor" class="control-label col-sm-2 text-right">Professor Coordenador</label>
-						<div class="col-sm-5">
-							<select class="form-control" name="professor">
-								<option value="">--</option>
-								<?php
-									$professores = consultaTodosProfessores();
-									while ($dados = mysqli_fetch_array($professores)) {
-										if($dados['ID_Usuario']==$_POST['coordenador']) {
-											echo "<option selected value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
-										}
-										else{
-											echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";	
-										}
-										
-							        }
-								?>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group">
-						<label for="indice" class="control-label col-sm-2 text-right">Indice da pesquisa</label>
-						<div class="col-sm-5"><input class="form-control" type="number" name="indice" value="<?php echo $_POST['indicePesquisa']; ?>"/></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group">
 						<label for="data-inicio" class="control-label col-sm-2 text-right">Data de inicio</label>
 						<div class="col-sm-5"><input class="form-control" type="date" name="data-inicio" value="<?php echo $_POST['dataInicio']; ?>"/></div>
 					</div>
@@ -125,20 +95,12 @@
 			</form>
 		<?php 
 			
-		}
-		
-			
-			
-			
-			
-			
-			
+		}			
 		
 		if(isset($_POST['delete'])){
-			echo "deleta projeto de pesquisa";
-			var_dump($_POST);
 			deletaPesquisa($_POST['idProjeto']);
-			echo "Deletado";
+			echo "Projeto de pesquisa deletado com sucesso!";
+			echo '<br><a href="projetos.php">Voltar</a>';
 		}?>
 	</div>
 </main>

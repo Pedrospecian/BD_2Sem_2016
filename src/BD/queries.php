@@ -214,10 +214,8 @@
 
     function consultaAtividades($idProjeto){
         $bd= conectaBD();
-        $sql="SELECT extensao_possui.ID_Ati, localizacao, Data_Atividade , ID_Projeto
-                FROM extensao_possui
-                INNER JOIN atividades_extensao ON atividades_Extensao.ID_Ati = extensao_Possui.ID_Ati
-                WHERE extensao_possui.ID_Projeto =".$idProjeto;
+        $sql="SELECT * FROM atividades_extensao
+                WHERE atividades_extensao.ID_Projeto =".$idProjeto;
         $resultado = $bd->query($sql);
         $bd->close();
         return $resultado;
@@ -616,9 +614,12 @@
                 VALUES ('".$idProjeto."');";
             $bd->query($sql_projetopesquisa);
             if($idAluno!=null){
-                $sql="INSERT INTO  coordena (ID_Projeto, Indice_Pequisador, Bolsa_Pesquisador, ID_Usuario)
-                    VALUES ('".$idProjeto."',  0,  ".$bolsa.",  ".$idProfessor.");";
-                $bd->query($sql);
+                $sql="INSERT INTO  coordena (ID_Projeto, Indice_Pesquisador, Bolsa_Pesquisador, ID_Usuario)
+                    VALUES ('".$idProjeto."',  '1',  '".$bolsa."',  '".$idProfessor."');";
+                if(!$bd->query($sql)){
+                    echo "Error: " . $sql . "<br>" . $bd->error;
+                    return FALSE;
+                }
                 $sql= "INSERT INTO participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
                 $bd->query($sql);
             }
@@ -639,13 +640,24 @@
         VALUES ('".$objetivo."',' ".$dataInicio."', '". $descricao."',' ".$dataFim."', ". $orcamento.", ". $idFinanciador.")";
         if ($bd->query($sql) === TRUE) {
             $idProjeto=mysqli_insert_id($bd);
-            $sql_projetoextensao= "INSERT INTO projeto_extensao (ID_Projeto, ID_Usuario)
-                VALUES ('".$idProjeto."', ".$idServidor.");";
-            $bd->query($sql_projetoextensao);
+            $sql_projetoextensao= "INSERT INTO projeto_extensao (ID_Projeto)
+                VALUES ('".$idProjeto."');";
+            if(!$bd->query($sql_projetoextensao)) {
+                echo "Error: " . $sql . "<br>" . $bd->error; 
+                return FALSE;
+            }
             if($idAluno!=null){
                 $sql= "INSERT INTO participa (`ID_Usuario`, `ID_Projeto`, `Bolsa`) VALUES (".$idAluno.", ".$idProjeto.", ".$bolsa.")";
-                $bd->query($sql);
+                if(!$bd->query($sql)) {
+                    echo "Error: " . $sql . "<br>" . $bd->error; 
+                    return FALSE;
+                }                
             }
+            $sql= "INSERT INTO exerce (`ID_Usuario`, `ID_Projeto`) VALUES (".$idServidor.", ".$idProjeto.")";
+            if(!$bd->query($sql)) {
+                echo "Error: " . $sql . "<br>" . $bd->error; 
+                return FALSE;
+            } 
             $bd->close();
             return TRUE;
         } else {
@@ -730,12 +742,14 @@
 
     function deletaExtensao($idProjeto){
         $bd= conectaBD();
-        $sql= "SELECT ID_Ati FROM extensao_possui WHERE ID_Projeto =".$idProjeto;
+        /*$sql= "SELECT ID_Ati FROM extensao_possui WHERE ID_Projeto =".$idProjeto;
         $atividades= $bd->query($sql);
         while($dados = mysqli_fetch_array($atividades)){
             deletarAtividade($dados['ID_Ati']);
-        }
-        $sql= "DELETE FROM extensao_possui WHERE ID_Projeto=".$idProjeto;
+        }*/
+        $sql= "DELETE FROM atividades_extensao WHERE ID_Projeto=".$idProjeto;
+        $bd->query($sql);
+        $sql= "DELETE FROM exerce WHERE ID_Projeto=".$idProjeto;
         $bd->query($sql);
         $sql= "DELETE FROM participa WHERE ID_Projeto =".$idProjeto;
         $bd->query($sql);
@@ -753,16 +767,16 @@
         $bd->close();
     }
 
-    function alteraPesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $idProfessor, $bolsa, $dataInicio, $dataFim, $idProjeto, $indicePesquisador){
+    function alteraPesquisa($objetivo, $descricao, $orcamento, $idFiananciador, $idAluno, $bolsa, $dataInicio, $dataFim, $idProjeto){
         $bd= conectaBD();
         $sql = "UPDATE projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
             WHERE ID_Projeto=".$idProjeto;
         if ($bd->query($sql) === TRUE) {
             if($idAluno!=null){
-                $sql="UPDATE coordena SET Indice_Pequisador=".$indicePesquisador." ,Bolsa_Pesquisador=".$bolsa.",ID_Usuario=".$idProfessor."
+                $sql="UPDATE coordena SET Bolsa_Pesquisador=".$bolsa."
                     WHERE ID_Projeto=".$idProjeto;
                 $bd->query($sql);
-                $sql= "UPDATE participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
+                $sql= "UPDATE participa SET ID_Usuario=".$idAluno.", Bolsa=".$bolsa."
                     WHERE ID_Projeto=".$idProjeto;
                 $bd->query($sql);
             }
@@ -771,20 +785,21 @@
         }
     }
 
-    function alteraExtensao( $objetivo, $descricao, $orcamento, $idFinanciador, $idAluno, $idServidor, $bolsa, $dataInicio, $dataFim, $idProjeto){
+    function alteraExtensao( $objetivo, $descricao, $orcamento, $idFinanciador, $idAluno, $bolsa, $dataInicio, $dataFim, $idProjeto){
         $bd= conectaBD();
-        $sql = "UPDATE projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFiananciador."
+        $sql = "UPDATE projeto SET objetivo='".$objetivo."', Data_Inicio='".$dataInicio."', Descricao='". $descricao."', Data_Termino=' ".$dataFim."', Orcamento=". $orcamento.", ID_Financiador=". $idFinanciador."
             WHERE ID_Projeto=".$idProjeto;
 
         if ($bd->query($sql) === TRUE) {
-            $idProjeto=mysqli_insert_id($bd);
-            $sql= "UPDATE projeto_extensao SET ID_Usuario= ".$idServidor."
-                WHERE ID_Projeto=".$idProjeto;
-            $bd->query($sql);
+           // $idProjeto=mysqli_insert_id($bd);
+            // $sql= "UPDATE projeto_extensao SET ID_Usuario= ".$idServidor."
+            //     WHERE ID_Projeto=".$idProjeto;
+            // $bd->query($sql);
             if($idAluno!=null){
                 $sql= "UPDATE participa (ID_Usuario=(".$idAluno.", Bolsa=".$bolsa.")
                     WHERE ID_Projeto=".$idProjeto;
                 $bd->query($sql);
+                echo "aAA";
             }
             $bd->close();
             return TRUE;

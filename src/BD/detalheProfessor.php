@@ -132,7 +132,6 @@
 			</form>
 		<?php }
 		if(isset($_POST["delete"])) { 
-			var_dump($_POST);
 		    $deletou = deletaProfessor($_POST['id']);
 		    if($deletou == TRUE){
 		        echo "Professor excluído com sucesso!";

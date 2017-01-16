@@ -5,27 +5,26 @@
 <main>
 	<div class="container">
 		<?php 
-		var_dump($_GET);
-		if(isset($_GET['update'])){ ?>
-			atualiza dados de projeto de extensao
+		//var_dump($_POST);
+		if(isset($_POST['update'])){ ?>
 			<form action="atualizaProjetoExtensao.php" method="GET" class="form-horizontal">
-				<input type="hidden" name="idProjeto-alt" value="<?php echo $_GET['idProjeto']; ?>"/>
+				<input type="hidden" name="idProjeto-alt" value="<?php echo $_POST['idProjeto']; ?>"/>
 				<div class="row">
 					<div class="form-group">
 						<label for="objetivo-alt" class="control-label col-sm-2 text-right">Objetivo</label>
-						<div class="col-sm-5"><input class="form-control" type="text" name="objetivo-alt" value="<?php echo $_GET['objetivo']; ?>"/></div>
+						<div class="col-sm-5"><input class="form-control" type="text" name="objetivo-alt" value="<?php echo $_POST['objetivo']; ?>"/></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<label for="descricao-alt" class="control-label col-sm-2 text-right">Descrição</label>
-						<div class="col-sm-5"><input class="form-control" type="text" name="descricao-alt" value="<?php echo $_GET['descricao']; ?>"/></div>
+						<div class="col-sm-5"><input class="form-control" type="text" name="descricao-alt" value="<?php echo $_POST['descricao']; ?>"/></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<label for="orcamento-alt" class="control-label col-sm-2 text-right">Orçamento</label>
-						<div class="col-sm-5"><input class="form-control" type="number" name="orcamento-alt" value="<?php echo $_GET['orcamento']; ?>"/></div>
+						<div class="col-sm-5"><input class="form-control" type="number" name="orcamento-alt" value="<?php echo $_POST['orcamento']; ?>"/></div>
 					</div>
 				</div>
 				<div class="row">
@@ -37,7 +36,7 @@
 								<?php
 									$financiadores = consultaFinanciadores();
 									while ($dados = mysqli_fetch_array($financiadores)) {
-										if($dados['ID_Financiador']==$_GET['idFinanciador']) {
+										if($dados['ID_Financiador']==$_POST['idFinanciador']) {
 											echo "<option selected value=".$dados['ID_Financiador'].">".$dados['nome']."</option>";
 										}
 										else{
@@ -58,7 +57,7 @@
 								<?php
 									$alunos = consultaTodosAlunos();
 									while ($dados = mysqli_fetch_array($alunos)) {
-										if($dados['ID_Usuario']==$_GET['idAluno']) {
+										if($dados['ID_Usuario']==$_POST['idAluno']) {
 											echo "<option selected value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 										}
 										else{
@@ -74,7 +73,7 @@
 				<div class="row">
 					<div class="form-group">
 						<label for="bolsa-alt" class="control-label col-sm-2 text-right">Bolsa</label>
-						<div class="col-sm-5"><input class="form-control" type="number" name="bolsa-alt" value="<?php echo $_GET['bolsa']; ?>"/></div>
+						<div class="col-sm-5"><input class="form-control" type="number" name="bolsa-alt" value="<?php echo $_POST['bolsa']; ?>"/></div>
 					</div>
 				</div>
 				<div class="row">
@@ -86,7 +85,7 @@
 								<?php
 									$professores = consultaServidores();
 									while ($dados = mysqli_fetch_array($professores)) {
-									if($dados['ID_Usuario']==$_GET['coordenador']) {
+									if($dados['ID_Usuario']==$_POST['coordenador']) {
 										echo "<option selected value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
 									}
 										echo "<option value=".$dados['ID_Usuario'].">".$dados['nome']."</option>";
@@ -99,13 +98,13 @@
 				<div class="row">
 					<div class="form-group">
 						<label for="data-inicio" class="control-label col-sm-2 text-right">Data de inicio</label>
-						<div class="col-sm-5"><input class="form-control" type="date" name="data-inicio" value="<?php echo $_GET['dataInicio']; ?>"/></div>
+						<div class="col-sm-5"><input class="form-control" type="date" name="data-inicio" value="<?php echo $_POST['dataInicio']; ?>"/></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<label for="data-fim" class="control-label col-sm-2 text-right">Data de termino</label>
-						<div class="col-sm-5"><input class="form-control" type="date" name="data-fim" value="<?php echo $_GET['dataTermino']; ?>"/></div>
+						<div class="col-sm-5"><input class="form-control" type="date" name="data-fim" value="<?php echo $_POST['dataTermino']; ?>"/></div>
 					</div>
 				</div>
 				<div class="row">
@@ -115,67 +114,38 @@
 				</div>
 			</form>
 		<?php }
-			if(isset($_GET['delete'])){
-				echo "deleta projeto de extensao";
-				deletaExtensao($_GET['idProjeto']);
-			}
-			if($_GET['localizacao']){
-				insereAtividade($_GET['idProjeto'], $_GET['data'], $_GET['localizacao']);
+			if(isset($_POST['delete'])){
+				//echo "deleta projeto de extensao";
+				deletaExtensao($_POST['idProjeto']);
+					echo "Projeto de extensão deletado com sucesso!";
+				echo '<br><a href="projetos.php">Voltar</a>';
 			}
 		
-		?>
+		if(isset($_POST['calendario'])) { ?>		  	
+		 	<h1>Atividades desse projeto de extensao</h1>
+			<table class="table">
+				<thead>
+					<tr>
+			        	<th>Localização</th>
+			        	<th>Data</th>
+			     	</tr>
+				</thead>
+			    <tbody>
+			    	<?php
+			    		$atividades = consultaAtividades($_POST['idProjeto']);
+			    		while ($dados = mysqli_fetch_array($atividades)) {
+			    			echo "<tr>";
+			    			echo "<td>".$dados['Localizacao']."</td>";
+			    			echo "<td>".$dados['Data_Atividade']."</td>";
+			    			echo "</tr>";
+			    		}
+			    	?>
+				</tbody>
+			</table>
+
+		<?php } ?>
+
 	</div>
-	
-	<h1>Adicionar atividade</h1>
- 	<form action="#" method="get" class="form-horizontal">			
- 		<div class="row">
- 			<input type="hidden" name="idProjeto" value=<?php echo "'".$_GET['idProjeto']."'";?>/>
- 			<div class="row">
- 				<div class="form-group">
- 					<label for="localizacao" class="control-label col-sm-2 text-right">Localizacao</label>
- 					<div class="col-sm-5"><input class="form-control" type="text" name="localizacao"/></div>
- 				</div>
- 			</div>
- 			<div class="form-group">
- 				<label for="data" class="control-label col-sm-2 text-right">Data</label>
- 				<div class="col-sm-5"><input class="form-control" type="date" name="data"/></div>
- 			</div>
- 		</div>
- 		<div class="row">
- 			<div class="form-group">
- 				<button type="submit" class="btn btn-default col-sm-3 col-sm-offset-1">Criar projeto de pesquisa</button>
- 			</div>
- 		</div>
- 	</form>
- 	<br/>
-  	
- 	<h3>Atividades desse projeto de extensao</h3>
- 		<table class="table">
- 			<thead>
- 				<tr>
- 		        	<th>Localização</th>
- 		        	<th>Data</th>
- 		        	<th>Alterar</th>
- 		        	<th>Deletar</th>
- 		     	</tr>
-     		</thead>
- 		    <tbody>
- 		    	<?php
- 		    		$atividades = consultaAtividades($_GET['idProjeto']);
- 		    		while ($dados = mysqli_fetch_array($atividades)) {
- 		    			echo "<form action='detalheAtividade.php' method='GET'>";
- 		    			echo "<input type='hidden' name='id' value='".$dados['ID_Ati']."'";
- 		    			echo "<tr>";
- 		    			echo "<td>".$dados['localizacao']."<input type='hidden' name='local' value='".$dados['localizacao']."'></td>";
- 		    			echo "<td>".$dados['Data_Atividade']."<input type='hidden' name='data' value='".$dados['Data_Atividade']."'></td>";
- 		    			echo "<td><button type='submit' value='update' name='update' class='btn btn-info'>Alterar</button></td>";
-			    		echo "<td><button type='submit' value='delete' name='delete' class='btn btn-danger'>Apagar</button></td>";
- 		    			echo "</tr>";
- 		    			echo "</form>";
- 		    		}
- 		    	?>
- 			</tbody>
- 		</table>
 	
 </main>
 <?php 

@@ -65,6 +65,16 @@
     }
 
 
+//listar todos os cursos da graduação
+    function consultaCursos(){
+        $bd= conectaBD();
+        $sql="SELECT *
+            FROM cursos";
+        $resultado = $bd->query($sql);
+        $bd->close();
+        return $resultado;
+    }
+
 
 //listar todos os cursos da graduação
     function consultaCursosGraduacao(){
